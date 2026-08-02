@@ -1,5 +1,6 @@
 /** @type {import('jest').Config} */
 module.exports = {
+  setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
   coverageReporters: ['clover', 'json', 'lcov', ['text', { skipFull: true }]],
   reporters: [
     'default',
@@ -10,8 +11,5 @@ module.exports = {
   transform: {
     "^.+\\.js$": "babel-jest"
   },
-  moduleDirectories: ["node_modules", "src", "."],
-  transformIgnorePatterns: [
-    "/node_modules/(?!chai/)"  // <-- chai tetap ditransform
-  ],
+  moduleDirectories: ["node_modules", "src", "."]
 };

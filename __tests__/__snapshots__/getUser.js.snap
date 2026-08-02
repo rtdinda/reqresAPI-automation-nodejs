@@ -1,0 +1,104 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Get List User -- Negative Case I can't get list user, if data user doesn't exist 1`] = `undefined`;
+
+exports[`Get List User -- Positive Case I can get list user and its detail by page number 2 1`] = `
+{
+  "_meta": {
+    "context": "legacy_success",
+    "cta": {
+      "label": "Get started",
+      "url": "https://app.reqres.in/upgrade",
+    },
+    "docs_url": "https://app.reqres.in/documentation",
+    "example_url": "https://app.reqres.in/examples/notes-app",
+    "message": "This is a read-only demo endpoint. Sign up to create your own collections with full CRUD and auth.",
+    "powered_by": "ReqRes",
+    "upgrade_url": "https://app.reqres.in/upgrade",
+    "variant": "v1_b",
+  },
+  "data": [
+    {
+      "avatar": "https://reqres.in/img/faces/7-image.jpg",
+      "email": "michael.lawson@reqres.in",
+      "first_name": "Michael",
+      "id": 7,
+      "last_name": "Lawson",
+    },
+    {
+      "avatar": "https://reqres.in/img/faces/8-image.jpg",
+      "email": "lindsay.ferguson@reqres.in",
+      "first_name": "Lindsay",
+      "id": 8,
+      "last_name": "Ferguson",
+    },
+    {
+      "avatar": "https://reqres.in/img/faces/9-image.jpg",
+      "email": "tobias.funke@reqres.in",
+      "first_name": "Tobias",
+      "id": 9,
+      "last_name": "Funke",
+    },
+    {
+      "avatar": "https://reqres.in/img/faces/10-image.jpg",
+      "email": "byron.fields@reqres.in",
+      "first_name": "Byron",
+      "id": 10,
+      "last_name": "Fields",
+    },
+    {
+      "avatar": "https://reqres.in/img/faces/11-image.jpg",
+      "email": "george.edwards@reqres.in",
+      "first_name": "George",
+      "id": 11,
+      "last_name": "Edwards",
+    },
+    {
+      "avatar": "https://reqres.in/img/faces/12-image.jpg",
+      "email": "rachel.howell@reqres.in",
+      "first_name": "Rachel",
+      "id": 12,
+      "last_name": "Howell",
+    },
+  ],
+  "page": 2,
+  "per_page": 6,
+  "support": {
+    "text": "Become a better CTO. A playbook of painful stories and practical advice from a two-time startup CTO.",
+    "url": "https://benhowdle.im/first-cto-playbook?utm_source=reqres&utm_medium=json&utm_campaign=referral",
+  },
+  "total": 12,
+  "total_pages": 2,
+}
+`;
+
+exports[`Get User -- Negative Case I can't get detail user by unexist ID 1`] = `{}`;
+
+exports[`Get User -- Positive Case I can get detail user by exist ID 1`] = `
+{
+  "_meta": {
+    "context": "legacy_success",
+    "cta": {
+      "label": "Get started",
+      "url": "https://app.reqres.in/upgrade",
+    },
+    "docs_url": "https://app.reqres.in/documentation",
+    "example_url": "https://app.reqres.in/examples/notes-app",
+    "message": "This is a read-only demo endpoint. Sign up to create your own collections with full CRUD and auth.",
+    "powered_by": "ReqRes",
+    "upgrade_url": "https://app.reqres.in/upgrade",
+    "variant": "v1_b",
+  },
+  "data": {
+    "avatar": "https://reqres.in/img/faces/2-image.jpg",
+    "email": "janet.weaver@reqres.in",
+    "first_name": "Janet",
+    "id": 2,
+    "last_name": "Weaver",
+  },
+  "support": {
+    "text": "Become a better CTO. A playbook of painful stories and practical advice from a two-time startup CTO.",
+    "url": "https://benhowdle.im/first-cto-playbook?utm_source=reqres&utm_medium=json&utm_campaign=referral",
+  },
+}
+`;

@@ -28,7 +28,7 @@ Constants.NO_INPUT = Constants.NAME + " was called without input results";
 Constants.NO_CLI_INPUT = Constants.NAME + " CLI was called without input JSON file to read";
 Constants.OVERRIDE_JEST_STARE_CONFIG = Constants.NAME + " was called with programmatic config";
 
-},{"chalk":20}],2:[function(require,module,exports){
+},{"chalk":17}],2:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Constants = void 0;
@@ -79,7 +79,6 @@ const Status_1 = require("./charts/Status");
 const Doughnut_1 = require("./charts/Doughnut");
 const TestSuite_1 = require("./suites/TestSuite");
 const TestSummary_1 = require("./summary/TestSummary");
-const util_1 = require("util");
 class Render {
     static init() {
         document.addEventListener("DOMContentLoaded", () => {
@@ -179,16 +178,16 @@ class Render {
         }
     }
     static setReportTitle(config) {
-        const tabTitle = !(0, util_1.isNullOrUndefined)(config.reportTitle) ? config.reportTitle : "jest-stare!";
+        const tabTitle = config.reportTitle != null ? config.reportTitle : "jest-stare!";
         document.title = tabTitle;
     }
     static setReportHeadline(config) {
-        const brandTitle = !(0, util_1.isNullOrUndefined)(config.reportHeadline) ? config.reportHeadline : "jest-stare";
+        const brandTitle = config.reportHeadline != null ? config.reportHeadline : "jest-stare";
         const a = $("#navbar-title");
         a.text(brandTitle);
     }
     static setCoverageLink(config) {
-        if (!(0, util_1.isNullOrUndefined)(config.coverageLink)) {
+        if (config.coverageLink != null) {
             const a = $("#coverage-link");
             a.addClass("active");
             a.removeClass("disabled");
@@ -263,7 +262,7 @@ class Render {
 }
 exports.Render = Render;
 
-},{"./Constants":2,"./charts/Doughnut":4,"./charts/Status":5,"./navigation/Switch":8,"./suites/TestSuite":9,"./summary/TestSummary":11,"jquery":69,"util":76}],4:[function(require,module,exports){
+},{"./Constants":2,"./charts/Doughnut":4,"./charts/Status":5,"./navigation/Switch":8,"./suites/TestSuite":9,"./summary/TestSummary":11,"jquery":41}],4:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Doughnut = void 0;
@@ -292,7 +291,7 @@ class Doughnut {
 }
 exports.Doughnut = Doughnut;
 
-},{"chart.js":23}],5:[function(require,module,exports){
+},{"chart.js":20}],5:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Status = void 0;
@@ -378,7 +377,7 @@ ImageSnapshotDifference.DIFF_INDICATOR = ["different from snapshot", "image to b
 ImageSnapshotDifference.DIFF_IMAGE = /See diff for details:\s*((.*?)\.png)/;
 ImageSnapshotDifference.DIFF_DETAILS = /Error: (.*)/;
 
-},{"../../processor/Constants":1,"ansi-parser":15,"jquery":69}],7:[function(require,module,exports){
+},{"../../processor/Constants":1,"ansi-parser":15,"jquery":41}],7:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TestDifference = void 0;
@@ -425,11 +424,10 @@ exports.TestDifference = TestDifference;
 TestDifference.DIFF_INDICATOR = /- Snapshot\s*(\-\s*[0-9]+)?\n\s*\+ Received\s*(\+\s*[0-9]+)?/g;
 TestDifference.DIFF_END_INDICATOR = /(at .*? \(.*?:[0-9]+:[0-9]+\)\s)/g;
 
-},{"diff2html":33,"jquery":69}],8:[function(require,module,exports){
+},{"diff2html":29,"jquery":41}],8:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Switch = void 0;
-const util_1 = require("util");
 class Switch {
     static mixStatus(currentStatus, oldStatus) {
         const statusArray = oldStatus.split(Switch.JOIN_CHAR);
@@ -444,7 +442,7 @@ class Switch {
         checkBox.change(() => {
             if (checkBox.is(":checked")) {
                 divClass.show();
-                if (!(0, util_1.isNullOrUndefined)(addtnlCheckBoxArray)) {
+                if (addtnlCheckBoxArray != null) {
                     addtnlCheckBoxArray.forEach((addtnlCheckBox, index) => {
                         const mixedDualClass = Switch.mixStatus(addtnlClassNameArray[index], divClassName);
                         const mixedClassDiv = $("." + mixedDualClass);
@@ -458,7 +456,7 @@ class Switch {
             }
             else {
                 divClass.hide();
-                if (!(0, util_1.isNullOrUndefined)(addtnlCheckBoxArray)) {
+                if (addtnlCheckBoxArray != null) {
                     let allUnchecked = true;
                     addtnlCheckBoxArray.forEach((addtnlCheckBox, index) => {
                         if (!addtnlCheckBox.is(":checked")) {
@@ -484,7 +482,7 @@ class Switch {
 exports.Switch = Switch;
 Switch.JOIN_CHAR = "\\.";
 
-},{"util":76}],9:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TestSuite = void 0;
@@ -888,9 +886,9 @@ Render_1.Render.init();
 
 },{"./Render":3}],14:[function(require,module,exports){
 /*!
- * @kurkle/color v0.3.2
+ * @kurkle/color v0.3.4
  * https://github.com/kurkle/color#readme
- * (c) 2023 Jukka Kurkela
+ * (c) 2024 Jukka Kurkela
  * Released under the MIT License
  */
 (function (global, factory) {
@@ -1073,183 +1071,183 @@ function hslString(v) {
 }
 
 const map = {
-  x: 'dark',
-  Z: 'light',
-  Y: 're',
-  X: 'blu',
-  W: 'gr',
-  V: 'medium',
-  U: 'slate',
-  A: 'ee',
-  T: 'ol',
-  S: 'or',
-  B: 'ra',
-  C: 'lateg',
-  D: 'ights',
-  R: 'in',
-  Q: 'turquois',
-  E: 'hi',
-  P: 'ro',
-  O: 'al',
-  N: 'le',
-  M: 'de',
-  L: 'yello',
-  F: 'en',
-  K: 'ch',
-  G: 'arks',
-  H: 'ea',
-  I: 'ightg',
-  J: 'wh'
+	x: 'dark',
+	Z: 'light',
+	Y: 're',
+	X: 'blu',
+	W: 'gr',
+	V: 'medium',
+	U: 'slate',
+	A: 'ee',
+	T: 'ol',
+	S: 'or',
+	B: 'ra',
+	C: 'lateg',
+	D: 'ights',
+	R: 'in',
+	Q: 'turquois',
+	E: 'hi',
+	P: 'ro',
+	O: 'al',
+	N: 'le',
+	M: 'de',
+	L: 'yello',
+	F: 'en',
+	K: 'ch',
+	G: 'arks',
+	H: 'ea',
+	I: 'ightg',
+	J: 'wh'
 };
 const names$1 = {
-  OiceXe: 'f0f8ff',
-  antiquewEte: 'faebd7',
-  aqua: 'ffff',
-  aquamarRe: '7fffd4',
-  azuY: 'f0ffff',
-  beige: 'f5f5dc',
-  bisque: 'ffe4c4',
-  black: '0',
-  blanKedOmond: 'ffebcd',
-  Xe: 'ff',
-  XeviTet: '8a2be2',
-  bPwn: 'a52a2a',
-  burlywood: 'deb887',
-  caMtXe: '5f9ea0',
-  KartYuse: '7fff00',
-  KocTate: 'd2691e',
-  cSO: 'ff7f50',
-  cSnflowerXe: '6495ed',
-  cSnsilk: 'fff8dc',
-  crimson: 'dc143c',
-  cyan: 'ffff',
-  xXe: '8b',
-  xcyan: '8b8b',
-  xgTMnPd: 'b8860b',
-  xWay: 'a9a9a9',
-  xgYF: '6400',
-  xgYy: 'a9a9a9',
-  xkhaki: 'bdb76b',
-  xmagFta: '8b008b',
-  xTivegYF: '556b2f',
-  xSange: 'ff8c00',
-  xScEd: '9932cc',
-  xYd: '8b0000',
-  xsOmon: 'e9967a',
-  xsHgYF: '8fbc8f',
-  xUXe: '483d8b',
-  xUWay: '2f4f4f',
-  xUgYy: '2f4f4f',
-  xQe: 'ced1',
-  xviTet: '9400d3',
-  dAppRk: 'ff1493',
-  dApskyXe: 'bfff',
-  dimWay: '696969',
-  dimgYy: '696969',
-  dodgerXe: '1e90ff',
-  fiYbrick: 'b22222',
-  flSOwEte: 'fffaf0',
-  foYstWAn: '228b22',
-  fuKsia: 'ff00ff',
-  gaRsbSo: 'dcdcdc',
-  ghostwEte: 'f8f8ff',
-  gTd: 'ffd700',
-  gTMnPd: 'daa520',
-  Way: '808080',
-  gYF: '8000',
-  gYFLw: 'adff2f',
-  gYy: '808080',
-  honeyMw: 'f0fff0',
-  hotpRk: 'ff69b4',
-  RdianYd: 'cd5c5c',
-  Rdigo: '4b0082',
-  ivSy: 'fffff0',
-  khaki: 'f0e68c',
-  lavFMr: 'e6e6fa',
-  lavFMrXsh: 'fff0f5',
-  lawngYF: '7cfc00',
-  NmoncEffon: 'fffacd',
-  ZXe: 'add8e6',
-  ZcSO: 'f08080',
-  Zcyan: 'e0ffff',
-  ZgTMnPdLw: 'fafad2',
-  ZWay: 'd3d3d3',
-  ZgYF: '90ee90',
-  ZgYy: 'd3d3d3',
-  ZpRk: 'ffb6c1',
-  ZsOmon: 'ffa07a',
-  ZsHgYF: '20b2aa',
-  ZskyXe: '87cefa',
-  ZUWay: '778899',
-  ZUgYy: '778899',
-  ZstAlXe: 'b0c4de',
-  ZLw: 'ffffe0',
-  lime: 'ff00',
-  limegYF: '32cd32',
-  lRF: 'faf0e6',
-  magFta: 'ff00ff',
-  maPon: '800000',
-  VaquamarRe: '66cdaa',
-  VXe: 'cd',
-  VScEd: 'ba55d3',
-  VpurpN: '9370db',
-  VsHgYF: '3cb371',
-  VUXe: '7b68ee',
-  VsprRggYF: 'fa9a',
-  VQe: '48d1cc',
-  VviTetYd: 'c71585',
-  midnightXe: '191970',
-  mRtcYam: 'f5fffa',
-  mistyPse: 'ffe4e1',
-  moccasR: 'ffe4b5',
-  navajowEte: 'ffdead',
-  navy: '80',
-  Tdlace: 'fdf5e6',
-  Tive: '808000',
-  TivedBb: '6b8e23',
-  Sange: 'ffa500',
-  SangeYd: 'ff4500',
-  ScEd: 'da70d6',
-  pOegTMnPd: 'eee8aa',
-  pOegYF: '98fb98',
-  pOeQe: 'afeeee',
-  pOeviTetYd: 'db7093',
-  papayawEp: 'ffefd5',
-  pHKpuff: 'ffdab9',
-  peru: 'cd853f',
-  pRk: 'ffc0cb',
-  plum: 'dda0dd',
-  powMrXe: 'b0e0e6',
-  purpN: '800080',
-  YbeccapurpN: '663399',
-  Yd: 'ff0000',
-  Psybrown: 'bc8f8f',
-  PyOXe: '4169e1',
-  saddNbPwn: '8b4513',
-  sOmon: 'fa8072',
-  sandybPwn: 'f4a460',
-  sHgYF: '2e8b57',
-  sHshell: 'fff5ee',
-  siFna: 'a0522d',
-  silver: 'c0c0c0',
-  skyXe: '87ceeb',
-  UXe: '6a5acd',
-  UWay: '708090',
-  UgYy: '708090',
-  snow: 'fffafa',
-  sprRggYF: 'ff7f',
-  stAlXe: '4682b4',
-  tan: 'd2b48c',
-  teO: '8080',
-  tEstN: 'd8bfd8',
-  tomato: 'ff6347',
-  Qe: '40e0d0',
-  viTet: 'ee82ee',
-  JHt: 'f5deb3',
-  wEte: 'ffffff',
-  wEtesmoke: 'f5f5f5',
-  Lw: 'ffff00',
-  LwgYF: '9acd32'
+	OiceXe: 'f0f8ff',
+	antiquewEte: 'faebd7',
+	aqua: 'ffff',
+	aquamarRe: '7fffd4',
+	azuY: 'f0ffff',
+	beige: 'f5f5dc',
+	bisque: 'ffe4c4',
+	black: '0',
+	blanKedOmond: 'ffebcd',
+	Xe: 'ff',
+	XeviTet: '8a2be2',
+	bPwn: 'a52a2a',
+	burlywood: 'deb887',
+	caMtXe: '5f9ea0',
+	KartYuse: '7fff00',
+	KocTate: 'd2691e',
+	cSO: 'ff7f50',
+	cSnflowerXe: '6495ed',
+	cSnsilk: 'fff8dc',
+	crimson: 'dc143c',
+	cyan: 'ffff',
+	xXe: '8b',
+	xcyan: '8b8b',
+	xgTMnPd: 'b8860b',
+	xWay: 'a9a9a9',
+	xgYF: '6400',
+	xgYy: 'a9a9a9',
+	xkhaki: 'bdb76b',
+	xmagFta: '8b008b',
+	xTivegYF: '556b2f',
+	xSange: 'ff8c00',
+	xScEd: '9932cc',
+	xYd: '8b0000',
+	xsOmon: 'e9967a',
+	xsHgYF: '8fbc8f',
+	xUXe: '483d8b',
+	xUWay: '2f4f4f',
+	xUgYy: '2f4f4f',
+	xQe: 'ced1',
+	xviTet: '9400d3',
+	dAppRk: 'ff1493',
+	dApskyXe: 'bfff',
+	dimWay: '696969',
+	dimgYy: '696969',
+	dodgerXe: '1e90ff',
+	fiYbrick: 'b22222',
+	flSOwEte: 'fffaf0',
+	foYstWAn: '228b22',
+	fuKsia: 'ff00ff',
+	gaRsbSo: 'dcdcdc',
+	ghostwEte: 'f8f8ff',
+	gTd: 'ffd700',
+	gTMnPd: 'daa520',
+	Way: '808080',
+	gYF: '8000',
+	gYFLw: 'adff2f',
+	gYy: '808080',
+	honeyMw: 'f0fff0',
+	hotpRk: 'ff69b4',
+	RdianYd: 'cd5c5c',
+	Rdigo: '4b0082',
+	ivSy: 'fffff0',
+	khaki: 'f0e68c',
+	lavFMr: 'e6e6fa',
+	lavFMrXsh: 'fff0f5',
+	lawngYF: '7cfc00',
+	NmoncEffon: 'fffacd',
+	ZXe: 'add8e6',
+	ZcSO: 'f08080',
+	Zcyan: 'e0ffff',
+	ZgTMnPdLw: 'fafad2',
+	ZWay: 'd3d3d3',
+	ZgYF: '90ee90',
+	ZgYy: 'd3d3d3',
+	ZpRk: 'ffb6c1',
+	ZsOmon: 'ffa07a',
+	ZsHgYF: '20b2aa',
+	ZskyXe: '87cefa',
+	ZUWay: '778899',
+	ZUgYy: '778899',
+	ZstAlXe: 'b0c4de',
+	ZLw: 'ffffe0',
+	lime: 'ff00',
+	limegYF: '32cd32',
+	lRF: 'faf0e6',
+	magFta: 'ff00ff',
+	maPon: '800000',
+	VaquamarRe: '66cdaa',
+	VXe: 'cd',
+	VScEd: 'ba55d3',
+	VpurpN: '9370db',
+	VsHgYF: '3cb371',
+	VUXe: '7b68ee',
+	VsprRggYF: 'fa9a',
+	VQe: '48d1cc',
+	VviTetYd: 'c71585',
+	midnightXe: '191970',
+	mRtcYam: 'f5fffa',
+	mistyPse: 'ffe4e1',
+	moccasR: 'ffe4b5',
+	navajowEte: 'ffdead',
+	navy: '80',
+	Tdlace: 'fdf5e6',
+	Tive: '808000',
+	TivedBb: '6b8e23',
+	Sange: 'ffa500',
+	SangeYd: 'ff4500',
+	ScEd: 'da70d6',
+	pOegTMnPd: 'eee8aa',
+	pOegYF: '98fb98',
+	pOeQe: 'afeeee',
+	pOeviTetYd: 'db7093',
+	papayawEp: 'ffefd5',
+	pHKpuff: 'ffdab9',
+	peru: 'cd853f',
+	pRk: 'ffc0cb',
+	plum: 'dda0dd',
+	powMrXe: 'b0e0e6',
+	purpN: '800080',
+	YbeccapurpN: '663399',
+	Yd: 'ff0000',
+	Psybrown: 'bc8f8f',
+	PyOXe: '4169e1',
+	saddNbPwn: '8b4513',
+	sOmon: 'fa8072',
+	sandybPwn: 'f4a460',
+	sHgYF: '2e8b57',
+	sHshell: 'fff5ee',
+	siFna: 'a0522d',
+	silver: 'c0c0c0',
+	skyXe: '87ceeb',
+	UXe: '6a5acd',
+	UWay: '708090',
+	UgYy: '708090',
+	snow: 'fffafa',
+	sprRggYF: 'ff7f',
+	stAlXe: '4682b4',
+	tan: 'd2b48c',
+	teO: '8080',
+	tEstN: 'd8bfd8',
+	tomato: 'ff6347',
+	Qe: '40e0d0',
+	viTet: 'ee82ee',
+	JHt: 'f5deb3',
+	wEte: 'ffffff',
+	wEtesmoke: 'f5f5f5',
+	Lw: 'ffff00',
+	LwgYF: '9acd32'
 };
 function unpack() {
   const unpacked = {};
@@ -1484,26 +1482,26 @@ function index_esm(input) {
 var color = /*#__PURE__*/Object.freeze({
 __proto__: null,
 Color: Color,
-default: index_esm,
-round: round,
-lim: lim,
-p2b: p2b,
-b2p: b2p,
-n2b: n2b,
 b2n: b2n,
-n2p: n2p,
+b2p: b2p,
+default: index_esm,
 hexParse: hexParse,
 hexString: hexString,
-rgb2hsl: rgb2hsl,
 hsl2rgb: hsl2rgb,
-hwb2rgb: hwb2rgb,
+hslString: hslString,
 hsv2rgb: hsv2rgb,
 hueParse: hueParse,
-rotate: rotate,
-hslString: hslString,
+hwb2rgb: hwb2rgb,
+lim: lim,
+n2b: n2b,
+n2p: n2p,
 nameParse: nameParse,
+p2b: p2b,
+rgb2hsl: rgb2hsl,
 rgbParse: rgbParse,
-rgbString: rgbString
+rgbString: rgbString,
+rotate: rotate,
+round: round
 });
 
 var index = Object.assign(index_esm, color);
@@ -1913,82 +1911,7 @@ Object.defineProperty(module, 'exports', {
 	get: assembleStyles
 });
 
-},{"color-convert":26}],17:[function(require,module,exports){
-(function (global){(function (){
-'use strict';
-
-var possibleNames = require('possible-typed-array-names');
-
-var g = typeof globalThis === 'undefined' ? global : globalThis;
-
-/** @type {import('.')} */
-module.exports = function availableTypedArrays() {
-	var /** @type {ReturnType<typeof availableTypedArrays>} */ out = [];
-	for (var i = 0; i < possibleNames.length; i++) {
-		if (typeof g[possibleNames[i]] === 'function') {
-			// @ts-expect-error
-			out[out.length] = possibleNames[i];
-		}
-	}
-	return out;
-};
-
-}).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"possible-typed-array-names":70}],18:[function(require,module,exports){
-'use strict';
-
-var GetIntrinsic = require('get-intrinsic');
-
-var callBind = require('./');
-
-var $indexOf = callBind(GetIntrinsic('String.prototype.indexOf'));
-
-module.exports = function callBoundIntrinsic(name, allowMissing) {
-	var intrinsic = GetIntrinsic(name, !!allowMissing);
-	if (typeof intrinsic === 'function' && $indexOf(name, '.prototype.') > -1) {
-		return callBind(intrinsic);
-	}
-	return intrinsic;
-};
-
-},{"./":19,"get-intrinsic":53}],19:[function(require,module,exports){
-'use strict';
-
-var bind = require('function-bind');
-var GetIntrinsic = require('get-intrinsic');
-var setFunctionLength = require('set-function-length');
-
-var $TypeError = require('es-errors/type');
-var $apply = GetIntrinsic('%Function.prototype.apply%');
-var $call = GetIntrinsic('%Function.prototype.call%');
-var $reflectApply = GetIntrinsic('%Reflect.apply%', true) || bind.call($call, $apply);
-
-var $defineProperty = require('es-define-property');
-var $max = GetIntrinsic('%Math.max%');
-
-module.exports = function callBind(originalFunction) {
-	if (typeof originalFunction !== 'function') {
-		throw new $TypeError('a function is required');
-	}
-	var func = $reflectApply(bind, $call, arguments);
-	return setFunctionLength(
-		func,
-		1 + $max(0, originalFunction.length - (arguments.length - 1)),
-		true
-	);
-};
-
-var applyBind = function applyBind() {
-	return $reflectApply(bind, $apply, arguments);
-};
-
-if ($defineProperty) {
-	$defineProperty(module.exports, 'apply', { value: applyBind });
-} else {
-	module.exports.apply = applyBind;
-}
-
-},{"es-define-property":42,"es-errors/type":48,"function-bind":52,"get-intrinsic":53,"set-function-length":72}],20:[function(require,module,exports){
+},{"color-convert":23}],17:[function(require,module,exports){
 'use strict';
 const ansiStyles = require('ansi-styles');
 const {stdout: stdoutColor, stderr: stderrColor} = require('supports-color');
@@ -2219,7 +2142,7 @@ chalk.stderr.supportsColor = stderrColor;
 
 module.exports = chalk;
 
-},{"./templates":21,"./util":22,"ansi-styles":16,"supports-color":73}],21:[function(require,module,exports){
+},{"./templates":18,"./util":19,"ansi-styles":16,"supports-color":42}],18:[function(require,module,exports){
 'use strict';
 const TEMPLATE_REGEX = /(?:\\(u(?:[a-f\d]{4}|\{[a-f\d]{1,6}\})|x[a-f\d]{2}|.))|(?:\{(~)?(\w+(?:\([^)]*\))?(?:\.\w+(?:\([^)]*\))?)*)(?:[ \t]|(?=\r?\n)))|(\})|((?:.|[\r\n\f])+?)/gi;
 const STYLE_REGEX = /(?:^|\.)(\w+)(?:\(([^)]*)\))?/g;
@@ -2355,7 +2278,7 @@ module.exports = (chalk, temporary) => {
 	return chunks.join('');
 };
 
-},{}],22:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 'use strict';
 
 const stringReplaceAll = (string, substring, replacer) => {
@@ -2396,16 +2319,16 @@ module.exports = {
 	stringEncaseCRLFWithFirstIndex
 };
 
-},{}],23:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 /*!
- * Chart.js v4.4.3
+ * Chart.js v4.5.0
  * https://www.chartjs.org
- * (c) 2024 Chart.js Contributors
+ * (c) 2025 Chart.js Contributors
  * Released under the MIT License
  */
 'use strict';
 
-var helpers_segment = require('./chunks/helpers.segment.cjs');
+var helpers_dataset = require('./chunks/helpers.dataset.cjs');
 require('@kurkle/color');
 
 class Animator {
@@ -2430,7 +2353,7 @@ class Animator {
             return;
         }
         this._running = true;
-        this._request = helpers_segment.requestAnimFrame.call(window, ()=>{
+        this._request = helpers_dataset.requestAnimFrame.call(window, ()=>{
             this._update();
             this._request = null;
             if (this._running) {
@@ -2551,8 +2474,8 @@ const interpolators = {
         return factor > 0.5 ? to : from;
     },
  color (from, to, factor) {
-        const c0 = helpers_segment.color(from || transparent);
-        const c1 = c0.valid && helpers_segment.color(to || transparent);
+        const c0 = helpers_dataset.color(from || transparent);
+        const c1 = c0.valid && helpers_dataset.color(to || transparent);
         return c1 && c1.valid ? c1.mix(c0, factor).hexString() : to;
     },
     number (from, to, factor) {
@@ -2562,20 +2485,20 @@ const interpolators = {
 class Animation {
     constructor(cfg, target, prop, to){
         const currentValue = target[prop];
-        to = helpers_segment.resolve([
+        to = helpers_dataset.resolve([
             cfg.to,
             to,
             currentValue,
             cfg.from
         ]);
-        const from = helpers_segment.resolve([
+        const from = helpers_dataset.resolve([
             cfg.from,
             currentValue,
             to
         ]);
         this._active = true;
         this._fn = cfg.fn || interpolators[cfg.type || typeof from];
-        this._easing = helpers_segment.effects[cfg.easing] || helpers_segment.effects.linear;
+        this._easing = helpers_dataset.effects[cfg.easing] || helpers_dataset.effects.linear;
         this._start = Math.floor(Date.now() + (cfg.delay || 0));
         this._duration = this._total = Math.floor(cfg.duration);
         this._loop = !!cfg.loop;
@@ -2598,13 +2521,13 @@ class Animation {
             this._duration = Math.floor(Math.max(remain, cfg.duration));
             this._total += elapsed;
             this._loop = !!cfg.loop;
-            this._to = helpers_segment.resolve([
+            this._to = helpers_dataset.resolve([
                 cfg.to,
                 to,
                 currentValue,
                 cfg.from
             ]);
-            this._from = helpers_segment.resolve([
+            this._from = helpers_dataset.resolve([
                 cfg.from,
                 currentValue,
                 to
@@ -2666,21 +2589,21 @@ class Animations {
         this.configure(config);
     }
     configure(config) {
-        if (!helpers_segment.isObject(config)) {
+        if (!helpers_dataset.isObject(config)) {
             return;
         }
-        const animationOptions = Object.keys(helpers_segment.defaults.animation);
+        const animationOptions = Object.keys(helpers_dataset.defaults.animation);
         const animatedProps = this._properties;
         Object.getOwnPropertyNames(config).forEach((key)=>{
             const cfg = config[key];
-            if (!helpers_segment.isObject(cfg)) {
+            if (!helpers_dataset.isObject(cfg)) {
                 return;
             }
             const resolved = {};
             for (const option of animationOptions){
                 resolved[option] = cfg[option];
             }
-            (helpers_segment.isArray(cfg.properties) && cfg.properties || [
+            (helpers_dataset.isArray(cfg.properties) && cfg.properties || [
                 key
             ]).forEach((prop)=>{
                 if (prop === key || !animatedProps.has(prop)) {
@@ -2806,7 +2729,7 @@ function defaultClip(xScale, yScale, allowedOverflow) {
 }
 function toClip(value) {
     let t, r, b, l;
-    if (helpers_segment.isObject(value)) {
+    if (helpers_dataset.isObject(value)) {
         t = value.top;
         r = value.right;
         b = value.bottom;
@@ -2838,18 +2761,23 @@ function applyStack(stack, value, dsIndex, options = {}) {
     if (value === null) {
         return;
     }
+    let found = false;
     for(i = 0, ilen = keys.length; i < ilen; ++i){
         datasetIndex = +keys[i];
         if (datasetIndex === dsIndex) {
+            found = true;
             if (options.all) {
                 continue;
             }
             break;
         }
         otherValue = stack.values[datasetIndex];
-        if (helpers_segment.isNumberFinite(otherValue) && (singleMode || value === 0 || helpers_segment.sign(value) === helpers_segment.sign(otherValue))) {
+        if (helpers_dataset.isNumberFinite(otherValue) && (singleMode || value === 0 || helpers_dataset.sign(value) === helpers_dataset.sign(otherValue))) {
             value += otherValue;
         }
+    }
+    if (!found && !options.all) {
+        return 0;
     }
     return value;
 }
@@ -2922,7 +2850,7 @@ function getFirstScaleId(chart, axis) {
     return Object.keys(scales).filter((key)=>scales[key].axis === axis).shift();
 }
 function createDatasetContext(parent, index) {
-    return helpers_segment.createContext(parent, {
+    return helpers_dataset.createContext(parent, {
         active: false,
         dataset: undefined,
         datasetIndex: index,
@@ -2932,7 +2860,7 @@ function createDatasetContext(parent, index) {
     });
 }
 function createDataContext(parent, index, element) {
-    return helpers_segment.createContext(parent, {
+    return helpers_dataset.createContext(parent, {
         active: false,
         dataIndex: index,
         parsed: undefined,
@@ -3014,9 +2942,9 @@ class DatasetController {
         const meta = this._cachedMeta;
         const dataset = this.getDataset();
         const chooseId = (axis, x, y, r)=>axis === 'x' ? x : axis === 'r' ? r : y;
-        const xid = meta.xAxisID = helpers_segment.valueOrDefault(dataset.xAxisID, getFirstScaleId(chart, 'x'));
-        const yid = meta.yAxisID = helpers_segment.valueOrDefault(dataset.yAxisID, getFirstScaleId(chart, 'y'));
-        const rid = meta.rAxisID = helpers_segment.valueOrDefault(dataset.rAxisID, getFirstScaleId(chart, 'r'));
+        const xid = meta.xAxisID = helpers_dataset.valueOrDefault(dataset.xAxisID, getFirstScaleId(chart, 'x'));
+        const yid = meta.yAxisID = helpers_dataset.valueOrDefault(dataset.yAxisID, getFirstScaleId(chart, 'y'));
+        const rid = meta.rAxisID = helpers_dataset.valueOrDefault(dataset.rAxisID, getFirstScaleId(chart, 'r'));
         const indexAxis = meta.indexAxis;
         const iid = meta.iAxisID = chooseId(indexAxis, xid, yid, rid);
         const vid = meta.vAxisID = chooseId(indexAxis, yid, xid, rid);
@@ -3045,7 +2973,7 @@ class DatasetController {
  _destroy() {
         const meta = this._cachedMeta;
         if (this._data) {
-            helpers_segment.unlistenArrayEvents(this._data, this);
+            helpers_dataset.unlistenArrayEvents(this._data, this);
         }
         if (meta._stacked) {
             clearStacks(meta);
@@ -3055,18 +2983,18 @@ class DatasetController {
         const dataset = this.getDataset();
         const data = dataset.data || (dataset.data = []);
         const _data = this._data;
-        if (helpers_segment.isObject(data)) {
+        if (helpers_dataset.isObject(data)) {
             const meta = this._cachedMeta;
             this._data = convertObjectDataToArray(data, meta);
         } else if (_data !== data) {
             if (_data) {
-                helpers_segment.unlistenArrayEvents(_data, this);
+                helpers_dataset.unlistenArrayEvents(_data, this);
                 const meta = this._cachedMeta;
                 clearStacks(meta);
                 meta._parsed = [];
             }
             if (data && Object.isExtensible(data)) {
-                helpers_segment.listenArrayEvents(data, this);
+                helpers_dataset.listenArrayEvents(data, this);
             }
             this._syncList = [];
             this._data = data;
@@ -3094,6 +3022,7 @@ class DatasetController {
         this._resyncElements(resetNewElements);
         if (stackChanged || oldStacked !== meta._stacked) {
             updateStacks(this, meta._parsed);
+            meta._stacked = isStacked(meta.vScale, meta);
         }
     }
  configure() {
@@ -3116,9 +3045,9 @@ class DatasetController {
             meta._sorted = true;
             parsed = data;
         } else {
-            if (helpers_segment.isArray(data[start])) {
+            if (helpers_dataset.isArray(data[start])) {
                 parsed = this.parseArrayData(meta, data, start, count);
-            } else if (helpers_segment.isObject(data[start])) {
+            } else if (helpers_dataset.isObject(data[start])) {
                 parsed = this.parseObjectData(meta, data, start, count);
             } else {
                 parsed = this.parsePrimitiveData(meta, data, start, count);
@@ -3179,8 +3108,8 @@ class DatasetController {
             index = i + start;
             item = data[index];
             parsed[i] = {
-                x: xScale.parse(helpers_segment.resolveObjectKey(item, xAxisKey), index),
-                y: yScale.parse(helpers_segment.resolveObjectKey(item, yAxisKey), index)
+                x: xScale.parse(helpers_dataset.resolveObjectKey(item, xAxisKey), index),
+                y: yScale.parse(helpers_dataset.resolveObjectKey(item, yAxisKey), index)
             };
         }
         return parsed;
@@ -3230,7 +3159,7 @@ class DatasetController {
         function _skip() {
             parsed = _parsed[i];
             const otherValue = parsed[otherScale.axis];
-            return !helpers_segment.isNumberFinite(parsed[scale.axis]) || otherMin > otherValue || otherMax < otherValue;
+            return !helpers_dataset.isNumberFinite(parsed[scale.axis]) || otherMin > otherValue || otherMax < otherValue;
         }
         for(i = 0; i < ilen; ++i){
             if (_skip()) {
@@ -3258,7 +3187,7 @@ class DatasetController {
         let i, ilen, value;
         for(i = 0, ilen = parsed.length; i < ilen; ++i){
             value = parsed[i][scale.axis];
-            if (helpers_segment.isNumberFinite(value)) {
+            if (helpers_dataset.isNumberFinite(value)) {
                 values.push(value);
             }
         }
@@ -3280,7 +3209,7 @@ class DatasetController {
  _update(mode) {
         const meta = this._cachedMeta;
         this.update(mode || 'default');
-        meta._clip = toClip(helpers_segment.valueOrDefault(this.options.clip, defaultClip(meta.xScale, meta.yScale, this.getMaxOverflow())));
+        meta._clip = toClip(helpers_dataset.valueOrDefault(this.options.clip, defaultClip(meta.xScale, meta.yScale, this.getMaxOverflow())));
     }
  update(mode) {}
     draw() {
@@ -3345,7 +3274,7 @@ class DatasetController {
         const cache = this._cachedDataOpts;
         const cacheKey = elementType + '-' + mode;
         const cached = cache[cacheKey];
-        const sharing = this.enableOptionSharing && helpers_segment.defined(index);
+        const sharing = this.enableOptionSharing && helpers_dataset.defined(index);
         if (cached) {
             return cloneIfNotShared(cached, sharing);
         }
@@ -3361,7 +3290,7 @@ class DatasetController {
             ''
         ];
         const scopes = config.getOptionScopes(this.getDataset(), scopeKeys);
-        const names = Object.keys(helpers_segment.defaults.elements[elementType]);
+        const names = Object.keys(helpers_dataset.defaults.elements[elementType]);
         const context = ()=>this.getContext(index, active, mode);
         const values = config.resolveNamedOptions(scopes, names, context, prefixes);
         if (values.$shared) {
@@ -3568,7 +3497,7 @@ function getAllScaleValues(scale, type) {
         for(let i = 0, ilen = visibleMetas.length; i < ilen; i++){
             values = values.concat(visibleMetas[i].controller.getAllParsedValues(scale));
         }
-        scale._cache.$bar = helpers_segment._arrayUnique(values.sort((a, b)=>a - b));
+        scale._cache.$bar = helpers_dataset._arrayUnique(values.sort((a, b)=>a - b));
     }
     return scale._cache.$bar;
 }
@@ -3581,7 +3510,7 @@ function getAllScaleValues(scale, type) {
         if (curr === 32767 || curr === -32768) {
             return;
         }
-        if (helpers_segment.defined(prev)) {
+        if (helpers_dataset.defined(prev)) {
             min = Math.min(min, Math.abs(curr - prev) || min);
         }
         prev = curr;
@@ -3600,7 +3529,7 @@ function getAllScaleValues(scale, type) {
  function computeFitCategoryTraits(index, ruler, options, stackCount) {
     const thickness = options.barThickness;
     let size, ratio;
-    if (helpers_segment.isNullOrUndef(thickness)) {
+    if (helpers_dataset.isNullOrUndef(thickness)) {
         size = ruler.min * options.categoryPercentage;
         ratio = options.barPercentage;
     } else {
@@ -3655,7 +3584,7 @@ function parseFloatBar(entry, item, vScale, i) {
     };
 }
 function parseValue(entry, item, vScale, i) {
-    if (helpers_segment.isArray(entry)) {
+    if (helpers_dataset.isArray(entry)) {
         parseFloatBar(entry, item, vScale, i);
     } else {
         item[vScale.axis] = vScale.parse(entry, i);
@@ -3682,7 +3611,7 @@ function isFloatBar(custom) {
 }
 function barSign(size, vScale, actualBase) {
     if (size !== 0) {
-        return helpers_segment.sign(size);
+        return helpers_dataset.sign(size);
     }
     return (vScale.isHorizontal() ? 1 : -1) * (vScale.min >= actualBase ? 1 : -1);
 }
@@ -3813,8 +3742,8 @@ class BarController extends DatasetController {
         for(i = start, ilen = start + count; i < ilen; ++i){
             obj = data[i];
             item = {};
-            item[iScale.axis] = iScale.parse(helpers_segment.resolveObjectKey(obj, iAxisKey), i);
-            parsed.push(parseValue(helpers_segment.resolveObjectKey(obj, vAxisKey), item, vScale, i));
+            item[iScale.axis] = iScale.parse(helpers_dataset.resolveObjectKey(obj, iAxisKey), i);
+            parsed.push(parseValue(helpers_dataset.resolveObjectKey(obj, vAxisKey), item, vScale, i));
         }
         return parsed;
     }
@@ -3859,7 +3788,7 @@ class BarController extends DatasetController {
         const { sharedOptions , includeOptions  } = this._getSharedOptions(start, mode);
         for(let i = start; i < start + count; i++){
             const parsed = this.getParsed(i);
-            const vpixels = reset || helpers_segment.isNullOrUndef(parsed[vScale.axis]) ? {
+            const vpixels = reset || helpers_dataset.isNullOrUndef(parsed[vScale.axis]) ? {
                 base,
                 head: base
             } : this._calculateBarValuePixels(i);
@@ -3888,10 +3817,12 @@ class BarController extends DatasetController {
         const metasets = iScale.getMatchingVisibleMetas(this._type).filter((meta)=>meta.controller.options.grouped);
         const stacked = iScale.options.stacked;
         const stacks = [];
+        const currentParsed = this._cachedMeta.controller.getParsed(dataIndex);
+        const iScaleValue = currentParsed && currentParsed[iScale.axis];
         const skipNull = (meta)=>{
-            const parsed = meta.controller.getParsed(dataIndex);
+            const parsed = meta._parsed.find((item)=>item[iScale.axis] === iScaleValue);
             const val = parsed && parsed[meta.vScale.axis];
-            if (helpers_segment.isNullOrUndef(val) || isNaN(val)) {
+            if (helpers_dataset.isNullOrUndef(val) || isNaN(val)) {
                 return true;
             }
         };
@@ -3913,6 +3844,22 @@ class BarController extends DatasetController {
     }
  _getStackCount(index) {
         return this._getStacks(undefined, index).length;
+    }
+    _getAxisCount() {
+        return this._getAxis().length;
+    }
+    getFirstScaleIdForIndexAxis() {
+        const scales = this.chart.scales;
+        const indexScaleId = this.chart.options.indexAxis;
+        return Object.keys(scales).filter((key)=>scales[key].axis === indexScaleId).shift();
+    }
+    _getAxis() {
+        const axis = {};
+        const firstScaleAxisId = this.getFirstScaleIdForIndexAxis();
+        for (const dataset of this.chart.data.datasets){
+            axis[helpers_dataset.valueOrDefault(this.chart.options.indexAxis === 'x' ? dataset.xAxisID : dataset.yAxisID, firstScaleAxisId)] = true;
+        }
+        return Object.keys(axis);
     }
  _getStackIndex(datasetIndex, name, dataIndex) {
         const stacks = this._getStacks(datasetIndex, dataIndex);
@@ -3958,12 +3905,12 @@ class BarController extends DatasetController {
         if (floating) {
             value = custom.barStart;
             length = custom.barEnd - custom.barStart;
-            if (value !== 0 && helpers_segment.sign(value) !== helpers_segment.sign(custom.barEnd)) {
+            if (value !== 0 && helpers_dataset.sign(value) !== helpers_dataset.sign(custom.barEnd)) {
                 start = 0;
             }
             start += value;
         }
-        const startValue = !helpers_segment.isNullOrUndef(baseValue) && !floating ? baseValue : start;
+        const startValue = !helpers_dataset.isNullOrUndef(baseValue) && !floating ? baseValue : start;
         let base = vScale.getPixelForValue(startValue);
         if (this.chart.getDataVisibility(index)) {
             head = vScale.getPixelForValue(start + length);
@@ -3987,7 +3934,7 @@ class BarController extends DatasetController {
             }
         }
         if (base === vScale.getPixelForValue(actualBase)) {
-            const halfGrid = helpers_segment.sign(size) * vScale.getLineWidthForValue(actualBase) / 2;
+            const halfGrid = helpers_dataset.sign(size) * vScale.getLineWidthForValue(actualBase) / 2;
             base += halfGrid;
             size -= halfGrid;
         }
@@ -4002,12 +3949,15 @@ class BarController extends DatasetController {
         const scale = ruler.scale;
         const options = this.options;
         const skipNull = options.skipNull;
-        const maxBarThickness = helpers_segment.valueOrDefault(options.maxBarThickness, Infinity);
+        const maxBarThickness = helpers_dataset.valueOrDefault(options.maxBarThickness, Infinity);
         let center, size;
+        const axisCount = this._getAxisCount();
         if (ruler.grouped) {
             const stackCount = skipNull ? this._getStackCount(index) : ruler.stackCount;
-            const range = options.barThickness === 'flex' ? computeFlexCategoryTraits(index, ruler, options, stackCount) : computeFitCategoryTraits(index, ruler, options, stackCount);
-            const stackIndex = this._getStackIndex(this.index, this._cachedMeta.stack, skipNull ? index : undefined);
+            const range = options.barThickness === 'flex' ? computeFlexCategoryTraits(index, ruler, options, stackCount * axisCount) : computeFitCategoryTraits(index, ruler, options, stackCount * axisCount);
+            const axisID = this.chart.options.indexAxis === 'x' ? this.getDataset().xAxisID : this.getDataset().yAxisID;
+            const axisNumber = this._getAxis().indexOf(helpers_dataset.valueOrDefault(axisID, this.getFirstScaleIdForIndexAxis()));
+            const stackIndex = this._getStackIndex(this.index, this._cachedMeta.stack, skipNull ? index : undefined) + axisNumber;
             center = range.start + range.chunk * stackIndex + range.chunk / 2;
             size = Math.min(maxBarThickness, range.chunk * range.ratio);
         } else {
@@ -4077,7 +4027,7 @@ class BubbleController extends DatasetController {
         const parsed = super.parseArrayData(meta, data, start, count);
         for(let i = 0; i < parsed.length; i++){
             const item = data[start + i];
-            parsed[i]._custom = helpers_segment.valueOrDefault(item[2], this.resolveDataElementOptions(i + start).radius);
+            parsed[i]._custom = helpers_dataset.valueOrDefault(item[2], this.resolveDataElementOptions(i + start).radius);
         }
         return parsed;
     }
@@ -4085,7 +4035,7 @@ class BubbleController extends DatasetController {
         const parsed = super.parseObjectData(meta, data, start, count);
         for(let i = 0; i < parsed.length; i++){
             const item = data[start + i];
-            parsed[i]._custom = helpers_segment.valueOrDefault(item && item.r && +item.r, this.resolveDataElementOptions(i + start).radius);
+            parsed[i]._custom = helpers_dataset.valueOrDefault(item && item.r && +item.r, this.resolveDataElementOptions(i + start).radius);
         }
         return parsed;
     }
@@ -4148,7 +4098,7 @@ class BubbleController extends DatasetController {
         if (mode !== 'active') {
             values.radius = 0;
         }
-        values.radius += helpers_segment.valueOrDefault(parsed && parsed._custom, radius);
+        values.radius += helpers_dataset.valueOrDefault(parsed && parsed._custom, radius);
         return values;
     }
 }
@@ -4158,19 +4108,19 @@ function getRatioAndOffset(rotation, circumference, cutout) {
     let ratioY = 1;
     let offsetX = 0;
     let offsetY = 0;
-    if (circumference < helpers_segment.TAU) {
+    if (circumference < helpers_dataset.TAU) {
         const startAngle = rotation;
         const endAngle = startAngle + circumference;
         const startX = Math.cos(startAngle);
         const startY = Math.sin(startAngle);
         const endX = Math.cos(endAngle);
         const endY = Math.sin(endAngle);
-        const calcMax = (angle, a, b)=>helpers_segment._angleBetween(angle, startAngle, endAngle, true) ? 1 : Math.max(a, a * cutout, b, b * cutout);
-        const calcMin = (angle, a, b)=>helpers_segment._angleBetween(angle, startAngle, endAngle, true) ? -1 : Math.min(a, a * cutout, b, b * cutout);
+        const calcMax = (angle, a, b)=>helpers_dataset._angleBetween(angle, startAngle, endAngle, true) ? 1 : Math.max(a, a * cutout, b, b * cutout);
+        const calcMin = (angle, a, b)=>helpers_dataset._angleBetween(angle, startAngle, endAngle, true) ? -1 : Math.min(a, a * cutout, b, b * cutout);
         const maxX = calcMax(0, startX, endX);
-        const maxY = calcMax(helpers_segment.HALF_PI, startY, endY);
-        const minX = calcMin(helpers_segment.PI, startX, endX);
-        const minY = calcMin(helpers_segment.PI + helpers_segment.HALF_PI, startY, endY);
+        const maxY = calcMax(helpers_dataset.HALF_PI, startY, endY);
+        const minX = calcMin(helpers_dataset.PI, startX, endX);
+        const minY = calcMin(helpers_dataset.PI + helpers_dataset.HALF_PI, startY, endY);
         ratioX = (maxX - minX) / 2;
         ratioY = (maxY - minY) / 2;
         offsetX = -(maxX + minX) / 2;
@@ -4270,9 +4220,9 @@ class DoughnutController extends DatasetController {
             meta._parsed = data;
         } else {
             let getter = (i)=>+data[i];
-            if (helpers_segment.isObject(data[start])) {
+            if (helpers_dataset.isObject(data[start])) {
                 const { key ='value'  } = this._parsing;
-                getter = (i)=>+helpers_segment.resolveObjectKey(data[i], key);
+                getter = (i)=>+helpers_dataset.resolveObjectKey(data[i], key);
             }
             let i, ilen;
             for(i = start, ilen = start + count; i < ilen; ++i){
@@ -4281,14 +4231,14 @@ class DoughnutController extends DatasetController {
         }
     }
  _getRotation() {
-        return helpers_segment.toRadians(this.options.rotation - 90);
+        return helpers_dataset.toRadians(this.options.rotation - 90);
     }
  _getCircumference() {
-        return helpers_segment.toRadians(this.options.circumference);
+        return helpers_dataset.toRadians(this.options.circumference);
     }
  _getRotationExtents() {
-        let min = helpers_segment.TAU;
-        let max = -helpers_segment.TAU;
+        let min = helpers_dataset.TAU;
+        let max = -helpers_dataset.TAU;
         for(let i = 0; i < this.chart.data.datasets.length; ++i){
             if (this.chart.isDatasetVisible(i) && this.chart.getDatasetMeta(i).type === this._type) {
                 const controller = this.chart.getDatasetMeta(i).controller;
@@ -4310,14 +4260,14 @@ class DoughnutController extends DatasetController {
         const arcs = meta.data;
         const spacing = this.getMaxBorderWidth() + this.getMaxOffset(arcs) + this.options.spacing;
         const maxSize = Math.max((Math.min(chartArea.width, chartArea.height) - spacing) / 2, 0);
-        const cutout = Math.min(helpers_segment.toPercentage(this.options.cutout, maxSize), 1);
+        const cutout = Math.min(helpers_dataset.toPercentage(this.options.cutout, maxSize), 1);
         const chartWeight = this._getRingWeight(this.index);
         const { circumference , rotation  } = this._getRotationExtents();
         const { ratioX , ratioY , offsetX , offsetY  } = getRatioAndOffset(rotation, circumference, cutout);
         const maxWidth = (chartArea.width - spacing) / ratioX;
         const maxHeight = (chartArea.height - spacing) / ratioY;
         const maxRadius = Math.max(Math.min(maxWidth, maxHeight) / 2, 0);
-        const outerRadius = helpers_segment.toDimension(this.options.radius, maxRadius);
+        const outerRadius = helpers_dataset.toDimension(this.options.radius, maxRadius);
         const innerRadius = Math.max(outerRadius * cutout, 0);
         const radiusLength = (outerRadius - innerRadius) / this._getVisibleDatasetWeightTotal();
         this.offsetX = offsetX * outerRadius;
@@ -4334,7 +4284,7 @@ class DoughnutController extends DatasetController {
         if (reset && opts.animation.animateRotate || !this.chart.getDataVisibility(i) || meta._parsed[i] === null || meta.data[i].hidden) {
             return 0;
         }
-        return this.calculateCircumference(meta._parsed[i] * circumference / helpers_segment.TAU);
+        return this.calculateCircumference(meta._parsed[i] * circumference / helpers_dataset.TAU);
     }
     updateElements(arcs, start, count, mode) {
         const reset = mode === 'reset';
@@ -4388,7 +4338,7 @@ class DoughnutController extends DatasetController {
     calculateCircumference(value) {
         const total = this._cachedMeta.total;
         if (total > 0 && !isNaN(value)) {
-            return helpers_segment.TAU * (Math.abs(value) / total);
+            return helpers_dataset.TAU * (Math.abs(value) / total);
         }
         return 0;
     }
@@ -4396,7 +4346,7 @@ class DoughnutController extends DatasetController {
         const meta = this._cachedMeta;
         const chart = this.chart;
         const labels = chart.data.labels || [];
-        const value = helpers_segment.formatNumber(meta._parsed[index], chart.options.locale);
+        const value = helpers_dataset.formatNumber(meta._parsed[index], chart.options.locale);
         return {
             label: labels[index] || '',
             value
@@ -4445,7 +4395,7 @@ class DoughnutController extends DatasetController {
         return ringWeightOffset;
     }
  _getRingWeight(datasetIndex) {
-        return Math.max(helpers_segment.valueOrDefault(this.chart.data.datasets[datasetIndex].weight, 1), 0);
+        return Math.max(helpers_dataset.valueOrDefault(this.chart.data.datasets[datasetIndex].weight, 1), 0);
     }
  _getVisibleDatasetWeightTotal() {
         return this._getRingWeightOffset(this.chart.data.datasets.length) || 1;
@@ -4479,10 +4429,10 @@ class LineController extends DatasetController {
         const meta = this._cachedMeta;
         const { dataset: line , data: points = [] , _dataset  } = meta;
         const animationsDisabled = this.chart._animationsDisabled;
-        let { start , count  } = helpers_segment._getStartAndCountOfVisiblePoints(meta, points, animationsDisabled);
+        let { start , count  } = helpers_dataset._getStartAndCountOfVisiblePoints(meta, points, animationsDisabled);
         this._drawStart = start;
         this._drawCount = count;
-        if (helpers_segment._scaleRangesChanged(meta)) {
+        if (helpers_dataset._scaleRangesChanged(meta)) {
             start = 0;
             count = points.length;
         }
@@ -4508,7 +4458,7 @@ class LineController extends DatasetController {
         const iAxis = iScale.axis;
         const vAxis = vScale.axis;
         const { spanGaps , segment  } = this.options;
-        const maxGapLength = helpers_segment.isNumber(spanGaps) ? spanGaps : Number.POSITIVE_INFINITY;
+        const maxGapLength = helpers_dataset.isNumber(spanGaps) ? spanGaps : Number.POSITIVE_INFINITY;
         const directUpdate = this.chart._animationsDisabled || reset || mode === 'none';
         const end = start + count;
         const pointsCount = points.length;
@@ -4521,7 +4471,7 @@ class LineController extends DatasetController {
                 continue;
             }
             const parsed = this.getParsed(i);
-            const nullData = helpers_segment.isNullOrUndef(parsed[vAxis]);
+            const nullData = helpers_dataset.isNullOrUndef(parsed[vAxis]);
             const iPixel = properties[iAxis] = iScale.getPixelForValue(parsed[iAxis], i);
             const vPixel = properties[vAxis] = reset || nullData ? vScale.getBasePixel() : vScale.getPixelForValue(_stacked ? this.applyStack(vScale, parsed, _stacked) : parsed[vAxis], i);
             properties.skip = isNaN(iPixel) || isNaN(vPixel) || nullData;
@@ -4641,14 +4591,14 @@ class PolarAreaController extends DatasetController {
         const meta = this._cachedMeta;
         const chart = this.chart;
         const labels = chart.data.labels || [];
-        const value = helpers_segment.formatNumber(meta._parsed[index].r, chart.options.locale);
+        const value = helpers_dataset.formatNumber(meta._parsed[index].r, chart.options.locale);
         return {
             label: labels[index] || '',
             value
         };
     }
     parseObjectData(meta, data, start, count) {
-        return helpers_segment._parseObjectDataRadialScale.bind(this)(meta, data, start, count);
+        return helpers_dataset._parseObjectDataRadialScale.bind(this)(meta, data, start, count);
     }
     update(mode) {
         const arcs = this._cachedMeta.data;
@@ -4693,7 +4643,7 @@ class PolarAreaController extends DatasetController {
         const scale = this._cachedMeta.rScale;
         const centerX = scale.xCenter;
         const centerY = scale.yCenter;
-        const datasetStartAngle = scale.getIndexAngle(0) - 0.5 * helpers_segment.PI;
+        const datasetStartAngle = scale.getIndexAngle(0) - 0.5 * helpers_dataset.PI;
         let angle = datasetStartAngle;
         let i;
         const defaultAngle = 360 / this.countVisibleElements();
@@ -4737,7 +4687,7 @@ class PolarAreaController extends DatasetController {
         return count;
     }
  _computeAngle(index, mode, defaultAngle) {
-        return this.chart.getDataVisibility(index) ? helpers_segment.toRadians(this.resolveDataElementOptions(index, mode).angle || defaultAngle) : 0;
+        return this.chart.getDataVisibility(index) ? helpers_dataset.toRadians(this.resolveDataElementOptions(index, mode).angle || defaultAngle) : 0;
     }
 }
 
@@ -4781,7 +4731,7 @@ class RadarController extends DatasetController {
         };
     }
     parseObjectData(meta, data, start, count) {
-        return helpers_segment._parseObjectDataRadialScale.bind(this)(meta, data, start, count);
+        return helpers_dataset._parseObjectDataRadialScale.bind(this)(meta, data, start, count);
     }
     update(mode) {
         const meta = this._cachedMeta;
@@ -4861,10 +4811,10 @@ class ScatterController extends DatasetController {
         const meta = this._cachedMeta;
         const { data: points = []  } = meta;
         const animationsDisabled = this.chart._animationsDisabled;
-        let { start , count  } = helpers_segment._getStartAndCountOfVisiblePoints(meta, points, animationsDisabled);
+        let { start , count  } = helpers_dataset._getStartAndCountOfVisiblePoints(meta, points, animationsDisabled);
         this._drawStart = start;
         this._drawCount = count;
-        if (helpers_segment._scaleRangesChanged(meta)) {
+        if (helpers_dataset._scaleRangesChanged(meta)) {
             start = 0;
             count = points.length;
         }
@@ -4905,14 +4855,14 @@ class ScatterController extends DatasetController {
         const iAxis = iScale.axis;
         const vAxis = vScale.axis;
         const { spanGaps , segment  } = this.options;
-        const maxGapLength = helpers_segment.isNumber(spanGaps) ? spanGaps : Number.POSITIVE_INFINITY;
+        const maxGapLength = helpers_dataset.isNumber(spanGaps) ? spanGaps : Number.POSITIVE_INFINITY;
         const directUpdate = this.chart._animationsDisabled || reset || mode === 'none';
         let prevParsed = start > 0 && this.getParsed(start - 1);
         for(let i = start; i < start + count; ++i){
             const point = points[i];
             const parsed = this.getParsed(i);
             const properties = directUpdate ? point : {};
-            const nullData = helpers_segment.isNullOrUndef(parsed[vAxis]);
+            const nullData = helpers_dataset.isNullOrUndef(parsed[vAxis]);
             const iPixel = properties[iAxis] = iScale.getPixelForValue(parsed[iAxis], i);
             const vPixel = properties[vAxis] = reset || nullData ? vScale.getBasePixel() : vScale.getPixelForValue(_stacked ? this.applyStack(vScale, parsed, _stacked) : parsed[vAxis], i);
             properties.skip = isNaN(iPixel) || isNaN(vPixel) || nullData;
@@ -5024,10 +4974,20 @@ var adapters = {
 function binarySearch(metaset, axis, value, intersect) {
     const { controller , data , _sorted  } = metaset;
     const iScale = controller._cachedMeta.iScale;
+    const spanGaps = metaset.dataset ? metaset.dataset.options ? metaset.dataset.options.spanGaps : null : null;
     if (iScale && axis === iScale.axis && axis !== 'r' && _sorted && data.length) {
-        const lookupMethod = iScale._reversePixels ? helpers_segment._rlookupByKey : helpers_segment._lookupByKey;
+        const lookupMethod = iScale._reversePixels ? helpers_dataset._rlookupByKey : helpers_dataset._lookupByKey;
         if (!intersect) {
-            return lookupMethod(data, axis, value);
+            const result = lookupMethod(data, axis, value);
+            if (spanGaps) {
+                const { vScale  } = controller._cachedMeta;
+                const { _parsed  } = metaset;
+                const distanceToDefinedLo = _parsed.slice(0, result.lo + 1).reverse().findIndex((point)=>!helpers_dataset.isNullOrUndef(point[vScale.axis]));
+                result.lo -= Math.max(0, distanceToDefinedLo);
+                const distanceToDefinedHi = _parsed.slice(result.hi).findIndex((point)=>!helpers_dataset.isNullOrUndef(point[vScale.axis]));
+                result.hi += Math.max(0, distanceToDefinedHi);
+            }
+            return result;
         } else if (controller._sharedOptions) {
             const el = data[0];
             const range = typeof el.getRange === 'function' && el.getRange(axis);
@@ -5075,7 +5035,7 @@ function binarySearch(metaset, axis, value, intersect) {
         return items;
     }
     const evaluationFunc = function(element, datasetIndex, index) {
-        if (!includeInvisible && !helpers_segment._isPointInArea(element, chart.chartArea, 0)) {
+        if (!includeInvisible && !helpers_dataset._isPointInArea(element, chart.chartArea, 0)) {
             return;
         }
         if (element.inRange(position.x, position.y, useFinalPosition)) {
@@ -5096,11 +5056,11 @@ function binarySearch(metaset, axis, value, intersect) {
             'startAngle',
             'endAngle'
         ], useFinalPosition);
-        const { angle  } = helpers_segment.getAngleFromPoint(element, {
+        const { angle  } = helpers_dataset.getAngleFromPoint(element, {
             x: position.x,
             y: position.y
         });
-        if (helpers_segment._angleBetween(angle, startAngle, endAngle)) {
+        if (helpers_dataset._angleBetween(angle, startAngle, endAngle)) {
             items.push({
                 element,
                 datasetIndex,
@@ -5157,7 +5117,7 @@ function binarySearch(metaset, axis, value, intersect) {
     const rangeMethod = axis === 'x' ? 'inXRange' : 'inYRange';
     let intersectsItem = false;
     evaluateInteractionItems(chart, axis, position, (element, datasetIndex, index)=>{
-        if (element[rangeMethod](position[axis], useFinalPosition)) {
+        if (element[rangeMethod] && element[rangeMethod](position[axis], useFinalPosition)) {
             items.push({
                 element,
                 datasetIndex,
@@ -5175,7 +5135,7 @@ function binarySearch(metaset, axis, value, intersect) {
     evaluateInteractionItems,
     modes: {
  index (chart, e, options, useFinalPosition) {
-            const position = helpers_segment.getRelativePosition(e, chart);
+            const position = helpers_dataset.getRelativePosition(e, chart);
             const axis = options.axis || 'x';
             const includeInvisible = options.includeInvisible || false;
             const items = options.intersect ? getIntersectItems(chart, position, axis, useFinalPosition, includeInvisible) : getNearestItems(chart, position, axis, false, useFinalPosition, includeInvisible);
@@ -5197,7 +5157,7 @@ function binarySearch(metaset, axis, value, intersect) {
             return elements;
         },
  dataset (chart, e, options, useFinalPosition) {
-            const position = helpers_segment.getRelativePosition(e, chart);
+            const position = helpers_dataset.getRelativePosition(e, chart);
             const axis = options.axis || 'xy';
             const includeInvisible = options.includeInvisible || false;
             let items = options.intersect ? getIntersectItems(chart, position, axis, useFinalPosition, includeInvisible) : getNearestItems(chart, position, axis, false, useFinalPosition, includeInvisible);
@@ -5216,23 +5176,23 @@ function binarySearch(metaset, axis, value, intersect) {
             return items;
         },
  point (chart, e, options, useFinalPosition) {
-            const position = helpers_segment.getRelativePosition(e, chart);
+            const position = helpers_dataset.getRelativePosition(e, chart);
             const axis = options.axis || 'xy';
             const includeInvisible = options.includeInvisible || false;
             return getIntersectItems(chart, position, axis, useFinalPosition, includeInvisible);
         },
  nearest (chart, e, options, useFinalPosition) {
-            const position = helpers_segment.getRelativePosition(e, chart);
+            const position = helpers_dataset.getRelativePosition(e, chart);
             const axis = options.axis || 'xy';
             const includeInvisible = options.includeInvisible || false;
             return getNearestItems(chart, position, axis, options.intersect, useFinalPosition, includeInvisible);
         },
  x (chart, e, options, useFinalPosition) {
-            const position = helpers_segment.getRelativePosition(e, chart);
+            const position = helpers_dataset.getRelativePosition(e, chart);
             return getAxisItems(chart, position, 'x', options.intersect, useFinalPosition);
         },
  y (chart, e, options, useFinalPosition) {
-            const position = helpers_segment.getRelativePosition(e, chart);
+            const position = helpers_dataset.getRelativePosition(e, chart);
             return getAxisItems(chart, position, 'y', options.intersect, useFinalPosition);
         }
     }
@@ -5342,7 +5302,7 @@ function updateMaxPadding(maxPadding, boxPadding) {
 function updateDims(chartArea, params, layout, stacks) {
     const { pos , box  } = layout;
     const maxPadding = chartArea.maxPadding;
-    if (!helpers_segment.isObject(pos)) {
+    if (!helpers_dataset.isObject(pos)) {
         if (layout.size) {
             chartArea[pos] -= layout.size;
         }
@@ -5443,7 +5403,7 @@ function placeBoxes(boxes, chartArea, params, stacks) {
         if (layout.horizontal) {
             const width = chartArea.w * weight;
             const height = stack.size || box.height;
-            if (helpers_segment.defined(stack.start)) {
+            if (helpers_dataset.defined(stack.start)) {
                 y = stack.start;
             }
             if (box.fullSize) {
@@ -5457,7 +5417,7 @@ function placeBoxes(boxes, chartArea, params, stacks) {
         } else {
             const height = chartArea.h * weight;
             const width = stack.size || box.width;
-            if (helpers_segment.defined(stack.start)) {
+            if (helpers_dataset.defined(stack.start)) {
                 x = stack.start;
             }
             if (box.fullSize) {
@@ -5508,13 +5468,13 @@ var layouts = {
         if (!chart) {
             return;
         }
-        const padding = helpers_segment.toPadding(chart.options.layout.padding);
+        const padding = helpers_dataset.toPadding(chart.options.layout.padding);
         const availableWidth = Math.max(width - padding.width, 0);
         const availableHeight = Math.max(height - padding.height, 0);
         const boxes = buildLayoutBoxes(chart.boxes);
         const verticalBoxes = boxes.vertical;
         const horizontalBoxes = boxes.horizontal;
-        helpers_segment.each(chart.boxes, (box)=>{
+        helpers_dataset.each(chart.boxes, (box)=>{
             if (typeof box.beforeLayout === 'function') {
                 box.beforeLayout();
             }
@@ -5530,7 +5490,7 @@ var layouts = {
             hBoxMaxHeight: availableHeight / 2
         });
         const maxPadding = Object.assign({}, padding);
-        updateMaxPadding(maxPadding, helpers_segment.toPadding(minPadding));
+        updateMaxPadding(maxPadding, helpers_dataset.toPadding(minPadding));
         const chartArea = Object.assign({
             maxPadding,
             w: availableWidth,
@@ -5557,7 +5517,7 @@ var layouts = {
             height: chartArea.h,
             width: chartArea.w
         };
-        helpers_segment.each(boxes.chartArea, (layout)=>{
+        helpers_dataset.each(boxes.chartArea, (layout)=>{
             const box = layout.box;
             Object.assign(box, chart.chartArea);
             box.update(chartArea.w, chartArea.h, {
@@ -5635,7 +5595,7 @@ const isNullOrEmpty = (value)=>value === null || value === '';
     style.display = style.display || 'block';
     style.boxSizing = style.boxSizing || 'border-box';
     if (isNullOrEmpty(renderWidth)) {
-        const displayWidth = helpers_segment.readUsedSize(canvas, 'width');
+        const displayWidth = helpers_dataset.readUsedSize(canvas, 'width');
         if (displayWidth !== undefined) {
             canvas.width = displayWidth;
         }
@@ -5644,7 +5604,7 @@ const isNullOrEmpty = (value)=>value === null || value === '';
         if (canvas.style.height === '') {
             canvas.height = canvas.width / (aspectRatio || 2);
         } else {
-            const displayHeight = helpers_segment.readUsedSize(canvas, 'height');
+            const displayHeight = helpers_dataset.readUsedSize(canvas, 'height');
             if (displayHeight !== undefined) {
                 canvas.height = displayHeight;
             }
@@ -5652,7 +5612,7 @@ const isNullOrEmpty = (value)=>value === null || value === '';
     }
     return canvas;
 }
-const eventListenerOptions = helpers_segment.supportsEventListenerOptions ? {
+const eventListenerOptions = helpers_dataset.supportsEventListenerOptions ? {
     passive: true
 } : false;
 function addListener(node, type, listener) {
@@ -5667,7 +5627,7 @@ function removeListener(chart, type, listener) {
 }
 function fromNativeEvent(event, chart) {
     const type = EVENT_TYPES[event.type] || event.type;
-    const { x , y  } = helpers_segment.getRelativePosition(event, chart);
+    const { x , y  } = helpers_dataset.getRelativePosition(event, chart);
     return {
         type,
         chart,
@@ -5747,11 +5707,11 @@ function unlistenDevicePixelRatioChanges(chart) {
 }
 function createResizeObserver(chart, type, listener) {
     const canvas = chart.canvas;
-    const container = canvas && helpers_segment._getParentNode(canvas);
+    const container = canvas && helpers_dataset._getParentNode(canvas);
     if (!container) {
         return;
     }
-    const resize = helpers_segment.throttled((width, height)=>{
+    const resize = helpers_dataset.throttled((width, height)=>{
         const w = container.clientWidth;
         listener(width, height);
         if (w < container.clientWidth) {
@@ -5781,7 +5741,7 @@ function releaseObserver(chart, type, observer) {
 }
 function createProxyAndListen(chart, type, listener) {
     const canvas = chart.canvas;
-    const proxy = helpers_segment.throttled((event)=>{
+    const proxy = helpers_dataset.throttled((event)=>{
         if (chart.ctx !== null) {
             listener(fromNativeEvent(event, chart));
         }
@@ -5809,7 +5769,7 @@ function createProxyAndListen(chart, type, listener) {
             'width'
         ].forEach((prop)=>{
             const value = initial[prop];
-            if (helpers_segment.isNullOrUndef(value)) {
+            if (helpers_dataset.isNullOrUndef(value)) {
                 canvas.removeAttribute(prop);
             } else {
                 canvas.setAttribute(prop, value);
@@ -5853,16 +5813,16 @@ function createProxyAndListen(chart, type, listener) {
         return window.devicePixelRatio;
     }
  getMaximumSize(canvas, width, height, aspectRatio) {
-        return helpers_segment.getMaximumSize(canvas, width, height, aspectRatio);
+        return helpers_dataset.getMaximumSize(canvas, width, height, aspectRatio);
     }
  isAttached(canvas) {
-        const container = canvas && helpers_segment._getParentNode(canvas);
+        const container = canvas && helpers_dataset._getParentNode(canvas);
         return !!(container && container.isConnected);
     }
 }
 
 function _detectPlatform(canvas) {
-    if (!helpers_segment._isDomSupported() || typeof OffscreenCanvas !== 'undefined' && canvas instanceof OffscreenCanvas) {
+    if (!helpers_dataset._isDomSupported() || typeof OffscreenCanvas !== 'undefined' && canvas instanceof OffscreenCanvas) {
         return BasicPlatform;
     }
     return DomPlatform;
@@ -5887,7 +5847,7 @@ class Element {
         };
     }
     hasValue() {
-        return helpers_segment.isNumber(this.x) && helpers_segment.isNumber(this.y);
+        return helpers_dataset.isNumber(this.x) && helpers_dataset.isNumber(this.y);
     }
     getProps(props, final) {
         const anims = this.$animations;
@@ -5920,11 +5880,11 @@ function autoSkip(scale, ticks) {
     if (numMajorIndices > 0) {
         let i, ilen;
         const avgMajorSpacing = numMajorIndices > 1 ? Math.round((last - first) / (numMajorIndices - 1)) : null;
-        skip(ticks, newTicks, spacing, helpers_segment.isNullOrUndef(avgMajorSpacing) ? 0 : first - avgMajorSpacing, first);
+        skip(ticks, newTicks, spacing, helpers_dataset.isNullOrUndef(avgMajorSpacing) ? 0 : first - avgMajorSpacing, first);
         for(i = 0, ilen = numMajorIndices - 1; i < ilen; i++){
             skip(ticks, newTicks, spacing, majorIndices[i], majorIndices[i + 1]);
         }
-        skip(ticks, newTicks, spacing, last, helpers_segment.isNullOrUndef(avgMajorSpacing) ? ticks.length : last + avgMajorSpacing);
+        skip(ticks, newTicks, spacing, last, helpers_dataset.isNullOrUndef(avgMajorSpacing) ? ticks.length : last + avgMajorSpacing);
         return newTicks;
     }
     skip(ticks, newTicks, spacing);
@@ -5943,7 +5903,7 @@ function determineMaxTicks(scale) {
     if (!evenMajorSpacing) {
         return Math.max(spacing, 1);
     }
-    const factors = helpers_segment._factorize(evenMajorSpacing);
+    const factors = helpers_dataset._factorize(evenMajorSpacing);
     for(let i = 0, ilen = factors.length - 1; i < ilen; i++){
         const factor = factors[i];
         if (factor > spacing) {
@@ -5976,8 +5936,8 @@ function determineMaxTicks(scale) {
     }
 }
  function skip(ticks, newTicks, spacing, majorStart, majorEnd) {
-    const start = helpers_segment.valueOrDefault(majorStart, 0);
-    const end = Math.min(helpers_segment.valueOrDefault(majorEnd, ticks.length), ticks.length);
+    const start = helpers_dataset.valueOrDefault(majorStart, 0);
+    const end = Math.min(helpers_dataset.valueOrDefault(majorEnd, ticks.length), ticks.length);
     let count = 0;
     let length, i, next;
     spacing = Math.ceil(spacing);
@@ -6049,7 +6009,7 @@ const getTicksLimit = (ticksLength, maxTicksLimit)=>Math.min(maxTicksLimit || ti
     return lineValue;
 }
  function garbageCollect(caches, length) {
-    helpers_segment.each(caches, (cache)=>{
+    helpers_dataset.each(caches, (cache)=>{
         const gc = cache.gc;
         const gcLen = gc.length / 2;
         let i;
@@ -6068,26 +6028,26 @@ const getTicksLimit = (ticksLength, maxTicksLimit)=>Math.min(maxTicksLimit || ti
     if (!options.display) {
         return 0;
     }
-    const font = helpers_segment.toFont(options.font, fallback);
-    const padding = helpers_segment.toPadding(options.padding);
-    const lines = helpers_segment.isArray(options.text) ? options.text.length : 1;
+    const font = helpers_dataset.toFont(options.font, fallback);
+    const padding = helpers_dataset.toPadding(options.padding);
+    const lines = helpers_dataset.isArray(options.text) ? options.text.length : 1;
     return lines * font.lineHeight + padding.height;
 }
 function createScaleContext(parent, scale) {
-    return helpers_segment.createContext(parent, {
+    return helpers_dataset.createContext(parent, {
         scale,
         type: 'scale'
     });
 }
 function createTickContext(parent, index, tick) {
-    return helpers_segment.createContext(parent, {
+    return helpers_dataset.createContext(parent, {
         tick,
         index,
         type: 'tick'
     });
 }
 function titleAlign(align, position, reverse) {
-     let ret = helpers_segment._toLeftRightCenter(align);
+     let ret = helpers_dataset._toLeftRightCenter(align);
     if (reverse && position !== 'right' || !reverse && position === 'right') {
         ret = reverseAlign(ret);
     }
@@ -6101,8 +6061,8 @@ function titleArgs(scale, offset, position, align) {
     const height = bottom - top;
     const width = right - left;
     if (scale.isHorizontal()) {
-        titleX = helpers_segment._alignStartEnd(align, left, right);
-        if (helpers_segment.isObject(position)) {
+        titleX = helpers_dataset._alignStartEnd(align, left, right);
+        if (helpers_dataset.isObject(position)) {
             const positionAxisID = Object.keys(position)[0];
             const value = position[positionAxisID];
             titleY = scales[positionAxisID].getPixelForValue(value) + height - offset;
@@ -6113,7 +6073,7 @@ function titleArgs(scale, offset, position, align) {
         }
         maxWidth = right - left;
     } else {
-        if (helpers_segment.isObject(position)) {
+        if (helpers_dataset.isObject(position)) {
             const positionAxisID = Object.keys(position)[0];
             const value = position[positionAxisID];
             titleX = scales[positionAxisID].getPixelForValue(value) - width + offset;
@@ -6122,8 +6082,8 @@ function titleArgs(scale, offset, position, align) {
         } else {
             titleX = offsetFromEdge(scale, position, offset);
         }
-        titleY = helpers_segment._alignStartEnd(align, bottom, top);
-        rotation = position === 'left' ? -helpers_segment.HALF_PI : helpers_segment.HALF_PI;
+        titleY = helpers_dataset._alignStartEnd(align, bottom, top);
+        rotation = position === 'left' ? -helpers_dataset.HALF_PI : helpers_dataset.HALF_PI;
     }
     return {
         titleX,
@@ -6196,15 +6156,15 @@ class Scale extends Element {
     }
  getUserBounds() {
         let { _userMin , _userMax , _suggestedMin , _suggestedMax  } = this;
-        _userMin = helpers_segment.finiteOrDefault(_userMin, Number.POSITIVE_INFINITY);
-        _userMax = helpers_segment.finiteOrDefault(_userMax, Number.NEGATIVE_INFINITY);
-        _suggestedMin = helpers_segment.finiteOrDefault(_suggestedMin, Number.POSITIVE_INFINITY);
-        _suggestedMax = helpers_segment.finiteOrDefault(_suggestedMax, Number.NEGATIVE_INFINITY);
+        _userMin = helpers_dataset.finiteOrDefault(_userMin, Number.POSITIVE_INFINITY);
+        _userMax = helpers_dataset.finiteOrDefault(_userMax, Number.NEGATIVE_INFINITY);
+        _suggestedMin = helpers_dataset.finiteOrDefault(_suggestedMin, Number.POSITIVE_INFINITY);
+        _suggestedMax = helpers_dataset.finiteOrDefault(_suggestedMax, Number.NEGATIVE_INFINITY);
         return {
-            min: helpers_segment.finiteOrDefault(_userMin, _suggestedMin),
-            max: helpers_segment.finiteOrDefault(_userMax, _suggestedMax),
-            minDefined: helpers_segment.isNumberFinite(_userMin),
-            maxDefined: helpers_segment.isNumberFinite(_userMax)
+            min: helpers_dataset.finiteOrDefault(_userMin, _suggestedMin),
+            max: helpers_dataset.finiteOrDefault(_userMax, _suggestedMax),
+            minDefined: helpers_dataset.isNumberFinite(_userMin),
+            maxDefined: helpers_dataset.isNumberFinite(_userMax)
         };
     }
  getMinMax(canStack) {
@@ -6229,8 +6189,8 @@ class Scale extends Element {
         min = maxDefined && min > max ? max : min;
         max = minDefined && min > max ? min : max;
         return {
-            min: helpers_segment.finiteOrDefault(min, helpers_segment.finiteOrDefault(max, min)),
-            max: helpers_segment.finiteOrDefault(max, helpers_segment.finiteOrDefault(min, max))
+            min: helpers_dataset.finiteOrDefault(min, helpers_dataset.finiteOrDefault(max, min)),
+            max: helpers_dataset.finiteOrDefault(max, helpers_dataset.finiteOrDefault(min, max))
         };
     }
  getPadding() {
@@ -6257,7 +6217,7 @@ class Scale extends Element {
         this._dataLimitsCached = false;
     }
     beforeUpdate() {
-        helpers_segment.callback(this.options.beforeUpdate, [
+        helpers_dataset.callback(this.options.beforeUpdate, [
             this
         ]);
     }
@@ -6285,7 +6245,7 @@ class Scale extends Element {
             this.beforeDataLimits();
             this.determineDataLimits();
             this.afterDataLimits();
-            this._range = helpers_segment._addGrace(this, grace, beginAtZero);
+            this._range = helpers_dataset._addGrace(this, grace, beginAtZero);
             this._dataLimitsCached = true;
         }
         this.beforeBuildTicks();
@@ -6328,12 +6288,12 @@ class Scale extends Element {
         this._alignToPixels = this.options.alignToPixels;
     }
     afterUpdate() {
-        helpers_segment.callback(this.options.afterUpdate, [
+        helpers_dataset.callback(this.options.afterUpdate, [
             this
         ]);
     }
     beforeSetDimensions() {
-        helpers_segment.callback(this.options.beforeSetDimensions, [
+        helpers_dataset.callback(this.options.beforeSetDimensions, [
             this
         ]);
     }
@@ -6353,13 +6313,13 @@ class Scale extends Element {
         this.paddingBottom = 0;
     }
     afterSetDimensions() {
-        helpers_segment.callback(this.options.afterSetDimensions, [
+        helpers_dataset.callback(this.options.afterSetDimensions, [
             this
         ]);
     }
     _callHooks(name) {
         this.chart.notifyPlugins(name, this.getContext());
-        helpers_segment.callback(this.options[name], [
+        helpers_dataset.callback(this.options[name], [
             this
         ]);
     }
@@ -6380,7 +6340,7 @@ class Scale extends Element {
         this._callHooks('afterBuildTicks');
     }
     beforeTickToLabelConversion() {
-        helpers_segment.callback(this.options.beforeTickToLabelConversion, [
+        helpers_dataset.callback(this.options.beforeTickToLabelConversion, [
             this
         ]);
     }
@@ -6389,7 +6349,7 @@ class Scale extends Element {
         let i, ilen, tick;
         for(i = 0, ilen = ticks.length; i < ilen; i++){
             tick = ticks[i];
-            tick.label = helpers_segment.callback(tickOpts.callback, [
+            tick.label = helpers_dataset.callback(tickOpts.callback, [
                 tick.value,
                 i,
                 ticks
@@ -6397,12 +6357,12 @@ class Scale extends Element {
         }
     }
     afterTickToLabelConversion() {
-        helpers_segment.callback(this.options.afterTickToLabelConversion, [
+        helpers_dataset.callback(this.options.afterTickToLabelConversion, [
             this
         ]);
     }
     beforeCalculateLabelRotation() {
-        helpers_segment.callback(this.options.beforeCalculateLabelRotation, [
+        helpers_dataset.callback(this.options.beforeCalculateLabelRotation, [
             this
         ]);
     }
@@ -6421,25 +6381,25 @@ class Scale extends Element {
         const labelSizes = this._getLabelSizes();
         const maxLabelWidth = labelSizes.widest.width;
         const maxLabelHeight = labelSizes.highest.height;
-        const maxWidth = helpers_segment._limitValue(this.chart.width - maxLabelWidth, 0, this.maxWidth);
+        const maxWidth = helpers_dataset._limitValue(this.chart.width - maxLabelWidth, 0, this.maxWidth);
         tickWidth = options.offset ? this.maxWidth / numTicks : maxWidth / (numTicks - 1);
         if (maxLabelWidth + 6 > tickWidth) {
             tickWidth = maxWidth / (numTicks - (options.offset ? 0.5 : 1));
             maxHeight = this.maxHeight - getTickMarkLength(options.grid) - tickOpts.padding - getTitleHeight(options.title, this.chart.options.font);
             maxLabelDiagonal = Math.sqrt(maxLabelWidth * maxLabelWidth + maxLabelHeight * maxLabelHeight);
-            labelRotation = helpers_segment.toDegrees(Math.min(Math.asin(helpers_segment._limitValue((labelSizes.highest.height + 6) / tickWidth, -1, 1)), Math.asin(helpers_segment._limitValue(maxHeight / maxLabelDiagonal, -1, 1)) - Math.asin(helpers_segment._limitValue(maxLabelHeight / maxLabelDiagonal, -1, 1))));
+            labelRotation = helpers_dataset.toDegrees(Math.min(Math.asin(helpers_dataset._limitValue((labelSizes.highest.height + 6) / tickWidth, -1, 1)), Math.asin(helpers_dataset._limitValue(maxHeight / maxLabelDiagonal, -1, 1)) - Math.asin(helpers_dataset._limitValue(maxLabelHeight / maxLabelDiagonal, -1, 1))));
             labelRotation = Math.max(minRotation, Math.min(maxRotation, labelRotation));
         }
         this.labelRotation = labelRotation;
     }
     afterCalculateLabelRotation() {
-        helpers_segment.callback(this.options.afterCalculateLabelRotation, [
+        helpers_dataset.callback(this.options.afterCalculateLabelRotation, [
             this
         ]);
     }
     afterAutoSkip() {}
     beforeFit() {
-        helpers_segment.callback(this.options.beforeFit, [
+        helpers_dataset.callback(this.options.beforeFit, [
             this
         ]);
     }
@@ -6463,7 +6423,7 @@ class Scale extends Element {
             if (tickOpts.display && this.ticks.length) {
                 const { first , last , widest , highest  } = this._getLabelSizes();
                 const tickPadding = tickOpts.padding * 2;
-                const angleRadians = helpers_segment.toRadians(this.labelRotation);
+                const angleRadians = helpers_dataset.toRadians(this.labelRotation);
                 const cos = Math.cos(angleRadians);
                 const sin = Math.sin(angleRadians);
                 if (isHorizontal) {
@@ -6535,7 +6495,7 @@ class Scale extends Element {
         }
     }
     afterFit() {
-        helpers_segment.callback(this.options.afterFit, [
+        helpers_dataset.callback(this.options.afterFit, [
             this
         ]);
     }
@@ -6551,7 +6511,7 @@ class Scale extends Element {
         this.generateTickLabels(ticks);
         let i, ilen;
         for(i = 0, ilen = ticks.length; i < ilen; i++){
-            if (helpers_segment.isNullOrUndef(ticks[i].label)) {
+            if (helpers_dataset.isNullOrUndef(ticks[i].label)) {
                 ticks.splice(i, 1);
                 ilen--;
                 i--;
@@ -6589,14 +6549,14 @@ class Scale extends Element {
             };
             lineHeight = tickFont.lineHeight;
             width = height = 0;
-            if (!helpers_segment.isNullOrUndef(label) && !helpers_segment.isArray(label)) {
-                width = helpers_segment._measureText(ctx, cache.data, cache.gc, width, label);
+            if (!helpers_dataset.isNullOrUndef(label) && !helpers_dataset.isArray(label)) {
+                width = helpers_dataset._measureText(ctx, cache.data, cache.gc, width, label);
                 height = lineHeight;
-            } else if (helpers_segment.isArray(label)) {
+            } else if (helpers_dataset.isArray(label)) {
                 for(j = 0, jlen = label.length; j < jlen; ++j){
                     nestedLabel =  label[j];
-                    if (!helpers_segment.isNullOrUndef(nestedLabel) && !helpers_segment.isArray(nestedLabel)) {
-                        width = helpers_segment._measureText(ctx, cache.data, cache.gc, width, nestedLabel);
+                    if (!helpers_dataset.isNullOrUndef(nestedLabel) && !helpers_dataset.isArray(nestedLabel)) {
+                        width = helpers_dataset._measureText(ctx, cache.data, cache.gc, width, nestedLabel);
                         height += lineHeight;
                     }
                 }
@@ -6641,7 +6601,7 @@ class Scale extends Element {
             decimal = 1 - decimal;
         }
         const pixel = this._startPixel + decimal * this._length;
-        return helpers_segment._int16Range(this._alignToPixels ? helpers_segment._alignPixel(this.chart, pixel, 0) : pixel);
+        return helpers_dataset._int16Range(this._alignToPixels ? helpers_dataset._alignPixel(this.chart, pixel, 0) : pixel);
     }
  getDecimalForPixel(pixel) {
         const decimal = (pixel - this._startPixel) / this._length;
@@ -6664,7 +6624,7 @@ class Scale extends Element {
     }
  _tickSize() {
         const optionTicks = this.options.ticks;
-        const rot = helpers_segment.toRadians(this.labelRotation);
+        const rot = helpers_dataset.toRadians(this.labelRotation);
         const cos = Math.abs(Math.cos(rot));
         const sin = Math.abs(Math.sin(rot));
         const labelSizes = this._getLabelSizes();
@@ -6695,7 +6655,7 @@ class Scale extends Element {
         const axisWidth = borderOpts.display ? borderOpts.width : 0;
         const axisHalfWidth = axisWidth / 2;
         const alignBorderValue = function(pixel) {
-            return helpers_segment._alignPixel(chart, pixel, axisWidth);
+            return helpers_dataset._alignPixel(chart, pixel, axisWidth);
         };
         let borderValue, i, lineValue, alignedLineValue;
         let tx1, ty1, tx2, ty2, x1, y1, x2, y2;
@@ -6726,7 +6686,7 @@ class Scale extends Element {
         } else if (axis === 'x') {
             if (position === 'center') {
                 borderValue = alignBorderValue((chartArea.top + chartArea.bottom) / 2 + 0.5);
-            } else if (helpers_segment.isObject(position)) {
+            } else if (helpers_dataset.isObject(position)) {
                 const positionAxisID = Object.keys(position)[0];
                 const value = position[positionAxisID];
                 borderValue = alignBorderValue(this.chart.scales[positionAxisID].getPixelForValue(value));
@@ -6738,7 +6698,7 @@ class Scale extends Element {
         } else if (axis === 'y') {
             if (position === 'center') {
                 borderValue = alignBorderValue((chartArea.left + chartArea.right) / 2);
-            } else if (helpers_segment.isObject(position)) {
+            } else if (helpers_dataset.isObject(position)) {
                 const positionAxisID = Object.keys(position)[0];
                 const value = position[positionAxisID];
                 borderValue = alignBorderValue(this.chart.scales[positionAxisID].getPixelForValue(value));
@@ -6748,7 +6708,7 @@ class Scale extends Element {
             x1 = chartArea.left;
             x2 = chartArea.right;
         }
-        const limit = helpers_segment.valueOrDefault(options.ticks.maxTicksLimit, ticksLength);
+        const limit = helpers_dataset.valueOrDefault(options.ticks.maxTicksLimit, ticksLength);
         const step = Math.max(1, Math.ceil(ticksLength / limit));
         for(i = 0; i < ticksLength; i += step){
             const context = this.getContext(i);
@@ -6766,7 +6726,7 @@ class Scale extends Element {
             if (lineValue === undefined) {
                 continue;
             }
-            alignedLineValue = helpers_segment._alignPixel(chart, lineValue, lineWidth);
+            alignedLineValue = helpers_dataset._alignPixel(chart, lineValue, lineWidth);
             if (isHorizontal) {
                 tx1 = tx2 = x1 = x2 = alignedLineValue;
             } else {
@@ -6805,7 +6765,7 @@ class Scale extends Element {
         const tl = getTickMarkLength(options.grid);
         const tickAndPadding = tl + padding;
         const hTickAndPadding = mirror ? -padding : tickAndPadding;
-        const rotation = -helpers_segment.toRadians(this.labelRotation);
+        const rotation = -helpers_dataset.toRadians(this.labelRotation);
         const items = [];
         let i, ilen, tick, label, x, y, textAlign, pixel, font, lineHeight, lineCount, textOffset;
         let textBaseline = 'middle';
@@ -6826,7 +6786,7 @@ class Scale extends Element {
         } else if (axis === 'x') {
             if (position === 'center') {
                 y = (chartArea.top + chartArea.bottom) / 2 + tickAndPadding;
-            } else if (helpers_segment.isObject(position)) {
+            } else if (helpers_dataset.isObject(position)) {
                 const positionAxisID = Object.keys(position)[0];
                 const value = position[positionAxisID];
                 y = this.chart.scales[positionAxisID].getPixelForValue(value) + tickAndPadding;
@@ -6835,7 +6795,7 @@ class Scale extends Element {
         } else if (axis === 'y') {
             if (position === 'center') {
                 x = (chartArea.left + chartArea.right) / 2 - tickAndPadding;
-            } else if (helpers_segment.isObject(position)) {
+            } else if (helpers_dataset.isObject(position)) {
                 const positionAxisID = Object.keys(position)[0];
                 const value = position[positionAxisID];
                 x = this.chart.scales[positionAxisID].getPixelForValue(value);
@@ -6857,7 +6817,7 @@ class Scale extends Element {
             pixel = this.getPixelForTick(i) + optionTicks.labelOffset;
             font = this._resolveTickFontOptions(i);
             lineHeight = font.lineHeight;
-            lineCount = helpers_segment.isArray(label) ? label.length : 1;
+            lineCount = helpers_dataset.isArray(label) ? label.length : 1;
             const halfCount = lineCount / 2;
             const color = optsAtIndex.color;
             const strokeColor = optsAtIndex.textStrokeColor;
@@ -6903,7 +6863,7 @@ class Scale extends Element {
             }
             let backdrop;
             if (optsAtIndex.showLabelBackdrop) {
-                const labelPadding = helpers_segment.toPadding(optsAtIndex.backdropPadding);
+                const labelPadding = helpers_dataset.toPadding(optsAtIndex.backdropPadding);
                 const height = labelSizes.heights[i];
                 const width = labelSizes.widths[i];
                 let top = textOffset - labelPadding.top;
@@ -6962,7 +6922,7 @@ class Scale extends Element {
     }
     _getXAxisLabelAlignment() {
         const { position , ticks  } = this.options;
-        const rotation = -helpers_segment.toRadians(this.labelRotation);
+        const rotation = -helpers_dataset.toRadians(this.labelRotation);
         if (rotation) {
             return position === 'top' ? 'left' : 'right';
         }
@@ -7144,12 +7104,12 @@ class Scale extends Element {
         const borderValue = this._borderValue;
         let x1, x2, y1, y2;
         if (this.isHorizontal()) {
-            x1 = helpers_segment._alignPixel(chart, this.left, axisWidth) - axisWidth / 2;
-            x2 = helpers_segment._alignPixel(chart, this.right, lastLineWidth) + lastLineWidth / 2;
+            x1 = helpers_dataset._alignPixel(chart, this.left, axisWidth) - axisWidth / 2;
+            x2 = helpers_dataset._alignPixel(chart, this.right, lastLineWidth) + lastLineWidth / 2;
             y1 = y2 = borderValue;
         } else {
-            y1 = helpers_segment._alignPixel(chart, this.top, axisWidth) - axisWidth / 2;
-            y2 = helpers_segment._alignPixel(chart, this.bottom, lastLineWidth) + lastLineWidth / 2;
+            y1 = helpers_dataset._alignPixel(chart, this.top, axisWidth) - axisWidth / 2;
+            y2 = helpers_dataset._alignPixel(chart, this.bottom, lastLineWidth) + lastLineWidth / 2;
             x1 = x2 = borderValue;
         }
         ctx.save();
@@ -7169,7 +7129,7 @@ class Scale extends Element {
         const ctx = this.ctx;
         const area = this._computeLabelArea();
         if (area) {
-            helpers_segment.clipArea(ctx, area);
+            helpers_dataset.clipArea(ctx, area);
         }
         const items = this.getLabelItems(chartArea);
         for (const item of items){
@@ -7177,10 +7137,10 @@ class Scale extends Element {
             const tickFont = item.font;
             const label = item.label;
             const y = item.textOffset;
-            helpers_segment.renderText(ctx, label, 0, y, tickFont, renderTextOptions);
+            helpers_dataset.renderText(ctx, label, 0, y, tickFont, renderTextOptions);
         }
         if (area) {
-            helpers_segment.unclipArea(ctx);
+            helpers_dataset.unclipArea(ctx);
         }
     }
  drawTitle() {
@@ -7188,20 +7148,20 @@ class Scale extends Element {
         if (!title.display) {
             return;
         }
-        const font = helpers_segment.toFont(title.font);
-        const padding = helpers_segment.toPadding(title.padding);
+        const font = helpers_dataset.toFont(title.font);
+        const padding = helpers_dataset.toPadding(title.padding);
         const align = title.align;
         let offset = font.lineHeight / 2;
-        if (position === 'bottom' || position === 'center' || helpers_segment.isObject(position)) {
+        if (position === 'bottom' || position === 'center' || helpers_dataset.isObject(position)) {
             offset += padding.bottom;
-            if (helpers_segment.isArray(title.text)) {
+            if (helpers_dataset.isArray(title.text)) {
                 offset += font.lineHeight * (title.text.length - 1);
             }
         } else {
             offset += padding.top;
         }
         const { titleX , titleY , maxWidth , rotation  } = titleArgs(this, offset, position, align);
-        helpers_segment.renderText(ctx, title.text, 0, 0, font, {
+        helpers_dataset.renderText(ctx, title.text, 0, 0, font, {
             color: title.color,
             maxWidth,
             rotation,
@@ -7226,8 +7186,8 @@ class Scale extends Element {
  _layers() {
         const opts = this.options;
         const tz = opts.ticks && opts.ticks.z || 0;
-        const gz = helpers_segment.valueOrDefault(opts.grid && opts.grid.z, -1);
-        const bz = helpers_segment.valueOrDefault(opts.border && opts.border.z, 0);
+        const gz = helpers_dataset.valueOrDefault(opts.grid && opts.grid.z, -1);
+        const bz = helpers_dataset.valueOrDefault(opts.border && opts.border.z, 0);
         if (!this._isVisible() || this.draw !== Scale.prototype.draw) {
             return [
                 {
@@ -7276,7 +7236,7 @@ class Scale extends Element {
     }
  _resolveTickFontOptions(index) {
         const opts = this.options.ticks.setContext(this.getContext(index));
-        return helpers_segment.toFont(opts.font);
+        return helpers_dataset.toFont(opts.font);
     }
  _maxDigits() {
         const fontSize = this._resolveTickFontOptions(0).lineHeight;
@@ -7312,7 +7272,7 @@ class TypedRegistry {
         items[id] = item;
         registerDefaults(item, scope, parentScope);
         if (this.override) {
-            helpers_segment.defaults.override(item.id, item.overrides);
+            helpers_dataset.defaults.override(item.id, item.overrides);
         }
         return scope;
     }
@@ -7326,26 +7286,26 @@ class TypedRegistry {
         if (id in items) {
             delete items[id];
         }
-        if (scope && id in helpers_segment.defaults[scope]) {
-            delete helpers_segment.defaults[scope][id];
+        if (scope && id in helpers_dataset.defaults[scope]) {
+            delete helpers_dataset.defaults[scope][id];
             if (this.override) {
-                delete helpers_segment.overrides[id];
+                delete helpers_dataset.overrides[id];
             }
         }
     }
 }
 function registerDefaults(item, scope, parentScope) {
-    const itemDefaults = helpers_segment.merge(Object.create(null), [
-        parentScope ? helpers_segment.defaults.get(parentScope) : {},
-        helpers_segment.defaults.get(scope),
+    const itemDefaults = helpers_dataset.merge(Object.create(null), [
+        parentScope ? helpers_dataset.defaults.get(parentScope) : {},
+        helpers_dataset.defaults.get(scope),
         item.defaults
     ]);
-    helpers_segment.defaults.set(scope, itemDefaults);
+    helpers_dataset.defaults.set(scope, itemDefaults);
     if (item.defaultRoutes) {
         routeDefaults(scope, item.defaultRoutes);
     }
     if (item.descriptors) {
-        helpers_segment.defaults.describe(scope, item.descriptors);
+        helpers_dataset.defaults.describe(scope, item.descriptors);
     }
 }
 function routeDefaults(scope, routes) {
@@ -7358,7 +7318,7 @@ function routeDefaults(scope, routes) {
         const parts = routes[property].split('.');
         const targetName = parts.pop();
         const targetScope = parts.join('.');
-        helpers_segment.defaults.route(sourceScope, sourceName, targetScope, targetName);
+        helpers_dataset.defaults.route(sourceScope, sourceName, targetScope, targetName);
     });
 }
 function isIChartComponent(proto) {
@@ -7427,7 +7387,7 @@ class Registry {
             if (typedRegistry || reg.isForType(arg) || reg === this.plugins && arg.id) {
                 this._exec(method, reg, arg);
             } else {
-                helpers_segment.each(arg, (item)=>{
+                helpers_dataset.each(arg, (item)=>{
                     const itemReg = typedRegistry || this._getRegistryForType(item);
                     this._exec(method, itemReg, item);
                 });
@@ -7435,10 +7395,10 @@ class Registry {
         });
     }
  _exec(method, registry, component) {
-        const camelMethod = helpers_segment._capitalize(method);
-        helpers_segment.callback(component['before' + camelMethod], [], component);
+        const camelMethod = helpers_dataset._capitalize(method);
+        helpers_dataset.callback(component['before' + camelMethod], [], component);
         registry[method](component);
-        helpers_segment.callback(component['after' + camelMethod], [], component);
+        helpers_dataset.callback(component['after' + camelMethod], [], component);
     }
  _getRegistryForType(type) {
         for(let i = 0; i < this._typedRegistries.length; i++){
@@ -7486,14 +7446,14 @@ class PluginService {
                 args,
                 descriptor.options
             ];
-            if (helpers_segment.callback(method, params, plugin) === false && args.cancelable) {
+            if (helpers_dataset.callback(method, params, plugin) === false && args.cancelable) {
                 return false;
             }
         }
         return true;
     }
     invalidate() {
-        if (!helpers_segment.isNullOrUndef(this._cache)) {
+        if (!helpers_dataset.isNullOrUndef(this._cache)) {
             this._oldCache = this._cache;
             this._cache = undefined;
         }
@@ -7508,7 +7468,7 @@ class PluginService {
     }
     _createDescriptors(chart, all) {
         const config = chart && chart.config;
-        const options = helpers_segment.valueOrDefault(config.options && config.options.plugins, {});
+        const options = helpers_dataset.valueOrDefault(config.options && config.options.plugins, {});
         const plugins = allPlugins(config);
         return options === false && !all ? [] : createDescriptors(chart, plugins, options, all);
     }
@@ -7584,7 +7544,7 @@ function pluginOpts(config, { plugin , local  }, opts, context) {
 }
 
 function getIndexAxis(type, options) {
-    const datasetDefaults = helpers_segment.defaults.datasets[type] || {};
+    const datasetDefaults = helpers_dataset.defaults.datasets[type] || {};
     const datasetOptions = (options.datasets || {})[type] || {};
     return datasetOptions.indexAxis || options.indexAxis || datasetDefaults.indexAxis || 'x';
 }
@@ -7642,7 +7602,7 @@ function retrieveAxisFromDatasets(id, config) {
     return {};
 }
 function mergeScaleConfig(config, options) {
-    const chartDefaults = helpers_segment.overrides[config.type] || {
+    const chartDefaults = helpers_dataset.overrides[config.type] || {
         scales: {}
     };
     const configScales = options.scales || {};
@@ -7650,16 +7610,16 @@ function mergeScaleConfig(config, options) {
     const scales = Object.create(null);
     Object.keys(configScales).forEach((id)=>{
         const scaleConf = configScales[id];
-        if (!helpers_segment.isObject(scaleConf)) {
+        if (!helpers_dataset.isObject(scaleConf)) {
             return console.error(`Invalid scale configuration for scale: ${id}`);
         }
         if (scaleConf._proxy) {
             return console.warn(`Ignoring resolver passed as options for scale: ${id}`);
         }
-        const axis = determineAxis(id, scaleConf, retrieveAxisFromDatasets(id, config), helpers_segment.defaults.scales[scaleConf.type]);
+        const axis = determineAxis(id, scaleConf, retrieveAxisFromDatasets(id, config), helpers_dataset.defaults.scales[scaleConf.type]);
         const defaultId = getDefaultScaleIDFromAxis(axis, chartIndexAxis);
         const defaultScaleOptions = chartDefaults.scales || {};
-        scales[id] = helpers_segment.mergeIf(Object.create(null), [
+        scales[id] = helpers_dataset.mergeIf(Object.create(null), [
             {
                 axis
             },
@@ -7671,13 +7631,13 @@ function mergeScaleConfig(config, options) {
     config.data.datasets.forEach((dataset)=>{
         const type = dataset.type || config.type;
         const indexAxis = dataset.indexAxis || getIndexAxis(type, options);
-        const datasetDefaults = helpers_segment.overrides[type] || {};
+        const datasetDefaults = helpers_dataset.overrides[type] || {};
         const defaultScaleOptions = datasetDefaults.scales || {};
         Object.keys(defaultScaleOptions).forEach((defaultID)=>{
             const axis = getAxisFromDefaultScaleID(defaultID, indexAxis);
             const id = dataset[axis + 'AxisID'] || axis;
             scales[id] = scales[id] || Object.create(null);
-            helpers_segment.mergeIf(scales[id], [
+            helpers_dataset.mergeIf(scales[id], [
                 {
                     axis
                 },
@@ -7688,16 +7648,16 @@ function mergeScaleConfig(config, options) {
     });
     Object.keys(scales).forEach((key)=>{
         const scale = scales[key];
-        helpers_segment.mergeIf(scale, [
-            helpers_segment.defaults.scales[scale.type],
-            helpers_segment.defaults.scale
+        helpers_dataset.mergeIf(scale, [
+            helpers_dataset.defaults.scales[scale.type],
+            helpers_dataset.defaults.scale
         ]);
     });
     return scales;
 }
 function initOptions(config) {
     const options = config.options || (config.options = {});
-    options.plugins = helpers_segment.valueOrDefault(options.plugins, {});
+    options.plugins = helpers_dataset.valueOrDefault(options.plugins, {});
     options.scales = mergeScaleConfig(config, options);
 }
 function initData(data) {
@@ -7724,7 +7684,7 @@ function cachedKeys(cacheKey, generate) {
     return keys;
 }
 const addIfFound = (set, obj, key)=>{
-    const opts = helpers_segment.resolveObjectKey(obj, key);
+    const opts = helpers_dataset.resolveObjectKey(obj, key);
     if (opts !== undefined) {
         set.add(opts);
     }
@@ -7831,9 +7791,9 @@ class Config {
                 keys.forEach((key)=>addIfFound(scopes, mainScope, key));
             }
             keys.forEach((key)=>addIfFound(scopes, options, key));
-            keys.forEach((key)=>addIfFound(scopes, helpers_segment.overrides[type] || {}, key));
-            keys.forEach((key)=>addIfFound(scopes, helpers_segment.defaults, key));
-            keys.forEach((key)=>addIfFound(scopes, helpers_segment.descriptors, key));
+            keys.forEach((key)=>addIfFound(scopes, helpers_dataset.overrides[type] || {}, key));
+            keys.forEach((key)=>addIfFound(scopes, helpers_dataset.defaults, key));
+            keys.forEach((key)=>addIfFound(scopes, helpers_dataset.descriptors, key));
         });
         const array = Array.from(scopes);
         if (array.length === 0) {
@@ -7848,13 +7808,13 @@ class Config {
         const { options , type  } = this;
         return [
             options,
-            helpers_segment.overrides[type] || {},
-            helpers_segment.defaults.datasets[type] || {},
+            helpers_dataset.overrides[type] || {},
+            helpers_dataset.defaults.datasets[type] || {},
             {
                 type
             },
-            helpers_segment.defaults,
-            helpers_segment.descriptors
+            helpers_dataset.defaults,
+            helpers_dataset.descriptors
         ];
     }
  resolveNamedOptions(scopes, names, context, prefixes = [
@@ -7867,9 +7827,9 @@ class Config {
         let options = resolver;
         if (needContext(resolver, names)) {
             result.$shared = false;
-            context = helpers_segment.isFunction(context) ? context() : context;
+            context = helpers_dataset.isFunction(context) ? context() : context;
             const subResolver = this.createResolver(scopes, context, subPrefixes);
-            options = helpers_segment._attachContext(resolver, context, subResolver);
+            options = helpers_dataset._attachContext(resolver, context, subResolver);
         }
         for (const prop of names){
             result[prop] = options[prop];
@@ -7880,7 +7840,7 @@ class Config {
         ''
     ], descriptorDefaults) {
         const { resolver  } = getResolver(this._resolverCache, scopes, prefixes);
-        return helpers_segment.isObject(context) ? helpers_segment._attachContext(resolver, context, undefined, descriptorDefaults) : resolver;
+        return helpers_dataset.isObject(context) ? helpers_dataset._attachContext(resolver, context, undefined, descriptorDefaults) : resolver;
     }
 }
 function getResolver(resolverCache, scopes, prefixes) {
@@ -7892,7 +7852,7 @@ function getResolver(resolverCache, scopes, prefixes) {
     const cacheKey = prefixes.join();
     let cached = cache.get(cacheKey);
     if (!cached) {
-        const resolver = helpers_segment._createResolver(scopes, prefixes);
+        const resolver = helpers_dataset._createResolver(scopes, prefixes);
         cached = {
             resolver,
             subPrefixes: prefixes.filter((p)=>!p.toLowerCase().includes('hover'))
@@ -7901,21 +7861,21 @@ function getResolver(resolverCache, scopes, prefixes) {
     }
     return cached;
 }
-const hasFunction = (value)=>helpers_segment.isObject(value) && Object.getOwnPropertyNames(value).some((key)=>helpers_segment.isFunction(value[key]));
+const hasFunction = (value)=>helpers_dataset.isObject(value) && Object.getOwnPropertyNames(value).some((key)=>helpers_dataset.isFunction(value[key]));
 function needContext(proxy, names) {
-    const { isScriptable , isIndexable  } = helpers_segment._descriptors(proxy);
+    const { isScriptable , isIndexable  } = helpers_dataset._descriptors(proxy);
     for (const prop of names){
         const scriptable = isScriptable(prop);
         const indexable = isIndexable(prop);
         const value = (indexable || scriptable) && proxy[prop];
-        if (scriptable && (helpers_segment.isFunction(value) || hasFunction(value)) || indexable && helpers_segment.isArray(value)) {
+        if (scriptable && (helpers_dataset.isFunction(value) || hasFunction(value)) || indexable && helpers_dataset.isArray(value)) {
             return true;
         }
     }
     return false;
 }
 
-var version = "4.4.3";
+var version = "4.5.0";
 
 const KNOWN_POSITIONS = [
     'top',
@@ -7936,19 +7896,19 @@ function onAnimationsComplete(context) {
     const chart = context.chart;
     const animationOptions = chart.options.animation;
     chart.notifyPlugins('afterRender');
-    helpers_segment.callback(animationOptions && animationOptions.onComplete, [
+    helpers_dataset.callback(animationOptions && animationOptions.onComplete, [
         context
     ], chart);
 }
 function onAnimationProgress(context) {
     const chart = context.chart;
     const animationOptions = chart.options.animation;
-    helpers_segment.callback(animationOptions && animationOptions.onProgress, [
+    helpers_dataset.callback(animationOptions && animationOptions.onProgress, [
         context
     ], chart);
 }
  function getCanvas(item) {
-    if (helpers_segment._isDomSupported() && typeof item === 'string') {
+    if (helpers_dataset._isDomSupported() && typeof item === 'string') {
         item = document.getElementById(item);
     } else if (item && item.length) {
         item = item[0];
@@ -7985,25 +7945,10 @@ function moveNumericKeys(obj, start, move) {
     }
     return e;
 }
-function getSizeForArea(scale, chartArea, field) {
-    return scale.options.clip ? scale[field] : chartArea[field];
-}
-function getDatasetArea(meta, chartArea) {
-    const { xScale , yScale  } = meta;
-    if (xScale && yScale) {
-        return {
-            left: getSizeForArea(xScale, chartArea, 'left'),
-            right: getSizeForArea(xScale, chartArea, 'right'),
-            top: getSizeForArea(yScale, chartArea, 'top'),
-            bottom: getSizeForArea(yScale, chartArea, 'bottom')
-        };
-    }
-    return chartArea;
-}
 class Chart {
-    static defaults = helpers_segment.defaults;
+    static defaults = helpers_dataset.defaults;
     static instances = instances;
-    static overrides = helpers_segment.overrides;
+    static overrides = helpers_dataset.overrides;
     static registry = registry;
     static version = version;
     static getChart = getChart;
@@ -8029,7 +7974,7 @@ class Chart {
         const canvas = context && context.canvas;
         const height = canvas && canvas.height;
         const width = canvas && canvas.width;
-        this.id = helpers_segment.uid();
+        this.id = helpers_dataset.uid();
         this.ctx = context;
         this.canvas = canvas;
         this.width = width;
@@ -8054,7 +7999,7 @@ class Chart {
         this.attached = false;
         this._animationsDisabled = undefined;
         this.$context = undefined;
-        this._doResize = helpers_segment.debounce((mode)=>this.update(mode), options.resizeDelay || 0);
+        this._doResize = helpers_dataset.debounce((mode)=>this.update(mode), options.resizeDelay || 0);
         this._dataChanges = [];
         instances[this.id] = this;
         if (!context || !canvas) {
@@ -8070,7 +8015,7 @@ class Chart {
     }
     get aspectRatio() {
         const { options: { aspectRatio , maintainAspectRatio  } , width , height , _aspectRatio  } = this;
-        if (!helpers_segment.isNullOrUndef(aspectRatio)) {
+        if (!helpers_dataset.isNullOrUndef(aspectRatio)) {
             return aspectRatio;
         }
         if (maintainAspectRatio && _aspectRatio) {
@@ -8098,14 +8043,14 @@ class Chart {
         if (this.options.responsive) {
             this.resize();
         } else {
-            helpers_segment.retinaScale(this, this.options.devicePixelRatio);
+            helpers_dataset.retinaScale(this, this.options.devicePixelRatio);
         }
         this.bindEvents();
         this.notifyPlugins('afterInit');
         return this;
     }
     clear() {
-        helpers_segment.clearCanvas(this.canvas, this.ctx);
+        helpers_dataset.clearCanvas(this.canvas, this.ctx);
         return this;
     }
     stop() {
@@ -8132,13 +8077,13 @@ class Chart {
         this.width = newSize.width;
         this.height = newSize.height;
         this._aspectRatio = this.aspectRatio;
-        if (!helpers_segment.retinaScale(this, newRatio, true)) {
+        if (!helpers_dataset.retinaScale(this, newRatio, true)) {
             return;
         }
         this.notifyPlugins('resize', {
             size: newSize
         });
-        helpers_segment.callback(options.onResize, [
+        helpers_dataset.callback(options.onResize, [
             this,
             newSize
         ], this);
@@ -8151,7 +8096,7 @@ class Chart {
     ensureScalesHaveIDs() {
         const options = this.options;
         const scalesOptions = options.scales || {};
-        helpers_segment.each(scalesOptions, (axisOptions, axisID)=>{
+        helpers_dataset.each(scalesOptions, (axisOptions, axisID)=>{
             axisOptions.id = axisID;
         });
     }
@@ -8177,11 +8122,11 @@ class Chart {
                 };
             }));
         }
-        helpers_segment.each(items, (item)=>{
+        helpers_dataset.each(items, (item)=>{
             const scaleOptions = item.options;
             const id = scaleOptions.id;
             const axis = determineAxis(id, scaleOptions);
-            const scaleType = helpers_segment.valueOrDefault(scaleOptions.type, item.dtype);
+            const scaleType = helpers_dataset.valueOrDefault(scaleOptions.type, item.dtype);
             if (scaleOptions.position === undefined || positionIsHorizontal(scaleOptions.position, axis) !== positionIsHorizontal(item.dposition)) {
                 scaleOptions.position = item.dposition;
             }
@@ -8201,12 +8146,12 @@ class Chart {
             }
             scale.init(scaleOptions, options);
         });
-        helpers_segment.each(updated, (hasUpdated, id)=>{
+        helpers_dataset.each(updated, (hasUpdated, id)=>{
             if (!hasUpdated) {
                 delete scales[id];
             }
         });
-        helpers_segment.each(scales, (scale)=>{
+        helpers_dataset.each(scales, (scale)=>{
             layouts.configure(this, scale, scale.options);
             layouts.addBox(this, scale);
         });
@@ -8259,7 +8204,7 @@ class Chart {
                 meta.controller.linkScales();
             } else {
                 const ControllerClass = registry.getController(type);
-                const { datasetElementType , dataElementType  } = helpers_segment.defaults.datasets[type];
+                const { datasetElementType , dataElementType  } = helpers_dataset.defaults.datasets[type];
                 Object.assign(ControllerClass, {
                     dataElementType: registry.getElement(dataElementType),
                     datasetElementType: datasetElementType && registry.getElement(datasetElementType)
@@ -8272,7 +8217,7 @@ class Chart {
         return newControllers;
     }
  _resetElements() {
-        helpers_segment.each(this.data.datasets, (dataset, datasetIndex)=>{
+        helpers_dataset.each(this.data.datasets, (dataset, datasetIndex)=>{
             this.getDatasetMeta(datasetIndex).controller.reset();
         }, this);
     }
@@ -8307,7 +8252,7 @@ class Chart {
         minPadding = this._minPadding = options.layout.autoPadding ? minPadding : 0;
         this._updateLayout(minPadding);
         if (!animsDisabled) {
-            helpers_segment.each(newControllers, (controller)=>{
+            helpers_dataset.each(newControllers, (controller)=>{
                 controller.reset();
             });
         }
@@ -8325,7 +8270,7 @@ class Chart {
         this.render();
     }
  _updateScales() {
-        helpers_segment.each(this.scales, (scale)=>{
+        helpers_dataset.each(this.scales, (scale)=>{
             layouts.removeBox(this, scale);
         });
         this.ensureScalesHaveIDs();
@@ -8335,7 +8280,7 @@ class Chart {
         const options = this.options;
         const existingEvents = new Set(Object.keys(this._listeners));
         const newEvents = new Set(options.events);
-        if (!helpers_segment.setsEqual(existingEvents, newEvents) || !!this._responsiveListeners !== options.responsive) {
+        if (!helpers_dataset.setsEqual(existingEvents, newEvents) || !!this._responsiveListeners !== options.responsive) {
             this.unbindEvents();
             this.bindEvents();
         }
@@ -8358,7 +8303,7 @@ class Chart {
         const makeSet = (idx)=>new Set(_dataChanges.filter((c)=>c[0] === idx).map((c, i)=>i + ',' + c.splice(1).join(',')));
         const changeSet = makeSet(0);
         for(let i = 1; i < datasetCount; i++){
-            if (!helpers_segment.setsEqual(changeSet, makeSet(i))) {
+            if (!helpers_dataset.setsEqual(changeSet, makeSet(i))) {
                 return;
             }
         }
@@ -8378,7 +8323,7 @@ class Chart {
         const area = this.chartArea;
         const noArea = area.width <= 0 || area.height <= 0;
         this._layers = [];
-        helpers_segment.each(this.boxes, (box)=>{
+        helpers_dataset.each(this.boxes, (box)=>{
             if (noArea && box.position === 'chartArea') {
                 return;
             }
@@ -8403,7 +8348,7 @@ class Chart {
             this.getDatasetMeta(i).controller.configure();
         }
         for(let i = 0, ilen = this.data.datasets.length; i < ilen; ++i){
-            this._updateDataset(i, helpers_segment.isFunction(mode) ? mode({
+            this._updateDataset(i, helpers_dataset.isFunction(mode) ? mode({
                 datasetIndex: i
             }) : mode);
         }
@@ -8447,8 +8392,8 @@ class Chart {
         let i;
         if (this._resizeBeforeDraw) {
             const { width , height  } = this._resizeBeforeDraw;
-            this._resize(width, height);
             this._resizeBeforeDraw = null;
+            this._resize(width, height);
         }
         this.clear();
         if (this.width <= 0 || this.height <= 0) {
@@ -8498,34 +8443,27 @@ class Chart {
     }
  _drawDataset(meta) {
         const ctx = this.ctx;
-        const clip = meta._clip;
-        const useClip = !clip.disabled;
-        const area = getDatasetArea(meta, this.chartArea);
         const args = {
             meta,
             index: meta.index,
             cancelable: true
         };
+        const clip = helpers_dataset.getDatasetClipArea(this, meta);
         if (this.notifyPlugins('beforeDatasetDraw', args) === false) {
             return;
         }
-        if (useClip) {
-            helpers_segment.clipArea(ctx, {
-                left: clip.left === false ? 0 : area.left - clip.left,
-                right: clip.right === false ? this.width : area.right + clip.right,
-                top: clip.top === false ? 0 : area.top - clip.top,
-                bottom: clip.bottom === false ? this.height : area.bottom + clip.bottom
-            });
+        if (clip) {
+            helpers_dataset.clipArea(ctx, clip);
         }
         meta.controller.draw();
-        if (useClip) {
-            helpers_segment.unclipArea(ctx);
+        if (clip) {
+            helpers_dataset.unclipArea(ctx);
         }
         args.cancelable = false;
         this.notifyPlugins('afterDatasetDraw', args);
     }
  isPointInArea(point) {
-        return helpers_segment._isPointInArea(point, this.chartArea, this._minPadding);
+        return helpers_dataset._isPointInArea(point, this.chartArea, this._minPadding);
     }
     getElementsAtEventForMode(e, mode, options, useFinalPosition) {
         const method = Interaction.modes[mode];
@@ -8558,7 +8496,7 @@ class Chart {
         return meta;
     }
     getContext() {
-        return this.$context || (this.$context = helpers_segment.createContext(null, {
+        return this.$context || (this.$context = helpers_dataset.createContext(null, {
             chart: this,
             type: 'chart'
         }));
@@ -8588,7 +8526,7 @@ class Chart {
         const mode = visible ? 'show' : 'hide';
         const meta = this.getDatasetMeta(datasetIndex);
         const anims = meta.controller._resolveAnimations(undefined, mode);
-        if (helpers_segment.defined(dataIndex)) {
+        if (helpers_dataset.defined(dataIndex)) {
             meta.data[dataIndex].hidden = !visible;
             this.update();
         } else {
@@ -8627,7 +8565,7 @@ class Chart {
         this.config.clearCache();
         if (canvas) {
             this.unbindEvents();
-            helpers_segment.clearCanvas(canvas, ctx);
+            helpers_dataset.clearCanvas(canvas, ctx);
             this.platform.releaseContext(ctx);
             this.canvas = null;
             this.ctx = null;
@@ -8658,7 +8596,7 @@ class Chart {
             e.offsetY = y;
             this._eventHandler(e);
         };
-        helpers_segment.each(this.options.events, (type)=>_add(type, listener));
+        helpers_dataset.each(this.options.events, (type)=>_add(type, listener));
     }
  bindResponsiveEvents() {
         if (!this._responsiveListeners) {
@@ -8703,11 +8641,11 @@ class Chart {
         }
     }
  unbindEvents() {
-        helpers_segment.each(this._listeners, (listener, type)=>{
+        helpers_dataset.each(this._listeners, (listener, type)=>{
             this.platform.removeEventListener(this, type, listener);
         });
         this._listeners = {};
-        helpers_segment.each(this._responsiveListeners, (listener, type)=>{
+        helpers_dataset.each(this._responsiveListeners, (listener, type)=>{
             this.platform.removeEventListener(this, type, listener);
         });
         this._responsiveListeners = undefined;
@@ -8743,7 +8681,7 @@ class Chart {
                 index
             };
         });
-        const changed = !helpers_segment._elementsEqual(active, lastActive);
+        const changed = !helpers_dataset._elementsEqual(active, lastActive);
         if (changed) {
             this._active = active;
             this._lastEvent = null;
@@ -8791,24 +8729,24 @@ class Chart {
         const { _active: lastActive = [] , options  } = this;
         const useFinalPosition = replay;
         const active = this._getActiveElements(e, lastActive, inChartArea, useFinalPosition);
-        const isClick = helpers_segment._isClickEvent(e);
+        const isClick = helpers_dataset._isClickEvent(e);
         const lastEvent = determineLastEvent(e, this._lastEvent, inChartArea, isClick);
         if (inChartArea) {
             this._lastEvent = null;
-            helpers_segment.callback(options.onHover, [
+            helpers_dataset.callback(options.onHover, [
                 e,
                 active,
                 this
             ], this);
             if (isClick) {
-                helpers_segment.callback(options.onClick, [
+                helpers_dataset.callback(options.onClick, [
                     e,
                     active,
                     this
                 ], this);
             }
         }
-        const changed = !helpers_segment._elementsEqual(active, lastActive);
+        const changed = !helpers_dataset._elementsEqual(active, lastActive);
         if (changed || replay) {
             this._active = active;
             this._updateHoverStyles(active, lastActive, replay);
@@ -8828,9 +8766,37 @@ class Chart {
     }
 }
 function invalidatePlugins() {
-    return helpers_segment.each(Chart.instances, (chart)=>chart._plugins.invalidate());
+    return helpers_dataset.each(Chart.instances, (chart)=>chart._plugins.invalidate());
 }
 
+function clipSelf(ctx, element, endAngle) {
+    const { startAngle , x , y , outerRadius , innerRadius , options  } = element;
+    const { borderWidth , borderJoinStyle  } = options;
+    const outerAngleClip = Math.min(borderWidth / outerRadius, helpers_dataset._normalizeAngle(startAngle - endAngle));
+    ctx.beginPath();
+    ctx.arc(x, y, outerRadius - borderWidth / 2, startAngle + outerAngleClip / 2, endAngle - outerAngleClip / 2);
+    if (innerRadius > 0) {
+        const innerAngleClip = Math.min(borderWidth / innerRadius, helpers_dataset._normalizeAngle(startAngle - endAngle));
+        ctx.arc(x, y, innerRadius + borderWidth / 2, endAngle - innerAngleClip / 2, startAngle + innerAngleClip / 2, true);
+    } else {
+        const clipWidth = Math.min(borderWidth / 2, outerRadius * helpers_dataset._normalizeAngle(startAngle - endAngle));
+        if (borderJoinStyle === 'round') {
+            ctx.arc(x, y, clipWidth, endAngle - helpers_dataset.PI / 2, startAngle + helpers_dataset.PI / 2, true);
+        } else if (borderJoinStyle === 'bevel') {
+            const r = 2 * clipWidth * clipWidth;
+            const endX = -r * Math.cos(endAngle + helpers_dataset.PI / 2) + x;
+            const endY = -r * Math.sin(endAngle + helpers_dataset.PI / 2) + y;
+            const startX = r * Math.cos(startAngle + helpers_dataset.PI / 2) + x;
+            const startY = r * Math.sin(startAngle + helpers_dataset.PI / 2) + y;
+            ctx.lineTo(endX, endY);
+            ctx.lineTo(startX, startY);
+        }
+    }
+    ctx.closePath();
+    ctx.moveTo(0, 0);
+    ctx.rect(0, 0, ctx.canvas.width, ctx.canvas.height);
+    ctx.clip('evenodd');
+}
 function clipArc(ctx, element, endAngle) {
     const { startAngle , pixelMargin , x , y , outerRadius , innerRadius  } = element;
     let angleMargin = pixelMargin / outerRadius;
@@ -8842,13 +8808,13 @@ function clipArc(ctx, element, endAngle) {
         angleMargin = pixelMargin / innerRadius;
         ctx.arc(x, y, innerRadius, endAngle + angleMargin, startAngle - angleMargin, true);
     } else {
-        ctx.arc(x, y, pixelMargin, endAngle + helpers_segment.HALF_PI, startAngle - helpers_segment.HALF_PI);
+        ctx.arc(x, y, pixelMargin, endAngle + helpers_dataset.HALF_PI, startAngle - helpers_dataset.HALF_PI);
     }
     ctx.closePath();
     ctx.clip();
 }
 function toRadiusCorners(value) {
-    return helpers_segment._readValueToProps(value, [
+    return helpers_dataset._readValueToProps(value, [
         'outerStart',
         'outerEnd',
         'innerStart',
@@ -8870,13 +8836,13 @@ function toRadiusCorners(value) {
     // we know that the thickness term will dominate and compute the limits at that point
     const computeOuterLimit = (val)=>{
         const outerArcLimit = (outerRadius - Math.min(halfThickness, val)) * angleDelta / 2;
-        return helpers_segment._limitValue(val, 0, Math.min(halfThickness, outerArcLimit));
+        return helpers_dataset._limitValue(val, 0, Math.min(halfThickness, outerArcLimit));
     };
     return {
         outerStart: computeOuterLimit(o.outerStart),
         outerEnd: computeOuterLimit(o.outerEnd),
-        innerStart: helpers_segment._limitValue(o.innerStart, 0, innerLimit),
-        innerEnd: helpers_segment._limitValue(o.innerEnd, 0, innerLimit)
+        innerStart: helpers_dataset._limitValue(o.innerStart, 0, innerLimit),
+        innerEnd: helpers_dataset._limitValue(o.innerEnd, 0, innerLimit)
     };
 }
 /**
@@ -8916,7 +8882,7 @@ function toRadiusCorners(value) {
         const adjustedAngle = avNogSpacingRadius !== 0 ? alpha * avNogSpacingRadius / (avNogSpacingRadius + spacing) : alpha;
         spacingOffset = (alpha - adjustedAngle) / 2;
     }
-    const beta = Math.max(0.001, alpha * outerRadius - offset / helpers_segment.PI) / outerRadius;
+    const beta = Math.max(0.001, alpha * outerRadius - offset / helpers_dataset.PI) / outerRadius;
     const angleOffset = (alpha - beta) / 2;
     const startAngle = start + angleOffset + spacingOffset;
     const endAngle = end - angleOffset - spacingOffset;
@@ -8938,7 +8904,7 @@ function toRadiusCorners(value) {
         // The corner segment from point 2 to point 3
         if (outerEnd > 0) {
             const pCenter = rThetaToXY(outerEndAdjustedRadius, outerEndAdjustedAngle, x, y);
-            ctx.arc(pCenter.x, pCenter.y, outerEnd, outerEndAdjustedAngle, endAngle + helpers_segment.HALF_PI);
+            ctx.arc(pCenter.x, pCenter.y, outerEnd, outerEndAdjustedAngle, endAngle + helpers_dataset.HALF_PI);
         }
         // The line from point 3 to point 4
         const p4 = rThetaToXY(innerEndAdjustedRadius, endAngle, x, y);
@@ -8946,7 +8912,7 @@ function toRadiusCorners(value) {
         // The corner segment from point 4 to point 5
         if (innerEnd > 0) {
             const pCenter = rThetaToXY(innerEndAdjustedRadius, innerEndAdjustedAngle, x, y);
-            ctx.arc(pCenter.x, pCenter.y, innerEnd, endAngle + helpers_segment.HALF_PI, innerEndAdjustedAngle + Math.PI);
+            ctx.arc(pCenter.x, pCenter.y, innerEnd, endAngle + helpers_dataset.HALF_PI, innerEndAdjustedAngle + Math.PI);
         }
         // The inner arc from point 5 to point b to point 6
         const innerMidAdjustedAngle = (endAngle - innerEnd / innerRadius + (startAngle + innerStart / innerRadius)) / 2;
@@ -8955,7 +8921,7 @@ function toRadiusCorners(value) {
         // The corner segment from point 6 to point 7
         if (innerStart > 0) {
             const pCenter = rThetaToXY(innerStartAdjustedRadius, innerStartAdjustedAngle, x, y);
-            ctx.arc(pCenter.x, pCenter.y, innerStart, innerStartAdjustedAngle + Math.PI, startAngle - helpers_segment.HALF_PI);
+            ctx.arc(pCenter.x, pCenter.y, innerStart, innerStartAdjustedAngle + Math.PI, startAngle - helpers_dataset.HALF_PI);
         }
         // The line from point 7 to point 8
         const p8 = rThetaToXY(outerStartAdjustedRadius, startAngle, x, y);
@@ -8963,7 +8929,7 @@ function toRadiusCorners(value) {
         // The corner segment from point 8 to point 1
         if (outerStart > 0) {
             const pCenter = rThetaToXY(outerStartAdjustedRadius, outerStartAdjustedAngle, x, y);
-            ctx.arc(pCenter.x, pCenter.y, outerStart, startAngle - helpers_segment.HALF_PI, outerStartAdjustedAngle);
+            ctx.arc(pCenter.x, pCenter.y, outerStart, startAngle - helpers_dataset.HALF_PI, outerStartAdjustedAngle);
         }
     } else {
         ctx.moveTo(x, y);
@@ -8985,7 +8951,7 @@ function drawArc(ctx, element, offset, spacing, circular) {
             ctx.fill();
         }
         if (!isNaN(circumference)) {
-            endAngle = startAngle + (circumference % helpers_segment.TAU || helpers_segment.TAU);
+            endAngle = startAngle + (circumference % helpers_dataset.TAU || helpers_dataset.TAU);
         }
     }
     pathArc(ctx, element, offset, spacing, endAngle, circular);
@@ -8994,7 +8960,7 @@ function drawArc(ctx, element, offset, spacing, circular) {
 }
 function drawBorder(ctx, element, offset, spacing, circular) {
     const { fullCircles , startAngle , circumference , options  } = element;
-    const { borderWidth , borderJoinStyle , borderDash , borderDashOffset  } = options;
+    const { borderWidth , borderJoinStyle , borderDash , borderDashOffset , borderRadius  } = options;
     const inner = options.borderAlign === 'inner';
     if (!borderWidth) {
         return;
@@ -9015,11 +8981,14 @@ function drawBorder(ctx, element, offset, spacing, circular) {
             ctx.stroke();
         }
         if (!isNaN(circumference)) {
-            endAngle = startAngle + (circumference % helpers_segment.TAU || helpers_segment.TAU);
+            endAngle = startAngle + (circumference % helpers_dataset.TAU || helpers_dataset.TAU);
         }
     }
     if (inner) {
         clipArc(ctx, element, endAngle);
+    }
+    if (options.selfJoin && endAngle - startAngle >= helpers_dataset.PI && borderRadius === 0 && borderJoinStyle !== 'miter') {
+        clipSelf(ctx, element, endAngle);
     }
     if (!fullCircles) {
         pathArc(ctx, element, offset, spacing, endAngle, circular);
@@ -9039,7 +9008,8 @@ class ArcElement extends Element {
         offset: 0,
         spacing: 0,
         angle: undefined,
-        circular: true
+        circular: true,
+        selfJoin: false
     };
     static defaultRoutes = {
         backgroundColor: 'backgroundColor'
@@ -9074,7 +9044,7 @@ class ArcElement extends Element {
             'x',
             'y'
         ], useFinalPosition);
-        const { angle , distance  } = helpers_segment.getAngleFromPoint(point, {
+        const { angle , distance  } = helpers_dataset.getAngleFromPoint(point, {
             x: chartX,
             y: chartY
         });
@@ -9086,9 +9056,10 @@ class ArcElement extends Element {
             'circumference'
         ], useFinalPosition);
         const rAdjust = (this.options.spacing + this.options.borderWidth) / 2;
-        const _circumference = helpers_segment.valueOrDefault(circumference, endAngle - startAngle);
-        const betweenAngles = _circumference >= helpers_segment.TAU || helpers_segment._angleBetween(angle, startAngle, endAngle);
-        const withinRadius = helpers_segment._isBetween(distance, innerRadius + rAdjust, outerRadius + rAdjust);
+        const _circumference = helpers_dataset.valueOrDefault(circumference, endAngle - startAngle);
+        const nonZeroBetween = helpers_dataset._angleBetween(angle, startAngle, endAngle) && startAngle !== endAngle;
+        const betweenAngles = _circumference >= helpers_dataset.TAU || nonZeroBetween;
+        const withinRadius = helpers_dataset._isBetween(distance, innerRadius + rAdjust, outerRadius + rAdjust);
         return betweenAngles && withinRadius;
     }
     getCenterPoint(useFinalPosition) {
@@ -9117,14 +9088,14 @@ class ArcElement extends Element {
         const spacing = (options.spacing || 0) / 2;
         const circular = options.circular;
         this.pixelMargin = options.borderAlign === 'inner' ? 0.33 : 0;
-        this.fullCircles = circumference > helpers_segment.TAU ? Math.floor(circumference / helpers_segment.TAU) : 0;
+        this.fullCircles = circumference > helpers_dataset.TAU ? Math.floor(circumference / helpers_dataset.TAU) : 0;
         if (circumference === 0 || this.innerRadius < 0 || this.outerRadius < 0) {
             return;
         }
         ctx.save();
         const halfAngle = (this.startAngle + this.endAngle) / 2;
         ctx.translate(Math.cos(halfAngle) * offset, Math.sin(halfAngle) * offset);
-        const fix = 1 - Math.sin(Math.min(helpers_segment.PI, circumference || 0));
+        const fix = 1 - Math.sin(Math.min(helpers_dataset.PI, circumference || 0));
         const radiusOffset = offset * fix;
         ctx.fillStyle = options.backgroundColor;
         ctx.strokeStyle = options.borderColor;
@@ -9135,22 +9106,22 @@ class ArcElement extends Element {
 }
 
 function setStyle(ctx, options, style = options) {
-    ctx.lineCap = helpers_segment.valueOrDefault(style.borderCapStyle, options.borderCapStyle);
-    ctx.setLineDash(helpers_segment.valueOrDefault(style.borderDash, options.borderDash));
-    ctx.lineDashOffset = helpers_segment.valueOrDefault(style.borderDashOffset, options.borderDashOffset);
-    ctx.lineJoin = helpers_segment.valueOrDefault(style.borderJoinStyle, options.borderJoinStyle);
-    ctx.lineWidth = helpers_segment.valueOrDefault(style.borderWidth, options.borderWidth);
-    ctx.strokeStyle = helpers_segment.valueOrDefault(style.borderColor, options.borderColor);
+    ctx.lineCap = helpers_dataset.valueOrDefault(style.borderCapStyle, options.borderCapStyle);
+    ctx.setLineDash(helpers_dataset.valueOrDefault(style.borderDash, options.borderDash));
+    ctx.lineDashOffset = helpers_dataset.valueOrDefault(style.borderDashOffset, options.borderDashOffset);
+    ctx.lineJoin = helpers_dataset.valueOrDefault(style.borderJoinStyle, options.borderJoinStyle);
+    ctx.lineWidth = helpers_dataset.valueOrDefault(style.borderWidth, options.borderWidth);
+    ctx.strokeStyle = helpers_dataset.valueOrDefault(style.borderColor, options.borderColor);
 }
 function lineTo(ctx, previous, target) {
     ctx.lineTo(target.x, target.y);
 }
  function getLineMethod(options) {
     if (options.stepped) {
-        return helpers_segment._steppedLineTo;
+        return helpers_dataset._steppedLineTo;
     }
     if (options.tension || options.cubicInterpolationMode === 'monotone') {
-        return helpers_segment._bezierCurveTo;
+        return helpers_dataset._bezierCurveTo;
     }
     return lineTo;
 }
@@ -9245,12 +9216,12 @@ function pathVars(points, segment, params = {}) {
 }
  function _getInterpolationMethod(options) {
     if (options.stepped) {
-        return helpers_segment._steppedInterpolation;
+        return helpers_dataset._steppedInterpolation;
     }
     if (options.tension || options.cubicInterpolationMode === 'monotone') {
-        return helpers_segment._bezierInterpolation;
+        return helpers_dataset._bezierInterpolation;
     }
-    return helpers_segment._pointInLine;
+    return helpers_dataset._pointInLine;
 }
 function strokePathWithCache(ctx, line, start, count) {
     let path = line._path;
@@ -9330,7 +9301,7 @@ class LineElement extends Element {
         const options = this.options;
         if ((options.tension || options.cubicInterpolationMode === 'monotone') && !options.stepped && !this._pointsUpdated) {
             const loop = options.spanGaps ? this._loop : this._fullLoop;
-            helpers_segment._updateBezierControlPoints(this._points, options, chartArea, loop, indexAxis);
+            helpers_dataset._updateBezierControlPoints(this._points, options, chartArea, loop, indexAxis);
             this._pointsUpdated = true;
         }
     }
@@ -9344,7 +9315,7 @@ class LineElement extends Element {
         return this._points;
     }
     get segments() {
-        return this._segments || (this._segments = helpers_segment._computeSegments(this, this.options.segment));
+        return this._segments || (this._segments = helpers_dataset._computeSegments(this, this.options.segment));
     }
  first() {
         const segments = this.segments;
@@ -9361,7 +9332,7 @@ class LineElement extends Element {
         const options = this.options;
         const value = point[property];
         const points = this.points;
-        const segments = helpers_segment._boundSegments(this, {
+        const segments = helpers_dataset._boundSegments(this, {
             property,
             start: value,
             end: value
@@ -9492,13 +9463,13 @@ class PointElement extends Element {
     }
     draw(ctx, area) {
         const options = this.options;
-        if (this.skip || options.radius < 0.1 || !helpers_segment._isPointInArea(this, area, this.size(options) / 2)) {
+        if (this.skip || options.radius < 0.1 || !helpers_dataset._isPointInArea(this, area, this.size(options) / 2)) {
             return;
         }
         ctx.strokeStyle = options.borderColor;
         ctx.lineWidth = options.borderWidth;
         ctx.fillStyle = options.backgroundColor;
-        helpers_segment.drawPoint(ctx, options, this.x, this.y);
+        helpers_dataset.drawPoint(ctx, options, this.x, this.y);
     }
     getRange() {
         const options = this.options || {};
@@ -9537,12 +9508,12 @@ function getBarBounds(bar, useFinalPosition) {
     };
 }
 function skipOrLimit(skip, value, min, max) {
-    return skip ? 0 : helpers_segment._limitValue(value, min, max);
+    return skip ? 0 : helpers_dataset._limitValue(value, min, max);
 }
 function parseBorderWidth(bar, maxW, maxH) {
     const value = bar.options.borderWidth;
     const skip = bar.borderSkipped;
-    const o = helpers_segment.toTRBL(value);
+    const o = helpers_dataset.toTRBL(value);
     return {
         t: skipOrLimit(skip.top, o.top, 0, maxH),
         r: skipOrLimit(skip.right, o.right, 0, maxW),
@@ -9555,10 +9526,10 @@ function parseBorderRadius(bar, maxW, maxH) {
         'enableBorderRadius'
     ]);
     const value = bar.options.borderRadius;
-    const o = helpers_segment.toTRBLCorners(value);
+    const o = helpers_dataset.toTRBLCorners(value);
     const maxR = Math.min(maxW, maxH);
     const skip = bar.borderSkipped;
-    const enableBorder = enableBorderRadius || helpers_segment.isObject(value);
+    const enableBorder = enableBorderRadius || helpers_dataset.isObject(value);
     return {
         topLeft: skipOrLimit(!enableBorder || skip.top || skip.left, o.topLeft, 0, maxR),
         topRight: skipOrLimit(!enableBorder || skip.top || skip.right, o.topRight, 0, maxR),
@@ -9599,7 +9570,7 @@ function inRange(bar, x, y, useFinalPosition) {
     const skipY = y === null;
     const skipBoth = skipX && skipY;
     const bounds = bar && !skipBoth && getBarBounds(bar, useFinalPosition);
-    return bounds && (skipX || helpers_segment._isBetween(x, bounds.left, bounds.right)) && (skipY || helpers_segment._isBetween(y, bounds.top, bounds.bottom));
+    return bounds && (skipX || helpers_dataset._isBetween(x, bounds.left, bounds.right)) && (skipY || helpers_dataset._isBetween(y, bounds.top, bounds.bottom));
 }
 function hasRadius(radius) {
     return radius.topLeft || radius.topRight || radius.bottomLeft || radius.bottomRight;
@@ -9648,7 +9619,7 @@ class BarElement extends Element {
     draw(ctx) {
         const { inflateAmount , options: { borderColor , backgroundColor  }  } = this;
         const { inner , outer  } = boundingRects(this);
-        const addRectPath = hasRadius(outer.radius) ? helpers_segment.addRoundedRectPath : addNormalRectPath;
+        const addRectPath = hasRadius(outer.radius) ? helpers_dataset.addRoundedRectPath : addNormalRectPath;
         ctx.save();
         if (outer.w !== inner.w || outer.h !== inner.h) {
             ctx.beginPath();
@@ -9753,6 +9724,9 @@ function containsColorsDefinitions(descriptors) {
 function containsColorsDefinition(descriptor) {
     return descriptor && (descriptor.borderColor || descriptor.backgroundColor);
 }
+function containsDefaultColorsDefenitions() {
+    return helpers_dataset.defaults.borderColor !== 'rgba(0,0,0,0.1)' || helpers_dataset.defaults.backgroundColor !== 'rgba(0,0,0,0.1)';
+}
 var plugin_colors = {
     id: 'colors',
     defaults: {
@@ -9765,7 +9739,8 @@ var plugin_colors = {
         }
         const { data: { datasets  } , options: chartOptions  } = chart.config;
         const { elements  } = chartOptions;
-        if (!options.forceOverride && (containsColorsDefinitions(datasets) || containsColorsDefinition(chartOptions) || elements && containsColorsDefinitions(elements))) {
+        const containsColorDefenition = containsColorsDefinitions(datasets) || containsColorsDefinition(chartOptions) || elements && containsColorsDefinitions(elements) || containsDefaultColorsDefenitions();
+        if (!options.forceOverride && containsColorDefenition) {
             return;
         }
         const colorizer = getColorizer(chart);
@@ -9841,7 +9816,7 @@ function minMaxDecimation(data, start, count, availableWidth) {
             avgX = (countX * avgX + point.x) / ++countX;
         } else {
             const lastIndex = i - 1;
-            if (!helpers_segment.isNullOrUndef(minIndex) && !helpers_segment.isNullOrUndef(maxIndex)) {
+            if (!helpers_dataset.isNullOrUndef(minIndex) && !helpers_dataset.isNullOrUndef(maxIndex)) {
                 const intermediateIndex1 = Math.min(minIndex, maxIndex);
                 const intermediateIndex2 = Math.max(minIndex, maxIndex);
                 if (intermediateIndex1 !== startIndex && intermediateIndex1 !== lastIndex) {
@@ -9894,10 +9869,10 @@ function getStartAndCountOfVisiblePointsSimplified(meta, points) {
     const { iScale  } = meta;
     const { min , max , minDefined , maxDefined  } = iScale.getUserBounds();
     if (minDefined) {
-        start = helpers_segment._limitValue(helpers_segment._lookupByKey(points, iScale.axis, min).lo, 0, pointCount - 1);
+        start = helpers_dataset._limitValue(helpers_dataset._lookupByKey(points, iScale.axis, min).lo, 0, pointCount - 1);
     }
     if (maxDefined) {
-        count = helpers_segment._limitValue(helpers_segment._lookupByKey(points, iScale.axis, max).hi + 1, start, pointCount) - start;
+        count = helpers_dataset._limitValue(helpers_dataset._lookupByKey(points, iScale.axis, max).hi + 1, start, pointCount) - start;
     } else {
         count = pointCount - start;
     }
@@ -9922,7 +9897,7 @@ var plugin_decimation = {
             const { _data , indexAxis  } = dataset;
             const meta = chart.getDatasetMeta(datasetIndex);
             const data = _data || dataset.data;
-            if (helpers_segment.resolve([
+            if (helpers_dataset.resolve([
                 indexAxis,
                 chart.options.indexAxis
             ]) === 'y') {
@@ -9944,7 +9919,7 @@ var plugin_decimation = {
                 cleanDecimatedDataset(dataset);
                 return;
             }
-            if (helpers_segment.isNullOrUndef(_data)) {
+            if (helpers_dataset.isNullOrUndef(_data)) {
                 dataset._data = data;
                 delete dataset.data;
                 Object.defineProperty(dataset, 'data', {
@@ -9995,10 +9970,10 @@ function _segments(line, target, property) {
             });
             continue;
         }
-        const targetSegments = helpers_segment._boundSegments(target, bounds);
+        const targetSegments = helpers_dataset._boundSegments(target, bounds);
         for (const tgt of targetSegments){
             const subBounds = _getBounds(property, tpoints[tgt.start], tpoints[tgt.end], tgt.loop);
-            const fillSources = helpers_segment._boundSegment(segment, points, subBounds);
+            const fillSources = helpers_dataset._boundSegment(segment, points, subBounds);
             for (const fillSource of fillSources){
                 parts.push({
                     source: fillSource,
@@ -10022,8 +9997,8 @@ function _getBounds(property, first, last, loop) {
     let start = first[property];
     let end = last[property];
     if (property === 'angle') {
-        start = helpers_segment._normalizeAngle(start);
-        end = helpers_segment._normalizeAngle(end);
+        start = helpers_dataset._normalizeAngle(start);
+        end = helpers_dataset._normalizeAngle(end);
     }
     return {
         property,
@@ -10080,7 +10055,7 @@ function _getEdge(a, b, prop, fn) {
 function _createBoundaryLine(boundary, line) {
     let points = [];
     let _loop = false;
-    if (helpers_segment.isArray(boundary)) {
+    if (helpers_dataset.isArray(boundary)) {
         _loop = true;
         points = boundary;
     } else {
@@ -10110,7 +10085,7 @@ function _resolveTarget(sources, index, propagate) {
         return fill;
     }
     while(fill !== false && visited.indexOf(fill) === -1){
-        if (!helpers_segment.isNumberFinite(fill)) {
+        if (!helpers_dataset.isNumberFinite(fill)) {
             return fill;
         }
         target = sources[fill];
@@ -10127,11 +10102,11 @@ function _resolveTarget(sources, index, propagate) {
 }
  function _decodeFill(line, index, count) {
      const fill = parseFillOption(line);
-    if (helpers_segment.isObject(fill)) {
+    if (helpers_dataset.isObject(fill)) {
         return isNaN(fill.value) ? false : fill;
     }
     let target = parseFloat(fill);
-    if (helpers_segment.isNumberFinite(target) && Math.floor(target) === target) {
+    if (helpers_dataset.isNumberFinite(target) && Math.floor(target) === target) {
         return decodeTargetIndex(fill[0], index, target, count);
     }
     return [
@@ -10157,7 +10132,7 @@ function decodeTargetIndex(firstCh, index, target, count) {
         pixel = scale.bottom;
     } else if (fill === 'end') {
         pixel = scale.top;
-    } else if (helpers_segment.isObject(fill)) {
+    } else if (helpers_dataset.isObject(fill)) {
         pixel = scale.getPixelForValue(fill.value);
     } else if (scale.getBasePixel) {
         pixel = scale.getBasePixel();
@@ -10170,7 +10145,7 @@ function decodeTargetIndex(firstCh, index, target, count) {
         value = startValue;
     } else if (fill === 'end') {
         value = scale.options.reverse ? scale.min : scale.max;
-    } else if (helpers_segment.isObject(fill)) {
+    } else if (helpers_dataset.isObject(fill)) {
         value = fill.value;
     } else {
         value = scale.getBaseValue();
@@ -10180,7 +10155,7 @@ function decodeTargetIndex(firstCh, index, target, count) {
  function parseFillOption(line) {
     const options = line.options;
     const fillOption = options.fill;
-    let fill = helpers_segment.valueOrDefault(fillOption && fillOption.target, fillOption);
+    let fill = helpers_dataset.valueOrDefault(fillOption && fillOption.target, fillOption);
     if (fill === undefined) {
         fill = !!options.backgroundColor;
     }
@@ -10261,7 +10236,7 @@ function _buildStackLine(source) {
         const segment = segments[i];
         const firstValue = linePoints[segment.start][property];
         const lastValue = linePoints[segment.end][property];
-        if (helpers_segment._isBetween(pointValue, firstValue, lastValue)) {
+        if (helpers_dataset._isBetween(pointValue, firstValue, lastValue)) {
             first = pointValue === firstValue;
             last = pointValue === lastValue;
             break;
@@ -10284,7 +10259,7 @@ class simpleArc {
         const { x , y , radius  } = this;
         bounds = bounds || {
             start: 0,
-            end: helpers_segment.TAU
+            end: helpers_dataset.TAU
         };
         ctx.arc(x, y, radius, bounds.end, bounds.start, true);
         return !opts.bounds;
@@ -10302,7 +10277,7 @@ class simpleArc {
 
 function _getTarget(source) {
     const { chart , fill , line  } = source;
-    if (helpers_segment.isNumberFinite(fill)) {
+    if (helpers_dataset.isNumberFinite(fill)) {
         return getLineByIndex(chart, fill);
     }
     if (fill === 'stack') {
@@ -10332,7 +10307,7 @@ function computeBoundary(source) {
 function computeLinearBoundary(source) {
     const { scale ={} , fill  } = source;
     const pixel = _getTargetPixel(fill, scale);
-    if (helpers_segment.isNumberFinite(pixel)) {
+    if (helpers_dataset.isNumberFinite(pixel)) {
         const horizontal = scale.isHorizontal();
         return {
             x: horizontal ? pixel : null,
@@ -10364,13 +10339,15 @@ function computeCircularBoundary(source) {
 
 function _drawfill(ctx, source, area) {
     const target = _getTarget(source);
-    const { line , scale , axis  } = source;
+    const { chart , index , line , scale , axis  } = source;
     const lineOpts = line.options;
     const fillOption = lineOpts.fill;
     const color = lineOpts.backgroundColor;
     const { above =color , below =color  } = fillOption || {};
+    const meta = chart.getDatasetMeta(index);
+    const clip = helpers_dataset.getDatasetClipArea(chart, meta);
     if (target && line.points.length) {
-        helpers_segment.clipArea(ctx, area);
+        helpers_dataset.clipArea(ctx, area);
         doFill(ctx, {
             line,
             target,
@@ -10378,34 +10355,54 @@ function _drawfill(ctx, source, area) {
             below,
             area,
             scale,
-            axis
+            axis,
+            clip
         });
-        helpers_segment.unclipArea(ctx);
+        helpers_dataset.unclipArea(ctx);
     }
 }
 function doFill(ctx, cfg) {
-    const { line , target , above , below , area , scale  } = cfg;
+    const { line , target , above , below , area , scale , clip  } = cfg;
     const property = line._loop ? 'angle' : cfg.axis;
     ctx.save();
-    if (property === 'x' && below !== above) {
-        clipVertical(ctx, target, area.top);
-        fill(ctx, {
-            line,
-            target,
-            color: above,
-            scale,
-            property
-        });
-        ctx.restore();
-        ctx.save();
-        clipVertical(ctx, target, area.bottom);
+    let fillColor = below;
+    if (below !== above) {
+        if (property === 'x') {
+            clipVertical(ctx, target, area.top);
+            fill(ctx, {
+                line,
+                target,
+                color: above,
+                scale,
+                property,
+                clip
+            });
+            ctx.restore();
+            ctx.save();
+            clipVertical(ctx, target, area.bottom);
+        } else if (property === 'y') {
+            clipHorizontal(ctx, target, area.left);
+            fill(ctx, {
+                line,
+                target,
+                color: below,
+                scale,
+                property,
+                clip
+            });
+            ctx.restore();
+            ctx.save();
+            clipHorizontal(ctx, target, area.right);
+            fillColor = above;
+        }
     }
     fill(ctx, {
         line,
         target,
-        color: below,
+        color: fillColor,
         scale,
-        property
+        property,
+        clip
     });
     ctx.restore();
 }
@@ -10438,15 +10435,44 @@ function clipVertical(ctx, target, clipY) {
     ctx.closePath();
     ctx.clip();
 }
+function clipHorizontal(ctx, target, clipX) {
+    const { segments , points  } = target;
+    let first = true;
+    let lineLoop = false;
+    ctx.beginPath();
+    for (const segment of segments){
+        const { start , end  } = segment;
+        const firstPoint = points[start];
+        const lastPoint = points[_findSegmentEnd(start, end, points)];
+        if (first) {
+            ctx.moveTo(firstPoint.x, firstPoint.y);
+            first = false;
+        } else {
+            ctx.lineTo(clipX, firstPoint.y);
+            ctx.lineTo(firstPoint.x, firstPoint.y);
+        }
+        lineLoop = !!target.pathSegment(ctx, segment, {
+            move: lineLoop
+        });
+        if (lineLoop) {
+            ctx.closePath();
+        } else {
+            ctx.lineTo(clipX, lastPoint.y);
+        }
+    }
+    ctx.lineTo(clipX, target.first().y);
+    ctx.closePath();
+    ctx.clip();
+}
 function fill(ctx, cfg) {
-    const { line , target , property , color , scale  } = cfg;
+    const { line , target , property , color , scale , clip  } = cfg;
     const segments = _segments(line, target, property);
     for (const { source: src , target: tgt , start , end  } of segments){
         const { style: { backgroundColor =color  } = {}  } = src;
         const notShape = target !== true;
         ctx.save();
         ctx.fillStyle = backgroundColor;
-        clipBounds(ctx, scale, notShape && _getBounds(property, start, end));
+        clipBounds(ctx, scale, clip, notShape && _getBounds(property, start, end));
         ctx.beginPath();
         const lineLoop = !!line.pathSegment(ctx, src);
         let loop;
@@ -10470,12 +10496,30 @@ function fill(ctx, cfg) {
         ctx.restore();
     }
 }
-function clipBounds(ctx, scale, bounds) {
-    const { top , bottom  } = scale.chart.chartArea;
+function clipBounds(ctx, scale, clip, bounds) {
+    const chartArea = scale.chart.chartArea;
     const { property , start , end  } = bounds || {};
-    if (property === 'x') {
+    if (property === 'x' || property === 'y') {
+        let left, top, right, bottom;
+        if (property === 'x') {
+            left = start;
+            top = chartArea.top;
+            right = end;
+            bottom = chartArea.bottom;
+        } else {
+            left = chartArea.left;
+            top = start;
+            right = chartArea.right;
+            bottom = end;
+        }
         ctx.beginPath();
-        ctx.rect(start, top, end - start, bottom - top);
+        if (clip) {
+            left = Math.max(left, clip.left);
+            right = Math.min(right, clip.right);
+            top = Math.max(top, clip.top);
+            bottom = Math.min(bottom, clip.bottom);
+        }
+        ctx.rect(left, top, right - left, bottom - top);
         ctx.clip();
     }
 }
@@ -10618,7 +10662,7 @@ class Legend extends Element {
     }
     buildLabels() {
         const labelOpts = this.options.labels || {};
-        let legendItems = helpers_segment.callback(labelOpts.generateLabels, [
+        let legendItems = helpers_dataset.callback(labelOpts.generateLabels, [
             this.chart
         ], this) || [];
         if (labelOpts.filter) {
@@ -10639,7 +10683,7 @@ class Legend extends Element {
             return;
         }
         const labelOpts = options.labels;
-        const labelFont = helpers_segment.toFont(labelOpts.font);
+        const labelFont = helpers_dataset.toFont(labelOpts.font);
         const fontSize = labelFont.size;
         const titleHeight = this._computeTitleHeight();
         const { boxWidth , itemHeight  } = getBoxSize(labelOpts, fontSize);
@@ -10731,14 +10775,14 @@ class Legend extends Element {
         }
         const titleHeight = this._computeTitleHeight();
         const { legendHitBoxes: hitboxes , options: { align , labels: { padding  } , rtl  }  } = this;
-        const rtlHelper = helpers_segment.getRtlAdapter(rtl, this.left, this.width);
+        const rtlHelper = helpers_dataset.getRtlAdapter(rtl, this.left, this.width);
         if (this.isHorizontal()) {
             let row = 0;
-            let left = helpers_segment._alignStartEnd(align, this.left + padding, this.right - this.lineWidths[row]);
+            let left = helpers_dataset._alignStartEnd(align, this.left + padding, this.right - this.lineWidths[row]);
             for (const hitbox of hitboxes){
                 if (row !== hitbox.row) {
                     row = hitbox.row;
-                    left = helpers_segment._alignStartEnd(align, this.left + padding, this.right - this.lineWidths[row]);
+                    left = helpers_dataset._alignStartEnd(align, this.left + padding, this.right - this.lineWidths[row]);
                 }
                 hitbox.top += this.top + titleHeight + padding;
                 hitbox.left = rtlHelper.leftForLtr(rtlHelper.x(left), hitbox.width);
@@ -10746,11 +10790,11 @@ class Legend extends Element {
             }
         } else {
             let col = 0;
-            let top = helpers_segment._alignStartEnd(align, this.top + titleHeight + padding, this.bottom - this.columnSizes[col].height);
+            let top = helpers_dataset._alignStartEnd(align, this.top + titleHeight + padding, this.bottom - this.columnSizes[col].height);
             for (const hitbox of hitboxes){
                 if (hitbox.col !== col) {
                     col = hitbox.col;
-                    top = helpers_segment._alignStartEnd(align, this.top + titleHeight + padding, this.bottom - this.columnSizes[col].height);
+                    top = helpers_dataset._alignStartEnd(align, this.top + titleHeight + padding, this.bottom - this.columnSizes[col].height);
                 }
                 hitbox.top = top;
                 hitbox.left += this.left + padding;
@@ -10765,17 +10809,17 @@ class Legend extends Element {
     draw() {
         if (this.options.display) {
             const ctx = this.ctx;
-            helpers_segment.clipArea(ctx, this);
+            helpers_dataset.clipArea(ctx, this);
             this._draw();
-            helpers_segment.unclipArea(ctx);
+            helpers_dataset.unclipArea(ctx);
         }
     }
  _draw() {
         const { options: opts , columnSizes , lineWidths , ctx  } = this;
         const { align , labels: labelOpts  } = opts;
-        const defaultColor = helpers_segment.defaults.color;
-        const rtlHelper = helpers_segment.getRtlAdapter(opts.rtl, this.left, this.width);
-        const labelFont = helpers_segment.toFont(labelOpts.font);
+        const defaultColor = helpers_dataset.defaults.color;
+        const rtlHelper = helpers_dataset.getRtlAdapter(opts.rtl, this.left, this.width);
+        const labelFont = helpers_dataset.toFont(labelOpts.font);
         const { padding  } = labelOpts;
         const fontSize = labelFont.size;
         const halfFontSize = fontSize / 2;
@@ -10791,14 +10835,14 @@ class Legend extends Element {
                 return;
             }
             ctx.save();
-            const lineWidth = helpers_segment.valueOrDefault(legendItem.lineWidth, 1);
-            ctx.fillStyle = helpers_segment.valueOrDefault(legendItem.fillStyle, defaultColor);
-            ctx.lineCap = helpers_segment.valueOrDefault(legendItem.lineCap, 'butt');
-            ctx.lineDashOffset = helpers_segment.valueOrDefault(legendItem.lineDashOffset, 0);
-            ctx.lineJoin = helpers_segment.valueOrDefault(legendItem.lineJoin, 'miter');
+            const lineWidth = helpers_dataset.valueOrDefault(legendItem.lineWidth, 1);
+            ctx.fillStyle = helpers_dataset.valueOrDefault(legendItem.fillStyle, defaultColor);
+            ctx.lineCap = helpers_dataset.valueOrDefault(legendItem.lineCap, 'butt');
+            ctx.lineDashOffset = helpers_dataset.valueOrDefault(legendItem.lineDashOffset, 0);
+            ctx.lineJoin = helpers_dataset.valueOrDefault(legendItem.lineJoin, 'miter');
             ctx.lineWidth = lineWidth;
-            ctx.strokeStyle = helpers_segment.valueOrDefault(legendItem.strokeStyle, defaultColor);
-            ctx.setLineDash(helpers_segment.valueOrDefault(legendItem.lineDash, []));
+            ctx.strokeStyle = helpers_dataset.valueOrDefault(legendItem.strokeStyle, defaultColor);
+            ctx.setLineDash(helpers_dataset.valueOrDefault(legendItem.lineDash, []));
             if (labelOpts.usePointStyle) {
                 const drawOptions = {
                     radius: boxHeight * Math.SQRT2 / 2,
@@ -10808,14 +10852,14 @@ class Legend extends Element {
                 };
                 const centerX = rtlHelper.xPlus(x, boxWidth / 2);
                 const centerY = y + halfFontSize;
-                helpers_segment.drawPointLegend(ctx, drawOptions, centerX, centerY, labelOpts.pointStyleWidth && boxWidth);
+                helpers_dataset.drawPointLegend(ctx, drawOptions, centerX, centerY, labelOpts.pointStyleWidth && boxWidth);
             } else {
                 const yBoxTop = y + Math.max((fontSize - boxHeight) / 2, 0);
                 const xBoxLeft = rtlHelper.leftForLtr(x, boxWidth);
-                const borderRadius = helpers_segment.toTRBLCorners(legendItem.borderRadius);
+                const borderRadius = helpers_dataset.toTRBLCorners(legendItem.borderRadius);
                 ctx.beginPath();
                 if (Object.values(borderRadius).some((v)=>v !== 0)) {
-                    helpers_segment.addRoundedRectPath(ctx, {
+                    helpers_dataset.addRoundedRectPath(ctx, {
                         x: xBoxLeft,
                         y: yBoxTop,
                         w: boxWidth,
@@ -10833,7 +10877,7 @@ class Legend extends Element {
             ctx.restore();
         };
         const fillText = function(x, y, legendItem) {
-            helpers_segment.renderText(ctx, legendItem.text, x, y + itemHeight / 2, labelFont, {
+            helpers_dataset.renderText(ctx, legendItem.text, x, y + itemHeight / 2, labelFont, {
                 strikethrough: legendItem.hidden,
                 textAlign: rtlHelper.textAlign(legendItem.textAlign)
             });
@@ -10842,18 +10886,18 @@ class Legend extends Element {
         const titleHeight = this._computeTitleHeight();
         if (isHorizontal) {
             cursor = {
-                x: helpers_segment._alignStartEnd(align, this.left + padding, this.right - lineWidths[0]),
+                x: helpers_dataset._alignStartEnd(align, this.left + padding, this.right - lineWidths[0]),
                 y: this.top + padding + titleHeight,
                 line: 0
             };
         } else {
             cursor = {
                 x: this.left + padding,
-                y: helpers_segment._alignStartEnd(align, this.top + titleHeight + padding, this.bottom - columnSizes[0].height),
+                y: helpers_dataset._alignStartEnd(align, this.top + titleHeight + padding, this.bottom - columnSizes[0].height),
                 line: 0
             };
         }
-        helpers_segment.overrideTextDirection(this.ctx, opts.textDirection);
+        helpers_dataset.overrideTextDirection(this.ctx, opts.textDirection);
         const lineHeight = itemHeight + padding;
         this.legendItems.forEach((legendItem, i)=>{
             ctx.strokeStyle = legendItem.fontColor;
@@ -10868,16 +10912,16 @@ class Legend extends Element {
                 if (i > 0 && x + width + padding > this.right) {
                     y = cursor.y += lineHeight;
                     cursor.line++;
-                    x = cursor.x = helpers_segment._alignStartEnd(align, this.left + padding, this.right - lineWidths[cursor.line]);
+                    x = cursor.x = helpers_dataset._alignStartEnd(align, this.left + padding, this.right - lineWidths[cursor.line]);
                 }
             } else if (i > 0 && y + lineHeight > this.bottom) {
                 x = cursor.x = x + columnSizes[cursor.line].width + padding;
                 cursor.line++;
-                y = cursor.y = helpers_segment._alignStartEnd(align, this.top + titleHeight + padding, this.bottom - columnSizes[cursor.line].height);
+                y = cursor.y = helpers_dataset._alignStartEnd(align, this.top + titleHeight + padding, this.bottom - columnSizes[cursor.line].height);
             }
             const realX = rtlHelper.x(x);
             drawLegendBox(realX, y, legendItem);
-            x = helpers_segment._textX(textAlign, x + boxWidth + halfFontSize, isHorizontal ? x + width : this.right, opts.rtl);
+            x = helpers_dataset._textX(textAlign, x + boxWidth + halfFontSize, isHorizontal ? x + width : this.right, opts.rtl);
             fillText(rtlHelper.x(x), y, legendItem);
             if (isHorizontal) {
                 cursor.x += width + padding;
@@ -10888,17 +10932,17 @@ class Legend extends Element {
                 cursor.y += lineHeight;
             }
         });
-        helpers_segment.restoreTextDirection(this.ctx, opts.textDirection);
+        helpers_dataset.restoreTextDirection(this.ctx, opts.textDirection);
     }
  drawTitle() {
         const opts = this.options;
         const titleOpts = opts.title;
-        const titleFont = helpers_segment.toFont(titleOpts.font);
-        const titlePadding = helpers_segment.toPadding(titleOpts.padding);
+        const titleFont = helpers_dataset.toFont(titleOpts.font);
+        const titlePadding = helpers_dataset.toPadding(titleOpts.padding);
         if (!titleOpts.display) {
             return;
         }
-        const rtlHelper = helpers_segment.getRtlAdapter(opts.rtl, this.left, this.width);
+        const rtlHelper = helpers_dataset.getRtlAdapter(opts.rtl, this.left, this.width);
         const ctx = this.ctx;
         const position = titleOpts.position;
         const halfFontSize = titleFont.size / 2;
@@ -10909,32 +10953,32 @@ class Legend extends Element {
         if (this.isHorizontal()) {
             maxWidth = Math.max(...this.lineWidths);
             y = this.top + topPaddingPlusHalfFontSize;
-            left = helpers_segment._alignStartEnd(opts.align, left, this.right - maxWidth);
+            left = helpers_dataset._alignStartEnd(opts.align, left, this.right - maxWidth);
         } else {
             const maxHeight = this.columnSizes.reduce((acc, size)=>Math.max(acc, size.height), 0);
-            y = topPaddingPlusHalfFontSize + helpers_segment._alignStartEnd(opts.align, this.top, this.bottom - maxHeight - opts.labels.padding - this._computeTitleHeight());
+            y = topPaddingPlusHalfFontSize + helpers_dataset._alignStartEnd(opts.align, this.top, this.bottom - maxHeight - opts.labels.padding - this._computeTitleHeight());
         }
-        const x = helpers_segment._alignStartEnd(position, left, left + maxWidth);
-        ctx.textAlign = rtlHelper.textAlign(helpers_segment._toLeftRightCenter(position));
+        const x = helpers_dataset._alignStartEnd(position, left, left + maxWidth);
+        ctx.textAlign = rtlHelper.textAlign(helpers_dataset._toLeftRightCenter(position));
         ctx.textBaseline = 'middle';
         ctx.strokeStyle = titleOpts.color;
         ctx.fillStyle = titleOpts.color;
         ctx.font = titleFont.string;
-        helpers_segment.renderText(ctx, titleOpts.text, x, y, titleFont);
+        helpers_dataset.renderText(ctx, titleOpts.text, x, y, titleFont);
     }
  _computeTitleHeight() {
         const titleOpts = this.options.title;
-        const titleFont = helpers_segment.toFont(titleOpts.font);
-        const titlePadding = helpers_segment.toPadding(titleOpts.padding);
+        const titleFont = helpers_dataset.toFont(titleOpts.font);
+        const titlePadding = helpers_dataset.toPadding(titleOpts.padding);
         return titleOpts.display ? titleFont.lineHeight + titlePadding.height : 0;
     }
  _getLegendItemAt(x, y) {
         let i, hitBox, lh;
-        if (helpers_segment._isBetween(x, this.left, this.right) && helpers_segment._isBetween(y, this.top, this.bottom)) {
+        if (helpers_dataset._isBetween(x, this.left, this.right) && helpers_dataset._isBetween(y, this.top, this.bottom)) {
             lh = this.legendHitBoxes;
             for(i = 0; i < lh.length; ++i){
                 hitBox = lh[i];
-                if (helpers_segment._isBetween(x, hitBox.left, hitBox.left + hitBox.width) && helpers_segment._isBetween(y, hitBox.top, hitBox.top + hitBox.height)) {
+                if (helpers_dataset._isBetween(x, hitBox.left, hitBox.left + hitBox.width) && helpers_dataset._isBetween(y, hitBox.top, hitBox.top + hitBox.height)) {
                     return this.legendItems[i];
                 }
             }
@@ -10951,7 +10995,7 @@ class Legend extends Element {
             const previous = this._hoveredItem;
             const sameItem = itemsEqual(previous, hoveredItem);
             if (previous && !sameItem) {
-                helpers_segment.callback(opts.onLeave, [
+                helpers_dataset.callback(opts.onLeave, [
                     e,
                     previous,
                     this
@@ -10959,14 +11003,14 @@ class Legend extends Element {
             }
             this._hoveredItem = hoveredItem;
             if (hoveredItem && !sameItem) {
-                helpers_segment.callback(opts.onHover, [
+                helpers_dataset.callback(opts.onHover, [
                     e,
                     hoveredItem,
                     this
                 ], this);
             }
         } else if (hoveredItem) {
-            helpers_segment.callback(opts.onClick, [
+            helpers_dataset.callback(opts.onClick, [
                 e,
                 hoveredItem,
                 this
@@ -11069,7 +11113,7 @@ var plugin_legend = {
                 const { labels: { usePointStyle , pointStyle , textAlign , color , useBorderRadius , borderRadius  }  } = chart.legend.options;
                 return chart._getSortedDatasetMetas().map((meta)=>{
                     const style = meta.controller.getStyle(usePointStyle ? 0 : undefined);
-                    const borderWidth = helpers_segment.toPadding(style.borderWidth);
+                    const borderWidth = helpers_dataset.toPadding(style.borderWidth);
                     return {
                         text: datasets[meta.index].label,
                         fillStyle: style.backgroundColor,
@@ -11136,9 +11180,9 @@ class Title extends Element {
         }
         this.width = this.right = maxWidth;
         this.height = this.bottom = maxHeight;
-        const lineCount = helpers_segment.isArray(opts.text) ? opts.text.length : 1;
-        this._padding = helpers_segment.toPadding(opts.padding);
-        const textSize = lineCount * helpers_segment.toFont(opts.font).lineHeight + this._padding.height;
+        const lineCount = helpers_dataset.isArray(opts.text) ? opts.text.length : 1;
+        this._padding = helpers_dataset.toPadding(opts.padding);
+        const textSize = lineCount * helpers_dataset.toFont(opts.font).lineHeight + this._padding.height;
         if (this.isHorizontal()) {
             this.height = textSize;
         } else {
@@ -11155,18 +11199,18 @@ class Title extends Element {
         let rotation = 0;
         let maxWidth, titleX, titleY;
         if (this.isHorizontal()) {
-            titleX = helpers_segment._alignStartEnd(align, left, right);
+            titleX = helpers_dataset._alignStartEnd(align, left, right);
             titleY = top + offset;
             maxWidth = right - left;
         } else {
             if (options.position === 'left') {
                 titleX = left + offset;
-                titleY = helpers_segment._alignStartEnd(align, bottom, top);
-                rotation = helpers_segment.PI * -0.5;
+                titleY = helpers_dataset._alignStartEnd(align, bottom, top);
+                rotation = helpers_dataset.PI * -0.5;
             } else {
                 titleX = right - offset;
-                titleY = helpers_segment._alignStartEnd(align, top, bottom);
-                rotation = helpers_segment.PI * 0.5;
+                titleY = helpers_dataset._alignStartEnd(align, top, bottom);
+                rotation = helpers_dataset.PI * 0.5;
             }
             maxWidth = bottom - top;
         }
@@ -11183,15 +11227,15 @@ class Title extends Element {
         if (!opts.display) {
             return;
         }
-        const fontOpts = helpers_segment.toFont(opts.font);
+        const fontOpts = helpers_dataset.toFont(opts.font);
         const lineHeight = fontOpts.lineHeight;
         const offset = lineHeight / 2 + this._padding.top;
         const { titleX , titleY , maxWidth , rotation  } = this._drawArgs(offset);
-        helpers_segment.renderText(ctx, opts.text, 0, 0, fontOpts, {
+        helpers_dataset.renderText(ctx, opts.text, 0, 0, fontOpts, {
             color: opts.color,
             maxWidth,
             rotation,
-            textAlign: helpers_segment._toLeftRightCenter(opts.align),
+            textAlign: helpers_dataset._toLeftRightCenter(opts.align),
             textBaseline: 'middle',
             translation: [
                 titleX,
@@ -11308,6 +11352,9 @@ const positioners = {
                 ++count;
             }
         }
+        if (count === 0 || xSet.size === 0) {
+            return false;
+        }
         const xAverage = [
             ...xSet
         ].reduce((a, b)=>a + b) / xSet.size;
@@ -11328,7 +11375,7 @@ const positioners = {
             const el = items[i].element;
             if (el && el.hasValue()) {
                 const center = el.getCenterPoint();
-                const d = helpers_segment.distanceBetweenPoints(eventPosition, center);
+                const d = helpers_dataset.distanceBetweenPoints(eventPosition, center);
                 if (d < minDistance) {
                     minDistance = d;
                     nearestElement = el;
@@ -11348,7 +11395,7 @@ const positioners = {
 };
 function pushOrConcat(base, toPush) {
     if (toPush) {
-        if (helpers_segment.isArray(toPush)) {
+        if (helpers_dataset.isArray(toPush)) {
             Array.prototype.push.apply(base, toPush);
         } else {
             base.push(toPush);
@@ -11382,13 +11429,13 @@ function pushOrConcat(base, toPush) {
     const ctx = tooltip.chart.ctx;
     const { body , footer , title  } = tooltip;
     const { boxWidth , boxHeight  } = options;
-    const bodyFont = helpers_segment.toFont(options.bodyFont);
-    const titleFont = helpers_segment.toFont(options.titleFont);
-    const footerFont = helpers_segment.toFont(options.footerFont);
+    const bodyFont = helpers_dataset.toFont(options.bodyFont);
+    const titleFont = helpers_dataset.toFont(options.titleFont);
+    const footerFont = helpers_dataset.toFont(options.footerFont);
     const titleLineCount = title.length;
     const footerLineCount = footer.length;
     const bodyLineItemCount = body.length;
-    const padding = helpers_segment.toPadding(options.padding);
+    const padding = helpers_dataset.toPadding(options.padding);
     let height = padding.height;
     let width = 0;
     let combinedBodyLength = body.reduce((count, bodyItem)=>count + bodyItem.before.length + bodyItem.lines.length + bodyItem.after.length, 0);
@@ -11409,18 +11456,18 @@ function pushOrConcat(base, toPush) {
     };
     ctx.save();
     ctx.font = titleFont.string;
-    helpers_segment.each(tooltip.title, maxLineWidth);
+    helpers_dataset.each(tooltip.title, maxLineWidth);
     ctx.font = bodyFont.string;
-    helpers_segment.each(tooltip.beforeBody.concat(tooltip.afterBody), maxLineWidth);
+    helpers_dataset.each(tooltip.beforeBody.concat(tooltip.afterBody), maxLineWidth);
     widthPadding = options.displayColors ? boxWidth + 2 + options.boxPadding : 0;
-    helpers_segment.each(body, (bodyItem)=>{
-        helpers_segment.each(bodyItem.before, maxLineWidth);
-        helpers_segment.each(bodyItem.lines, maxLineWidth);
-        helpers_segment.each(bodyItem.after, maxLineWidth);
+    helpers_dataset.each(body, (bodyItem)=>{
+        helpers_dataset.each(bodyItem.before, maxLineWidth);
+        helpers_dataset.each(bodyItem.lines, maxLineWidth);
+        helpers_dataset.each(bodyItem.after, maxLineWidth);
     });
     widthPadding = 0;
     ctx.font = footerFont.string;
-    helpers_segment.each(tooltip.footer, maxLineWidth);
+    helpers_dataset.each(tooltip.footer, maxLineWidth);
     ctx.restore();
     width += padding.width;
     return {
@@ -11494,7 +11541,7 @@ function alignY(size, yAlign, paddingAndSize) {
     const { caretSize , caretPadding , cornerRadius  } = options;
     const { xAlign , yAlign  } = alignment;
     const paddingAndSize = caretSize + caretPadding;
-    const { topLeft , topRight , bottomLeft , bottomRight  } = helpers_segment.toTRBLCorners(cornerRadius);
+    const { topLeft , topRight , bottomLeft , bottomRight  } = helpers_dataset.toTRBLCorners(cornerRadius);
     let x = alignX(size, xAlign);
     const y = alignY(size, yAlign, paddingAndSize);
     if (yAlign === 'center') {
@@ -11509,19 +11556,19 @@ function alignY(size, yAlign, paddingAndSize) {
         x += Math.max(topRight, bottomRight) + caretSize;
     }
     return {
-        x: helpers_segment._limitValue(x, 0, chart.width - size.width),
-        y: helpers_segment._limitValue(y, 0, chart.height - size.height)
+        x: helpers_dataset._limitValue(x, 0, chart.width - size.width),
+        y: helpers_dataset._limitValue(y, 0, chart.height - size.height)
     };
 }
 function getAlignedX(tooltip, align, options) {
-    const padding = helpers_segment.toPadding(options.padding);
+    const padding = helpers_dataset.toPadding(options.padding);
     return align === 'center' ? tooltip.x + tooltip.width / 2 : align === 'right' ? tooltip.x + tooltip.width - padding.right : tooltip.x + padding.left;
 }
  function getBeforeAfterBodyLines(callback) {
     return pushOrConcat([], splitNewlines(callback));
 }
 function createTooltipContext(parent, tooltip, tooltipItems) {
-    return helpers_segment.createContext(parent, {
+    return helpers_dataset.createContext(parent, {
         tooltip,
         tooltipItems,
         type: 'tooltip'
@@ -11532,7 +11579,7 @@ function overrideCallbacks(callbacks, context) {
     return override ? callbacks.override(override) : callbacks;
 }
 const defaultCallbacks = {
-    beforeTitle: helpers_segment.noop,
+    beforeTitle: helpers_dataset.noop,
     title (tooltipItems) {
         if (tooltipItems.length > 0) {
             const item = tooltipItems[0];
@@ -11548,9 +11595,9 @@ const defaultCallbacks = {
         }
         return '';
     },
-    afterTitle: helpers_segment.noop,
-    beforeBody: helpers_segment.noop,
-    beforeLabel: helpers_segment.noop,
+    afterTitle: helpers_dataset.noop,
+    beforeBody: helpers_dataset.noop,
+    beforeLabel: helpers_dataset.noop,
     label (tooltipItem) {
         if (this && this.options && this.options.mode === 'dataset') {
             return tooltipItem.label + ': ' + tooltipItem.formattedValue || tooltipItem.formattedValue;
@@ -11560,7 +11607,7 @@ const defaultCallbacks = {
             label += ': ';
         }
         const value = tooltipItem.formattedValue;
-        if (!helpers_segment.isNullOrUndef(value)) {
+        if (!helpers_dataset.isNullOrUndef(value)) {
             label += value;
         }
         return label;
@@ -11588,11 +11635,11 @@ const defaultCallbacks = {
             rotation: options.rotation
         };
     },
-    afterLabel: helpers_segment.noop,
-    afterBody: helpers_segment.noop,
-    beforeFooter: helpers_segment.noop,
-    footer: helpers_segment.noop,
-    afterFooter: helpers_segment.noop
+    afterLabel: helpers_dataset.noop,
+    afterBody: helpers_dataset.noop,
+    beforeFooter: helpers_dataset.noop,
+    footer: helpers_dataset.noop,
+    afterFooter: helpers_dataset.noop
 };
  function invokeCallbackWithFallback(callbacks, name, ctx, arg) {
     const result = callbacks[name].call(ctx, arg);
@@ -11672,7 +11719,7 @@ class Tooltip extends Element {
     getBody(tooltipItems, options) {
         const { callbacks  } = options;
         const bodyItems = [];
-        helpers_segment.each(tooltipItems, (context)=>{
+        helpers_dataset.each(tooltipItems, (context)=>{
             const bodyItem = {
                 before: [],
                 lines: [],
@@ -11717,7 +11764,7 @@ class Tooltip extends Element {
         if (options.itemSort) {
             tooltipItems = tooltipItems.sort((a, b)=>options.itemSort(a, b, data));
         }
-        helpers_segment.each(tooltipItems, (context)=>{
+        helpers_dataset.each(tooltipItems, (context)=>{
             const scoped = overrideCallbacks(options.callbacks, context);
             labelColors.push(invokeCallbackWithFallback(scoped, 'labelColor', this, context));
             labelPointStyles.push(invokeCallbackWithFallback(scoped, 'labelPointStyle', this, context));
@@ -11786,7 +11833,7 @@ class Tooltip extends Element {
     getCaretPosition(tooltipPoint, size, options) {
         const { xAlign , yAlign  } = this;
         const { caretSize , cornerRadius  } = options;
-        const { topLeft , topRight , bottomLeft , bottomRight  } = helpers_segment.toTRBLCorners(cornerRadius);
+        const { topLeft , topRight , bottomLeft , bottomRight  } = helpers_dataset.toTRBLCorners(cornerRadius);
         const { x: ptX , y: ptY  } = tooltipPoint;
         const { width , height  } = size;
         let x1, x2, x3, y1, y2, y3;
@@ -11839,11 +11886,11 @@ class Tooltip extends Element {
         const length = title.length;
         let titleFont, titleSpacing, i;
         if (length) {
-            const rtlHelper = helpers_segment.getRtlAdapter(options.rtl, this.x, this.width);
+            const rtlHelper = helpers_dataset.getRtlAdapter(options.rtl, this.x, this.width);
             pt.x = getAlignedX(this, options.titleAlign, options);
             ctx.textAlign = rtlHelper.textAlign(options.titleAlign);
             ctx.textBaseline = 'middle';
-            titleFont = helpers_segment.toFont(options.titleFont);
+            titleFont = helpers_dataset.toFont(options.titleFont);
             titleSpacing = options.titleSpacing;
             ctx.fillStyle = options.titleColor;
             ctx.font = titleFont.string;
@@ -11860,7 +11907,7 @@ class Tooltip extends Element {
         const labelColor = this.labelColors[i];
         const labelPointStyle = this.labelPointStyles[i];
         const { boxHeight , boxWidth  } = options;
-        const bodyFont = helpers_segment.toFont(options.bodyFont);
+        const bodyFont = helpers_dataset.toFont(options.bodyFont);
         const colorX = getAlignedX(this, 'left', options);
         const rtlColorX = rtlHelper.x(colorX);
         const yOffSet = boxHeight < bodyFont.lineHeight ? (bodyFont.lineHeight - boxHeight) / 2 : 0;
@@ -11876,22 +11923,22 @@ class Tooltip extends Element {
             const centerY = colorY + boxHeight / 2;
             ctx.strokeStyle = options.multiKeyBackground;
             ctx.fillStyle = options.multiKeyBackground;
-            helpers_segment.drawPoint(ctx, drawOptions, centerX, centerY);
+            helpers_dataset.drawPoint(ctx, drawOptions, centerX, centerY);
             ctx.strokeStyle = labelColor.borderColor;
             ctx.fillStyle = labelColor.backgroundColor;
-            helpers_segment.drawPoint(ctx, drawOptions, centerX, centerY);
+            helpers_dataset.drawPoint(ctx, drawOptions, centerX, centerY);
         } else {
-            ctx.lineWidth = helpers_segment.isObject(labelColor.borderWidth) ? Math.max(...Object.values(labelColor.borderWidth)) : labelColor.borderWidth || 1;
+            ctx.lineWidth = helpers_dataset.isObject(labelColor.borderWidth) ? Math.max(...Object.values(labelColor.borderWidth)) : labelColor.borderWidth || 1;
             ctx.strokeStyle = labelColor.borderColor;
             ctx.setLineDash(labelColor.borderDash || []);
             ctx.lineDashOffset = labelColor.borderDashOffset || 0;
             const outerX = rtlHelper.leftForLtr(rtlColorX, boxWidth);
             const innerX = rtlHelper.leftForLtr(rtlHelper.xPlus(rtlColorX, 1), boxWidth - 2);
-            const borderRadius = helpers_segment.toTRBLCorners(labelColor.borderRadius);
+            const borderRadius = helpers_dataset.toTRBLCorners(labelColor.borderRadius);
             if (Object.values(borderRadius).some((v)=>v !== 0)) {
                 ctx.beginPath();
                 ctx.fillStyle = options.multiKeyBackground;
-                helpers_segment.addRoundedRectPath(ctx, {
+                helpers_dataset.addRoundedRectPath(ctx, {
                     x: outerX,
                     y: colorY,
                     w: boxWidth,
@@ -11902,7 +11949,7 @@ class Tooltip extends Element {
                 ctx.stroke();
                 ctx.fillStyle = labelColor.backgroundColor;
                 ctx.beginPath();
-                helpers_segment.addRoundedRectPath(ctx, {
+                helpers_dataset.addRoundedRectPath(ctx, {
                     x: innerX,
                     y: colorY + 1,
                     w: boxWidth - 2,
@@ -11923,10 +11970,10 @@ class Tooltip extends Element {
     drawBody(pt, ctx, options) {
         const { body  } = this;
         const { bodySpacing , bodyAlign , displayColors , boxHeight , boxWidth , boxPadding  } = options;
-        const bodyFont = helpers_segment.toFont(options.bodyFont);
+        const bodyFont = helpers_dataset.toFont(options.bodyFont);
         let bodyLineHeight = bodyFont.lineHeight;
         let xLinePadding = 0;
-        const rtlHelper = helpers_segment.getRtlAdapter(options.rtl, this.x, this.width);
+        const rtlHelper = helpers_dataset.getRtlAdapter(options.rtl, this.x, this.width);
         const fillLineOfText = function(line) {
             ctx.fillText(line, rtlHelper.x(pt.x + xLinePadding), pt.y + bodyLineHeight / 2);
             pt.y += bodyLineHeight + bodySpacing;
@@ -11938,13 +11985,13 @@ class Tooltip extends Element {
         ctx.font = bodyFont.string;
         pt.x = getAlignedX(this, bodyAlignForCalculation, options);
         ctx.fillStyle = options.bodyColor;
-        helpers_segment.each(this.beforeBody, fillLineOfText);
+        helpers_dataset.each(this.beforeBody, fillLineOfText);
         xLinePadding = displayColors && bodyAlignForCalculation !== 'right' ? bodyAlign === 'center' ? boxWidth / 2 + boxPadding : boxWidth + 2 + boxPadding : 0;
         for(i = 0, ilen = body.length; i < ilen; ++i){
             bodyItem = body[i];
             textColor = this.labelTextColors[i];
             ctx.fillStyle = textColor;
-            helpers_segment.each(bodyItem.before, fillLineOfText);
+            helpers_dataset.each(bodyItem.before, fillLineOfText);
             lines = bodyItem.lines;
             if (displayColors && lines.length) {
                 this._drawColorBox(ctx, pt, i, rtlHelper, options);
@@ -11954,11 +12001,11 @@ class Tooltip extends Element {
                 fillLineOfText(lines[j]);
                 bodyLineHeight = bodyFont.lineHeight;
             }
-            helpers_segment.each(bodyItem.after, fillLineOfText);
+            helpers_dataset.each(bodyItem.after, fillLineOfText);
         }
         xLinePadding = 0;
         bodyLineHeight = bodyFont.lineHeight;
-        helpers_segment.each(this.afterBody, fillLineOfText);
+        helpers_dataset.each(this.afterBody, fillLineOfText);
         pt.y -= bodySpacing;
     }
     drawFooter(pt, ctx, options) {
@@ -11966,12 +12013,12 @@ class Tooltip extends Element {
         const length = footer.length;
         let footerFont, i;
         if (length) {
-            const rtlHelper = helpers_segment.getRtlAdapter(options.rtl, this.x, this.width);
+            const rtlHelper = helpers_dataset.getRtlAdapter(options.rtl, this.x, this.width);
             pt.x = getAlignedX(this, options.footerAlign, options);
             pt.y += options.footerMarginTop;
             ctx.textAlign = rtlHelper.textAlign(options.footerAlign);
             ctx.textBaseline = 'middle';
-            footerFont = helpers_segment.toFont(options.footerFont);
+            footerFont = helpers_dataset.toFont(options.footerFont);
             ctx.fillStyle = options.footerColor;
             ctx.font = footerFont.string;
             for(i = 0; i < length; ++i){
@@ -11984,7 +12031,7 @@ class Tooltip extends Element {
         const { xAlign , yAlign  } = this;
         const { x , y  } = pt;
         const { width , height  } = tooltipSize;
-        const { topLeft , topRight , bottomLeft , bottomRight  } = helpers_segment.toTRBLCorners(options.cornerRadius);
+        const { topLeft , topRight , bottomLeft , bottomRight  } = helpers_dataset.toTRBLCorners(options.cornerRadius);
         ctx.fillStyle = options.backgroundColor;
         ctx.strokeStyle = options.borderColor;
         ctx.lineWidth = options.borderWidth;
@@ -12060,18 +12107,18 @@ class Tooltip extends Element {
             y: this.y
         };
         opacity = Math.abs(opacity) < 1e-3 ? 0 : opacity;
-        const padding = helpers_segment.toPadding(options.padding);
+        const padding = helpers_dataset.toPadding(options.padding);
         const hasTooltipContent = this.title.length || this.beforeBody.length || this.body.length || this.afterBody.length || this.footer.length;
         if (options.enabled && hasTooltipContent) {
             ctx.save();
             ctx.globalAlpha = opacity;
             this.drawBackground(pt, ctx, tooltipSize, options);
-            helpers_segment.overrideTextDirection(ctx, options.textDirection);
+            helpers_dataset.overrideTextDirection(ctx, options.textDirection);
             pt.y += padding.top;
             this.drawTitle(pt, ctx, options);
             this.drawBody(pt, ctx, options);
             this.drawFooter(pt, ctx, options);
-            helpers_segment.restoreTextDirection(ctx, options.textDirection);
+            helpers_dataset.restoreTextDirection(ctx, options.textDirection);
             ctx.restore();
         }
     }
@@ -12091,7 +12138,7 @@ class Tooltip extends Element {
                 index
             };
         });
-        const changed = !helpers_segment._elementsEqual(lastActive, active);
+        const changed = !helpers_dataset._elementsEqual(lastActive, active);
         const positionChanged = this._positionChanged(active, eventPosition);
         if (changed || positionChanged) {
             this._active = active;
@@ -12109,7 +12156,7 @@ class Tooltip extends Element {
         const lastActive = this._active || [];
         const active = this._getActiveElements(e, lastActive, replay, inChartArea);
         const positionChanged = this._positionChanged(active, e);
-        const changed = replay || !helpers_segment._elementsEqual(active, lastActive) || positionChanged;
+        const changed = replay || !helpers_dataset._elementsEqual(active, lastActive) || positionChanged;
         if (changed) {
             this._active = active;
             if (options.enabled || options.external) {
@@ -12300,7 +12347,7 @@ function findOrAddLabel(labels, raw, index, addedLabels) {
     const last = labels.lastIndexOf(raw);
     return first !== last ? index : first;
 }
-const validIndex = (index, max)=>index === null ? null : helpers_segment._limitValue(Math.round(index), 0, max);
+const validIndex = (index, max)=>index === null ? null : helpers_dataset._limitValue(Math.round(index), 0, max);
 function _getLabelForValue(value) {
     const labels = this.getLabels();
     if (value >= 0 && value < labels.length) {
@@ -12335,11 +12382,11 @@ class CategoryScale extends Scale {
         super.init(scaleOptions);
     }
     parse(raw, index) {
-        if (helpers_segment.isNullOrUndef(raw)) {
+        if (helpers_dataset.isNullOrUndef(raw)) {
             return null;
         }
         const labels = this.getLabels();
-        index = isFinite(index) && labels[index] === raw ? index : findOrAddLabel(labels, raw, helpers_segment.valueOrDefault(index, raw), this._addedLabels);
+        index = isFinite(index) && labels[index] === raw ? index : findOrAddLabel(labels, raw, helpers_dataset.valueOrDefault(index, raw), this._addedLabels);
         return validIndex(index, labels.length - 1);
     }
     determineDataLimits() {
@@ -12409,11 +12456,11 @@ function generateTicks$1(generationOptions, dataRange) {
     const unit = step || 1;
     const maxSpaces = maxTicks - 1;
     const { min: rmin , max: rmax  } = dataRange;
-    const minDefined = !helpers_segment.isNullOrUndef(min);
-    const maxDefined = !helpers_segment.isNullOrUndef(max);
-    const countDefined = !helpers_segment.isNullOrUndef(count);
+    const minDefined = !helpers_dataset.isNullOrUndef(min);
+    const maxDefined = !helpers_dataset.isNullOrUndef(max);
+    const countDefined = !helpers_dataset.isNullOrUndef(count);
     const minSpacing = (rmax - rmin) / (maxDigits + 1);
-    let spacing = helpers_segment.niceNum((rmax - rmin) / maxSpaces / unit) * unit;
+    let spacing = helpers_dataset.niceNum((rmax - rmin) / maxSpaces / unit) * unit;
     let factor, niceMin, niceMax, numSpaces;
     if (spacing < MIN_SPACING && !minDefined && !maxDefined) {
         return [
@@ -12427,9 +12474,9 @@ function generateTicks$1(generationOptions, dataRange) {
     }
     numSpaces = Math.ceil(rmax / spacing) - Math.floor(rmin / spacing);
     if (numSpaces > maxSpaces) {
-        spacing = helpers_segment.niceNum(numSpaces * spacing / maxSpaces / unit) * unit;
+        spacing = helpers_dataset.niceNum(numSpaces * spacing / maxSpaces / unit) * unit;
     }
-    if (!helpers_segment.isNullOrUndef(precision)) {
+    if (!helpers_dataset.isNullOrUndef(precision)) {
         factor = Math.pow(10, precision);
         spacing = Math.ceil(spacing * factor) / factor;
     }
@@ -12440,7 +12487,7 @@ function generateTicks$1(generationOptions, dataRange) {
         niceMin = rmin;
         niceMax = rmax;
     }
-    if (minDefined && maxDefined && step && helpers_segment.almostWhole((max - min) / step, spacing / 1000)) {
+    if (minDefined && maxDefined && step && helpers_dataset.almostWhole((max - min) / step, spacing / 1000)) {
         numSpaces = Math.round(Math.min((max - min) / spacing, maxTicks));
         spacing = (max - min) / numSpaces;
         niceMin = min;
@@ -12452,14 +12499,14 @@ function generateTicks$1(generationOptions, dataRange) {
         spacing = (niceMax - niceMin) / numSpaces;
     } else {
         numSpaces = (niceMax - niceMin) / spacing;
-        if (helpers_segment.almostEquals(numSpaces, Math.round(numSpaces), spacing / 1000)) {
+        if (helpers_dataset.almostEquals(numSpaces, Math.round(numSpaces), spacing / 1000)) {
             numSpaces = Math.round(numSpaces);
         } else {
             numSpaces = Math.ceil(numSpaces);
         }
     }
-    const decimalPlaces = Math.max(helpers_segment._decimalPlaces(spacing), helpers_segment._decimalPlaces(niceMin));
-    factor = Math.pow(10, helpers_segment.isNullOrUndef(precision) ? decimalPlaces : precision);
+    const decimalPlaces = Math.max(helpers_dataset._decimalPlaces(spacing), helpers_dataset._decimalPlaces(niceMin));
+    factor = Math.pow(10, helpers_dataset.isNullOrUndef(precision) ? decimalPlaces : precision);
     niceMin = Math.round(niceMin * factor) / factor;
     niceMax = Math.round(niceMax * factor) / factor;
     let j = 0;
@@ -12471,7 +12518,7 @@ function generateTicks$1(generationOptions, dataRange) {
             if (niceMin < min) {
                 j++;
             }
-            if (helpers_segment.almostEquals(Math.round((niceMin + j * spacing) * factor) / factor, min, relativeLabelSize(min, minSpacing, generationOptions))) {
+            if (helpers_dataset.almostEquals(Math.round((niceMin + j * spacing) * factor) / factor, min, relativeLabelSize(min, minSpacing, generationOptions))) {
                 j++;
             }
         } else if (niceMin < min) {
@@ -12488,7 +12535,7 @@ function generateTicks$1(generationOptions, dataRange) {
         });
     }
     if (maxDefined && includeBounds && niceMax !== max) {
-        if (ticks.length && helpers_segment.almostEquals(ticks[ticks.length - 1].value, max, relativeLabelSize(max, minSpacing, generationOptions))) {
+        if (ticks.length && helpers_dataset.almostEquals(ticks[ticks.length - 1].value, max, relativeLabelSize(max, minSpacing, generationOptions))) {
             ticks[ticks.length - 1].value = max;
         } else {
             ticks.push({
@@ -12503,7 +12550,7 @@ function generateTicks$1(generationOptions, dataRange) {
     return ticks;
 }
 function relativeLabelSize(value, minSpacing, { horizontal , minRotation  }) {
-    const rad = helpers_segment.toRadians(minRotation);
+    const rad = helpers_dataset.toRadians(minRotation);
     const ratio = (horizontal ? Math.sin(rad) : Math.cos(rad)) || 0.001;
     const length = 0.75 * minSpacing * ('' + value).length;
     return Math.min(minSpacing / ratio, length);
@@ -12518,7 +12565,7 @@ class LinearScaleBase extends Scale {
         this._valueRange = 0;
     }
     parse(raw, index) {
-        if (helpers_segment.isNullOrUndef(raw)) {
+        if (helpers_dataset.isNullOrUndef(raw)) {
             return null;
         }
         if ((typeof raw === 'number' || raw instanceof Number) && !isFinite(+raw)) {
@@ -12533,8 +12580,8 @@ class LinearScaleBase extends Scale {
         const setMin = (v)=>min = minDefined ? min : v;
         const setMax = (v)=>max = maxDefined ? max : v;
         if (beginAtZero) {
-            const minSign = helpers_segment.sign(min);
-            const maxSign = helpers_segment.sign(max);
+            const minSign = helpers_dataset.sign(min);
+            const maxSign = helpers_dataset.sign(max);
             if (minSign < 0 && maxSign < 0) {
                 setMax(0);
             } else if (minSign > 0 && maxSign > 0) {
@@ -12594,7 +12641,7 @@ class LinearScaleBase extends Scale {
         const dataRange = this._range || this;
         const ticks = generateTicks$1(numericGeneratorOptions, dataRange);
         if (opts.bounds === 'ticks') {
-            helpers_segment._setMinAndMaxByKey(ticks, this, 'value');
+            helpers_dataset._setMinAndMaxByKey(ticks, this, 'value');
         }
         if (opts.reverse) {
             ticks.reverse();
@@ -12621,7 +12668,7 @@ class LinearScaleBase extends Scale {
         this._valueRange = end - start;
     }
     getLabelForValue(value) {
-        return helpers_segment.formatNumber(value, this.chart.options.locale, this.options.ticks.format);
+        return helpers_dataset.formatNumber(value, this.chart.options.locale, this.options.ticks.format);
     }
 }
 
@@ -12629,19 +12676,19 @@ class LinearScale extends LinearScaleBase {
     static id = 'linear';
  static defaults = {
         ticks: {
-            callback: helpers_segment.Ticks.formatters.numeric
+            callback: helpers_dataset.Ticks.formatters.numeric
         }
     };
     determineDataLimits() {
         const { min , max  } = this.getMinMax(true);
-        this.min = helpers_segment.isNumberFinite(min) ? min : 0;
-        this.max = helpers_segment.isNumberFinite(max) ? max : 1;
+        this.min = helpers_dataset.isNumberFinite(min) ? min : 0;
+        this.max = helpers_dataset.isNumberFinite(max) ? max : 1;
         this.handleTickRangeOptions();
     }
  computeTickLimit() {
         const horizontal = this.isHorizontal();
         const length = horizontal ? this.width : this.height;
-        const minRotation = helpers_segment.toRadians(this.options.ticks.minRotation);
+        const minRotation = helpers_dataset.toRadians(this.options.ticks.minRotation);
         const ratio = (horizontal ? Math.sin(minRotation) : Math.cos(minRotation)) || 0.001;
         const tickFont = this._resolveTickFontOptions(0);
         return Math.ceil(length / Math.min(40, tickFont.lineHeight / ratio));
@@ -12654,7 +12701,7 @@ class LinearScale extends LinearScaleBase {
     }
 }
 
-const log10Floor = (v)=>Math.floor(helpers_segment.log10(v));
+const log10Floor = (v)=>Math.floor(helpers_dataset.log10(v));
 const changeExponent = (v, m)=>Math.pow(10, log10Floor(v) + m);
 function isMajor(tickVal) {
     const remain = tickVal / Math.pow(10, log10Floor(tickVal));
@@ -12678,7 +12725,7 @@ function startExp(min, max) {
     return Math.min(rangeExp, log10Floor(min));
 }
  function generateTicks(generationOptions, { min , max  }) {
-    min = helpers_segment.finiteOrDefault(generationOptions.min, min);
+    min = helpers_dataset.finiteOrDefault(generationOptions.min, min);
     const ticks = [];
     const minExp = log10Floor(min);
     let exp = startExp(min, max);
@@ -12688,7 +12735,7 @@ function startExp(min, max) {
     const start = Math.round((min - base) * precision) / precision;
     const offset = Math.floor((min - base) / stepSize / 10) * stepSize * 10;
     let significand = Math.floor((start - offset) / Math.pow(10, exp));
-    let value = helpers_segment.finiteOrDefault(generationOptions.min, Math.round((base + offset + significand * Math.pow(10, exp)) * precision) / precision);
+    let value = helpers_dataset.finiteOrDefault(generationOptions.min, Math.round((base + offset + significand * Math.pow(10, exp)) * precision) / precision);
     while(value < max){
         ticks.push({
             value,
@@ -12707,7 +12754,7 @@ function startExp(min, max) {
         }
         value = Math.round((base + offset + significand * Math.pow(10, exp)) * precision) / precision;
     }
-    const lastTick = helpers_segment.finiteOrDefault(generationOptions.max, value);
+    const lastTick = helpers_dataset.finiteOrDefault(generationOptions.max, value);
     ticks.push({
         value: lastTick,
         major: isMajor(lastTick),
@@ -12719,7 +12766,7 @@ class LogarithmicScale extends Scale {
     static id = 'logarithmic';
  static defaults = {
         ticks: {
-            callback: helpers_segment.Ticks.formatters.logarithmic,
+            callback: helpers_dataset.Ticks.formatters.logarithmic,
             major: {
                 enabled: true
             }
@@ -12741,16 +12788,16 @@ class LogarithmicScale extends Scale {
             this._zero = true;
             return undefined;
         }
-        return helpers_segment.isNumberFinite(value) && value > 0 ? value : null;
+        return helpers_dataset.isNumberFinite(value) && value > 0 ? value : null;
     }
     determineDataLimits() {
         const { min , max  } = this.getMinMax(true);
-        this.min = helpers_segment.isNumberFinite(min) ? Math.max(0, min) : null;
-        this.max = helpers_segment.isNumberFinite(max) ? Math.max(0, max) : null;
+        this.min = helpers_dataset.isNumberFinite(min) ? Math.max(0, min) : null;
+        this.max = helpers_dataset.isNumberFinite(max) ? Math.max(0, max) : null;
         if (this.options.beginAtZero) {
             this._zero = true;
         }
-        if (this._zero && this.min !== this._suggestedMin && !helpers_segment.isNumberFinite(this._userMin)) {
+        if (this._zero && this.min !== this._suggestedMin && !helpers_dataset.isNumberFinite(this._userMin)) {
             this.min = min === changeExponent(this.min, 0) ? changeExponent(this.min, -1) : changeExponent(this.min, 0);
         }
         this.handleTickRangeOptions();
@@ -12787,7 +12834,7 @@ class LogarithmicScale extends Scale {
         };
         const ticks = generateTicks(generationOptions, this);
         if (opts.bounds === 'ticks') {
-            helpers_segment._setMinAndMaxByKey(ticks, this, 'value');
+            helpers_dataset._setMinAndMaxByKey(ticks, this, 'value');
         }
         if (opts.reverse) {
             ticks.reverse();
@@ -12800,13 +12847,13 @@ class LogarithmicScale extends Scale {
         return ticks;
     }
  getLabelForValue(value) {
-        return value === undefined ? '0' : helpers_segment.formatNumber(value, this.chart.options.locale, this.options.ticks.format);
+        return value === undefined ? '0' : helpers_dataset.formatNumber(value, this.chart.options.locale, this.options.ticks.format);
     }
  configure() {
         const start = this.min;
         super.configure();
-        this._startValue = helpers_segment.log10(start);
-        this._valueRange = helpers_segment.log10(this.max) - helpers_segment.log10(start);
+        this._startValue = helpers_dataset.log10(start);
+        this._valueRange = helpers_dataset.log10(this.max) - helpers_dataset.log10(start);
     }
     getPixelForValue(value) {
         if (value === undefined || value === 0) {
@@ -12815,7 +12862,7 @@ class LogarithmicScale extends Scale {
         if (value === null || isNaN(value)) {
             return NaN;
         }
-        return this.getPixelForDecimal(value === this.min ? 0 : (helpers_segment.log10(value) - this._startValue) / this._valueRange);
+        return this.getPixelForDecimal(value === this.min ? 0 : (helpers_dataset.log10(value) - this._startValue) / this._valueRange);
     }
     getValueForPixel(pixel) {
         const decimal = this.getDecimalForPixel(pixel);
@@ -12826,17 +12873,17 @@ class LogarithmicScale extends Scale {
 function getTickBackdropHeight(opts) {
     const tickOpts = opts.ticks;
     if (tickOpts.display && opts.display) {
-        const padding = helpers_segment.toPadding(tickOpts.backdropPadding);
-        return helpers_segment.valueOrDefault(tickOpts.font && tickOpts.font.size, helpers_segment.defaults.font.size) + padding.height;
+        const padding = helpers_dataset.toPadding(tickOpts.backdropPadding);
+        return helpers_dataset.valueOrDefault(tickOpts.font && tickOpts.font.size, helpers_dataset.defaults.font.size) + padding.height;
     }
     return 0;
 }
 function measureLabelSize(ctx, font, label) {
-    label = helpers_segment.isArray(label) ? label : [
+    label = helpers_dataset.isArray(label) ? label : [
         label
     ];
     return {
-        w: helpers_segment._longestText(ctx, font.string, label),
+        w: helpers_dataset._longestText(ctx, font.string, label),
         h: label.length * font.lineHeight
     };
 }
@@ -12869,16 +12916,16 @@ function determineLimits(angle, pos, size, min, max) {
     const padding = [];
     const valueCount = scale._pointLabels.length;
     const pointLabelOpts = scale.options.pointLabels;
-    const additionalAngle = pointLabelOpts.centerPointLabels ? helpers_segment.PI / valueCount : 0;
+    const additionalAngle = pointLabelOpts.centerPointLabels ? helpers_dataset.PI / valueCount : 0;
     for(let i = 0; i < valueCount; i++){
         const opts = pointLabelOpts.setContext(scale.getPointLabelContext(i));
         padding[i] = opts.padding;
         const pointPosition = scale.getPointPosition(i, scale.drawingArea + padding[i], additionalAngle);
-        const plFont = helpers_segment.toFont(opts.font);
+        const plFont = helpers_dataset.toFont(opts.font);
         const textSize = measureLabelSize(scale.ctx, plFont, scale._pointLabels[i]);
         labelSizes[i] = textSize;
-        const angleRadians = helpers_segment._normalizeAngle(scale.getIndexAngle(i) + additionalAngle);
-        const angle = Math.round(helpers_segment.toDegrees(angleRadians));
+        const angleRadians = helpers_dataset._normalizeAngle(scale.getIndexAngle(i) + additionalAngle);
+        const angle = Math.round(helpers_dataset.toDegrees(angleRadians));
         const hLimits = determineLimits(angle, pointPosition.x, textSize.w, 0, 180);
         const vLimits = determineLimits(angle, pointPosition.y, textSize.h, 90, 270);
         updateLimits(limits, orig, angleRadians, hLimits, vLimits);
@@ -12910,7 +12957,7 @@ function createPointLabelItem(scale, index, itemOpts) {
     const outerDistance = scale.drawingArea;
     const { extra , additionalAngle , padding , size  } = itemOpts;
     const pointLabelPosition = scale.getPointPosition(index, outerDistance + extra + padding, additionalAngle);
-    const angle = Math.round(helpers_segment.toDegrees(helpers_segment._normalizeAngle(pointLabelPosition.angle + helpers_segment.HALF_PI)));
+    const angle = Math.round(helpers_dataset.toDegrees(helpers_dataset._normalizeAngle(pointLabelPosition.angle + helpers_dataset.HALF_PI)));
     const y = yForAngle(pointLabelPosition.y, size.h, angle);
     const textAlign = getTextAlignForAngle(angle);
     const left = leftForTextAlign(pointLabelPosition.x, size.w, textAlign);
@@ -12930,16 +12977,16 @@ function isNotOverlapped(item, area) {
         return true;
     }
     const { left , top , right , bottom  } = item;
-    const apexesInArea = helpers_segment._isPointInArea({
+    const apexesInArea = helpers_dataset._isPointInArea({
         x: left,
         y: top
-    }, area) || helpers_segment._isPointInArea({
+    }, area) || helpers_dataset._isPointInArea({
         x: left,
         y: bottom
-    }, area) || helpers_segment._isPointInArea({
+    }, area) || helpers_dataset._isPointInArea({
         x: right,
         y: top
-    }, area) || helpers_segment._isPointInArea({
+    }, area) || helpers_dataset._isPointInArea({
         x: right,
         y: bottom
     }, area);
@@ -12952,7 +12999,7 @@ function buildPointLabelItems(scale, labelSizes, padding) {
     const { centerPointLabels , display  } = opts.pointLabels;
     const itemOpts = {
         extra: getTickBackdropHeight(opts) / 2,
-        additionalAngle: centerPointLabels ? helpers_segment.PI / valueCount : 0
+        additionalAngle: centerPointLabels ? helpers_dataset.PI / valueCount : 0
     };
     let area;
     for(let i = 0; i < valueCount; i++){
@@ -12996,9 +13043,9 @@ function yForAngle(y, h, angle) {
 function drawPointLabelBox(ctx, opts, item) {
     const { left , top , right , bottom  } = item;
     const { backdropColor  } = opts;
-    if (!helpers_segment.isNullOrUndef(backdropColor)) {
-        const borderRadius = helpers_segment.toTRBLCorners(opts.borderRadius);
-        const padding = helpers_segment.toPadding(opts.backdropPadding);
+    if (!helpers_dataset.isNullOrUndef(backdropColor)) {
+        const borderRadius = helpers_dataset.toTRBLCorners(opts.borderRadius);
+        const padding = helpers_dataset.toPadding(opts.backdropPadding);
         ctx.fillStyle = backdropColor;
         const backdropLeft = left - padding.left;
         const backdropTop = top - padding.top;
@@ -13006,7 +13053,7 @@ function drawPointLabelBox(ctx, opts, item) {
         const backdropHeight = bottom - top + padding.height;
         if (Object.values(borderRadius).some((v)=>v !== 0)) {
             ctx.beginPath();
-            helpers_segment.addRoundedRectPath(ctx, {
+            helpers_dataset.addRoundedRectPath(ctx, {
                 x: backdropLeft,
                 y: backdropTop,
                 w: backdropWidth,
@@ -13028,9 +13075,9 @@ function drawPointLabels(scale, labelCount) {
         }
         const optsAtIndex = pointLabels.setContext(scale.getPointLabelContext(i));
         drawPointLabelBox(ctx, optsAtIndex, item);
-        const plFont = helpers_segment.toFont(optsAtIndex.font);
+        const plFont = helpers_dataset.toFont(optsAtIndex.font);
         const { x , y , textAlign  } = item;
-        helpers_segment.renderText(ctx, scale._pointLabels[i], x, y + plFont.lineHeight / 2, plFont, {
+        helpers_dataset.renderText(ctx, scale._pointLabels[i], x, y + plFont.lineHeight / 2, plFont, {
             color: optsAtIndex.color,
             textAlign: textAlign,
             textBaseline: 'middle'
@@ -13040,7 +13087,7 @@ function drawPointLabels(scale, labelCount) {
 function pathRadiusLine(scale, radius, circular, labelCount) {
     const { ctx  } = scale;
     if (circular) {
-        ctx.arc(scale.xCenter, scale.yCenter, radius, 0, helpers_segment.TAU);
+        ctx.arc(scale.xCenter, scale.yCenter, radius, 0, helpers_dataset.TAU);
     } else {
         let pointPosition = scale.getPointPosition(0, radius);
         ctx.moveTo(pointPosition.x, pointPosition.y);
@@ -13060,7 +13107,7 @@ function drawRadiusLine(scale, gridLineOpts, radius, labelCount, borderOpts) {
     ctx.save();
     ctx.strokeStyle = color;
     ctx.lineWidth = lineWidth;
-    ctx.setLineDash(borderOpts.dash);
+    ctx.setLineDash(borderOpts.dash || []);
     ctx.lineDashOffset = borderOpts.dashOffset;
     ctx.beginPath();
     pathRadiusLine(scale, radius, circular, labelCount);
@@ -13069,7 +13116,7 @@ function drawRadiusLine(scale, gridLineOpts, radius, labelCount, borderOpts) {
     ctx.restore();
 }
 function createPointLabelContext(parent, index, label) {
-    return helpers_segment.createContext(parent, {
+    return helpers_dataset.createContext(parent, {
         label,
         index,
         type: 'pointLabel'
@@ -13093,7 +13140,7 @@ class RadialLinearScale extends LinearScaleBase {
         startAngle: 0,
         ticks: {
             showLabelBackdrop: true,
-            callback: helpers_segment.Ticks.formatters.numeric
+            callback: helpers_dataset.Ticks.formatters.numeric
         },
         pointLabels: {
             backdropColor: undefined,
@@ -13128,7 +13175,7 @@ class RadialLinearScale extends LinearScaleBase {
         this._pointLabelItems = [];
     }
     setDimensions() {
-        const padding = this._padding = helpers_segment.toPadding(getTickBackdropHeight(this.options) / 2);
+        const padding = this._padding = helpers_dataset.toPadding(getTickBackdropHeight(this.options) / 2);
         const w = this.width = this.maxWidth - padding.width;
         const h = this.height = this.maxHeight - padding.height;
         this.xCenter = Math.floor(this.left + w / 2 + padding.left);
@@ -13137,8 +13184,8 @@ class RadialLinearScale extends LinearScaleBase {
     }
     determineDataLimits() {
         const { min , max  } = this.getMinMax(false);
-        this.min = helpers_segment.isNumberFinite(min) && !isNaN(min) ? min : 0;
-        this.max = helpers_segment.isNumberFinite(max) && !isNaN(max) ? max : 0;
+        this.min = helpers_dataset.isNumberFinite(min) && !isNaN(min) ? min : 0;
+        this.max = helpers_dataset.isNumberFinite(max) && !isNaN(max) ? max : 0;
         this.handleTickRangeOptions();
     }
  computeTickLimit() {
@@ -13147,7 +13194,7 @@ class RadialLinearScale extends LinearScaleBase {
     generateTickLabels(ticks) {
         LinearScaleBase.prototype.generateTickLabels.call(this, ticks);
         this._pointLabels = this.getLabels().map((value, index)=>{
-            const label = helpers_segment.callback(this.options.pointLabels.callback, [
+            const label = helpers_dataset.callback(this.options.pointLabels.callback, [
                 value,
                 index
             ], this);
@@ -13168,12 +13215,12 @@ class RadialLinearScale extends LinearScaleBase {
         this.drawingArea -= Math.min(this.drawingArea / 2, Math.max(leftMovement, rightMovement, topMovement, bottomMovement));
     }
     getIndexAngle(index) {
-        const angleMultiplier = helpers_segment.TAU / (this._pointLabels.length || 1);
+        const angleMultiplier = helpers_dataset.TAU / (this._pointLabels.length || 1);
         const startAngle = this.options.startAngle || 0;
-        return helpers_segment._normalizeAngle(index * angleMultiplier + helpers_segment.toRadians(startAngle));
+        return helpers_dataset._normalizeAngle(index * angleMultiplier + helpers_dataset.toRadians(startAngle));
     }
     getDistanceFromCenterForValue(value) {
-        if (helpers_segment.isNullOrUndef(value)) {
+        if (helpers_dataset.isNullOrUndef(value)) {
             return NaN;
         }
         const scalingFactor = this.drawingArea / (this.max - this.min);
@@ -13183,7 +13230,7 @@ class RadialLinearScale extends LinearScaleBase {
         return (value - this.min) * scalingFactor;
     }
     getValueForDistanceFromCenter(distance) {
-        if (helpers_segment.isNullOrUndef(distance)) {
+        if (helpers_dataset.isNullOrUndef(distance)) {
             return NaN;
         }
         const scaledDistance = distance / (this.drawingArea / (this.max - this.min));
@@ -13197,7 +13244,7 @@ class RadialLinearScale extends LinearScaleBase {
         }
     }
     getPointPosition(index, distanceFromCenter, additionalAngle = 0) {
-        const angle = this.getIndexAngle(index) - helpers_segment.HALF_PI + additionalAngle;
+        const angle = this.getIndexAngle(index) - helpers_dataset.HALF_PI + additionalAngle;
         return {
             x: Math.cos(angle) * distanceFromCenter + this.xCenter,
             y: Math.sin(angle) * distanceFromCenter + this.yCenter,
@@ -13264,7 +13311,7 @@ class RadialLinearScale extends LinearScaleBase {
                 ctx.strokeStyle = color;
                 ctx.setLineDash(optsAtIndex.borderDash);
                 ctx.lineDashOffset = optsAtIndex.borderDashOffset;
-                offset = this.getDistanceFromCenterForValue(opts.ticks.reverse ? this.min : this.max);
+                offset = this.getDistanceFromCenterForValue(opts.reverse ? this.min : this.max);
                 position = this.getPointPosition(i, offset);
                 ctx.beginPath();
                 ctx.moveTo(this.xCenter, this.yCenter);
@@ -13294,16 +13341,16 @@ class RadialLinearScale extends LinearScaleBase {
                 return;
             }
             const optsAtIndex = tickOpts.setContext(this.getContext(index));
-            const tickFont = helpers_segment.toFont(optsAtIndex.font);
+            const tickFont = helpers_dataset.toFont(optsAtIndex.font);
             offset = this.getDistanceFromCenterForValue(this.ticks[index].value);
             if (optsAtIndex.showLabelBackdrop) {
                 ctx.font = tickFont.string;
                 width = ctx.measureText(tick.label).width;
                 ctx.fillStyle = optsAtIndex.backdropColor;
-                const padding = helpers_segment.toPadding(optsAtIndex.backdropPadding);
+                const padding = helpers_dataset.toPadding(optsAtIndex.backdropPadding);
                 ctx.fillRect(-width / 2 - padding.left, -offset - tickFont.size / 2 - padding.top, width + padding.width, tickFont.size + padding.height);
             }
-            helpers_segment.renderText(ctx, tick.label, 0, -offset, tickFont, {
+            helpers_dataset.renderText(ctx, tick.label, 0, -offset, tickFont, {
                 color: optsAtIndex.color,
                 strokeColor: optsAtIndex.textStrokeColor,
                 strokeWidth: optsAtIndex.textStrokeWidth
@@ -13365,7 +13412,7 @@ const INTERVALS = {
     return a - b;
 }
  function parse(scale, input) {
-    if (helpers_segment.isNullOrUndef(input)) {
+    if (helpers_dataset.isNullOrUndef(input)) {
         return null;
     }
     const adapter = scale._adapter;
@@ -13374,14 +13421,14 @@ const INTERVALS = {
     if (typeof parser === 'function') {
         value = parser(value);
     }
-    if (!helpers_segment.isNumberFinite(value)) {
-        value = typeof parser === 'string' ? adapter.parse(value,  parser) : adapter.parse(value);
+    if (!helpers_dataset.isNumberFinite(value)) {
+        value = typeof parser === 'string' ? adapter.parse(value, parser) : adapter.parse(value);
     }
     if (value === null) {
         return null;
     }
     if (round) {
-        value = round === 'week' && (helpers_segment.isNumber(isoWeekday) || isoWeekday === true) ? adapter.startOf(value, 'isoWeek', isoWeekday) : adapter.startOf(value, round);
+        value = round === 'week' && (helpers_dataset.isNumber(isoWeekday) || isoWeekday === true) ? adapter.startOf(value, 'isoWeek', isoWeekday) : adapter.startOf(value, round);
     }
     return +value;
 }
@@ -13416,7 +13463,7 @@ const INTERVALS = {
     if (!timestamps) {
         ticks[time] = true;
     } else if (timestamps.length) {
-        const { lo , hi  } = helpers_segment._lookup(timestamps, time);
+        const { lo , hi  } = helpers_dataset._lookup(timestamps, time);
         const timestamp = timestamps[lo] >= time ? timestamps[lo] : timestamps[hi];
         ticks[timestamp] = true;
     }
@@ -13487,7 +13534,7 @@ class TimeScale extends Scale {
         const time = scaleOpts.time || (scaleOpts.time = {});
          const adapter = this._adapter = new adapters._date(scaleOpts.adapters.date);
         adapter.init(opts);
-        helpers_segment.mergeIf(time.displayFormats, adapter.formats());
+        helpers_dataset.mergeIf(time.displayFormats, adapter.formats());
         this._parseOpts = {
             parser: time.parser,
             round: time.round,
@@ -13529,8 +13576,8 @@ class TimeScale extends Scale {
                 _applyBounds(this.getMinMax(false));
             }
         }
-        min = helpers_segment.isNumberFinite(min) && !isNaN(min) ? min : +adapter.startOf(Date.now(), unit);
-        max = helpers_segment.isNumberFinite(max) && !isNaN(max) ? max : +adapter.endOf(Date.now(), unit) + 1;
+        min = helpers_dataset.isNumberFinite(min) && !isNaN(min) ? min : +adapter.startOf(Date.now(), unit);
+        max = helpers_dataset.isNumberFinite(max) && !isNaN(max) ? max : +adapter.endOf(Date.now(), unit) + 1;
         this.min = Math.min(min, max - 1);
         this.max = Math.max(min + 1, max);
     }
@@ -13558,7 +13605,7 @@ class TimeScale extends Scale {
         }
         const min = this.min;
         const max = this.max;
-        const ticks = helpers_segment._filterBetween(timestamps, min, max);
+        const ticks = helpers_dataset._filterBetween(timestamps, min, max);
         this._unit = timeOpts.unit || (tickOpts.autoSkip ? determineUnitForAutoTicks(timeOpts.minUnit, this.min, this.max, this._getLabelCapacity(min)) : determineUnitForFormatting(this, ticks.length, timeOpts.minUnit, this.min, this.max));
         this._majorUnit = !tickOpts.major.enabled || this._unit === 'year' ? undefined : determineMajorUnit(this._unit);
         this.initOffsets(timestamps);
@@ -13591,8 +13638,8 @@ class TimeScale extends Scale {
             }
         }
         const limit = timestamps.length < 3 ? 0.5 : 0.25;
-        start = helpers_segment._limitValue(start, 0, limit);
-        end = helpers_segment._limitValue(end, 0, limit);
+        start = helpers_dataset._limitValue(start, 0, limit);
+        end = helpers_dataset._limitValue(end, 0, limit);
         this._offsets = {
             start,
             end,
@@ -13606,9 +13653,9 @@ class TimeScale extends Scale {
         const options = this.options;
         const timeOpts = options.time;
         const minor = timeOpts.unit || determineUnitForAutoTicks(timeOpts.minUnit, min, max, this._getLabelCapacity(min));
-        const stepSize = helpers_segment.valueOrDefault(options.ticks.stepSize, 1);
+        const stepSize = helpers_dataset.valueOrDefault(options.ticks.stepSize, 1);
         const weekday = minor === 'week' ? timeOpts.isoWeekday : false;
-        const hasWeekday = helpers_segment.isNumber(weekday) || weekday === true;
+        const hasWeekday = helpers_dataset.isNumber(weekday) || weekday === true;
         const ticks = {};
         let first = min;
         let time, count;
@@ -13647,7 +13694,7 @@ class TimeScale extends Scale {
         const options = this.options;
         const formatter = options.ticks.callback;
         if (formatter) {
-            return helpers_segment.callback(formatter, [
+            return helpers_dataset.callback(formatter, [
                 time,
                 index,
                 ticks
@@ -13685,7 +13732,7 @@ class TimeScale extends Scale {
  _getLabelSize(label) {
         const ticksOpts = this.options.ticks;
         const tickLabelWidth = this.ctx.measureText(label).width;
-        const angle = helpers_segment.toRadians(this.isHorizontal() ? ticksOpts.maxRotation : ticksOpts.minRotation);
+        const angle = helpers_dataset.toRadians(this.isHorizontal() ? ticksOpts.maxRotation : ticksOpts.minRotation);
         const cosRotation = Math.cos(angle);
         const sinRotation = Math.sin(angle);
         const tickFontSize = this._resolveTickFontOptions(0).size;
@@ -13733,7 +13780,7 @@ class TimeScale extends Scale {
         return this._cache.labels = this._normalized ? timestamps : this.normalize(timestamps);
     }
  normalize(values) {
-        return helpers_segment._arrayUnique(values.sort(sorter));
+        return helpers_dataset._arrayUnique(values.sort(sorter));
     }
 }
 
@@ -13743,13 +13790,13 @@ function interpolate(table, val, reverse) {
     let prevSource, nextSource, prevTarget, nextTarget;
     if (reverse) {
         if (val >= table[lo].pos && val <= table[hi].pos) {
-            ({ lo , hi  } = helpers_segment._lookupByKey(table, 'pos', val));
+            ({ lo , hi  } = helpers_dataset._lookupByKey(table, 'pos', val));
         }
         ({ pos: prevSource , time: prevTarget  } = table[lo]);
         ({ pos: nextSource , time: nextTarget  } = table[hi]);
     } else {
         if (val >= table[lo].time && val <= table[hi].time) {
-            ({ lo , hi  } = helpers_segment._lookupByKey(table, 'time', val));
+            ({ lo , hi  } = helpers_dataset._lookupByKey(table, 'time', val));
         }
         ({ time: prevSource , pos: prevTarget  } = table[lo]);
         ({ time: nextSource , pos: nextTarget  } = table[hi]);
@@ -13863,8 +13910,8 @@ const registerables = [
     scales
 ];
 
-exports.Ticks = helpers_segment.Ticks;
-exports.defaults = helpers_segment.defaults;
+exports.Ticks = helpers_dataset.Ticks;
+exports.defaults = helpers_dataset.defaults;
 exports.Animation = Animation;
 exports.Animations = Animations;
 exports.ArcElement = ArcElement;
@@ -13912,11 +13959,11 @@ exports.registry = registry;
 exports.scales = scales;
 
 
-},{"./chunks/helpers.segment.cjs":24,"@kurkle/color":14}],24:[function(require,module,exports){
+},{"./chunks/helpers.dataset.cjs":21,"@kurkle/color":14}],21:[function(require,module,exports){
 /*!
- * Chart.js v4.4.3
+ * Chart.js v4.5.0
  * https://www.chartjs.org
- * (c) 2024 Chart.js Contributors
+ * (c) 2025 Chart.js Contributors
  * Released under the MIT License
  */
 'use strict';
@@ -13940,7 +13987,7 @@ var color$1 = require('@kurkle/color');
  * @param value - The value to test.
  * @since 2.7.0
  */ function isNullOrUndef(value) {
-    return value === null || typeof value === 'undefined';
+    return value === null || value === undefined;
 }
 /**
  * Returns true if `value` is an array (including typed arrays), else returns false.
@@ -14242,8 +14289,13 @@ function almostEquals(x, y, epsilon) {
     result.sort((a, b)=>a - b).pop();
     return result;
 }
+/**
+ * Verifies that attempting to coerce n to string or number won't throw a TypeError.
+ */ function isNonPrimitive(n) {
+    return typeof n === 'symbol' || typeof n === 'object' && n !== null && !(Symbol.toPrimitive in n || 'toString' in n || 'valueOf' in n);
+}
 function isNumber(n) {
-    return !isNaN(parseFloat(n)) && isFinite(n);
+    return !isNonPrimitive(n) && !isNaN(parseFloat(n)) && isFinite(n);
 }
 function almostWhole(x, epsilon) {
     const rounded = Math.round(x);
@@ -14539,18 +14591,29 @@ function fontString(pixelSize, fontStyle, fontFamily) {
     let start = 0;
     let count = pointCount;
     if (meta._sorted) {
-        const { iScale , _parsed  } = meta;
+        const { iScale , vScale , _parsed  } = meta;
+        const spanGaps = meta.dataset ? meta.dataset.options ? meta.dataset.options.spanGaps : null : null;
         const axis = iScale.axis;
         const { min , max , minDefined , maxDefined  } = iScale.getUserBounds();
         if (minDefined) {
-            start = _limitValue(Math.min(// @ts-expect-error Need to type _parsed
+            start = Math.min(// @ts-expect-error Need to type _parsed
             _lookupByKey(_parsed, axis, min).lo, // @ts-expect-error Need to fix types on _lookupByKey
-            animationsDisabled ? pointCount : _lookupByKey(points, axis, iScale.getPixelForValue(min)).lo), 0, pointCount - 1);
+            animationsDisabled ? pointCount : _lookupByKey(points, axis, iScale.getPixelForValue(min)).lo);
+            if (spanGaps) {
+                const distanceToDefinedLo = _parsed.slice(0, start + 1).reverse().findIndex((point)=>!isNullOrUndef(point[vScale.axis]));
+                start -= Math.max(0, distanceToDefinedLo);
+            }
+            start = _limitValue(start, 0, pointCount - 1);
         }
         if (maxDefined) {
-            count = _limitValue(Math.max(// @ts-expect-error Need to type _parsed
+            let end = Math.max(// @ts-expect-error Need to type _parsed
             _lookupByKey(_parsed, iScale.axis, max, true).hi + 1, // @ts-expect-error Need to fix types on _lookupByKey
-            animationsDisabled ? 0 : _lookupByKey(points, axis, iScale.getPixelForValue(max), true).hi + 1), start, pointCount) - start;
+            animationsDisabled ? 0 : _lookupByKey(points, axis, iScale.getPixelForValue(max), true).hi + 1);
+            if (spanGaps) {
+                const distanceToDefinedHi = _parsed.slice(end - 1).findIndex((point)=>!isNullOrUndef(point[vScale.axis]));
+                end += Math.max(0, distanceToDefinedHi);
+            }
+            count = _limitValue(end, start, pointCount) - start;
         } else {
             count = pointCount - start;
         }
@@ -16044,12 +16107,6 @@ function capBezierPoints(points, area) {
 }
 
 /**
- * Note: typedefs are auto-exported, so use a made-up `dom` namespace where
- * necessary to avoid duplicates with `export * from './helpers`; see
- * https://github.com/microsoft/TypeScript/issues/46011
- * @typedef { import('../core/core.controller.js').default } dom.Chart
- * @typedef { import('../../types').ChartEvent } ChartEvent
- */ /**
  * @private
  */ function _isDomSupported() {
     return typeof window !== 'undefined' && typeof document !== 'undefined';
@@ -16662,6 +16719,35 @@ function styleChanged(style, prevStyle) {
     return JSON.stringify(style, replacer) !== JSON.stringify(prevStyle, replacer);
 }
 
+function getSizeForArea(scale, chartArea, field) {
+    return scale.options.clip ? scale[field] : chartArea[field];
+}
+function getDatasetArea(meta, chartArea) {
+    const { xScale , yScale  } = meta;
+    if (xScale && yScale) {
+        return {
+            left: getSizeForArea(xScale, chartArea, 'left'),
+            right: getSizeForArea(xScale, chartArea, 'right'),
+            top: getSizeForArea(yScale, chartArea, 'top'),
+            bottom: getSizeForArea(yScale, chartArea, 'bottom')
+        };
+    }
+    return chartArea;
+}
+function getDatasetClipArea(chart, meta) {
+    const clip = meta._clip;
+    if (clip.disabled) {
+        return false;
+    }
+    const area = getDatasetArea(meta, chart.chartArea);
+    return {
+        left: clip.left === false ? 0 : area.left - (clip.left === true ? 0 : clip.left),
+        right: clip.right === false ? chart.width : area.right + (clip.right === true ? 0 : clip.right),
+        top: clip.top === false ? 0 : area.top - (clip.top === true ? 0 : clip.top),
+        bottom: clip.bottom === false ? chart.height : area.bottom + (clip.bottom === true ? 0 : clip.bottom)
+    };
+}
+
 exports.HALF_PI = HALF_PI;
 exports.INFINITY = INFINITY;
 exports.PI = PI;
@@ -16740,6 +16826,7 @@ exports.finiteOrDefault = finiteOrDefault;
 exports.fontString = fontString;
 exports.formatNumber = formatNumber;
 exports.getAngleFromPoint = getAngleFromPoint;
+exports.getDatasetClipArea = getDatasetClipArea;
 exports.getHoverColor = getHoverColor;
 exports.getMaximumSize = getMaximumSize;
 exports.getRelativePosition = getRelativePosition;
@@ -16789,7 +16876,7 @@ exports.unlistenArrayEvents = unlistenArrayEvents;
 exports.valueOrDefault = valueOrDefault;
 
 
-},{"@kurkle/color":14}],25:[function(require,module,exports){
+},{"@kurkle/color":14}],22:[function(require,module,exports){
 /* MIT license */
 /* eslint-disable no-mixed-operators */
 const cssKeywords = require('color-name');
@@ -17630,7 +17717,7 @@ convert.rgb.gray = function (rgb) {
 	return [val / 255 * 100];
 };
 
-},{"color-name":28}],26:[function(require,module,exports){
+},{"color-name":25}],23:[function(require,module,exports){
 const conversions = require('./conversions');
 const route = require('./route');
 
@@ -17713,7 +17800,7 @@ models.forEach(fromModel => {
 
 module.exports = convert;
 
-},{"./conversions":25,"./route":27}],27:[function(require,module,exports){
+},{"./conversions":22,"./route":24}],24:[function(require,module,exports){
 const conversions = require('./conversions');
 
 /*
@@ -17812,7 +17899,7 @@ module.exports = function (fromModel) {
 };
 
 
-},{"./conversions":25}],28:[function(require,module,exports){
+},{"./conversions":22}],25:[function(require,module,exports){
 'use strict'
 
 module.exports = {
@@ -17966,316 +18053,291 @@ module.exports = {
 	"yellowgreen": [154, 205, 50]
 };
 
-},{}],29:[function(require,module,exports){
-'use strict';
-
-var $defineProperty = require('es-define-property');
-
-var $SyntaxError = require('es-errors/syntax');
-var $TypeError = require('es-errors/type');
-
-var gopd = require('gopd');
-
-/** @type {import('.')} */
-module.exports = function defineDataProperty(
-	obj,
-	property,
-	value
-) {
-	if (!obj || (typeof obj !== 'object' && typeof obj !== 'function')) {
-		throw new $TypeError('`obj` must be an object or a function`');
-	}
-	if (typeof property !== 'string' && typeof property !== 'symbol') {
-		throw new $TypeError('`property` must be a string or a symbol`');
-	}
-	if (arguments.length > 3 && typeof arguments[3] !== 'boolean' && arguments[3] !== null) {
-		throw new $TypeError('`nonEnumerable`, if provided, must be a boolean or null');
-	}
-	if (arguments.length > 4 && typeof arguments[4] !== 'boolean' && arguments[4] !== null) {
-		throw new $TypeError('`nonWritable`, if provided, must be a boolean or null');
-	}
-	if (arguments.length > 5 && typeof arguments[5] !== 'boolean' && arguments[5] !== null) {
-		throw new $TypeError('`nonConfigurable`, if provided, must be a boolean or null');
-	}
-	if (arguments.length > 6 && typeof arguments[6] !== 'boolean') {
-		throw new $TypeError('`loose`, if provided, must be a boolean');
-	}
-
-	var nonEnumerable = arguments.length > 3 ? arguments[3] : null;
-	var nonWritable = arguments.length > 4 ? arguments[4] : null;
-	var nonConfigurable = arguments.length > 5 ? arguments[5] : null;
-	var loose = arguments.length > 6 ? arguments[6] : false;
-
-	/* @type {false | TypedPropertyDescriptor<unknown>} */
-	var desc = !!gopd && gopd(obj, property);
-
-	if ($defineProperty) {
-		$defineProperty(obj, property, {
-			configurable: nonConfigurable === null && desc ? desc.configurable : !nonConfigurable,
-			enumerable: nonEnumerable === null && desc ? desc.enumerable : !nonEnumerable,
-			value: value,
-			writable: nonWritable === null && desc ? desc.writable : !nonWritable
-		});
-	} else if (loose || (!nonEnumerable && !nonWritable && !nonConfigurable)) {
-		// must fall back to [[Set]], and was not explicitly asked to make non-enumerable, non-writable, or non-configurable
-		obj[property] = value; // eslint-disable-line no-param-reassign
-	} else {
-		throw new $SyntaxError('This environment does not support defining a property as non-configurable, non-writable, or non-enumerable.');
-	}
-};
-
-},{"es-define-property":42,"es-errors/syntax":47,"es-errors/type":48,"gopd":54}],30:[function(require,module,exports){
+},{}],26:[function(require,module,exports){
 /*!
 
- diff v5.1.0
+ diff v7.0.0
 
-Software License Agreement (BSD License)
+BSD 3-Clause License
 
 Copyright (c) 2009-2015, Kevin Decker <kpdecker@gmail.com>
-
 All rights reserved.
 
-Redistribution and use of this software in source and binary forms, with or without modification,
-are permitted provided that the following conditions are met:
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
 
-* Redistributions of source code must retain the above
-  copyright notice, this list of conditions and the
-  following disclaimer.
+1. Redistributions of source code must retain the above copyright notice, this
+   list of conditions and the following disclaimer.
 
-* Redistributions in binary form must reproduce the above
-  copyright notice, this list of conditions and the
-  following disclaimer in the documentation and/or other
-  materials provided with the distribution.
+2. Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+   and/or other materials provided with the distribution.
 
-* Neither the name of Kevin Decker nor the names of its
-  contributors may be used to endorse or promote products
-  derived from this software without specific prior
-  written permission.
+3. Neither the name of the copyright holder nor the names of its
+   contributors may be used to endorse or promote products derived from
+   this software without specific prior written permission.
 
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR
-IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
-FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
-CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER
-IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
-OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
 @license
 */
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
   typeof define === 'function' && define.amd ? define(['exports'], factory) :
-  (global = global || self, factory(global.Diff = {}));
-}(this, (function (exports) { 'use strict';
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.Diff = {}));
+})(this, (function (exports) { 'use strict';
 
   function Diff() {}
   Diff.prototype = {
     diff: function diff(oldString, newString) {
+      var _options$timeout;
       var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
       var callback = options.callback;
-
       if (typeof options === 'function') {
         callback = options;
         options = {};
       }
-
-      this.options = options;
       var self = this;
-
       function done(value) {
+        value = self.postProcess(value, options);
         if (callback) {
           setTimeout(function () {
-            callback(undefined, value);
+            callback(value);
           }, 0);
           return true;
         } else {
           return value;
         }
-      } // Allow subclasses to massage the input prior to running
-
-
-      oldString = this.castInput(oldString);
-      newString = this.castInput(newString);
-      oldString = this.removeEmpty(this.tokenize(oldString));
-      newString = this.removeEmpty(this.tokenize(newString));
-      var newLen = newString.length,
-          oldLen = oldString.length;
-      var editLength = 1;
-      var maxEditLength = newLen + oldLen;
-
-      if (options.maxEditLength) {
-        maxEditLength = Math.min(maxEditLength, options.maxEditLength);
       }
 
+      // Allow subclasses to massage the input prior to running
+      oldString = this.castInput(oldString, options);
+      newString = this.castInput(newString, options);
+      oldString = this.removeEmpty(this.tokenize(oldString, options));
+      newString = this.removeEmpty(this.tokenize(newString, options));
+      var newLen = newString.length,
+        oldLen = oldString.length;
+      var editLength = 1;
+      var maxEditLength = newLen + oldLen;
+      if (options.maxEditLength != null) {
+        maxEditLength = Math.min(maxEditLength, options.maxEditLength);
+      }
+      var maxExecutionTime = (_options$timeout = options.timeout) !== null && _options$timeout !== void 0 ? _options$timeout : Infinity;
+      var abortAfterTimestamp = Date.now() + maxExecutionTime;
       var bestPath = [{
-        newPos: -1,
-        components: []
-      }]; // Seed editLength = 0, i.e. the content starts with the same values
+        oldPos: -1,
+        lastComponent: undefined
+      }];
 
-      var oldPos = this.extractCommon(bestPath[0], newString, oldString, 0);
-
-      if (bestPath[0].newPos + 1 >= newLen && oldPos + 1 >= oldLen) {
+      // Seed editLength = 0, i.e. the content starts with the same values
+      var newPos = this.extractCommon(bestPath[0], newString, oldString, 0, options);
+      if (bestPath[0].oldPos + 1 >= oldLen && newPos + 1 >= newLen) {
         // Identity per the equality and tokenizer
-        return done([{
-          value: this.join(newString),
-          count: newString.length
-        }]);
-      } // Main worker method. checks all permutations of a given edit length for acceptance.
+        return done(buildValues(self, bestPath[0].lastComponent, newString, oldString, self.useLongestToken));
+      }
 
+      // Once we hit the right edge of the edit graph on some diagonal k, we can
+      // definitely reach the end of the edit graph in no more than k edits, so
+      // there's no point in considering any moves to diagonal k+1 any more (from
+      // which we're guaranteed to need at least k+1 more edits).
+      // Similarly, once we've reached the bottom of the edit graph, there's no
+      // point considering moves to lower diagonals.
+      // We record this fact by setting minDiagonalToConsider and
+      // maxDiagonalToConsider to some finite value once we've hit the edge of
+      // the edit graph.
+      // This optimization is not faithful to the original algorithm presented in
+      // Myers's paper, which instead pointlessly extends D-paths off the end of
+      // the edit graph - see page 7 of Myers's paper which notes this point
+      // explicitly and illustrates it with a diagram. This has major performance
+      // implications for some common scenarios. For instance, to compute a diff
+      // where the new text simply appends d characters on the end of the
+      // original text of length n, the true Myers algorithm will take O(n+d^2)
+      // time while this optimization needs only O(n+d) time.
+      var minDiagonalToConsider = -Infinity,
+        maxDiagonalToConsider = Infinity;
 
+      // Main worker method. checks all permutations of a given edit length for acceptance.
       function execEditLength() {
-        for (var diagonalPath = -1 * editLength; diagonalPath <= editLength; diagonalPath += 2) {
+        for (var diagonalPath = Math.max(minDiagonalToConsider, -editLength); diagonalPath <= Math.min(maxDiagonalToConsider, editLength); diagonalPath += 2) {
           var basePath = void 0;
-
-          var addPath = bestPath[diagonalPath - 1],
-              removePath = bestPath[diagonalPath + 1],
-              _oldPos = (removePath ? removePath.newPos : 0) - diagonalPath;
-
-          if (addPath) {
+          var removePath = bestPath[diagonalPath - 1],
+            addPath = bestPath[diagonalPath + 1];
+          if (removePath) {
             // No one else is going to attempt to use this value, clear it
             bestPath[diagonalPath - 1] = undefined;
           }
-
-          var canAdd = addPath && addPath.newPos + 1 < newLen,
-              canRemove = removePath && 0 <= _oldPos && _oldPos < oldLen;
-
+          var canAdd = false;
+          if (addPath) {
+            // what newPos will be after we do an insertion:
+            var addPathNewPos = addPath.oldPos - diagonalPath;
+            canAdd = addPath && 0 <= addPathNewPos && addPathNewPos < newLen;
+          }
+          var canRemove = removePath && removePath.oldPos + 1 < oldLen;
           if (!canAdd && !canRemove) {
             // If this path is a terminal then prune
             bestPath[diagonalPath] = undefined;
             continue;
-          } // Select the diagonal that we want to branch from. We select the prior
-          // path whose position in the new string is the farthest from the origin
-          // and does not pass the bounds of the diff graph
-
-
-          if (!canAdd || canRemove && addPath.newPos < removePath.newPos) {
-            basePath = clonePath(removePath);
-            self.pushComponent(basePath.components, undefined, true);
-          } else {
-            basePath = addPath; // No need to clone, we've pulled it from the list
-
-            basePath.newPos++;
-            self.pushComponent(basePath.components, true, undefined);
           }
 
-          _oldPos = self.extractCommon(basePath, newString, oldString, diagonalPath); // If we have hit the end of both strings, then we are done
-
-          if (basePath.newPos + 1 >= newLen && _oldPos + 1 >= oldLen) {
-            return done(buildValues(self, basePath.components, newString, oldString, self.useLongestToken));
+          // Select the diagonal that we want to branch from. We select the prior
+          // path whose position in the old string is the farthest from the origin
+          // and does not pass the bounds of the diff graph
+          if (!canRemove || canAdd && removePath.oldPos < addPath.oldPos) {
+            basePath = self.addToPath(addPath, true, false, 0, options);
           } else {
-            // Otherwise track this path as a potential candidate and continue.
+            basePath = self.addToPath(removePath, false, true, 1, options);
+          }
+          newPos = self.extractCommon(basePath, newString, oldString, diagonalPath, options);
+          if (basePath.oldPos + 1 >= oldLen && newPos + 1 >= newLen) {
+            // If we have hit the end of both strings, then we are done
+            return done(buildValues(self, basePath.lastComponent, newString, oldString, self.useLongestToken));
+          } else {
             bestPath[diagonalPath] = basePath;
+            if (basePath.oldPos + 1 >= oldLen) {
+              maxDiagonalToConsider = Math.min(maxDiagonalToConsider, diagonalPath - 1);
+            }
+            if (newPos + 1 >= newLen) {
+              minDiagonalToConsider = Math.max(minDiagonalToConsider, diagonalPath + 1);
+            }
           }
         }
-
         editLength++;
-      } // Performs the length of edit iteration. Is a bit fugly as this has to support the
+      }
+
+      // Performs the length of edit iteration. Is a bit fugly as this has to support the
       // sync and async mode which is never fun. Loops over execEditLength until a value
       // is produced, or until the edit length exceeds options.maxEditLength (if given),
       // in which case it will return undefined.
-
-
       if (callback) {
         (function exec() {
           setTimeout(function () {
-            if (editLength > maxEditLength) {
+            if (editLength > maxEditLength || Date.now() > abortAfterTimestamp) {
               return callback();
             }
-
             if (!execEditLength()) {
               exec();
             }
           }, 0);
         })();
       } else {
-        while (editLength <= maxEditLength) {
+        while (editLength <= maxEditLength && Date.now() <= abortAfterTimestamp) {
           var ret = execEditLength();
-
           if (ret) {
             return ret;
           }
         }
       }
     },
-    pushComponent: function pushComponent(components, added, removed) {
-      var last = components[components.length - 1];
-
-      if (last && last.added === added && last.removed === removed) {
-        // We need to clone here as the component clone operation is just
-        // as shallow array clone
-        components[components.length - 1] = {
-          count: last.count + 1,
-          added: added,
-          removed: removed
+    addToPath: function addToPath(path, added, removed, oldPosInc, options) {
+      var last = path.lastComponent;
+      if (last && !options.oneChangePerToken && last.added === added && last.removed === removed) {
+        return {
+          oldPos: path.oldPos + oldPosInc,
+          lastComponent: {
+            count: last.count + 1,
+            added: added,
+            removed: removed,
+            previousComponent: last.previousComponent
+          }
         };
       } else {
-        components.push({
-          count: 1,
-          added: added,
-          removed: removed
-        });
+        return {
+          oldPos: path.oldPos + oldPosInc,
+          lastComponent: {
+            count: 1,
+            added: added,
+            removed: removed,
+            previousComponent: last
+          }
+        };
       }
     },
-    extractCommon: function extractCommon(basePath, newString, oldString, diagonalPath) {
+    extractCommon: function extractCommon(basePath, newString, oldString, diagonalPath, options) {
       var newLen = newString.length,
-          oldLen = oldString.length,
-          newPos = basePath.newPos,
-          oldPos = newPos - diagonalPath,
-          commonCount = 0;
-
-      while (newPos + 1 < newLen && oldPos + 1 < oldLen && this.equals(newString[newPos + 1], oldString[oldPos + 1])) {
+        oldLen = oldString.length,
+        oldPos = basePath.oldPos,
+        newPos = oldPos - diagonalPath,
+        commonCount = 0;
+      while (newPos + 1 < newLen && oldPos + 1 < oldLen && this.equals(oldString[oldPos + 1], newString[newPos + 1], options)) {
         newPos++;
         oldPos++;
         commonCount++;
+        if (options.oneChangePerToken) {
+          basePath.lastComponent = {
+            count: 1,
+            previousComponent: basePath.lastComponent,
+            added: false,
+            removed: false
+          };
+        }
       }
-
-      if (commonCount) {
-        basePath.components.push({
-          count: commonCount
-        });
+      if (commonCount && !options.oneChangePerToken) {
+        basePath.lastComponent = {
+          count: commonCount,
+          previousComponent: basePath.lastComponent,
+          added: false,
+          removed: false
+        };
       }
-
-      basePath.newPos = newPos;
-      return oldPos;
+      basePath.oldPos = oldPos;
+      return newPos;
     },
-    equals: function equals(left, right) {
-      if (this.options.comparator) {
-        return this.options.comparator(left, right);
+    equals: function equals(left, right, options) {
+      if (options.comparator) {
+        return options.comparator(left, right);
       } else {
-        return left === right || this.options.ignoreCase && left.toLowerCase() === right.toLowerCase();
+        return left === right || options.ignoreCase && left.toLowerCase() === right.toLowerCase();
       }
     },
     removeEmpty: function removeEmpty(array) {
       var ret = [];
-
       for (var i = 0; i < array.length; i++) {
         if (array[i]) {
           ret.push(array[i]);
         }
       }
-
       return ret;
     },
     castInput: function castInput(value) {
       return value;
     },
     tokenize: function tokenize(value) {
-      return value.split('');
+      return Array.from(value);
     },
     join: function join(chars) {
       return chars.join('');
+    },
+    postProcess: function postProcess(changeObjects) {
+      return changeObjects;
     }
   };
-
-  function buildValues(diff, components, newString, oldString, useLongestToken) {
+  function buildValues(diff, lastComponent, newString, oldString, useLongestToken) {
+    // First we convert our linked list of components in reverse order to an
+    // array in the right order:
+    var components = [];
+    var nextComponent;
+    while (lastComponent) {
+      components.push(lastComponent);
+      nextComponent = lastComponent.previousComponent;
+      delete lastComponent.previousComponent;
+      lastComponent = nextComponent;
+    }
+    components.reverse();
     var componentPos = 0,
-        componentLen = components.length,
-        newPos = 0,
-        oldPos = 0;
-
+      componentLen = components.length,
+      newPos = 0,
+      oldPos = 0;
     for (; componentPos < componentLen; componentPos++) {
       var component = components[componentPos];
-
       if (!component.removed) {
         if (!component.added && useLongestToken) {
           var value = newString.slice(newPos, newPos + component.count);
@@ -18287,44 +18349,18 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         } else {
           component.value = diff.join(newString.slice(newPos, newPos + component.count));
         }
+        newPos += component.count;
 
-        newPos += component.count; // Common case
-
+        // Common case
         if (!component.added) {
           oldPos += component.count;
         }
       } else {
         component.value = diff.join(oldString.slice(oldPos, oldPos + component.count));
-        oldPos += component.count; // Reverse add and remove so removes are output first to match common convention
-        // The diffing algorithm is tied to add then remove output and this is the simplest
-        // route to get the desired output with minimal overhead.
-
-        if (componentPos && components[componentPos - 1].added) {
-          var tmp = components[componentPos - 1];
-          components[componentPos - 1] = components[componentPos];
-          components[componentPos] = tmp;
-        }
+        oldPos += component.count;
       }
-    } // Special case handle for when one terminal is ignored (i.e. whitespace).
-    // For this case we merge the terminal into the prior string and drop the change.
-    // This is only available for string mode.
-
-
-    var lastComponent = components[componentLen - 1];
-
-    if (componentLen > 1 && typeof lastComponent.value === 'string' && (lastComponent.added || lastComponent.removed) && diff.equals('', lastComponent.value)) {
-      components[componentLen - 2].value += lastComponent.value;
-      components.pop();
     }
-
     return components;
-  }
-
-  function clonePath(path) {
-    return {
-      newPos: path.newPos,
-      components: path.components.slice(0)
-    };
   }
 
   var characterDiff = new Diff();
@@ -18332,21 +18368,114 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     return characterDiff.diff(oldStr, newStr, options);
   }
 
-  function generateOptions(options, defaults) {
-    if (typeof options === 'function') {
-      defaults.callback = options;
-    } else if (options) {
-      for (var name in options) {
-        /* istanbul ignore else */
-        if (options.hasOwnProperty(name)) {
-          defaults[name] = options[name];
-        }
+  function longestCommonPrefix(str1, str2) {
+    var i;
+    for (i = 0; i < str1.length && i < str2.length; i++) {
+      if (str1[i] != str2[i]) {
+        return str1.slice(0, i);
       }
     }
+    return str1.slice(0, i);
+  }
+  function longestCommonSuffix(str1, str2) {
+    var i;
 
-    return defaults;
+    // Unlike longestCommonPrefix, we need a special case to handle all scenarios
+    // where we return the empty string since str1.slice(-0) will return the
+    // entire string.
+    if (!str1 || !str2 || str1[str1.length - 1] != str2[str2.length - 1]) {
+      return '';
+    }
+    for (i = 0; i < str1.length && i < str2.length; i++) {
+      if (str1[str1.length - (i + 1)] != str2[str2.length - (i + 1)]) {
+        return str1.slice(-i);
+      }
+    }
+    return str1.slice(-i);
+  }
+  function replacePrefix(string, oldPrefix, newPrefix) {
+    if (string.slice(0, oldPrefix.length) != oldPrefix) {
+      throw Error("string ".concat(JSON.stringify(string), " doesn't start with prefix ").concat(JSON.stringify(oldPrefix), "; this is a bug"));
+    }
+    return newPrefix + string.slice(oldPrefix.length);
+  }
+  function replaceSuffix(string, oldSuffix, newSuffix) {
+    if (!oldSuffix) {
+      return string + newSuffix;
+    }
+    if (string.slice(-oldSuffix.length) != oldSuffix) {
+      throw Error("string ".concat(JSON.stringify(string), " doesn't end with suffix ").concat(JSON.stringify(oldSuffix), "; this is a bug"));
+    }
+    return string.slice(0, -oldSuffix.length) + newSuffix;
+  }
+  function removePrefix(string, oldPrefix) {
+    return replacePrefix(string, oldPrefix, '');
+  }
+  function removeSuffix(string, oldSuffix) {
+    return replaceSuffix(string, oldSuffix, '');
+  }
+  function maximumOverlap(string1, string2) {
+    return string2.slice(0, overlapCount(string1, string2));
   }
 
+  // Nicked from https://stackoverflow.com/a/60422853/1709587
+  function overlapCount(a, b) {
+    // Deal with cases where the strings differ in length
+    var startA = 0;
+    if (a.length > b.length) {
+      startA = a.length - b.length;
+    }
+    var endB = b.length;
+    if (a.length < b.length) {
+      endB = a.length;
+    }
+    // Create a back-reference for each index
+    //   that should be followed in case of a mismatch.
+    //   We only need B to make these references:
+    var map = Array(endB);
+    var k = 0; // Index that lags behind j
+    map[0] = 0;
+    for (var j = 1; j < endB; j++) {
+      if (b[j] == b[k]) {
+        map[j] = map[k]; // skip over the same character (optional optimisation)
+      } else {
+        map[j] = k;
+      }
+      while (k > 0 && b[j] != b[k]) {
+        k = map[k];
+      }
+      if (b[j] == b[k]) {
+        k++;
+      }
+    }
+    // Phase 2: use these references while iterating over A
+    k = 0;
+    for (var i = startA; i < a.length; i++) {
+      while (k > 0 && a[i] != b[k]) {
+        k = map[k];
+      }
+      if (a[i] == b[k]) {
+        k++;
+      }
+    }
+    return k;
+  }
+
+  /**
+   * Returns true if the string consistently uses Windows line endings.
+   */
+  function hasOnlyWinLineEndings(string) {
+    return string.includes('\r\n') && !string.startsWith('\n') && !string.match(/[^\r]\n/);
+  }
+
+  /**
+   * Returns true if the string consistently uses Unix line endings.
+   */
+  function hasOnlyUnixLineEndings(string) {
+    return !string.includes('\r\n') && string.includes('\n');
+  }
+
+  // Based on https://en.wikipedia.org/wiki/Latin_script_in_Unicode
   //
   // Ranges and exceptions:
   // Latin-1 Supplement, 0080–00FF
@@ -18364,77 +18493,330 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   //  - U+02DC  ˜ &#732;  Small Tilde
   //  - U+02DD  ˝ &#733;  Double Acute Accent
   // Latin Extended Additional, 1E00–1EFF
+  var extendedWordChars = "a-zA-Z0-9_\\u{C0}-\\u{FF}\\u{D8}-\\u{F6}\\u{F8}-\\u{2C6}\\u{2C8}-\\u{2D7}\\u{2DE}-\\u{2FF}\\u{1E00}-\\u{1EFF}";
 
-  var extendedWordChars = /^[A-Za-z\xC0-\u02C6\u02C8-\u02D7\u02DE-\u02FF\u1E00-\u1EFF]+$/;
-  var reWhitespace = /\S/;
+  // Each token is one of the following:
+  // - A punctuation mark plus the surrounding whitespace
+  // - A word plus the surrounding whitespace
+  // - Pure whitespace (but only in the special case where this the entire text
+  //   is just whitespace)
+  //
+  // We have to include surrounding whitespace in the tokens because the two
+  // alternative approaches produce horribly broken results:
+  // * If we just discard the whitespace, we can't fully reproduce the original
+  //   text from the sequence of tokens and any attempt to render the diff will
+  //   get the whitespace wrong.
+  // * If we have separate tokens for whitespace, then in a typical text every
+  //   second token will be a single space character. But this often results in
+  //   the optimal diff between two texts being a perverse one that preserves
+  //   the spaces between words but deletes and reinserts actual common words.
+  //   See https://github.com/kpdecker/jsdiff/issues/160#issuecomment-1866099640
+  //   for an example.
+  //
+  // Keeping the surrounding whitespace of course has implications for .equals
+  // and .join, not just .tokenize.
+
+  // This regex does NOT fully implement the tokenization rules described above.
+  // Instead, it gives runs of whitespace their own "token". The tokenize method
+  // then handles stitching whitespace tokens onto adjacent word or punctuation
+  // tokens.
+  var tokenizeIncludingWhitespace = new RegExp("[".concat(extendedWordChars, "]+|\\s+|[^").concat(extendedWordChars, "]"), 'ug');
   var wordDiff = new Diff();
-
-  wordDiff.equals = function (left, right) {
-    if (this.options.ignoreCase) {
+  wordDiff.equals = function (left, right, options) {
+    if (options.ignoreCase) {
       left = left.toLowerCase();
       right = right.toLowerCase();
     }
-
-    return left === right || this.options.ignoreWhitespace && !reWhitespace.test(left) && !reWhitespace.test(right);
+    return left.trim() === right.trim();
   };
-
   wordDiff.tokenize = function (value) {
-    // All whitespace symbols except newline group into one token, each newline - in separate token
-    var tokens = value.split(/([^\S\r\n]+|[()[\]{}'"\r\n]|\b)/); // Join the boundary splits that we do not consider to be boundaries. This is primarily the extended Latin character set.
-
-    for (var i = 0; i < tokens.length - 1; i++) {
-      // If we have an empty string in the next field and we have only word chars before and after, merge
-      if (!tokens[i + 1] && tokens[i + 2] && extendedWordChars.test(tokens[i]) && extendedWordChars.test(tokens[i + 2])) {
-        tokens[i] += tokens[i + 2];
-        tokens.splice(i + 1, 2);
-        i--;
+    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    var parts;
+    if (options.intlSegmenter) {
+      if (options.intlSegmenter.resolvedOptions().granularity != 'word') {
+        throw new Error('The segmenter passed must have a granularity of "word"');
       }
+      parts = Array.from(options.intlSegmenter.segment(value), function (segment) {
+        return segment.segment;
+      });
+    } else {
+      parts = value.match(tokenizeIncludingWhitespace) || [];
     }
-
+    var tokens = [];
+    var prevPart = null;
+    parts.forEach(function (part) {
+      if (/\s/.test(part)) {
+        if (prevPart == null) {
+          tokens.push(part);
+        } else {
+          tokens.push(tokens.pop() + part);
+        }
+      } else if (/\s/.test(prevPart)) {
+        if (tokens[tokens.length - 1] == prevPart) {
+          tokens.push(tokens.pop() + part);
+        } else {
+          tokens.push(prevPart + part);
+        }
+      } else {
+        tokens.push(part);
+      }
+      prevPart = part;
+    });
     return tokens;
   };
-
-  function diffWords(oldStr, newStr, options) {
-    options = generateOptions(options, {
-      ignoreWhitespace: true
+  wordDiff.join = function (tokens) {
+    // Tokens being joined here will always have appeared consecutively in the
+    // same text, so we can simply strip off the leading whitespace from all the
+    // tokens except the first (and except any whitespace-only tokens - but such
+    // a token will always be the first and only token anyway) and then join them
+    // and the whitespace around words and punctuation will end up correct.
+    return tokens.map(function (token, i) {
+      if (i == 0) {
+        return token;
+      } else {
+        return token.replace(/^\s+/, '');
+      }
+    }).join('');
+  };
+  wordDiff.postProcess = function (changes, options) {
+    if (!changes || options.oneChangePerToken) {
+      return changes;
+    }
+    var lastKeep = null;
+    // Change objects representing any insertion or deletion since the last
+    // "keep" change object. There can be at most one of each.
+    var insertion = null;
+    var deletion = null;
+    changes.forEach(function (change) {
+      if (change.added) {
+        insertion = change;
+      } else if (change.removed) {
+        deletion = change;
+      } else {
+        if (insertion || deletion) {
+          // May be false at start of text
+          dedupeWhitespaceInChangeObjects(lastKeep, deletion, insertion, change);
+        }
+        lastKeep = change;
+        insertion = null;
+        deletion = null;
+      }
     });
+    if (insertion || deletion) {
+      dedupeWhitespaceInChangeObjects(lastKeep, deletion, insertion, null);
+    }
+    return changes;
+  };
+  function diffWords(oldStr, newStr, options) {
+    // This option has never been documented and never will be (it's clearer to
+    // just call `diffWordsWithSpace` directly if you need that behavior), but
+    // has existed in jsdiff for a long time, so we retain support for it here
+    // for the sake of backwards compatibility.
+    if ((options === null || options === void 0 ? void 0 : options.ignoreWhitespace) != null && !options.ignoreWhitespace) {
+      return diffWordsWithSpace(oldStr, newStr, options);
+    }
     return wordDiff.diff(oldStr, newStr, options);
   }
+  function dedupeWhitespaceInChangeObjects(startKeep, deletion, insertion, endKeep) {
+    // Before returning, we tidy up the leading and trailing whitespace of the
+    // change objects to eliminate cases where trailing whitespace in one object
+    // is repeated as leading whitespace in the next.
+    // Below are examples of the outcomes we want here to explain the code.
+    // I=insert, K=keep, D=delete
+    // 1. diffing 'foo bar baz' vs 'foo baz'
+    //    Prior to cleanup, we have K:'foo ' D:' bar ' K:' baz'
+    //    After cleanup, we want:   K:'foo ' D:'bar ' K:'baz'
+    //
+    // 2. Diffing 'foo bar baz' vs 'foo qux baz'
+    //    Prior to cleanup, we have K:'foo ' D:' bar ' I:' qux ' K:' baz'
+    //    After cleanup, we want K:'foo ' D:'bar' I:'qux' K:' baz'
+    //
+    // 3. Diffing 'foo\nbar baz' vs 'foo baz'
+    //    Prior to cleanup, we have K:'foo ' D:'\nbar ' K:' baz'
+    //    After cleanup, we want K'foo' D:'\nbar' K:' baz'
+    //
+    // 4. Diffing 'foo baz' vs 'foo\nbar baz'
+    //    Prior to cleanup, we have K:'foo\n' I:'\nbar ' K:' baz'
+    //    After cleanup, we ideally want K'foo' I:'\nbar' K:' baz'
+    //    but don't actually manage this currently (the pre-cleanup change
+    //    objects don't contain enough information to make it possible).
+    //
+    // 5. Diffing 'foo   bar baz' vs 'foo  baz'
+    //    Prior to cleanup, we have K:'foo  ' D:'   bar ' K:'  baz'
+    //    After cleanup, we want K:'foo  ' D:' bar ' K:'baz'
+    //
+    // Our handling is unavoidably imperfect in the case where there's a single
+    // indel between keeps and the whitespace has changed. For instance, consider
+    // diffing 'foo\tbar\nbaz' vs 'foo baz'. Unless we create an extra change
+    // object to represent the insertion of the space character (which isn't even
+    // a token), we have no way to avoid losing information about the texts'
+    // original whitespace in the result we return. Still, we do our best to
+    // output something that will look sensible if we e.g. print it with
+    // insertions in green and deletions in red.
+
+    // Between two "keep" change objects (or before the first or after the last
+    // change object), we can have either:
+    // * A "delete" followed by an "insert"
+    // * Just an "insert"
+    // * Just a "delete"
+    // We handle the three cases separately.
+    if (deletion && insertion) {
+      var oldWsPrefix = deletion.value.match(/^\s*/)[0];
+      var oldWsSuffix = deletion.value.match(/\s*$/)[0];
+      var newWsPrefix = insertion.value.match(/^\s*/)[0];
+      var newWsSuffix = insertion.value.match(/\s*$/)[0];
+      if (startKeep) {
+        var commonWsPrefix = longestCommonPrefix(oldWsPrefix, newWsPrefix);
+        startKeep.value = replaceSuffix(startKeep.value, newWsPrefix, commonWsPrefix);
+        deletion.value = removePrefix(deletion.value, commonWsPrefix);
+        insertion.value = removePrefix(insertion.value, commonWsPrefix);
+      }
+      if (endKeep) {
+        var commonWsSuffix = longestCommonSuffix(oldWsSuffix, newWsSuffix);
+        endKeep.value = replacePrefix(endKeep.value, newWsSuffix, commonWsSuffix);
+        deletion.value = removeSuffix(deletion.value, commonWsSuffix);
+        insertion.value = removeSuffix(insertion.value, commonWsSuffix);
+      }
+    } else if (insertion) {
+      // The whitespaces all reflect what was in the new text rather than
+      // the old, so we essentially have no information about whitespace
+      // insertion or deletion. We just want to dedupe the whitespace.
+      // We do that by having each change object keep its trailing
+      // whitespace and deleting duplicate leading whitespace where
+      // present.
+      if (startKeep) {
+        insertion.value = insertion.value.replace(/^\s*/, '');
+      }
+      if (endKeep) {
+        endKeep.value = endKeep.value.replace(/^\s*/, '');
+      }
+      // otherwise we've got a deletion and no insertion
+    } else if (startKeep && endKeep) {
+      var newWsFull = endKeep.value.match(/^\s*/)[0],
+        delWsStart = deletion.value.match(/^\s*/)[0],
+        delWsEnd = deletion.value.match(/\s*$/)[0];
+
+      // Any whitespace that comes straight after startKeep in both the old and
+      // new texts, assign to startKeep and remove from the deletion.
+      var newWsStart = longestCommonPrefix(newWsFull, delWsStart);
+      deletion.value = removePrefix(deletion.value, newWsStart);
+
+      // Any whitespace that comes straight before endKeep in both the old and
+      // new texts, and hasn't already been assigned to startKeep, assign to
+      // endKeep and remove from the deletion.
+      var newWsEnd = longestCommonSuffix(removePrefix(newWsFull, newWsStart), delWsEnd);
+      deletion.value = removeSuffix(deletion.value, newWsEnd);
+      endKeep.value = replacePrefix(endKeep.value, newWsFull, newWsEnd);
+
+      // If there's any whitespace from the new text that HASN'T already been
+      // assigned, assign it to the start:
+      startKeep.value = replaceSuffix(startKeep.value, newWsFull, newWsFull.slice(0, newWsFull.length - newWsEnd.length));
+    } else if (endKeep) {
+      // We are at the start of the text. Preserve all the whitespace on
+      // endKeep, and just remove whitespace from the end of deletion to the
+      // extent that it overlaps with the start of endKeep.
+      var endKeepWsPrefix = endKeep.value.match(/^\s*/)[0];
+      var deletionWsSuffix = deletion.value.match(/\s*$/)[0];
+      var overlap = maximumOverlap(deletionWsSuffix, endKeepWsPrefix);
+      deletion.value = removeSuffix(deletion.value, overlap);
+    } else if (startKeep) {
+      // We are at the END of the text. Preserve all the whitespace on
+      // startKeep, and just remove whitespace from the start of deletion to
+      // the extent that it overlaps with the end of startKeep.
+      var startKeepWsSuffix = startKeep.value.match(/\s*$/)[0];
+      var deletionWsPrefix = deletion.value.match(/^\s*/)[0];
+      var _overlap = maximumOverlap(startKeepWsSuffix, deletionWsPrefix);
+      deletion.value = removePrefix(deletion.value, _overlap);
+    }
+  }
+  var wordWithSpaceDiff = new Diff();
+  wordWithSpaceDiff.tokenize = function (value) {
+    // Slightly different to the tokenizeIncludingWhitespace regex used above in
+    // that this one treats each individual newline as a distinct tokens, rather
+    // than merging them into other surrounding whitespace. This was requested
+    // in https://github.com/kpdecker/jsdiff/issues/180 &
+    //    https://github.com/kpdecker/jsdiff/issues/211
+    var regex = new RegExp("(\\r?\\n)|[".concat(extendedWordChars, "]+|[^\\S\\n\\r]+|[^").concat(extendedWordChars, "]"), 'ug');
+    return value.match(regex) || [];
+  };
   function diffWordsWithSpace(oldStr, newStr, options) {
-    return wordDiff.diff(oldStr, newStr, options);
+    return wordWithSpaceDiff.diff(oldStr, newStr, options);
+  }
+
+  function generateOptions(options, defaults) {
+    if (typeof options === 'function') {
+      defaults.callback = options;
+    } else if (options) {
+      for (var name in options) {
+        /* istanbul ignore else */
+        if (options.hasOwnProperty(name)) {
+          defaults[name] = options[name];
+        }
+      }
+    }
+    return defaults;
   }
 
   var lineDiff = new Diff();
-
-  lineDiff.tokenize = function (value) {
+  lineDiff.tokenize = function (value, options) {
+    if (options.stripTrailingCr) {
+      // remove one \r before \n to match GNU diff's --strip-trailing-cr behavior
+      value = value.replace(/\r\n/g, '\n');
+    }
     var retLines = [],
-        linesAndNewlines = value.split(/(\n|\r\n)/); // Ignore the final empty token that occurs if the string ends with a new line
+      linesAndNewlines = value.split(/(\n|\r\n)/);
 
+    // Ignore the final empty token that occurs if the string ends with a new line
     if (!linesAndNewlines[linesAndNewlines.length - 1]) {
       linesAndNewlines.pop();
-    } // Merge the content and line separators into single tokens
+    }
 
-
+    // Merge the content and line separators into single tokens
     for (var i = 0; i < linesAndNewlines.length; i++) {
       var line = linesAndNewlines[i];
-
-      if (i % 2 && !this.options.newlineIsToken) {
+      if (i % 2 && !options.newlineIsToken) {
         retLines[retLines.length - 1] += line;
       } else {
-        if (this.options.ignoreWhitespace) {
-          line = line.trim();
-        }
-
         retLines.push(line);
       }
     }
-
     return retLines;
   };
-
+  lineDiff.equals = function (left, right, options) {
+    // If we're ignoring whitespace, we need to normalise lines by stripping
+    // whitespace before checking equality. (This has an annoying interaction
+    // with newlineIsToken that requires special handling: if newlines get their
+    // own token, then we DON'T want to trim the *newline* tokens down to empty
+    // strings, since this would cause us to treat whitespace-only line content
+    // as equal to a separator between lines, which would be weird and
+    // inconsistent with the documented behavior of the options.)
+    if (options.ignoreWhitespace) {
+      if (!options.newlineIsToken || !left.includes('\n')) {
+        left = left.trim();
+      }
+      if (!options.newlineIsToken || !right.includes('\n')) {
+        right = right.trim();
+      }
+    } else if (options.ignoreNewlineAtEof && !options.newlineIsToken) {
+      if (left.endsWith('\n')) {
+        left = left.slice(0, -1);
+      }
+      if (right.endsWith('\n')) {
+        right = right.slice(0, -1);
+      }
+    }
+    return Diff.prototype.equals.call(this, left, right, options);
+  };
   function diffLines(oldStr, newStr, callback) {
     return lineDiff.diff(oldStr, newStr, callback);
   }
+
+  // Kept for backwards compatibility. This is a rather arbitrary wrapper method
+  // that just calls `diffLines` with `ignoreWhitespace: true`. It's confusing to
+  // have two ways to do exactly the same thing in the API, so we no longer
+  // document this one (library users should explicitly use `diffLines` with
+  // `ignoreWhitespace: true` instead) but we keep it around to maintain
+  // compatibility with code that used old versions.
   function diffTrimmedLines(oldStr, newStr, callback) {
     var options = generateOptions(callback, {
       ignoreWhitespace: true
@@ -18443,53 +18825,88 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   }
 
   var sentenceDiff = new Diff();
-
   sentenceDiff.tokenize = function (value) {
     return value.split(/(\S.+?[.!?])(?=\s+|$)/);
   };
-
   function diffSentences(oldStr, newStr, callback) {
     return sentenceDiff.diff(oldStr, newStr, callback);
   }
 
   var cssDiff = new Diff();
-
   cssDiff.tokenize = function (value) {
     return value.split(/([{}:;,]|\s+)/);
   };
-
   function diffCss(oldStr, newStr, callback) {
     return cssDiff.diff(oldStr, newStr, callback);
   }
 
-  function _typeof(obj) {
+  function ownKeys(e, r) {
+    var t = Object.keys(e);
+    if (Object.getOwnPropertySymbols) {
+      var o = Object.getOwnPropertySymbols(e);
+      r && (o = o.filter(function (r) {
+        return Object.getOwnPropertyDescriptor(e, r).enumerable;
+      })), t.push.apply(t, o);
+    }
+    return t;
+  }
+  function _objectSpread2(e) {
+    for (var r = 1; r < arguments.length; r++) {
+      var t = null != arguments[r] ? arguments[r] : {};
+      r % 2 ? ownKeys(Object(t), !0).forEach(function (r) {
+        _defineProperty(e, r, t[r]);
+      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) {
+        Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r));
+      });
+    }
+    return e;
+  }
+  function _toPrimitive(t, r) {
+    if ("object" != typeof t || !t) return t;
+    var e = t[Symbol.toPrimitive];
+    if (void 0 !== e) {
+      var i = e.call(t, r || "default");
+      if ("object" != typeof i) return i;
+      throw new TypeError("@@toPrimitive must return a primitive value.");
+    }
+    return ("string" === r ? String : Number)(t);
+  }
+  function _toPropertyKey(t) {
+    var i = _toPrimitive(t, "string");
+    return "symbol" == typeof i ? i : i + "";
+  }
+  function _typeof(o) {
     "@babel/helpers - typeof";
 
-    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-      _typeof = function (obj) {
-        return typeof obj;
-      };
-    } else {
-      _typeof = function (obj) {
-        return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-      };
-    }
-
-    return _typeof(obj);
+    return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) {
+      return typeof o;
+    } : function (o) {
+      return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
+    }, _typeof(o);
   }
-
+  function _defineProperty(obj, key, value) {
+    key = _toPropertyKey(key);
+    if (key in obj) {
+      Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+      });
+    } else {
+      obj[key] = value;
+    }
+    return obj;
+  }
   function _toConsumableArray(arr) {
     return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
   }
-
   function _arrayWithoutHoles(arr) {
     if (Array.isArray(arr)) return _arrayLikeToArray(arr);
   }
-
   function _iterableToArray(iter) {
-    if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);
+    if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
   }
-
   function _unsupportedIterableToArray(o, minLen) {
     if (!o) return;
     if (typeof o === "string") return _arrayLikeToArray(o, minLen);
@@ -18498,238 +18915,263 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     if (n === "Map" || n === "Set") return Array.from(o);
     if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
   }
-
   function _arrayLikeToArray(arr, len) {
     if (len == null || len > arr.length) len = arr.length;
-
     for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-
     return arr2;
   }
-
   function _nonIterableSpread() {
     throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
   }
 
-  var objectPrototypeToString = Object.prototype.toString;
-  var jsonDiff = new Diff(); // Discriminate between two lines of pretty-printed, serialized JSON where one of them has a
+  var jsonDiff = new Diff();
+  // Discriminate between two lines of pretty-printed, serialized JSON where one of them has a
   // dangling comma and the other doesn't. Turns out including the dangling comma yields the nicest output:
-
   jsonDiff.useLongestToken = true;
   jsonDiff.tokenize = lineDiff.tokenize;
-
-  jsonDiff.castInput = function (value) {
-    var _this$options = this.options,
-        undefinedReplacement = _this$options.undefinedReplacement,
-        _this$options$stringi = _this$options.stringifyReplacer,
-        stringifyReplacer = _this$options$stringi === void 0 ? function (k, v) {
-      return typeof v === 'undefined' ? undefinedReplacement : v;
-    } : _this$options$stringi;
+  jsonDiff.castInput = function (value, options) {
+    var undefinedReplacement = options.undefinedReplacement,
+      _options$stringifyRep = options.stringifyReplacer,
+      stringifyReplacer = _options$stringifyRep === void 0 ? function (k, v) {
+        return typeof v === 'undefined' ? undefinedReplacement : v;
+      } : _options$stringifyRep;
     return typeof value === 'string' ? value : JSON.stringify(canonicalize(value, null, null, stringifyReplacer), stringifyReplacer, '  ');
   };
-
-  jsonDiff.equals = function (left, right) {
-    return Diff.prototype.equals.call(jsonDiff, left.replace(/,([\r\n])/g, '$1'), right.replace(/,([\r\n])/g, '$1'));
+  jsonDiff.equals = function (left, right, options) {
+    return Diff.prototype.equals.call(jsonDiff, left.replace(/,([\r\n])/g, '$1'), right.replace(/,([\r\n])/g, '$1'), options);
   };
-
   function diffJson(oldObj, newObj, options) {
     return jsonDiff.diff(oldObj, newObj, options);
-  } // This function handles the presence of circular references by bailing out when encountering an
-  // object that is already on the "stack" of items being processed. Accepts an optional replacer
+  }
 
+  // This function handles the presence of circular references by bailing out when encountering an
+  // object that is already on the "stack" of items being processed. Accepts an optional replacer
   function canonicalize(obj, stack, replacementStack, replacer, key) {
     stack = stack || [];
     replacementStack = replacementStack || [];
-
     if (replacer) {
       obj = replacer(key, obj);
     }
-
     var i;
-
     for (i = 0; i < stack.length; i += 1) {
       if (stack[i] === obj) {
         return replacementStack[i];
       }
     }
-
     var canonicalizedObj;
-
-    if ('[object Array]' === objectPrototypeToString.call(obj)) {
+    if ('[object Array]' === Object.prototype.toString.call(obj)) {
       stack.push(obj);
       canonicalizedObj = new Array(obj.length);
       replacementStack.push(canonicalizedObj);
-
       for (i = 0; i < obj.length; i += 1) {
         canonicalizedObj[i] = canonicalize(obj[i], stack, replacementStack, replacer, key);
       }
-
       stack.pop();
       replacementStack.pop();
       return canonicalizedObj;
     }
-
     if (obj && obj.toJSON) {
       obj = obj.toJSON();
     }
-
     if (_typeof(obj) === 'object' && obj !== null) {
       stack.push(obj);
       canonicalizedObj = {};
       replacementStack.push(canonicalizedObj);
-
       var sortedKeys = [],
-          _key;
-
+        _key;
       for (_key in obj) {
         /* istanbul ignore else */
-        if (obj.hasOwnProperty(_key)) {
+        if (Object.prototype.hasOwnProperty.call(obj, _key)) {
           sortedKeys.push(_key);
         }
       }
-
       sortedKeys.sort();
-
       for (i = 0; i < sortedKeys.length; i += 1) {
         _key = sortedKeys[i];
         canonicalizedObj[_key] = canonicalize(obj[_key], stack, replacementStack, replacer, _key);
       }
-
       stack.pop();
       replacementStack.pop();
     } else {
       canonicalizedObj = obj;
     }
-
     return canonicalizedObj;
   }
 
   var arrayDiff = new Diff();
-
   arrayDiff.tokenize = function (value) {
     return value.slice();
   };
-
   arrayDiff.join = arrayDiff.removeEmpty = function (value) {
     return value;
   };
-
   function diffArrays(oldArr, newArr, callback) {
     return arrayDiff.diff(oldArr, newArr, callback);
   }
 
-  function parsePatch(uniDiff) {
-    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-    var diffstr = uniDiff.split(/\r\n|[\n\v\f\r\x85]/),
-        delimiters = uniDiff.match(/\r\n|[\n\v\f\r\x85]/g) || [],
-        list = [],
-        i = 0;
+  function unixToWin(patch) {
+    if (Array.isArray(patch)) {
+      return patch.map(unixToWin);
+    }
+    return _objectSpread2(_objectSpread2({}, patch), {}, {
+      hunks: patch.hunks.map(function (hunk) {
+        return _objectSpread2(_objectSpread2({}, hunk), {}, {
+          lines: hunk.lines.map(function (line, i) {
+            var _hunk$lines;
+            return line.startsWith('\\') || line.endsWith('\r') || (_hunk$lines = hunk.lines[i + 1]) !== null && _hunk$lines !== void 0 && _hunk$lines.startsWith('\\') ? line : line + '\r';
+          })
+        });
+      })
+    });
+  }
+  function winToUnix(patch) {
+    if (Array.isArray(patch)) {
+      return patch.map(winToUnix);
+    }
+    return _objectSpread2(_objectSpread2({}, patch), {}, {
+      hunks: patch.hunks.map(function (hunk) {
+        return _objectSpread2(_objectSpread2({}, hunk), {}, {
+          lines: hunk.lines.map(function (line) {
+            return line.endsWith('\r') ? line.substring(0, line.length - 1) : line;
+          })
+        });
+      })
+    });
+  }
 
+  /**
+   * Returns true if the patch consistently uses Unix line endings (or only involves one line and has
+   * no line endings).
+   */
+  function isUnix(patch) {
+    if (!Array.isArray(patch)) {
+      patch = [patch];
+    }
+    return !patch.some(function (index) {
+      return index.hunks.some(function (hunk) {
+        return hunk.lines.some(function (line) {
+          return !line.startsWith('\\') && line.endsWith('\r');
+        });
+      });
+    });
+  }
+
+  /**
+   * Returns true if the patch uses Windows line endings and only Windows line endings.
+   */
+  function isWin(patch) {
+    if (!Array.isArray(patch)) {
+      patch = [patch];
+    }
+    return patch.some(function (index) {
+      return index.hunks.some(function (hunk) {
+        return hunk.lines.some(function (line) {
+          return line.endsWith('\r');
+        });
+      });
+    }) && patch.every(function (index) {
+      return index.hunks.every(function (hunk) {
+        return hunk.lines.every(function (line, i) {
+          var _hunk$lines2;
+          return line.startsWith('\\') || line.endsWith('\r') || ((_hunk$lines2 = hunk.lines[i + 1]) === null || _hunk$lines2 === void 0 ? void 0 : _hunk$lines2.startsWith('\\'));
+        });
+      });
+    });
+  }
+
+  function parsePatch(uniDiff) {
+    var diffstr = uniDiff.split(/\n/),
+      list = [],
+      i = 0;
     function parseIndex() {
       var index = {};
-      list.push(index); // Parse diff metadata
+      list.push(index);
 
+      // Parse diff metadata
       while (i < diffstr.length) {
-        var line = diffstr[i]; // File header found, end parsing diff metadata
+        var line = diffstr[i];
 
+        // File header found, end parsing diff metadata
         if (/^(\-\-\-|\+\+\+|@@)\s/.test(line)) {
           break;
-        } // Diff index
+        }
 
-
+        // Diff index
         var header = /^(?:Index:|diff(?: -r \w+)+)\s+(.+?)\s*$/.exec(line);
-
         if (header) {
           index.index = header[1];
         }
-
         i++;
-      } // Parse file headers if they are defined. Unified diff requires them, but
+      }
+
+      // Parse file headers if they are defined. Unified diff requires them, but
       // there's no technical issues to have an isolated hunk without file header
-
-
       parseFileHeader(index);
-      parseFileHeader(index); // Parse hunks
+      parseFileHeader(index);
 
+      // Parse hunks
       index.hunks = [];
-
       while (i < diffstr.length) {
         var _line = diffstr[i];
-
-        if (/^(Index:|diff|\-\-\-|\+\+\+)\s/.test(_line)) {
+        if (/^(Index:\s|diff\s|\-\-\-\s|\+\+\+\s|===================================================================)/.test(_line)) {
           break;
         } else if (/^@@/.test(_line)) {
           index.hunks.push(parseHunk());
-        } else if (_line && options.strict) {
-          // Ignore unexpected content unless in strict mode
+        } else if (_line) {
           throw new Error('Unknown line ' + (i + 1) + ' ' + JSON.stringify(_line));
         } else {
           i++;
         }
       }
-    } // Parses the --- and +++ headers, if none are found, no lines
+    }
+
+    // Parses the --- and +++ headers, if none are found, no lines
     // are consumed.
-
-
     function parseFileHeader(index) {
-      var fileHeader = /^(---|\+\+\+)\s+(.*)$/.exec(diffstr[i]);
-
+      var fileHeader = /^(---|\+\+\+)\s+(.*)\r?$/.exec(diffstr[i]);
       if (fileHeader) {
         var keyPrefix = fileHeader[1] === '---' ? 'old' : 'new';
         var data = fileHeader[2].split('\t', 2);
         var fileName = data[0].replace(/\\\\/g, '\\');
-
         if (/^".*"$/.test(fileName)) {
           fileName = fileName.substr(1, fileName.length - 2);
         }
-
         index[keyPrefix + 'FileName'] = fileName;
         index[keyPrefix + 'Header'] = (data[1] || '').trim();
         i++;
       }
-    } // Parses a hunk
+    }
+
+    // Parses a hunk
     // This assumes that we are at the start of a hunk.
-
-
     function parseHunk() {
       var chunkHeaderIndex = i,
-          chunkHeaderLine = diffstr[i++],
-          chunkHeader = chunkHeaderLine.split(/@@ -(\d+)(?:,(\d+))? \+(\d+)(?:,(\d+))? @@/);
+        chunkHeaderLine = diffstr[i++],
+        chunkHeader = chunkHeaderLine.split(/@@ -(\d+)(?:,(\d+))? \+(\d+)(?:,(\d+))? @@/);
       var hunk = {
         oldStart: +chunkHeader[1],
         oldLines: typeof chunkHeader[2] === 'undefined' ? 1 : +chunkHeader[2],
         newStart: +chunkHeader[3],
         newLines: typeof chunkHeader[4] === 'undefined' ? 1 : +chunkHeader[4],
-        lines: [],
-        linedelimiters: []
-      }; // Unified Diff Format quirk: If the chunk size is 0,
+        lines: []
+      };
+
+      // Unified Diff Format quirk: If the chunk size is 0,
       // the first number is one lower than one would expect.
       // https://www.artima.com/weblogs/viewpost.jsp?thread=164293
-
       if (hunk.oldLines === 0) {
         hunk.oldStart += 1;
       }
-
       if (hunk.newLines === 0) {
         hunk.newStart += 1;
       }
-
       var addCount = 0,
-          removeCount = 0;
-
-      for (; i < diffstr.length; i++) {
-        // Lines starting with '---' could be mistaken for the "remove line" operation
-        // But they could be the header for the next file. Therefore prune such cases out.
-        if (diffstr[i].indexOf('--- ') === 0 && i + 2 < diffstr.length && diffstr[i + 1].indexOf('+++ ') === 0 && diffstr[i + 2].indexOf('@@') === 0) {
-          break;
-        }
-
+        removeCount = 0;
+      for (; i < diffstr.length && (removeCount < hunk.oldLines || addCount < hunk.newLines || (_diffstr$i = diffstr[i]) !== null && _diffstr$i !== void 0 && _diffstr$i.startsWith('\\')); i++) {
+        var _diffstr$i;
         var operation = diffstr[i].length == 0 && i != diffstr.length - 1 ? ' ' : diffstr[i][0];
-
         if (operation === '+' || operation === '-' || operation === ' ' || operation === '\\') {
           hunk.lines.push(diffstr[i]);
-          hunk.linedelimiters.push(delimiters[i] || '\n');
-
           if (operation === '+') {
             addCount++;
           } else if (operation === '-') {
@@ -18739,37 +19181,30 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             removeCount++;
           }
         } else {
-          break;
+          throw new Error("Hunk at line ".concat(chunkHeaderIndex + 1, " contained invalid line ").concat(diffstr[i]));
         }
-      } // Handle the empty block count case
+      }
 
-
+      // Handle the empty block count case
       if (!addCount && hunk.newLines === 1) {
         hunk.newLines = 0;
       }
-
       if (!removeCount && hunk.oldLines === 1) {
         hunk.oldLines = 0;
-      } // Perform optional sanity checking
-
-
-      if (options.strict) {
-        if (addCount !== hunk.newLines) {
-          throw new Error('Added line count did not match for hunk at line ' + (chunkHeaderIndex + 1));
-        }
-
-        if (removeCount !== hunk.oldLines) {
-          throw new Error('Removed line count did not match for hunk at line ' + (chunkHeaderIndex + 1));
-        }
       }
 
+      // Perform sanity checking
+      if (addCount !== hunk.newLines) {
+        throw new Error('Added line count did not match for hunk at line ' + (chunkHeaderIndex + 1));
+      }
+      if (removeCount !== hunk.oldLines) {
+        throw new Error('Removed line count did not match for hunk at line ' + (chunkHeaderIndex + 1));
+      }
       return hunk;
     }
-
     while (i < diffstr.length) {
       parseIndex();
     }
-
     return list;
   }
 
@@ -18778,210 +19213,275 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   // start of 2, this will iterate 2, 3, 1, 4, 0.
   function distanceIterator (start, minLine, maxLine) {
     var wantForward = true,
-        backwardExhausted = false,
-        forwardExhausted = false,
-        localOffset = 1;
+      backwardExhausted = false,
+      forwardExhausted = false,
+      localOffset = 1;
     return function iterator() {
       if (wantForward && !forwardExhausted) {
         if (backwardExhausted) {
           localOffset++;
         } else {
           wantForward = false;
-        } // Check if trying to fit beyond text length, and if not, check it fits
-        // after offset location (or desired location on first iteration)
-
-
-        if (start + localOffset <= maxLine) {
-          return localOffset;
         }
 
+        // Check if trying to fit beyond text length, and if not, check it fits
+        // after offset location (or desired location on first iteration)
+        if (start + localOffset <= maxLine) {
+          return start + localOffset;
+        }
         forwardExhausted = true;
       }
-
       if (!backwardExhausted) {
         if (!forwardExhausted) {
           wantForward = true;
-        } // Check if trying to fit before text beginning, and if not, check it fits
-        // before offset location
-
-
-        if (minLine <= start - localOffset) {
-          return -localOffset++;
         }
 
+        // Check if trying to fit before text beginning, and if not, check it fits
+        // before offset location
+        if (minLine <= start - localOffset) {
+          return start - localOffset++;
+        }
         backwardExhausted = true;
         return iterator();
-      } // We tried to fit hunk before text beginning and beyond text length, then
-      // hunk can't fit on the text. Return undefined
+      }
 
+      // We tried to fit hunk before text beginning and beyond text length, then
+      // hunk can't fit on the text. Return undefined
     };
   }
 
   function applyPatch(source, uniDiff) {
     var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-
     if (typeof uniDiff === 'string') {
       uniDiff = parsePatch(uniDiff);
     }
-
     if (Array.isArray(uniDiff)) {
       if (uniDiff.length > 1) {
         throw new Error('applyPatch only works with a single input.');
       }
-
       uniDiff = uniDiff[0];
-    } // Apply the diff to the input
+    }
+    if (options.autoConvertLineEndings || options.autoConvertLineEndings == null) {
+      if (hasOnlyWinLineEndings(source) && isUnix(uniDiff)) {
+        uniDiff = unixToWin(uniDiff);
+      } else if (hasOnlyUnixLineEndings(source) && isWin(uniDiff)) {
+        uniDiff = winToUnix(uniDiff);
+      }
+    }
 
+    // Apply the diff to the input
+    var lines = source.split('\n'),
+      hunks = uniDiff.hunks,
+      compareLine = options.compareLine || function (lineNumber, line, operation, patchContent) {
+        return line === patchContent;
+      },
+      fuzzFactor = options.fuzzFactor || 0,
+      minLine = 0;
+    if (fuzzFactor < 0 || !Number.isInteger(fuzzFactor)) {
+      throw new Error('fuzzFactor must be a non-negative integer');
+    }
 
-    var lines = source.split(/\r\n|[\n\v\f\r\x85]/),
-        delimiters = source.match(/\r\n|[\n\v\f\r\x85]/g) || [],
-        hunks = uniDiff.hunks,
-        compareLine = options.compareLine || function (lineNumber, line, operation, patchContent) {
-      return line === patchContent;
-    },
-        errorCount = 0,
-        fuzzFactor = options.fuzzFactor || 0,
-        minLine = 0,
-        offset = 0,
-        removeEOFNL,
-        addEOFNL;
+    // Special case for empty patch.
+    if (!hunks.length) {
+      return source;
+    }
+
+    // Before anything else, handle EOFNL insertion/removal. If the patch tells us to make a change
+    // to the EOFNL that is redundant/impossible - i.e. to remove a newline that's not there, or add a
+    // newline that already exists - then we either return false and fail to apply the patch (if
+    // fuzzFactor is 0) or simply ignore the problem and do nothing (if fuzzFactor is >0).
+    // If we do need to remove/add a newline at EOF, this will always be in the final hunk:
+    var prevLine = '',
+      removeEOFNL = false,
+      addEOFNL = false;
+    for (var i = 0; i < hunks[hunks.length - 1].lines.length; i++) {
+      var line = hunks[hunks.length - 1].lines[i];
+      if (line[0] == '\\') {
+        if (prevLine[0] == '+') {
+          removeEOFNL = true;
+        } else if (prevLine[0] == '-') {
+          addEOFNL = true;
+        }
+      }
+      prevLine = line;
+    }
+    if (removeEOFNL) {
+      if (addEOFNL) {
+        // This means the final line gets changed but doesn't have a trailing newline in either the
+        // original or patched version. In that case, we do nothing if fuzzFactor > 0, and if
+        // fuzzFactor is 0, we simply validate that the source file has no trailing newline.
+        if (!fuzzFactor && lines[lines.length - 1] == '') {
+          return false;
+        }
+      } else if (lines[lines.length - 1] == '') {
+        lines.pop();
+      } else if (!fuzzFactor) {
+        return false;
+      }
+    } else if (addEOFNL) {
+      if (lines[lines.length - 1] != '') {
+        lines.push('');
+      } else if (!fuzzFactor) {
+        return false;
+      }
+    }
+
     /**
-     * Checks if the hunk exactly fits on the provided location
+     * Checks if the hunk can be made to fit at the provided location with at most `maxErrors`
+     * insertions, substitutions, or deletions, while ensuring also that:
+     * - lines deleted in the hunk match exactly, and
+     * - wherever an insertion operation or block of insertion operations appears in the hunk, the
+     *   immediately preceding and following lines of context match exactly
+     *
+     * `toPos` should be set such that lines[toPos] is meant to match hunkLines[0].
+     *
+     * If the hunk can be applied, returns an object with properties `oldLineLastI` and
+     * `replacementLines`. Otherwise, returns null.
      */
-
-
-    function hunkFits(hunk, toPos) {
-      for (var j = 0; j < hunk.lines.length; j++) {
-        var line = hunk.lines[j],
-            operation = line.length > 0 ? line[0] : ' ',
-            content = line.length > 0 ? line.substr(1) : line;
-
-        if (operation === ' ' || operation === '-') {
-          // Context sanity check
-          if (!compareLine(toPos + 1, lines[toPos], operation, content)) {
-            errorCount++;
-
-            if (errorCount > fuzzFactor) {
-              return false;
+    function applyHunk(hunkLines, toPos, maxErrors) {
+      var hunkLinesI = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
+      var lastContextLineMatched = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : true;
+      var patchedLines = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : [];
+      var patchedLinesLength = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0;
+      var nConsecutiveOldContextLines = 0;
+      var nextContextLineMustMatch = false;
+      for (; hunkLinesI < hunkLines.length; hunkLinesI++) {
+        var hunkLine = hunkLines[hunkLinesI],
+          operation = hunkLine.length > 0 ? hunkLine[0] : ' ',
+          content = hunkLine.length > 0 ? hunkLine.substr(1) : hunkLine;
+        if (operation === '-') {
+          if (compareLine(toPos + 1, lines[toPos], operation, content)) {
+            toPos++;
+            nConsecutiveOldContextLines = 0;
+          } else {
+            if (!maxErrors || lines[toPos] == null) {
+              return null;
             }
+            patchedLines[patchedLinesLength] = lines[toPos];
+            return applyHunk(hunkLines, toPos + 1, maxErrors - 1, hunkLinesI, false, patchedLines, patchedLinesLength + 1);
           }
+        }
+        if (operation === '+') {
+          if (!lastContextLineMatched) {
+            return null;
+          }
+          patchedLines[patchedLinesLength] = content;
+          patchedLinesLength++;
+          nConsecutiveOldContextLines = 0;
+          nextContextLineMustMatch = true;
+        }
+        if (operation === ' ') {
+          nConsecutiveOldContextLines++;
+          patchedLines[patchedLinesLength] = lines[toPos];
+          if (compareLine(toPos + 1, lines[toPos], operation, content)) {
+            patchedLinesLength++;
+            lastContextLineMatched = true;
+            nextContextLineMustMatch = false;
+            toPos++;
+          } else {
+            if (nextContextLineMustMatch || !maxErrors) {
+              return null;
+            }
 
-          toPos++;
+            // Consider 3 possibilities in sequence:
+            // 1. lines contains a *substitution* not included in the patch context, or
+            // 2. lines contains an *insertion* not included in the patch context, or
+            // 3. lines contains a *deletion* not included in the patch context
+            // The first two options are of course only possible if the line from lines is non-null -
+            // i.e. only option 3 is possible if we've overrun the end of the old file.
+            return lines[toPos] && (applyHunk(hunkLines, toPos + 1, maxErrors - 1, hunkLinesI + 1, false, patchedLines, patchedLinesLength + 1) || applyHunk(hunkLines, toPos + 1, maxErrors - 1, hunkLinesI, false, patchedLines, patchedLinesLength + 1)) || applyHunk(hunkLines, toPos, maxErrors - 1, hunkLinesI + 1, false, patchedLines, patchedLinesLength);
+          }
         }
       }
 
-      return true;
-    } // Search best fit offsets for each hunk based on the previous ones
+      // Before returning, trim any unmodified context lines off the end of patchedLines and reduce
+      // toPos (and thus oldLineLastI) accordingly. This allows later hunks to be applied to a region
+      // that starts in this hunk's trailing context.
+      patchedLinesLength -= nConsecutiveOldContextLines;
+      toPos -= nConsecutiveOldContextLines;
+      patchedLines.length = patchedLinesLength;
+      return {
+        patchedLines: patchedLines,
+        oldLineLastI: toPos - 1
+      };
+    }
+    var resultLines = [];
 
-
-    for (var i = 0; i < hunks.length; i++) {
-      var hunk = hunks[i],
-          maxLine = lines.length - hunk.oldLines,
-          localOffset = 0,
-          toPos = offset + hunk.oldStart - 1;
-      var iterator = distanceIterator(toPos, minLine, maxLine);
-
-      for (; localOffset !== undefined; localOffset = iterator()) {
-        if (hunkFits(hunk, toPos + localOffset)) {
-          hunk.offset = offset += localOffset;
+    // Search best fit offsets for each hunk based on the previous ones
+    var prevHunkOffset = 0;
+    for (var _i = 0; _i < hunks.length; _i++) {
+      var hunk = hunks[_i];
+      var hunkResult = void 0;
+      var maxLine = lines.length - hunk.oldLines + fuzzFactor;
+      var toPos = void 0;
+      for (var maxErrors = 0; maxErrors <= fuzzFactor; maxErrors++) {
+        toPos = hunk.oldStart + prevHunkOffset - 1;
+        var iterator = distanceIterator(toPos, minLine, maxLine);
+        for (; toPos !== undefined; toPos = iterator()) {
+          hunkResult = applyHunk(hunk.lines, toPos, maxErrors);
+          if (hunkResult) {
+            break;
+          }
+        }
+        if (hunkResult) {
           break;
         }
       }
-
-      if (localOffset === undefined) {
+      if (!hunkResult) {
         return false;
-      } // Set lower text limit to end of the current hunk, so next ones don't try
+      }
+
+      // Copy everything from the end of where we applied the last hunk to the start of this hunk
+      for (var _i2 = minLine; _i2 < toPos; _i2++) {
+        resultLines.push(lines[_i2]);
+      }
+
+      // Add the lines produced by applying the hunk:
+      for (var _i3 = 0; _i3 < hunkResult.patchedLines.length; _i3++) {
+        var _line = hunkResult.patchedLines[_i3];
+        resultLines.push(_line);
+      }
+
+      // Set lower text limit to end of the current hunk, so next ones don't try
       // to fit over already patched text
+      minLine = hunkResult.oldLineLastI + 1;
 
-
-      minLine = hunk.offset + hunk.oldStart + hunk.oldLines;
-    } // Apply patch hunks
-
-
-    var diffOffset = 0;
-
-    for (var _i = 0; _i < hunks.length; _i++) {
-      var _hunk = hunks[_i],
-          _toPos = _hunk.oldStart + _hunk.offset + diffOffset - 1;
-
-      diffOffset += _hunk.newLines - _hunk.oldLines;
-
-      for (var j = 0; j < _hunk.lines.length; j++) {
-        var line = _hunk.lines[j],
-            operation = line.length > 0 ? line[0] : ' ',
-            content = line.length > 0 ? line.substr(1) : line,
-            delimiter = _hunk.linedelimiters[j];
-
-        if (operation === ' ') {
-          _toPos++;
-        } else if (operation === '-') {
-          lines.splice(_toPos, 1);
-          delimiters.splice(_toPos, 1);
-          /* istanbul ignore else */
-        } else if (operation === '+') {
-          lines.splice(_toPos, 0, content);
-          delimiters.splice(_toPos, 0, delimiter);
-          _toPos++;
-        } else if (operation === '\\') {
-          var previousOperation = _hunk.lines[j - 1] ? _hunk.lines[j - 1][0] : null;
-
-          if (previousOperation === '+') {
-            removeEOFNL = true;
-          } else if (previousOperation === '-') {
-            addEOFNL = true;
-          }
-        }
-      }
-    } // Handle EOFNL insertion/removal
-
-
-    if (removeEOFNL) {
-      while (!lines[lines.length - 1]) {
-        lines.pop();
-        delimiters.pop();
-      }
-    } else if (addEOFNL) {
-      lines.push('');
-      delimiters.push('\n');
+      // Note the offset between where the patch said the hunk should've applied and where we
+      // applied it, so we can adjust future hunks accordingly:
+      prevHunkOffset = toPos + 1 - hunk.oldStart;
     }
 
-    for (var _k = 0; _k < lines.length - 1; _k++) {
-      lines[_k] = lines[_k] + delimiters[_k];
+    // Copy over the rest of the lines from the old text
+    for (var _i4 = minLine; _i4 < lines.length; _i4++) {
+      resultLines.push(lines[_i4]);
     }
+    return resultLines.join('\n');
+  }
 
-    return lines.join('');
-  } // Wrapper that supports multiple file patches via callbacks.
-
+  // Wrapper that supports multiple file patches via callbacks.
   function applyPatches(uniDiff, options) {
     if (typeof uniDiff === 'string') {
       uniDiff = parsePatch(uniDiff);
     }
-
     var currentIndex = 0;
-
     function processIndex() {
       var index = uniDiff[currentIndex++];
-
       if (!index) {
         return options.complete();
       }
-
       options.loadFile(index, function (err, data) {
         if (err) {
           return options.complete(err);
         }
-
         var updatedContent = applyPatch(data, index, options);
         options.patched(index, updatedContent, function (err) {
           if (err) {
             return options.complete(err);
           }
-
           processIndex();
         });
       });
     }
-
     processIndex();
   }
 
@@ -18989,202 +19489,238 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     if (!options) {
       options = {};
     }
-
+    if (typeof options === 'function') {
+      options = {
+        callback: options
+      };
+    }
     if (typeof options.context === 'undefined') {
       options.context = 4;
     }
-
-    var diff = diffLines(oldStr, newStr, options);
-
-    if (!diff) {
-      return;
+    if (options.newlineIsToken) {
+      throw new Error('newlineIsToken may not be used with patch-generation functions, only with diffing functions');
     }
-
-    diff.push({
-      value: '',
-      lines: []
-    }); // Append an empty value to make cleanup easier
-
-    function contextLines(lines) {
-      return lines.map(function (entry) {
-        return ' ' + entry;
-      });
+    if (!options.callback) {
+      return diffLinesResultToPatch(diffLines(oldStr, newStr, options));
+    } else {
+      var _options = options,
+        _callback = _options.callback;
+      diffLines(oldStr, newStr, _objectSpread2(_objectSpread2({}, options), {}, {
+        callback: function callback(diff) {
+          var patch = diffLinesResultToPatch(diff);
+          _callback(patch);
+        }
+      }));
     }
+    function diffLinesResultToPatch(diff) {
+      // STEP 1: Build up the patch with no "\ No newline at end of file" lines and with the arrays
+      //         of lines containing trailing newline characters. We'll tidy up later...
 
-    var hunks = [];
-    var oldRangeStart = 0,
+      if (!diff) {
+        return;
+      }
+      diff.push({
+        value: '',
+        lines: []
+      }); // Append an empty value to make cleanup easier
+
+      function contextLines(lines) {
+        return lines.map(function (entry) {
+          return ' ' + entry;
+        });
+      }
+      var hunks = [];
+      var oldRangeStart = 0,
         newRangeStart = 0,
         curRange = [],
         oldLine = 1,
         newLine = 1;
-
-    var _loop = function _loop(i) {
-      var current = diff[i],
-          lines = current.lines || current.value.replace(/\n$/, '').split('\n');
-      current.lines = lines;
-
-      if (current.added || current.removed) {
-        var _curRange;
-
-        // If we have previous context, start with that
-        if (!oldRangeStart) {
-          var prev = diff[i - 1];
-          oldRangeStart = oldLine;
-          newRangeStart = newLine;
-
-          if (prev) {
-            curRange = options.context > 0 ? contextLines(prev.lines.slice(-options.context)) : [];
-            oldRangeStart -= curRange.length;
-            newRangeStart -= curRange.length;
-          }
-        } // Output our changes
-
-
-        (_curRange = curRange).push.apply(_curRange, _toConsumableArray(lines.map(function (entry) {
-          return (current.added ? '+' : '-') + entry;
-        }))); // Track the updated file position
-
-
-        if (current.added) {
-          newLine += lines.length;
-        } else {
-          oldLine += lines.length;
-        }
-      } else {
-        // Identical context lines. Track line changes
-        if (oldRangeStart) {
-          // Close out any changes that have been output (or join overlapping)
-          if (lines.length <= options.context * 2 && i < diff.length - 2) {
-            var _curRange2;
-
-            // Overlapping
-            (_curRange2 = curRange).push.apply(_curRange2, _toConsumableArray(contextLines(lines)));
-          } else {
-            var _curRange3;
-
-            // end the range and output
-            var contextSize = Math.min(lines.length, options.context);
-
-            (_curRange3 = curRange).push.apply(_curRange3, _toConsumableArray(contextLines(lines.slice(0, contextSize))));
-
-            var hunk = {
-              oldStart: oldRangeStart,
-              oldLines: oldLine - oldRangeStart + contextSize,
-              newStart: newRangeStart,
-              newLines: newLine - newRangeStart + contextSize,
-              lines: curRange
-            };
-
-            if (i >= diff.length - 2 && lines.length <= options.context) {
-              // EOF is inside this hunk
-              var oldEOFNewline = /\n$/.test(oldStr);
-              var newEOFNewline = /\n$/.test(newStr);
-              var noNlBeforeAdds = lines.length == 0 && curRange.length > hunk.oldLines;
-
-              if (!oldEOFNewline && noNlBeforeAdds && oldStr.length > 0) {
-                // special case: old has no eol and no trailing context; no-nl can end up before adds
-                // however, if the old file is empty, do not output the no-nl line
-                curRange.splice(hunk.oldLines, 0, '\\ No newline at end of file');
-              }
-
-              if (!oldEOFNewline && !noNlBeforeAdds || !newEOFNewline) {
-                curRange.push('\\ No newline at end of file');
-              }
+      var _loop = function _loop() {
+        var current = diff[i],
+          lines = current.lines || splitLines(current.value);
+        current.lines = lines;
+        if (current.added || current.removed) {
+          var _curRange;
+          // If we have previous context, start with that
+          if (!oldRangeStart) {
+            var prev = diff[i - 1];
+            oldRangeStart = oldLine;
+            newRangeStart = newLine;
+            if (prev) {
+              curRange = options.context > 0 ? contextLines(prev.lines.slice(-options.context)) : [];
+              oldRangeStart -= curRange.length;
+              newRangeStart -= curRange.length;
             }
+          }
 
-            hunks.push(hunk);
-            oldRangeStart = 0;
-            newRangeStart = 0;
-            curRange = [];
+          // Output our changes
+          (_curRange = curRange).push.apply(_curRange, _toConsumableArray(lines.map(function (entry) {
+            return (current.added ? '+' : '-') + entry;
+          })));
+
+          // Track the updated file position
+          if (current.added) {
+            newLine += lines.length;
+          } else {
+            oldLine += lines.length;
+          }
+        } else {
+          // Identical context lines. Track line changes
+          if (oldRangeStart) {
+            // Close out any changes that have been output (or join overlapping)
+            if (lines.length <= options.context * 2 && i < diff.length - 2) {
+              var _curRange2;
+              // Overlapping
+              (_curRange2 = curRange).push.apply(_curRange2, _toConsumableArray(contextLines(lines)));
+            } else {
+              var _curRange3;
+              // end the range and output
+              var contextSize = Math.min(lines.length, options.context);
+              (_curRange3 = curRange).push.apply(_curRange3, _toConsumableArray(contextLines(lines.slice(0, contextSize))));
+              var _hunk = {
+                oldStart: oldRangeStart,
+                oldLines: oldLine - oldRangeStart + contextSize,
+                newStart: newRangeStart,
+                newLines: newLine - newRangeStart + contextSize,
+                lines: curRange
+              };
+              hunks.push(_hunk);
+              oldRangeStart = 0;
+              newRangeStart = 0;
+              curRange = [];
+            }
+          }
+          oldLine += lines.length;
+          newLine += lines.length;
+        }
+      };
+      for (var i = 0; i < diff.length; i++) {
+        _loop();
+      }
+
+      // Step 2: eliminate the trailing `\n` from each line of each hunk, and, where needed, add
+      //         "\ No newline at end of file".
+      for (var _i = 0, _hunks = hunks; _i < _hunks.length; _i++) {
+        var hunk = _hunks[_i];
+        for (var _i2 = 0; _i2 < hunk.lines.length; _i2++) {
+          if (hunk.lines[_i2].endsWith('\n')) {
+            hunk.lines[_i2] = hunk.lines[_i2].slice(0, -1);
+          } else {
+            hunk.lines.splice(_i2 + 1, 0, '\\ No newline at end of file');
+            _i2++; // Skip the line we just added, then continue iterating
           }
         }
-
-        oldLine += lines.length;
-        newLine += lines.length;
       }
-    };
-
-    for (var i = 0; i < diff.length; i++) {
-      _loop(i);
+      return {
+        oldFileName: oldFileName,
+        newFileName: newFileName,
+        oldHeader: oldHeader,
+        newHeader: newHeader,
+        hunks: hunks
+      };
     }
-
-    return {
-      oldFileName: oldFileName,
-      newFileName: newFileName,
-      oldHeader: oldHeader,
-      newHeader: newHeader,
-      hunks: hunks
-    };
   }
   function formatPatch(diff) {
+    if (Array.isArray(diff)) {
+      return diff.map(formatPatch).join('\n');
+    }
     var ret = [];
-
     if (diff.oldFileName == diff.newFileName) {
       ret.push('Index: ' + diff.oldFileName);
     }
-
     ret.push('===================================================================');
     ret.push('--- ' + diff.oldFileName + (typeof diff.oldHeader === 'undefined' ? '' : '\t' + diff.oldHeader));
     ret.push('+++ ' + diff.newFileName + (typeof diff.newHeader === 'undefined' ? '' : '\t' + diff.newHeader));
-
     for (var i = 0; i < diff.hunks.length; i++) {
-      var hunk = diff.hunks[i]; // Unified Diff Format quirk: If the chunk size is 0,
+      var hunk = diff.hunks[i];
+      // Unified Diff Format quirk: If the chunk size is 0,
       // the first number is one lower than one would expect.
       // https://www.artima.com/weblogs/viewpost.jsp?thread=164293
-
       if (hunk.oldLines === 0) {
         hunk.oldStart -= 1;
       }
-
       if (hunk.newLines === 0) {
         hunk.newStart -= 1;
       }
-
       ret.push('@@ -' + hunk.oldStart + ',' + hunk.oldLines + ' +' + hunk.newStart + ',' + hunk.newLines + ' @@');
       ret.push.apply(ret, hunk.lines);
     }
-
     return ret.join('\n') + '\n';
   }
   function createTwoFilesPatch(oldFileName, newFileName, oldStr, newStr, oldHeader, newHeader, options) {
-    return formatPatch(structuredPatch(oldFileName, newFileName, oldStr, newStr, oldHeader, newHeader, options));
+    var _options2;
+    if (typeof options === 'function') {
+      options = {
+        callback: options
+      };
+    }
+    if (!((_options2 = options) !== null && _options2 !== void 0 && _options2.callback)) {
+      var patchObj = structuredPatch(oldFileName, newFileName, oldStr, newStr, oldHeader, newHeader, options);
+      if (!patchObj) {
+        return;
+      }
+      return formatPatch(patchObj);
+    } else {
+      var _options3 = options,
+        _callback2 = _options3.callback;
+      structuredPatch(oldFileName, newFileName, oldStr, newStr, oldHeader, newHeader, _objectSpread2(_objectSpread2({}, options), {}, {
+        callback: function callback(patchObj) {
+          if (!patchObj) {
+            _callback2();
+          } else {
+            _callback2(formatPatch(patchObj));
+          }
+        }
+      }));
+    }
   }
   function createPatch(fileName, oldStr, newStr, oldHeader, newHeader, options) {
     return createTwoFilesPatch(fileName, fileName, oldStr, newStr, oldHeader, newHeader, options);
+  }
+
+  /**
+   * Split `text` into an array of lines, including the trailing newline character (where present)
+   */
+  function splitLines(text) {
+    var hasTrailingNl = text.endsWith('\n');
+    var result = text.split('\n').map(function (line) {
+      return line + '\n';
+    });
+    if (hasTrailingNl) {
+      result.pop();
+    } else {
+      result.push(result.pop().slice(0, -1));
+    }
+    return result;
   }
 
   function arrayEqual(a, b) {
     if (a.length !== b.length) {
       return false;
     }
-
     return arrayStartsWith(a, b);
   }
   function arrayStartsWith(array, start) {
     if (start.length > array.length) {
       return false;
     }
-
     for (var i = 0; i < start.length; i++) {
       if (start[i] !== array[i]) {
         return false;
       }
     }
-
     return true;
   }
 
   function calcLineCount(hunk) {
     var _calcOldNewLineCount = calcOldNewLineCount(hunk.lines),
-        oldLines = _calcOldNewLineCount.oldLines,
-        newLines = _calcOldNewLineCount.newLines;
-
+      oldLines = _calcOldNewLineCount.oldLines,
+      newLines = _calcOldNewLineCount.newLines;
     if (oldLines !== undefined) {
       hunk.oldLines = oldLines;
     } else {
       delete hunk.oldLines;
     }
-
     if (newLines !== undefined) {
       hunk.newLines = newLines;
     } else {
@@ -19194,14 +19730,14 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   function merge(mine, theirs, base) {
     mine = loadPatch(mine, base);
     theirs = loadPatch(theirs, base);
-    var ret = {}; // For index we just let it pass through as it doesn't have any necessary meaning.
+    var ret = {};
+
+    // For index we just let it pass through as it doesn't have any necessary meaning.
     // Leaving sanity checks on this to the API consumer that may know more about the
     // meaning in their own context.
-
     if (mine.index || theirs.index) {
       ret.index = mine.index || theirs.index;
     }
-
     if (mine.newFileName || theirs.newFileName) {
       if (!fileNameChanged(mine)) {
         // No header or no change in ours, use theirs (and ours if theirs does not exist)
@@ -19223,21 +19759,18 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         ret.newHeader = selectField(ret, mine.newHeader, theirs.newHeader);
       }
     }
-
     ret.hunks = [];
     var mineIndex = 0,
-        theirsIndex = 0,
-        mineOffset = 0,
-        theirsOffset = 0;
-
+      theirsIndex = 0,
+      mineOffset = 0,
+      theirsOffset = 0;
     while (mineIndex < mine.hunks.length || theirsIndex < theirs.hunks.length) {
       var mineCurrent = mine.hunks[mineIndex] || {
-        oldStart: Infinity
-      },
-          theirsCurrent = theirs.hunks[theirsIndex] || {
-        oldStart: Infinity
-      };
-
+          oldStart: Infinity
+        },
+        theirsCurrent = theirs.hunks[theirsIndex] || {
+          oldStart: Infinity
+        };
       if (hunkBefore(mineCurrent, theirsCurrent)) {
         // This patch does not overlap with any of the others, yay.
         ret.hunks.push(cloneHunk(mineCurrent, mineOffset));
@@ -19263,30 +19796,23 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         ret.hunks.push(mergedHunk);
       }
     }
-
     return ret;
   }
-
   function loadPatch(param, base) {
     if (typeof param === 'string') {
       if (/^@@/m.test(param) || /^Index:/m.test(param)) {
         return parsePatch(param)[0];
       }
-
       if (!base) {
         throw new Error('Must provide a base reference or pass in a patch');
       }
-
       return structuredPatch(undefined, undefined, base, param);
     }
-
     return param;
   }
-
   function fileNameChanged(patch) {
     return patch.newFileName && patch.newFileName !== patch.oldFileName;
   }
-
   function selectField(index, mine, theirs) {
     if (mine === theirs) {
       return mine;
@@ -19298,11 +19824,9 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       };
     }
   }
-
   function hunkBefore(test, check) {
     return test.oldStart < check.oldStart && test.oldStart + test.oldLines < check.oldStart;
   }
-
   function cloneHunk(hunk, offset) {
     return {
       oldStart: hunk.oldStart,
@@ -19312,39 +19836,37 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       lines: hunk.lines
     };
   }
-
   function mergeLines(hunk, mineOffset, mineLines, theirOffset, theirLines) {
     // This will generally result in a conflicted hunk, but there are cases where the context
     // is the only overlap where we can successfully merge the content here.
     var mine = {
-      offset: mineOffset,
-      lines: mineLines,
-      index: 0
-    },
-        their = {
-      offset: theirOffset,
-      lines: theirLines,
-      index: 0
-    }; // Handle any leading content
+        offset: mineOffset,
+        lines: mineLines,
+        index: 0
+      },
+      their = {
+        offset: theirOffset,
+        lines: theirLines,
+        index: 0
+      };
 
+    // Handle any leading content
     insertLeading(hunk, mine, their);
-    insertLeading(hunk, their, mine); // Now in the overlap content. Scan through and select the best changes from each.
+    insertLeading(hunk, their, mine);
 
+    // Now in the overlap content. Scan through and select the best changes from each.
     while (mine.index < mine.lines.length && their.index < their.lines.length) {
       var mineCurrent = mine.lines[mine.index],
-          theirCurrent = their.lines[their.index];
-
+        theirCurrent = their.lines[their.index];
       if ((mineCurrent[0] === '-' || mineCurrent[0] === '+') && (theirCurrent[0] === '-' || theirCurrent[0] === '+')) {
         // Both modified ...
         mutualChange(hunk, mine, their);
       } else if (mineCurrent[0] === '+' && theirCurrent[0] === ' ') {
         var _hunk$lines;
-
         // Mine inserted
         (_hunk$lines = hunk.lines).push.apply(_hunk$lines, _toConsumableArray(collectChange(mine)));
       } else if (theirCurrent[0] === '+' && mineCurrent[0] === ' ') {
         var _hunk$lines2;
-
         // Theirs inserted
         (_hunk$lines2 = hunk.lines).push.apply(_hunk$lines2, _toConsumableArray(collectChange(their)));
       } else if (mineCurrent[0] === '-' && theirCurrent[0] === ' ') {
@@ -19362,57 +19884,44 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         // Context mismatch
         conflict(hunk, collectChange(mine), collectChange(their));
       }
-    } // Now push anything that may be remaining
+    }
 
-
+    // Now push anything that may be remaining
     insertTrailing(hunk, mine);
     insertTrailing(hunk, their);
     calcLineCount(hunk);
   }
-
   function mutualChange(hunk, mine, their) {
     var myChanges = collectChange(mine),
-        theirChanges = collectChange(their);
-
+      theirChanges = collectChange(their);
     if (allRemoves(myChanges) && allRemoves(theirChanges)) {
       // Special case for remove changes that are supersets of one another
       if (arrayStartsWith(myChanges, theirChanges) && skipRemoveSuperset(their, myChanges, myChanges.length - theirChanges.length)) {
         var _hunk$lines3;
-
         (_hunk$lines3 = hunk.lines).push.apply(_hunk$lines3, _toConsumableArray(myChanges));
-
         return;
       } else if (arrayStartsWith(theirChanges, myChanges) && skipRemoveSuperset(mine, theirChanges, theirChanges.length - myChanges.length)) {
         var _hunk$lines4;
-
         (_hunk$lines4 = hunk.lines).push.apply(_hunk$lines4, _toConsumableArray(theirChanges));
-
         return;
       }
     } else if (arrayEqual(myChanges, theirChanges)) {
       var _hunk$lines5;
-
       (_hunk$lines5 = hunk.lines).push.apply(_hunk$lines5, _toConsumableArray(myChanges));
-
       return;
     }
-
     conflict(hunk, myChanges, theirChanges);
   }
-
   function removal(hunk, mine, their, swap) {
     var myChanges = collectChange(mine),
-        theirChanges = collectContext(their, myChanges);
-
+      theirChanges = collectContext(their, myChanges);
     if (theirChanges.merged) {
       var _hunk$lines6;
-
       (_hunk$lines6 = hunk.lines).push.apply(_hunk$lines6, _toConsumableArray(theirChanges.merged));
     } else {
       conflict(hunk, swap ? theirChanges : myChanges, swap ? myChanges : theirChanges);
     }
   }
-
   function conflict(hunk, mine, their) {
     hunk.conflict = true;
     hunk.lines.push({
@@ -19421,7 +19930,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       theirs: their
     });
   }
-
   function insertLeading(hunk, insert, their) {
     while (insert.offset < their.offset && insert.index < insert.lines.length) {
       var line = insert.lines[insert.index++];
@@ -19429,25 +19937,22 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       insert.offset++;
     }
   }
-
   function insertTrailing(hunk, insert) {
     while (insert.index < insert.lines.length) {
       var line = insert.lines[insert.index++];
       hunk.lines.push(line);
     }
   }
-
   function collectChange(state) {
     var ret = [],
-        operation = state.lines[state.index][0];
-
+      operation = state.lines[state.index][0];
     while (state.index < state.lines.length) {
-      var line = state.lines[state.index]; // Group additions that are immediately after subtractions and treat them as one "atomic" modify change.
+      var line = state.lines[state.index];
 
+      // Group additions that are immediately after subtractions and treat them as one "atomic" modify change.
       if (operation === '-' && line[0] === '+') {
         operation = '+';
       }
-
       if (operation === line[0]) {
         ret.push(line);
         state.index++;
@@ -19455,39 +19960,35 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         break;
       }
     }
-
     return ret;
   }
-
   function collectContext(state, matchChanges) {
     var changes = [],
-        merged = [],
-        matchIndex = 0,
-        contextChanges = false,
-        conflicted = false;
-
+      merged = [],
+      matchIndex = 0,
+      contextChanges = false,
+      conflicted = false;
     while (matchIndex < matchChanges.length && state.index < state.lines.length) {
       var change = state.lines[state.index],
-          match = matchChanges[matchIndex]; // Once we've hit our add, then we are done
+        match = matchChanges[matchIndex];
 
+      // Once we've hit our add, then we are done
       if (match[0] === '+') {
         break;
       }
-
       contextChanges = contextChanges || change[0] !== ' ';
       merged.push(match);
-      matchIndex++; // Consume any additions in the other block as a conflict to attempt
-      // to pull in the remaining context after this
+      matchIndex++;
 
+      // Consume any additions in the other block as a conflict to attempt
+      // to pull in the remaining context after this
       if (change[0] === '+') {
         conflicted = true;
-
         while (change[0] === '+') {
           changes.push(change);
           change = state.lines[++state.index];
         }
       }
-
       if (match.substr(1) === change.substr(1)) {
         changes.push(change);
         state.index++;
@@ -19495,44 +19996,35 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         conflicted = true;
       }
     }
-
     if ((matchChanges[matchIndex] || '')[0] === '+' && contextChanges) {
       conflicted = true;
     }
-
     if (conflicted) {
       return changes;
     }
-
     while (matchIndex < matchChanges.length) {
       merged.push(matchChanges[matchIndex++]);
     }
-
     return {
       merged: merged,
       changes: changes
     };
   }
-
   function allRemoves(changes) {
     return changes.reduce(function (prev, change) {
       return prev && change[0] === '-';
     }, true);
   }
-
   function skipRemoveSuperset(state, removeChanges, delta) {
     for (var i = 0; i < delta; i++) {
       var changeContent = removeChanges[removeChanges.length - delta + i].substr(1);
-
       if (state.lines[state.index + i] !== ' ' + changeContent) {
         return false;
       }
     }
-
     state.index += delta;
     return true;
   }
-
   function calcOldNewLineCount(lines) {
     var oldLines = 0;
     var newLines = 0;
@@ -19540,7 +20032,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       if (typeof line !== 'string') {
         var myCount = calcOldNewLineCount(line.mine);
         var theirCount = calcOldNewLineCount(line.theirs);
-
         if (oldLines !== undefined) {
           if (myCount.oldLines === theirCount.oldLines) {
             oldLines += myCount.oldLines;
@@ -19548,7 +20039,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             oldLines = undefined;
           }
         }
-
         if (newLines !== undefined) {
           if (myCount.newLines === theirCount.newLines) {
             newLines += myCount.newLines;
@@ -19560,7 +20050,6 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         if (newLines !== undefined && (line[0] === '+' || line[0] === ' ')) {
           newLines++;
         }
-
         if (oldLines !== undefined && (line[0] === '-' || line[0] === ' ')) {
           oldLines++;
         }
@@ -19572,15 +20061,42 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     };
   }
 
+  function reversePatch(structuredPatch) {
+    if (Array.isArray(structuredPatch)) {
+      return structuredPatch.map(reversePatch).reverse();
+    }
+    return _objectSpread2(_objectSpread2({}, structuredPatch), {}, {
+      oldFileName: structuredPatch.newFileName,
+      oldHeader: structuredPatch.newHeader,
+      newFileName: structuredPatch.oldFileName,
+      newHeader: structuredPatch.oldHeader,
+      hunks: structuredPatch.hunks.map(function (hunk) {
+        return {
+          oldLines: hunk.newLines,
+          oldStart: hunk.newStart,
+          newLines: hunk.oldLines,
+          newStart: hunk.oldStart,
+          lines: hunk.lines.map(function (l) {
+            if (l.startsWith('-')) {
+              return "+".concat(l.slice(1));
+            }
+            if (l.startsWith('+')) {
+              return "-".concat(l.slice(1));
+            }
+            return l;
+          })
+        };
+      })
+    });
+  }
+
   // See: http://code.google.com/p/google-diff-match-patch/wiki/API
   function convertChangesToDMP(changes) {
     var ret = [],
-        change,
-        operation;
-
+      change,
+      operation;
     for (var i = 0; i < changes.length; i++) {
       change = changes[i];
-
       if (change.added) {
         operation = 1;
       } else if (change.removed) {
@@ -19588,37 +20104,29 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       } else {
         operation = 0;
       }
-
       ret.push([operation, change.value]);
     }
-
     return ret;
   }
 
   function convertChangesToXML(changes) {
     var ret = [];
-
     for (var i = 0; i < changes.length; i++) {
       var change = changes[i];
-
       if (change.added) {
         ret.push('<ins>');
       } else if (change.removed) {
         ret.push('<del>');
       }
-
       ret.push(escapeHTML(change.value));
-
       if (change.added) {
         ret.push('</ins>');
       } else if (change.removed) {
         ret.push('</del>');
       }
     }
-
     return ret.join('');
   }
-
   function escapeHTML(s) {
     var n = s;
     n = n.replace(/&/g, '&amp;');
@@ -19645,18 +20153,18 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   exports.diffTrimmedLines = diffTrimmedLines;
   exports.diffWords = diffWords;
   exports.diffWordsWithSpace = diffWordsWithSpace;
+  exports.formatPatch = formatPatch;
   exports.merge = merge;
   exports.parsePatch = parsePatch;
+  exports.reversePatch = reversePatch;
   exports.structuredPatch = structuredPatch;
 
-  Object.defineProperty(exports, '__esModule', { value: true });
+}));
 
-})));
-
-},{}],31:[function(require,module,exports){
+},{}],27:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.parse = void 0;
+exports.parse = parse;
 const types_1 = require("./types");
 const utils_1 = require("./utils");
 function getExtension(filename, language) {
@@ -19971,7 +20479,8 @@ function parse(diffInput, config = {}) {
         else if ((values = index.exec(line))) {
             currentFile.checksumBefore = values[1];
             currentFile.checksumAfter = values[2];
-            values[3] && (currentFile.mode = values[3]);
+            if (values[3])
+                currentFile.mode = values[3];
         }
         else if ((values = combinedIndex.exec(line))) {
             currentFile.checksumBefore = [values[2], values[3]];
@@ -19994,9 +20503,8 @@ function parse(diffInput, config = {}) {
     saveFile();
     return files;
 }
-exports.parse = parse;
 
-},{"./types":40,"./utils":41}],32:[function(require,module,exports){
+},{"./types":36,"./utils":37}],28:[function(require,module,exports){
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
@@ -20014,13 +20522,23 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 }) : function(o, v) {
     o["default"] = v;
 });
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.defaultTemplates = void 0;
 const Hogan = __importStar(require("hogan.js"));
@@ -20062,7 +20580,7 @@ exports.defaultTemplates["tag-file-changed"] = new Hogan.Template({ code: functi
 exports.defaultTemplates["tag-file-deleted"] = new Hogan.Template({ code: function (c, p, i) { var t = this; t.b(i = i || ""); t.b("<span class=\"d2h-tag d2h-deleted d2h-deleted-tag\">DELETED</span>"); return t.fl(); }, partials: {}, subs: {} });
 exports.defaultTemplates["tag-file-renamed"] = new Hogan.Template({ code: function (c, p, i) { var t = this; t.b(i = i || ""); t.b("<span class=\"d2h-tag d2h-moved d2h-moved-tag\">RENAMED</span>"); return t.fl(); }, partials: {}, subs: {} });
 
-},{"hogan.js":62}],33:[function(require,module,exports){
+},{"hogan.js":39}],29:[function(require,module,exports){
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
@@ -20080,18 +20598,30 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 }) : function(o, v) {
     o["default"] = v;
 });
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.html = exports.parse = exports.defaultDiff2HtmlConfig = void 0;
+exports.defaultDiff2HtmlConfig = void 0;
+exports.parse = parse;
+exports.html = html;
 const DiffParser = __importStar(require("./diff-parser"));
 const file_list_renderer_1 = require("./file-list-renderer");
 const line_by_line_renderer_1 = __importStar(require("./line-by-line-renderer"));
@@ -20102,7 +20632,6 @@ exports.defaultDiff2HtmlConfig = Object.assign(Object.assign(Object.assign({}, l
 function parse(diffInput, configuration = {}) {
     return DiffParser.parse(diffInput, Object.assign(Object.assign({}, exports.defaultDiff2HtmlConfig), configuration));
 }
-exports.parse = parse;
 function html(diffInput, configuration = {}) {
     const config = Object.assign(Object.assign({}, exports.defaultDiff2HtmlConfig), configuration);
     const diffJson = typeof diffInput === 'string' ? DiffParser.parse(diffInput, config) : diffInput;
@@ -20115,9 +20644,8 @@ function html(diffInput, configuration = {}) {
         : new line_by_line_renderer_1.default(hoganUtils, config).render(diffJson);
     return fileList + diffOutput;
 }
-exports.html = html;
 
-},{"./diff-parser":31,"./file-list-renderer":34,"./hoganjs-utils":35,"./line-by-line-renderer":36,"./side-by-side-renderer":39,"./types":40}],34:[function(require,module,exports){
+},{"./diff-parser":27,"./file-list-renderer":30,"./hoganjs-utils":31,"./line-by-line-renderer":32,"./side-by-side-renderer":35,"./types":36}],30:[function(require,module,exports){
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
@@ -20135,13 +20663,23 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 }) : function(o, v) {
     o["default"] = v;
 });
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FileListRenderer = exports.defaultFileListRendererConfig = void 0;
 const renderUtils = __importStar(require("./render-utils"));
@@ -20177,7 +20715,7 @@ class FileListRenderer {
 }
 exports.FileListRenderer = FileListRenderer;
 
-},{"./render-utils":38}],35:[function(require,module,exports){
+},{"./render-utils":34}],31:[function(require,module,exports){
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
@@ -20195,13 +20733,23 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 }) : function(o, v) {
     o["default"] = v;
 });
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
 Object.defineProperty(exports, "__esModule", { value: true });
 const Hogan = __importStar(require("hogan.js"));
 const diff2html_templates_1 = require("./diff2html-templates");
@@ -20222,7 +20770,7 @@ class HoganJsUtils {
             const template = this.preCompiledTemplates[templateKey];
             return template.render(params, partials, indent);
         }
-        catch (e) {
+        catch (_e) {
             throw new Error(`Could not find template to render '${templateKey}'`);
         }
     }
@@ -20235,7 +20783,7 @@ class HoganJsUtils {
 }
 exports.default = HoganJsUtils;
 
-},{"./diff2html-templates":32,"hogan.js":62}],36:[function(require,module,exports){
+},{"./diff2html-templates":28,"hogan.js":39}],32:[function(require,module,exports){
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
@@ -20253,18 +20801,29 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 }) : function(o, v) {
     o["default"] = v;
 });
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.defaultLineByLineRendererConfig = void 0;
 const Rematch = __importStar(require("./rematch"));
 const renderUtils = __importStar(require("./render-utils"));
 const types_1 = require("./types");
+const utils_1 = require("./utils");
 exports.defaultLineByLineRendererConfig = Object.assign(Object.assign({}, renderUtils.defaultRenderConfig), { renderNothingWhenEmpty: false, matchingMaxComparisons: 2500, maxLineSizeInBlockForComparison: 200 });
 const genericTemplatesPath = 'generic';
 const baseTemplatesPath = 'line-by-line';
@@ -20395,7 +20954,7 @@ class LineByLineRenderer {
     }
     applyRematchMatching(oldLines, newLines, matcher) {
         const comparisons = oldLines.length * newLines.length;
-        const maxLineSizeInBlock = Math.max.apply(null, [0].concat(oldLines.concat(newLines).map(elem => elem.content.length)));
+        const maxLineSizeInBlock = (0, utils_1.max)(oldLines.concat(newLines).map(elem => elem.content.length));
         const doMatching = comparisons < this.config.matchingMaxComparisons &&
             maxLineSizeInBlock < this.config.maxLineSizeInBlockForComparison &&
             (this.config.matching === 'lines' || this.config.matching === 'words');
@@ -20462,10 +21021,12 @@ class LineByLineRenderer {
 }
 exports.default = LineByLineRenderer;
 
-},{"./rematch":37,"./render-utils":38,"./types":40}],37:[function(require,module,exports){
+},{"./rematch":33,"./render-utils":34,"./types":36,"./utils":37}],33:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.newMatcherFn = exports.newDistanceFn = exports.levenshtein = void 0;
+exports.levenshtein = levenshtein;
+exports.newDistanceFn = newDistanceFn;
+exports.newMatcherFn = newMatcherFn;
 function levenshtein(a, b) {
     if (a.length === 0) {
         return b.length;
@@ -20494,7 +21055,6 @@ function levenshtein(a, b) {
     }
     return matrix[b.length][a.length];
 }
-exports.levenshtein = levenshtein;
 function newDistanceFn(str) {
     return (x, y) => {
         const xValue = str(x).trim();
@@ -20503,7 +21063,6 @@ function newDistanceFn(str) {
         return lev / (xValue.length + yValue.length);
     };
 }
-exports.newDistanceFn = newDistanceFn;
 function newMatcherFn(distance) {
     function findBestMatch(a, b, cache = new Map()) {
         let bestMatchDist = Infinity;
@@ -20551,9 +21110,8 @@ function newMatcherFn(distance) {
     }
     return group;
 }
-exports.newMatcherFn = newMatcherFn;
 
-},{}],38:[function(require,module,exports){
+},{}],34:[function(require,module,exports){
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
@@ -20571,15 +21129,33 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 }) : function(o, v) {
     o["default"] = v;
 });
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.diffHighlight = exports.getFileIcon = exports.getHtmlId = exports.filenameDiff = exports.deconstructLine = exports.escapeForHtml = exports.colorSchemeToCss = exports.toCSSClass = exports.defaultRenderConfig = exports.CSSLineClass = void 0;
+exports.defaultRenderConfig = exports.CSSLineClass = void 0;
+exports.toCSSClass = toCSSClass;
+exports.colorSchemeToCss = colorSchemeToCss;
+exports.escapeForHtml = escapeForHtml;
+exports.deconstructLine = deconstructLine;
+exports.filenameDiff = filenameDiff;
+exports.getHtmlId = getHtmlId;
+exports.getFileIcon = getFileIcon;
+exports.diffHighlight = diffHighlight;
 const jsDiff = __importStar(require("diff"));
 const utils_1 = require("./utils");
 const rematch = __importStar(require("./rematch"));
@@ -20621,7 +21197,6 @@ function toCSSClass(lineType) {
             return exports.CSSLineClass.DELETES;
     }
 }
-exports.toCSSClass = toCSSClass;
 function colorSchemeToCss(colorScheme) {
     switch (colorScheme) {
         case types_1.ColorSchemeType.DARK:
@@ -20633,7 +21208,6 @@ function colorSchemeToCss(colorScheme) {
             return 'd2h-light-color-scheme';
     }
 }
-exports.colorSchemeToCss = colorSchemeToCss;
 function prefixLength(isCombined) {
     return isCombined ? 2 : 1;
 }
@@ -20647,7 +21221,6 @@ function escapeForHtml(str) {
         .replace(/'/g, '&#x27;')
         .replace(/\//g, '&#x2F;');
 }
-exports.escapeForHtml = escapeForHtml;
 function deconstructLine(line, isCombined, escape = true) {
     const indexToSplit = prefixLength(isCombined);
     return {
@@ -20655,7 +21228,6 @@ function deconstructLine(line, isCombined, escape = true) {
         content: escape ? escapeForHtml(line.substring(indexToSplit)) : line.substring(indexToSplit),
     };
 }
-exports.deconstructLine = deconstructLine;
 function filenameDiff(file) {
     const oldFilename = (0, utils_1.unifyPath)(file.oldName);
     const newFilename = (0, utils_1.unifyPath)(file.newName);
@@ -20710,11 +21282,9 @@ function filenameDiff(file) {
         return oldFilename;
     }
 }
-exports.filenameDiff = filenameDiff;
 function getHtmlId(file) {
     return `d2h-${(0, utils_1.hashCode)(filenameDiff(file)).toString().slice(-6)}`;
 }
-exports.getHtmlId = getHtmlId;
 function getFileIcon(file) {
     let templateName = 'file-changed';
     if (file.isRename) {
@@ -20734,7 +21304,6 @@ function getFileIcon(file) {
     }
     return templateName;
 }
-exports.getFileIcon = getFileIcon;
 function diffHighlight(diffLine1, diffLine2, isCombined, config = {}) {
     const { matching, maxLineLengthHighlight, matchWordsThreshold, diffStyle } = Object.assign(Object.assign({}, exports.defaultRenderConfig), config);
     const line1 = deconstructLine(diffLine1, isCombined, false);
@@ -20788,9 +21357,8 @@ function diffHighlight(diffLine1, diffLine2, isCombined, config = {}) {
         },
     };
 }
-exports.diffHighlight = diffHighlight;
 
-},{"./rematch":37,"./types":40,"./utils":41,"diff":30}],39:[function(require,module,exports){
+},{"./rematch":33,"./types":36,"./utils":37,"diff":26}],35:[function(require,module,exports){
 "use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
@@ -20808,18 +21376,29 @@ var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (
 }) : function(o, v) {
     o["default"] = v;
 });
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.defaultSideBySideRendererConfig = void 0;
 const Rematch = __importStar(require("./rematch"));
 const renderUtils = __importStar(require("./render-utils"));
 const types_1 = require("./types");
+const utils_1 = require("./utils");
 exports.defaultSideBySideRendererConfig = Object.assign(Object.assign({}, renderUtils.defaultRenderConfig), { renderNothingWhenEmpty: false, matchingMaxComparisons: 2500, maxLineSizeInBlockForComparison: 200 });
 const genericTemplatesPath = 'generic';
 const baseTemplatesPath = 'side-by-side';
@@ -20959,7 +21538,7 @@ class SideBySideRenderer {
     }
     applyRematchMatching(oldLines, newLines, matcher) {
         const comparisons = oldLines.length * newLines.length;
-        const maxLineSizeInBlock = Math.max.apply(null, [0].concat(oldLines.concat(newLines).map(elem => elem.content.length)));
+        const maxLineSizeInBlock = (0, utils_1.max)(oldLines.concat(newLines).map(elem => elem.content.length));
         const doMatching = comparisons < this.config.matchingMaxComparisons &&
             maxLineSizeInBlock < this.config.maxLineSizeInBlockForComparison &&
             (this.config.matching === 'lines' || this.config.matching === 'words');
@@ -21028,7 +21607,7 @@ class SideBySideRenderer {
 }
 exports.default = SideBySideRenderer;
 
-},{"./rematch":37,"./render-utils":38,"./types":40}],40:[function(require,module,exports){
+},{"./rematch":33,"./render-utils":34,"./types":36,"./utils":37}],36:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ColorSchemeType = exports.DiffStyleType = exports.LineMatchingType = exports.OutputFormatType = exports.LineType = void 0;
@@ -21058,10 +21637,13 @@ var ColorSchemeType;
     ColorSchemeType["LIGHT"] = "light";
 })(ColorSchemeType || (exports.ColorSchemeType = ColorSchemeType = {}));
 
-},{}],41:[function(require,module,exports){
+},{}],37:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.hashCode = exports.unifyPath = exports.escapeForRegExp = void 0;
+exports.escapeForRegExp = escapeForRegExp;
+exports.unifyPath = unifyPath;
+exports.hashCode = hashCode;
+exports.max = max;
 const specials = [
     '-',
     '[',
@@ -21084,11 +21666,9 @@ const regex = RegExp('[' + specials.join('\\') + ']', 'g');
 function escapeForRegExp(str) {
     return str.replace(regex, '\\$&');
 }
-exports.escapeForRegExp = escapeForRegExp;
 function unifyPath(path) {
     return path ? path.replace(/\\/g, '/') : path;
 }
-exports.unifyPath = unifyPath;
 function hashCode(text) {
     let i, chr, len;
     let hash = 0;
@@ -21099,725 +21679,16 @@ function hashCode(text) {
     }
     return hash;
 }
-exports.hashCode = hashCode;
-
-},{}],42:[function(require,module,exports){
-'use strict';
-
-var GetIntrinsic = require('get-intrinsic');
-
-/** @type {import('.')} */
-var $defineProperty = GetIntrinsic('%Object.defineProperty%', true) || false;
-if ($defineProperty) {
-	try {
-		$defineProperty({}, 'a', { value: 1 });
-	} catch (e) {
-		// IE 8 has a broken defineProperty
-		$defineProperty = false;
-	}
+function max(arr) {
+    const length = arr.length;
+    let max = -Infinity;
+    for (let i = 0; i < length; i++) {
+        max = Math.max(max, arr[i]);
+    }
+    return max;
 }
 
-module.exports = $defineProperty;
-
-},{"get-intrinsic":53}],43:[function(require,module,exports){
-'use strict';
-
-/** @type {import('./eval')} */
-module.exports = EvalError;
-
-},{}],44:[function(require,module,exports){
-'use strict';
-
-/** @type {import('.')} */
-module.exports = Error;
-
-},{}],45:[function(require,module,exports){
-'use strict';
-
-/** @type {import('./range')} */
-module.exports = RangeError;
-
-},{}],46:[function(require,module,exports){
-'use strict';
-
-/** @type {import('./ref')} */
-module.exports = ReferenceError;
-
-},{}],47:[function(require,module,exports){
-'use strict';
-
-/** @type {import('./syntax')} */
-module.exports = SyntaxError;
-
-},{}],48:[function(require,module,exports){
-'use strict';
-
-/** @type {import('./type')} */
-module.exports = TypeError;
-
-},{}],49:[function(require,module,exports){
-'use strict';
-
-/** @type {import('./uri')} */
-module.exports = URIError;
-
-},{}],50:[function(require,module,exports){
-'use strict';
-
-var isCallable = require('is-callable');
-
-var toStr = Object.prototype.toString;
-var hasOwnProperty = Object.prototype.hasOwnProperty;
-
-var forEachArray = function forEachArray(array, iterator, receiver) {
-    for (var i = 0, len = array.length; i < len; i++) {
-        if (hasOwnProperty.call(array, i)) {
-            if (receiver == null) {
-                iterator(array[i], i, array);
-            } else {
-                iterator.call(receiver, array[i], i, array);
-            }
-        }
-    }
-};
-
-var forEachString = function forEachString(string, iterator, receiver) {
-    for (var i = 0, len = string.length; i < len; i++) {
-        // no such thing as a sparse string.
-        if (receiver == null) {
-            iterator(string.charAt(i), i, string);
-        } else {
-            iterator.call(receiver, string.charAt(i), i, string);
-        }
-    }
-};
-
-var forEachObject = function forEachObject(object, iterator, receiver) {
-    for (var k in object) {
-        if (hasOwnProperty.call(object, k)) {
-            if (receiver == null) {
-                iterator(object[k], k, object);
-            } else {
-                iterator.call(receiver, object[k], k, object);
-            }
-        }
-    }
-};
-
-var forEach = function forEach(list, iterator, thisArg) {
-    if (!isCallable(iterator)) {
-        throw new TypeError('iterator must be a function');
-    }
-
-    var receiver;
-    if (arguments.length >= 3) {
-        receiver = thisArg;
-    }
-
-    if (toStr.call(list) === '[object Array]') {
-        forEachArray(list, iterator, receiver);
-    } else if (typeof list === 'string') {
-        forEachString(list, iterator, receiver);
-    } else {
-        forEachObject(list, iterator, receiver);
-    }
-};
-
-module.exports = forEach;
-
-},{"is-callable":66}],51:[function(require,module,exports){
-'use strict';
-
-/* eslint no-invalid-this: 1 */
-
-var ERROR_MESSAGE = 'Function.prototype.bind called on incompatible ';
-var toStr = Object.prototype.toString;
-var max = Math.max;
-var funcType = '[object Function]';
-
-var concatty = function concatty(a, b) {
-    var arr = [];
-
-    for (var i = 0; i < a.length; i += 1) {
-        arr[i] = a[i];
-    }
-    for (var j = 0; j < b.length; j += 1) {
-        arr[j + a.length] = b[j];
-    }
-
-    return arr;
-};
-
-var slicy = function slicy(arrLike, offset) {
-    var arr = [];
-    for (var i = offset || 0, j = 0; i < arrLike.length; i += 1, j += 1) {
-        arr[j] = arrLike[i];
-    }
-    return arr;
-};
-
-var joiny = function (arr, joiner) {
-    var str = '';
-    for (var i = 0; i < arr.length; i += 1) {
-        str += arr[i];
-        if (i + 1 < arr.length) {
-            str += joiner;
-        }
-    }
-    return str;
-};
-
-module.exports = function bind(that) {
-    var target = this;
-    if (typeof target !== 'function' || toStr.apply(target) !== funcType) {
-        throw new TypeError(ERROR_MESSAGE + target);
-    }
-    var args = slicy(arguments, 1);
-
-    var bound;
-    var binder = function () {
-        if (this instanceof bound) {
-            var result = target.apply(
-                this,
-                concatty(args, arguments)
-            );
-            if (Object(result) === result) {
-                return result;
-            }
-            return this;
-        }
-        return target.apply(
-            that,
-            concatty(args, arguments)
-        );
-
-    };
-
-    var boundLength = max(0, target.length - args.length);
-    var boundArgs = [];
-    for (var i = 0; i < boundLength; i++) {
-        boundArgs[i] = '$' + i;
-    }
-
-    bound = Function('binder', 'return function (' + joiny(boundArgs, ',') + '){ return binder.apply(this,arguments); }')(binder);
-
-    if (target.prototype) {
-        var Empty = function Empty() {};
-        Empty.prototype = target.prototype;
-        bound.prototype = new Empty();
-        Empty.prototype = null;
-    }
-
-    return bound;
-};
-
-},{}],52:[function(require,module,exports){
-'use strict';
-
-var implementation = require('./implementation');
-
-module.exports = Function.prototype.bind || implementation;
-
-},{"./implementation":51}],53:[function(require,module,exports){
-'use strict';
-
-var undefined;
-
-var $Error = require('es-errors');
-var $EvalError = require('es-errors/eval');
-var $RangeError = require('es-errors/range');
-var $ReferenceError = require('es-errors/ref');
-var $SyntaxError = require('es-errors/syntax');
-var $TypeError = require('es-errors/type');
-var $URIError = require('es-errors/uri');
-
-var $Function = Function;
-
-// eslint-disable-next-line consistent-return
-var getEvalledConstructor = function (expressionSyntax) {
-	try {
-		return $Function('"use strict"; return (' + expressionSyntax + ').constructor;')();
-	} catch (e) {}
-};
-
-var $gOPD = Object.getOwnPropertyDescriptor;
-if ($gOPD) {
-	try {
-		$gOPD({}, '');
-	} catch (e) {
-		$gOPD = null; // this is IE 8, which has a broken gOPD
-	}
-}
-
-var throwTypeError = function () {
-	throw new $TypeError();
-};
-var ThrowTypeError = $gOPD
-	? (function () {
-		try {
-			// eslint-disable-next-line no-unused-expressions, no-caller, no-restricted-properties
-			arguments.callee; // IE 8 does not throw here
-			return throwTypeError;
-		} catch (calleeThrows) {
-			try {
-				// IE 8 throws on Object.getOwnPropertyDescriptor(arguments, '')
-				return $gOPD(arguments, 'callee').get;
-			} catch (gOPDthrows) {
-				return throwTypeError;
-			}
-		}
-	}())
-	: throwTypeError;
-
-var hasSymbols = require('has-symbols')();
-var hasProto = require('has-proto')();
-
-var getProto = Object.getPrototypeOf || (
-	hasProto
-		? function (x) { return x.__proto__; } // eslint-disable-line no-proto
-		: null
-);
-
-var needsEval = {};
-
-var TypedArray = typeof Uint8Array === 'undefined' || !getProto ? undefined : getProto(Uint8Array);
-
-var INTRINSICS = {
-	__proto__: null,
-	'%AggregateError%': typeof AggregateError === 'undefined' ? undefined : AggregateError,
-	'%Array%': Array,
-	'%ArrayBuffer%': typeof ArrayBuffer === 'undefined' ? undefined : ArrayBuffer,
-	'%ArrayIteratorPrototype%': hasSymbols && getProto ? getProto([][Symbol.iterator]()) : undefined,
-	'%AsyncFromSyncIteratorPrototype%': undefined,
-	'%AsyncFunction%': needsEval,
-	'%AsyncGenerator%': needsEval,
-	'%AsyncGeneratorFunction%': needsEval,
-	'%AsyncIteratorPrototype%': needsEval,
-	'%Atomics%': typeof Atomics === 'undefined' ? undefined : Atomics,
-	'%BigInt%': typeof BigInt === 'undefined' ? undefined : BigInt,
-	'%BigInt64Array%': typeof BigInt64Array === 'undefined' ? undefined : BigInt64Array,
-	'%BigUint64Array%': typeof BigUint64Array === 'undefined' ? undefined : BigUint64Array,
-	'%Boolean%': Boolean,
-	'%DataView%': typeof DataView === 'undefined' ? undefined : DataView,
-	'%Date%': Date,
-	'%decodeURI%': decodeURI,
-	'%decodeURIComponent%': decodeURIComponent,
-	'%encodeURI%': encodeURI,
-	'%encodeURIComponent%': encodeURIComponent,
-	'%Error%': $Error,
-	'%eval%': eval, // eslint-disable-line no-eval
-	'%EvalError%': $EvalError,
-	'%Float32Array%': typeof Float32Array === 'undefined' ? undefined : Float32Array,
-	'%Float64Array%': typeof Float64Array === 'undefined' ? undefined : Float64Array,
-	'%FinalizationRegistry%': typeof FinalizationRegistry === 'undefined' ? undefined : FinalizationRegistry,
-	'%Function%': $Function,
-	'%GeneratorFunction%': needsEval,
-	'%Int8Array%': typeof Int8Array === 'undefined' ? undefined : Int8Array,
-	'%Int16Array%': typeof Int16Array === 'undefined' ? undefined : Int16Array,
-	'%Int32Array%': typeof Int32Array === 'undefined' ? undefined : Int32Array,
-	'%isFinite%': isFinite,
-	'%isNaN%': isNaN,
-	'%IteratorPrototype%': hasSymbols && getProto ? getProto(getProto([][Symbol.iterator]())) : undefined,
-	'%JSON%': typeof JSON === 'object' ? JSON : undefined,
-	'%Map%': typeof Map === 'undefined' ? undefined : Map,
-	'%MapIteratorPrototype%': typeof Map === 'undefined' || !hasSymbols || !getProto ? undefined : getProto(new Map()[Symbol.iterator]()),
-	'%Math%': Math,
-	'%Number%': Number,
-	'%Object%': Object,
-	'%parseFloat%': parseFloat,
-	'%parseInt%': parseInt,
-	'%Promise%': typeof Promise === 'undefined' ? undefined : Promise,
-	'%Proxy%': typeof Proxy === 'undefined' ? undefined : Proxy,
-	'%RangeError%': $RangeError,
-	'%ReferenceError%': $ReferenceError,
-	'%Reflect%': typeof Reflect === 'undefined' ? undefined : Reflect,
-	'%RegExp%': RegExp,
-	'%Set%': typeof Set === 'undefined' ? undefined : Set,
-	'%SetIteratorPrototype%': typeof Set === 'undefined' || !hasSymbols || !getProto ? undefined : getProto(new Set()[Symbol.iterator]()),
-	'%SharedArrayBuffer%': typeof SharedArrayBuffer === 'undefined' ? undefined : SharedArrayBuffer,
-	'%String%': String,
-	'%StringIteratorPrototype%': hasSymbols && getProto ? getProto(''[Symbol.iterator]()) : undefined,
-	'%Symbol%': hasSymbols ? Symbol : undefined,
-	'%SyntaxError%': $SyntaxError,
-	'%ThrowTypeError%': ThrowTypeError,
-	'%TypedArray%': TypedArray,
-	'%TypeError%': $TypeError,
-	'%Uint8Array%': typeof Uint8Array === 'undefined' ? undefined : Uint8Array,
-	'%Uint8ClampedArray%': typeof Uint8ClampedArray === 'undefined' ? undefined : Uint8ClampedArray,
-	'%Uint16Array%': typeof Uint16Array === 'undefined' ? undefined : Uint16Array,
-	'%Uint32Array%': typeof Uint32Array === 'undefined' ? undefined : Uint32Array,
-	'%URIError%': $URIError,
-	'%WeakMap%': typeof WeakMap === 'undefined' ? undefined : WeakMap,
-	'%WeakRef%': typeof WeakRef === 'undefined' ? undefined : WeakRef,
-	'%WeakSet%': typeof WeakSet === 'undefined' ? undefined : WeakSet
-};
-
-if (getProto) {
-	try {
-		null.error; // eslint-disable-line no-unused-expressions
-	} catch (e) {
-		// https://github.com/tc39/proposal-shadowrealm/pull/384#issuecomment-1364264229
-		var errorProto = getProto(getProto(e));
-		INTRINSICS['%Error.prototype%'] = errorProto;
-	}
-}
-
-var doEval = function doEval(name) {
-	var value;
-	if (name === '%AsyncFunction%') {
-		value = getEvalledConstructor('async function () {}');
-	} else if (name === '%GeneratorFunction%') {
-		value = getEvalledConstructor('function* () {}');
-	} else if (name === '%AsyncGeneratorFunction%') {
-		value = getEvalledConstructor('async function* () {}');
-	} else if (name === '%AsyncGenerator%') {
-		var fn = doEval('%AsyncGeneratorFunction%');
-		if (fn) {
-			value = fn.prototype;
-		}
-	} else if (name === '%AsyncIteratorPrototype%') {
-		var gen = doEval('%AsyncGenerator%');
-		if (gen && getProto) {
-			value = getProto(gen.prototype);
-		}
-	}
-
-	INTRINSICS[name] = value;
-
-	return value;
-};
-
-var LEGACY_ALIASES = {
-	__proto__: null,
-	'%ArrayBufferPrototype%': ['ArrayBuffer', 'prototype'],
-	'%ArrayPrototype%': ['Array', 'prototype'],
-	'%ArrayProto_entries%': ['Array', 'prototype', 'entries'],
-	'%ArrayProto_forEach%': ['Array', 'prototype', 'forEach'],
-	'%ArrayProto_keys%': ['Array', 'prototype', 'keys'],
-	'%ArrayProto_values%': ['Array', 'prototype', 'values'],
-	'%AsyncFunctionPrototype%': ['AsyncFunction', 'prototype'],
-	'%AsyncGenerator%': ['AsyncGeneratorFunction', 'prototype'],
-	'%AsyncGeneratorPrototype%': ['AsyncGeneratorFunction', 'prototype', 'prototype'],
-	'%BooleanPrototype%': ['Boolean', 'prototype'],
-	'%DataViewPrototype%': ['DataView', 'prototype'],
-	'%DatePrototype%': ['Date', 'prototype'],
-	'%ErrorPrototype%': ['Error', 'prototype'],
-	'%EvalErrorPrototype%': ['EvalError', 'prototype'],
-	'%Float32ArrayPrototype%': ['Float32Array', 'prototype'],
-	'%Float64ArrayPrototype%': ['Float64Array', 'prototype'],
-	'%FunctionPrototype%': ['Function', 'prototype'],
-	'%Generator%': ['GeneratorFunction', 'prototype'],
-	'%GeneratorPrototype%': ['GeneratorFunction', 'prototype', 'prototype'],
-	'%Int8ArrayPrototype%': ['Int8Array', 'prototype'],
-	'%Int16ArrayPrototype%': ['Int16Array', 'prototype'],
-	'%Int32ArrayPrototype%': ['Int32Array', 'prototype'],
-	'%JSONParse%': ['JSON', 'parse'],
-	'%JSONStringify%': ['JSON', 'stringify'],
-	'%MapPrototype%': ['Map', 'prototype'],
-	'%NumberPrototype%': ['Number', 'prototype'],
-	'%ObjectPrototype%': ['Object', 'prototype'],
-	'%ObjProto_toString%': ['Object', 'prototype', 'toString'],
-	'%ObjProto_valueOf%': ['Object', 'prototype', 'valueOf'],
-	'%PromisePrototype%': ['Promise', 'prototype'],
-	'%PromiseProto_then%': ['Promise', 'prototype', 'then'],
-	'%Promise_all%': ['Promise', 'all'],
-	'%Promise_reject%': ['Promise', 'reject'],
-	'%Promise_resolve%': ['Promise', 'resolve'],
-	'%RangeErrorPrototype%': ['RangeError', 'prototype'],
-	'%ReferenceErrorPrototype%': ['ReferenceError', 'prototype'],
-	'%RegExpPrototype%': ['RegExp', 'prototype'],
-	'%SetPrototype%': ['Set', 'prototype'],
-	'%SharedArrayBufferPrototype%': ['SharedArrayBuffer', 'prototype'],
-	'%StringPrototype%': ['String', 'prototype'],
-	'%SymbolPrototype%': ['Symbol', 'prototype'],
-	'%SyntaxErrorPrototype%': ['SyntaxError', 'prototype'],
-	'%TypedArrayPrototype%': ['TypedArray', 'prototype'],
-	'%TypeErrorPrototype%': ['TypeError', 'prototype'],
-	'%Uint8ArrayPrototype%': ['Uint8Array', 'prototype'],
-	'%Uint8ClampedArrayPrototype%': ['Uint8ClampedArray', 'prototype'],
-	'%Uint16ArrayPrototype%': ['Uint16Array', 'prototype'],
-	'%Uint32ArrayPrototype%': ['Uint32Array', 'prototype'],
-	'%URIErrorPrototype%': ['URIError', 'prototype'],
-	'%WeakMapPrototype%': ['WeakMap', 'prototype'],
-	'%WeakSetPrototype%': ['WeakSet', 'prototype']
-};
-
-var bind = require('function-bind');
-var hasOwn = require('hasown');
-var $concat = bind.call(Function.call, Array.prototype.concat);
-var $spliceApply = bind.call(Function.apply, Array.prototype.splice);
-var $replace = bind.call(Function.call, String.prototype.replace);
-var $strSlice = bind.call(Function.call, String.prototype.slice);
-var $exec = bind.call(Function.call, RegExp.prototype.exec);
-
-/* adapted from https://github.com/lodash/lodash/blob/4.17.15/dist/lodash.js#L6735-L6744 */
-var rePropName = /[^%.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|%$))/g;
-var reEscapeChar = /\\(\\)?/g; /** Used to match backslashes in property paths. */
-var stringToPath = function stringToPath(string) {
-	var first = $strSlice(string, 0, 1);
-	var last = $strSlice(string, -1);
-	if (first === '%' && last !== '%') {
-		throw new $SyntaxError('invalid intrinsic syntax, expected closing `%`');
-	} else if (last === '%' && first !== '%') {
-		throw new $SyntaxError('invalid intrinsic syntax, expected opening `%`');
-	}
-	var result = [];
-	$replace(string, rePropName, function (match, number, quote, subString) {
-		result[result.length] = quote ? $replace(subString, reEscapeChar, '$1') : number || match;
-	});
-	return result;
-};
-/* end adaptation */
-
-var getBaseIntrinsic = function getBaseIntrinsic(name, allowMissing) {
-	var intrinsicName = name;
-	var alias;
-	if (hasOwn(LEGACY_ALIASES, intrinsicName)) {
-		alias = LEGACY_ALIASES[intrinsicName];
-		intrinsicName = '%' + alias[0] + '%';
-	}
-
-	if (hasOwn(INTRINSICS, intrinsicName)) {
-		var value = INTRINSICS[intrinsicName];
-		if (value === needsEval) {
-			value = doEval(intrinsicName);
-		}
-		if (typeof value === 'undefined' && !allowMissing) {
-			throw new $TypeError('intrinsic ' + name + ' exists, but is not available. Please file an issue!');
-		}
-
-		return {
-			alias: alias,
-			name: intrinsicName,
-			value: value
-		};
-	}
-
-	throw new $SyntaxError('intrinsic ' + name + ' does not exist!');
-};
-
-module.exports = function GetIntrinsic(name, allowMissing) {
-	if (typeof name !== 'string' || name.length === 0) {
-		throw new $TypeError('intrinsic name must be a non-empty string');
-	}
-	if (arguments.length > 1 && typeof allowMissing !== 'boolean') {
-		throw new $TypeError('"allowMissing" argument must be a boolean');
-	}
-
-	if ($exec(/^%?[^%]*%?$/, name) === null) {
-		throw new $SyntaxError('`%` may not be present anywhere but at the beginning and end of the intrinsic name');
-	}
-	var parts = stringToPath(name);
-	var intrinsicBaseName = parts.length > 0 ? parts[0] : '';
-
-	var intrinsic = getBaseIntrinsic('%' + intrinsicBaseName + '%', allowMissing);
-	var intrinsicRealName = intrinsic.name;
-	var value = intrinsic.value;
-	var skipFurtherCaching = false;
-
-	var alias = intrinsic.alias;
-	if (alias) {
-		intrinsicBaseName = alias[0];
-		$spliceApply(parts, $concat([0, 1], alias));
-	}
-
-	for (var i = 1, isOwn = true; i < parts.length; i += 1) {
-		var part = parts[i];
-		var first = $strSlice(part, 0, 1);
-		var last = $strSlice(part, -1);
-		if (
-			(
-				(first === '"' || first === "'" || first === '`')
-				|| (last === '"' || last === "'" || last === '`')
-			)
-			&& first !== last
-		) {
-			throw new $SyntaxError('property names with quotes must have matching quotes');
-		}
-		if (part === 'constructor' || !isOwn) {
-			skipFurtherCaching = true;
-		}
-
-		intrinsicBaseName += '.' + part;
-		intrinsicRealName = '%' + intrinsicBaseName + '%';
-
-		if (hasOwn(INTRINSICS, intrinsicRealName)) {
-			value = INTRINSICS[intrinsicRealName];
-		} else if (value != null) {
-			if (!(part in value)) {
-				if (!allowMissing) {
-					throw new $TypeError('base intrinsic for ' + name + ' exists, but the property is not available.');
-				}
-				return void undefined;
-			}
-			if ($gOPD && (i + 1) >= parts.length) {
-				var desc = $gOPD(value, part);
-				isOwn = !!desc;
-
-				// By convention, when a data property is converted to an accessor
-				// property to emulate a data property that does not suffer from
-				// the override mistake, that accessor's getter is marked with
-				// an `originalValue` property. Here, when we detect this, we
-				// uphold the illusion by pretending to see that original data
-				// property, i.e., returning the value rather than the getter
-				// itself.
-				if (isOwn && 'get' in desc && !('originalValue' in desc.get)) {
-					value = desc.get;
-				} else {
-					value = value[part];
-				}
-			} else {
-				isOwn = hasOwn(value, part);
-				value = value[part];
-			}
-
-			if (isOwn && !skipFurtherCaching) {
-				INTRINSICS[intrinsicRealName] = value;
-			}
-		}
-	}
-	return value;
-};
-
-},{"es-errors":44,"es-errors/eval":43,"es-errors/range":45,"es-errors/ref":46,"es-errors/syntax":47,"es-errors/type":48,"es-errors/uri":49,"function-bind":52,"has-proto":56,"has-symbols":57,"hasown":60}],54:[function(require,module,exports){
-'use strict';
-
-var GetIntrinsic = require('get-intrinsic');
-
-var $gOPD = GetIntrinsic('%Object.getOwnPropertyDescriptor%', true);
-
-if ($gOPD) {
-	try {
-		$gOPD([], 'length');
-	} catch (e) {
-		// IE 8 has a broken gOPD
-		$gOPD = null;
-	}
-}
-
-module.exports = $gOPD;
-
-},{"get-intrinsic":53}],55:[function(require,module,exports){
-'use strict';
-
-var $defineProperty = require('es-define-property');
-
-var hasPropertyDescriptors = function hasPropertyDescriptors() {
-	return !!$defineProperty;
-};
-
-hasPropertyDescriptors.hasArrayLengthDefineBug = function hasArrayLengthDefineBug() {
-	// node v0.6 has a bug where array lengths can be Set but not Defined
-	if (!$defineProperty) {
-		return null;
-	}
-	try {
-		return $defineProperty([], 'length', { value: 1 }).length !== 1;
-	} catch (e) {
-		// In Firefox 4-22, defining length on an array throws an exception.
-		return true;
-	}
-};
-
-module.exports = hasPropertyDescriptors;
-
-},{"es-define-property":42}],56:[function(require,module,exports){
-'use strict';
-
-var test = {
-	__proto__: null,
-	foo: {}
-};
-
-var $Object = Object;
-
-/** @type {import('.')} */
-module.exports = function hasProto() {
-	// @ts-expect-error: TS errors on an inherited property for some reason
-	return { __proto__: test }.foo === test.foo
-		&& !(test instanceof $Object);
-};
-
-},{}],57:[function(require,module,exports){
-'use strict';
-
-var origSymbol = typeof Symbol !== 'undefined' && Symbol;
-var hasSymbolSham = require('./shams');
-
-module.exports = function hasNativeSymbols() {
-	if (typeof origSymbol !== 'function') { return false; }
-	if (typeof Symbol !== 'function') { return false; }
-	if (typeof origSymbol('foo') !== 'symbol') { return false; }
-	if (typeof Symbol('bar') !== 'symbol') { return false; }
-
-	return hasSymbolSham();
-};
-
-},{"./shams":58}],58:[function(require,module,exports){
-'use strict';
-
-/* eslint complexity: [2, 18], max-statements: [2, 33] */
-module.exports = function hasSymbols() {
-	if (typeof Symbol !== 'function' || typeof Object.getOwnPropertySymbols !== 'function') { return false; }
-	if (typeof Symbol.iterator === 'symbol') { return true; }
-
-	var obj = {};
-	var sym = Symbol('test');
-	var symObj = Object(sym);
-	if (typeof sym === 'string') { return false; }
-
-	if (Object.prototype.toString.call(sym) !== '[object Symbol]') { return false; }
-	if (Object.prototype.toString.call(symObj) !== '[object Symbol]') { return false; }
-
-	// temp disabled per https://github.com/ljharb/object.assign/issues/17
-	// if (sym instanceof Symbol) { return false; }
-	// temp disabled per https://github.com/WebReflection/get-own-property-symbols/issues/4
-	// if (!(symObj instanceof Symbol)) { return false; }
-
-	// if (typeof Symbol.prototype.toString !== 'function') { return false; }
-	// if (String(sym) !== Symbol.prototype.toString.call(sym)) { return false; }
-
-	var symVal = 42;
-	obj[sym] = symVal;
-	for (sym in obj) { return false; } // eslint-disable-line no-restricted-syntax, no-unreachable-loop
-	if (typeof Object.keys === 'function' && Object.keys(obj).length !== 0) { return false; }
-
-	if (typeof Object.getOwnPropertyNames === 'function' && Object.getOwnPropertyNames(obj).length !== 0) { return false; }
-
-	var syms = Object.getOwnPropertySymbols(obj);
-	if (syms.length !== 1 || syms[0] !== sym) { return false; }
-
-	if (!Object.prototype.propertyIsEnumerable.call(obj, sym)) { return false; }
-
-	if (typeof Object.getOwnPropertyDescriptor === 'function') {
-		var descriptor = Object.getOwnPropertyDescriptor(obj, sym);
-		if (descriptor.value !== symVal || descriptor.enumerable !== true) { return false; }
-	}
-
-	return true;
-};
-
-},{}],59:[function(require,module,exports){
-'use strict';
-
-var hasSymbols = require('has-symbols/shams');
-
-/** @type {import('.')} */
-module.exports = function hasToStringTagShams() {
-	return hasSymbols() && !!Symbol.toStringTag;
-};
-
-},{"has-symbols/shams":58}],60:[function(require,module,exports){
-'use strict';
-
-var call = Function.prototype.call;
-var $hasOwn = Object.prototype.hasOwnProperty;
-var bind = require('function-bind');
-
-/** @type {import('.')} */
-module.exports = bind.call(call, $hasOwn);
-
-},{"function-bind":52}],61:[function(require,module,exports){
+},{}],38:[function(require,module,exports){
 /*
  *  Copyright 2011 Twitter, Inc.
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -22242,7 +22113,7 @@ module.exports = bind.call(call, $hasOwn);
   }
 })(typeof exports !== 'undefined' ? exports : Hogan);
 
-},{}],62:[function(require,module,exports){
+},{}],39:[function(require,module,exports){
 /*
  *  Copyright 2011 Twitter, Inc.
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -22265,7 +22136,7 @@ Hogan.Template = require('./template').Template;
 Hogan.template = Hogan.Template;
 module.exports = Hogan;
 
-},{"./compiler":61,"./template":63}],63:[function(require,module,exports){
+},{"./compiler":38,"./template":40}],40:[function(require,module,exports){
 /*
  *  Copyright 2011 Twitter, Inc.
  *  Licensed under the Apache License, Version 2.0 (the "License");
@@ -22608,224 +22479,7 @@ var Hogan = {};
 
 })(typeof exports !== 'undefined' ? exports : Hogan);
 
-},{}],64:[function(require,module,exports){
-if (typeof Object.create === 'function') {
-  // implementation from standard node.js 'util' module
-  module.exports = function inherits(ctor, superCtor) {
-    if (superCtor) {
-      ctor.super_ = superCtor
-      ctor.prototype = Object.create(superCtor.prototype, {
-        constructor: {
-          value: ctor,
-          enumerable: false,
-          writable: true,
-          configurable: true
-        }
-      })
-    }
-  };
-} else {
-  // old school shim for old browsers
-  module.exports = function inherits(ctor, superCtor) {
-    if (superCtor) {
-      ctor.super_ = superCtor
-      var TempCtor = function () {}
-      TempCtor.prototype = superCtor.prototype
-      ctor.prototype = new TempCtor()
-      ctor.prototype.constructor = ctor
-    }
-  }
-}
-
-},{}],65:[function(require,module,exports){
-'use strict';
-
-var hasToStringTag = require('has-tostringtag/shams')();
-var callBound = require('call-bind/callBound');
-
-var $toString = callBound('Object.prototype.toString');
-
-var isStandardArguments = function isArguments(value) {
-	if (hasToStringTag && value && typeof value === 'object' && Symbol.toStringTag in value) {
-		return false;
-	}
-	return $toString(value) === '[object Arguments]';
-};
-
-var isLegacyArguments = function isArguments(value) {
-	if (isStandardArguments(value)) {
-		return true;
-	}
-	return value !== null &&
-		typeof value === 'object' &&
-		typeof value.length === 'number' &&
-		value.length >= 0 &&
-		$toString(value) !== '[object Array]' &&
-		$toString(value.callee) === '[object Function]';
-};
-
-var supportsStandardArguments = (function () {
-	return isStandardArguments(arguments);
-}());
-
-isStandardArguments.isLegacyArguments = isLegacyArguments; // for tests
-
-module.exports = supportsStandardArguments ? isStandardArguments : isLegacyArguments;
-
-},{"call-bind/callBound":18,"has-tostringtag/shams":59}],66:[function(require,module,exports){
-'use strict';
-
-var fnToStr = Function.prototype.toString;
-var reflectApply = typeof Reflect === 'object' && Reflect !== null && Reflect.apply;
-var badArrayLike;
-var isCallableMarker;
-if (typeof reflectApply === 'function' && typeof Object.defineProperty === 'function') {
-	try {
-		badArrayLike = Object.defineProperty({}, 'length', {
-			get: function () {
-				throw isCallableMarker;
-			}
-		});
-		isCallableMarker = {};
-		// eslint-disable-next-line no-throw-literal
-		reflectApply(function () { throw 42; }, null, badArrayLike);
-	} catch (_) {
-		if (_ !== isCallableMarker) {
-			reflectApply = null;
-		}
-	}
-} else {
-	reflectApply = null;
-}
-
-var constructorRegex = /^\s*class\b/;
-var isES6ClassFn = function isES6ClassFunction(value) {
-	try {
-		var fnStr = fnToStr.call(value);
-		return constructorRegex.test(fnStr);
-	} catch (e) {
-		return false; // not a function
-	}
-};
-
-var tryFunctionObject = function tryFunctionToStr(value) {
-	try {
-		if (isES6ClassFn(value)) { return false; }
-		fnToStr.call(value);
-		return true;
-	} catch (e) {
-		return false;
-	}
-};
-var toStr = Object.prototype.toString;
-var objectClass = '[object Object]';
-var fnClass = '[object Function]';
-var genClass = '[object GeneratorFunction]';
-var ddaClass = '[object HTMLAllCollection]'; // IE 11
-var ddaClass2 = '[object HTML document.all class]';
-var ddaClass3 = '[object HTMLCollection]'; // IE 9-10
-var hasToStringTag = typeof Symbol === 'function' && !!Symbol.toStringTag; // better: use `has-tostringtag`
-
-var isIE68 = !(0 in [,]); // eslint-disable-line no-sparse-arrays, comma-spacing
-
-var isDDA = function isDocumentDotAll() { return false; };
-if (typeof document === 'object') {
-	// Firefox 3 canonicalizes DDA to undefined when it's not accessed directly
-	var all = document.all;
-	if (toStr.call(all) === toStr.call(document.all)) {
-		isDDA = function isDocumentDotAll(value) {
-			/* globals document: false */
-			// in IE 6-8, typeof document.all is "object" and it's truthy
-			if ((isIE68 || !value) && (typeof value === 'undefined' || typeof value === 'object')) {
-				try {
-					var str = toStr.call(value);
-					return (
-						str === ddaClass
-						|| str === ddaClass2
-						|| str === ddaClass3 // opera 12.16
-						|| str === objectClass // IE 6-8
-					) && value('') == null; // eslint-disable-line eqeqeq
-				} catch (e) { /**/ }
-			}
-			return false;
-		};
-	}
-}
-
-module.exports = reflectApply
-	? function isCallable(value) {
-		if (isDDA(value)) { return true; }
-		if (!value) { return false; }
-		if (typeof value !== 'function' && typeof value !== 'object') { return false; }
-		try {
-			reflectApply(value, null, badArrayLike);
-		} catch (e) {
-			if (e !== isCallableMarker) { return false; }
-		}
-		return !isES6ClassFn(value) && tryFunctionObject(value);
-	}
-	: function isCallable(value) {
-		if (isDDA(value)) { return true; }
-		if (!value) { return false; }
-		if (typeof value !== 'function' && typeof value !== 'object') { return false; }
-		if (hasToStringTag) { return tryFunctionObject(value); }
-		if (isES6ClassFn(value)) { return false; }
-		var strClass = toStr.call(value);
-		if (strClass !== fnClass && strClass !== genClass && !(/^\[object HTML/).test(strClass)) { return false; }
-		return tryFunctionObject(value);
-	};
-
-},{}],67:[function(require,module,exports){
-'use strict';
-
-var toStr = Object.prototype.toString;
-var fnToStr = Function.prototype.toString;
-var isFnRegex = /^\s*(?:function)?\*/;
-var hasToStringTag = require('has-tostringtag/shams')();
-var getProto = Object.getPrototypeOf;
-var getGeneratorFunc = function () { // eslint-disable-line consistent-return
-	if (!hasToStringTag) {
-		return false;
-	}
-	try {
-		return Function('return function*() {}')();
-	} catch (e) {
-	}
-};
-var GeneratorFunction;
-
-module.exports = function isGeneratorFunction(fn) {
-	if (typeof fn !== 'function') {
-		return false;
-	}
-	if (isFnRegex.test(fnToStr.call(fn))) {
-		return true;
-	}
-	if (!hasToStringTag) {
-		var str = toStr.call(fn);
-		return str === '[object GeneratorFunction]';
-	}
-	if (!getProto) {
-		return false;
-	}
-	if (typeof GeneratorFunction === 'undefined') {
-		var generatorFunc = getGeneratorFunc();
-		GeneratorFunction = generatorFunc ? getProto(generatorFunc) : false;
-	}
-	return getProto(fn) === GeneratorFunction;
-};
-
-},{"has-tostringtag/shams":59}],68:[function(require,module,exports){
-'use strict';
-
-var whichTypedArray = require('which-typed-array');
-
-/** @type {import('.')} */
-module.exports = function isTypedArray(value) {
-	return !!whichTypedArray(value);
-};
-
-},{"which-typed-array":77}],69:[function(require,module,exports){
+},{}],41:[function(require,module,exports){
 /*!
  * jQuery JavaScript Library v3.7.1
  * https://jquery.com/
@@ -33543,1441 +33197,11 @@ if ( typeof noGlobal === "undefined" ) {
 return jQuery;
 } );
 
-},{}],70:[function(require,module,exports){
-'use strict';
-
-/** @type {import('.')} */
-module.exports = [
-	'Float32Array',
-	'Float64Array',
-	'Int8Array',
-	'Int16Array',
-	'Int32Array',
-	'Uint8Array',
-	'Uint8ClampedArray',
-	'Uint16Array',
-	'Uint32Array',
-	'BigInt64Array',
-	'BigUint64Array'
-];
-
-},{}],71:[function(require,module,exports){
-// shim for using process in browser
-var process = module.exports = {};
-
-// cached from whatever global is present so that test runners that stub it
-// don't break things.  But we need to wrap it in a try catch in case it is
-// wrapped in strict mode code which doesn't define any globals.  It's inside a
-// function because try/catches deoptimize in certain engines.
-
-var cachedSetTimeout;
-var cachedClearTimeout;
-
-function defaultSetTimout() {
-    throw new Error('setTimeout has not been defined');
-}
-function defaultClearTimeout () {
-    throw new Error('clearTimeout has not been defined');
-}
-(function () {
-    try {
-        if (typeof setTimeout === 'function') {
-            cachedSetTimeout = setTimeout;
-        } else {
-            cachedSetTimeout = defaultSetTimout;
-        }
-    } catch (e) {
-        cachedSetTimeout = defaultSetTimout;
-    }
-    try {
-        if (typeof clearTimeout === 'function') {
-            cachedClearTimeout = clearTimeout;
-        } else {
-            cachedClearTimeout = defaultClearTimeout;
-        }
-    } catch (e) {
-        cachedClearTimeout = defaultClearTimeout;
-    }
-} ())
-function runTimeout(fun) {
-    if (cachedSetTimeout === setTimeout) {
-        //normal enviroments in sane situations
-        return setTimeout(fun, 0);
-    }
-    // if setTimeout wasn't available but was latter defined
-    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
-        cachedSetTimeout = setTimeout;
-        return setTimeout(fun, 0);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedSetTimeout(fun, 0);
-    } catch(e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
-            return cachedSetTimeout.call(null, fun, 0);
-        } catch(e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
-            return cachedSetTimeout.call(this, fun, 0);
-        }
-    }
-
-
-}
-function runClearTimeout(marker) {
-    if (cachedClearTimeout === clearTimeout) {
-        //normal enviroments in sane situations
-        return clearTimeout(marker);
-    }
-    // if clearTimeout wasn't available but was latter defined
-    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
-        cachedClearTimeout = clearTimeout;
-        return clearTimeout(marker);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedClearTimeout(marker);
-    } catch (e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
-            return cachedClearTimeout.call(null, marker);
-        } catch (e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
-            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
-            return cachedClearTimeout.call(this, marker);
-        }
-    }
-
-
-
-}
-var queue = [];
-var draining = false;
-var currentQueue;
-var queueIndex = -1;
-
-function cleanUpNextTick() {
-    if (!draining || !currentQueue) {
-        return;
-    }
-    draining = false;
-    if (currentQueue.length) {
-        queue = currentQueue.concat(queue);
-    } else {
-        queueIndex = -1;
-    }
-    if (queue.length) {
-        drainQueue();
-    }
-}
-
-function drainQueue() {
-    if (draining) {
-        return;
-    }
-    var timeout = runTimeout(cleanUpNextTick);
-    draining = true;
-
-    var len = queue.length;
-    while(len) {
-        currentQueue = queue;
-        queue = [];
-        while (++queueIndex < len) {
-            if (currentQueue) {
-                currentQueue[queueIndex].run();
-            }
-        }
-        queueIndex = -1;
-        len = queue.length;
-    }
-    currentQueue = null;
-    draining = false;
-    runClearTimeout(timeout);
-}
-
-process.nextTick = function (fun) {
-    var args = new Array(arguments.length - 1);
-    if (arguments.length > 1) {
-        for (var i = 1; i < arguments.length; i++) {
-            args[i - 1] = arguments[i];
-        }
-    }
-    queue.push(new Item(fun, args));
-    if (queue.length === 1 && !draining) {
-        runTimeout(drainQueue);
-    }
-};
-
-// v8 likes predictible objects
-function Item(fun, array) {
-    this.fun = fun;
-    this.array = array;
-}
-Item.prototype.run = function () {
-    this.fun.apply(null, this.array);
-};
-process.title = 'browser';
-process.browser = true;
-process.env = {};
-process.argv = [];
-process.version = ''; // empty string to avoid regexp issues
-process.versions = {};
-
-function noop() {}
-
-process.on = noop;
-process.addListener = noop;
-process.once = noop;
-process.off = noop;
-process.removeListener = noop;
-process.removeAllListeners = noop;
-process.emit = noop;
-process.prependListener = noop;
-process.prependOnceListener = noop;
-
-process.listeners = function (name) { return [] }
-
-process.binding = function (name) {
-    throw new Error('process.binding is not supported');
-};
-
-process.cwd = function () { return '/' };
-process.chdir = function (dir) {
-    throw new Error('process.chdir is not supported');
-};
-process.umask = function() { return 0; };
-
-},{}],72:[function(require,module,exports){
-'use strict';
-
-var GetIntrinsic = require('get-intrinsic');
-var define = require('define-data-property');
-var hasDescriptors = require('has-property-descriptors')();
-var gOPD = require('gopd');
-
-var $TypeError = require('es-errors/type');
-var $floor = GetIntrinsic('%Math.floor%');
-
-/** @type {import('.')} */
-module.exports = function setFunctionLength(fn, length) {
-	if (typeof fn !== 'function') {
-		throw new $TypeError('`fn` is not a function');
-	}
-	if (typeof length !== 'number' || length < 0 || length > 0xFFFFFFFF || $floor(length) !== length) {
-		throw new $TypeError('`length` must be a positive 32-bit integer');
-	}
-
-	var loose = arguments.length > 2 && !!arguments[2];
-
-	var functionLengthIsConfigurable = true;
-	var functionLengthIsWritable = true;
-	if ('length' in fn && gOPD) {
-		var desc = gOPD(fn, 'length');
-		if (desc && !desc.configurable) {
-			functionLengthIsConfigurable = false;
-		}
-		if (desc && !desc.writable) {
-			functionLengthIsWritable = false;
-		}
-	}
-
-	if (functionLengthIsConfigurable || functionLengthIsWritable || !loose) {
-		if (hasDescriptors) {
-			define(/** @type {Parameters<define>[0]} */ (fn), 'length', length, true, true);
-		} else {
-			define(/** @type {Parameters<define>[0]} */ (fn), 'length', length);
-		}
-	}
-	return fn;
-};
-
-},{"define-data-property":29,"es-errors/type":48,"get-intrinsic":53,"gopd":54,"has-property-descriptors":55}],73:[function(require,module,exports){
+},{}],42:[function(require,module,exports){
 'use strict';
 module.exports = {
 	stdout: false,
 	stderr: false
 };
 
-},{}],74:[function(require,module,exports){
-module.exports = function isBuffer(arg) {
-  return arg && typeof arg === 'object'
-    && typeof arg.copy === 'function'
-    && typeof arg.fill === 'function'
-    && typeof arg.readUInt8 === 'function';
-}
-},{}],75:[function(require,module,exports){
-// Currently in sync with Node.js lib/internal/util/types.js
-// https://github.com/nodejs/node/commit/112cc7c27551254aa2b17098fb774867f05ed0d9
-
-'use strict';
-
-var isArgumentsObject = require('is-arguments');
-var isGeneratorFunction = require('is-generator-function');
-var whichTypedArray = require('which-typed-array');
-var isTypedArray = require('is-typed-array');
-
-function uncurryThis(f) {
-  return f.call.bind(f);
-}
-
-var BigIntSupported = typeof BigInt !== 'undefined';
-var SymbolSupported = typeof Symbol !== 'undefined';
-
-var ObjectToString = uncurryThis(Object.prototype.toString);
-
-var numberValue = uncurryThis(Number.prototype.valueOf);
-var stringValue = uncurryThis(String.prototype.valueOf);
-var booleanValue = uncurryThis(Boolean.prototype.valueOf);
-
-if (BigIntSupported) {
-  var bigIntValue = uncurryThis(BigInt.prototype.valueOf);
-}
-
-if (SymbolSupported) {
-  var symbolValue = uncurryThis(Symbol.prototype.valueOf);
-}
-
-function checkBoxedPrimitive(value, prototypeValueOf) {
-  if (typeof value !== 'object') {
-    return false;
-  }
-  try {
-    prototypeValueOf(value);
-    return true;
-  } catch(e) {
-    return false;
-  }
-}
-
-exports.isArgumentsObject = isArgumentsObject;
-exports.isGeneratorFunction = isGeneratorFunction;
-exports.isTypedArray = isTypedArray;
-
-// Taken from here and modified for better browser support
-// https://github.com/sindresorhus/p-is-promise/blob/cda35a513bda03f977ad5cde3a079d237e82d7ef/index.js
-function isPromise(input) {
-	return (
-		(
-			typeof Promise !== 'undefined' &&
-			input instanceof Promise
-		) ||
-		(
-			input !== null &&
-			typeof input === 'object' &&
-			typeof input.then === 'function' &&
-			typeof input.catch === 'function'
-		)
-	);
-}
-exports.isPromise = isPromise;
-
-function isArrayBufferView(value) {
-  if (typeof ArrayBuffer !== 'undefined' && ArrayBuffer.isView) {
-    return ArrayBuffer.isView(value);
-  }
-
-  return (
-    isTypedArray(value) ||
-    isDataView(value)
-  );
-}
-exports.isArrayBufferView = isArrayBufferView;
-
-
-function isUint8Array(value) {
-  return whichTypedArray(value) === 'Uint8Array';
-}
-exports.isUint8Array = isUint8Array;
-
-function isUint8ClampedArray(value) {
-  return whichTypedArray(value) === 'Uint8ClampedArray';
-}
-exports.isUint8ClampedArray = isUint8ClampedArray;
-
-function isUint16Array(value) {
-  return whichTypedArray(value) === 'Uint16Array';
-}
-exports.isUint16Array = isUint16Array;
-
-function isUint32Array(value) {
-  return whichTypedArray(value) === 'Uint32Array';
-}
-exports.isUint32Array = isUint32Array;
-
-function isInt8Array(value) {
-  return whichTypedArray(value) === 'Int8Array';
-}
-exports.isInt8Array = isInt8Array;
-
-function isInt16Array(value) {
-  return whichTypedArray(value) === 'Int16Array';
-}
-exports.isInt16Array = isInt16Array;
-
-function isInt32Array(value) {
-  return whichTypedArray(value) === 'Int32Array';
-}
-exports.isInt32Array = isInt32Array;
-
-function isFloat32Array(value) {
-  return whichTypedArray(value) === 'Float32Array';
-}
-exports.isFloat32Array = isFloat32Array;
-
-function isFloat64Array(value) {
-  return whichTypedArray(value) === 'Float64Array';
-}
-exports.isFloat64Array = isFloat64Array;
-
-function isBigInt64Array(value) {
-  return whichTypedArray(value) === 'BigInt64Array';
-}
-exports.isBigInt64Array = isBigInt64Array;
-
-function isBigUint64Array(value) {
-  return whichTypedArray(value) === 'BigUint64Array';
-}
-exports.isBigUint64Array = isBigUint64Array;
-
-function isMapToString(value) {
-  return ObjectToString(value) === '[object Map]';
-}
-isMapToString.working = (
-  typeof Map !== 'undefined' &&
-  isMapToString(new Map())
-);
-
-function isMap(value) {
-  if (typeof Map === 'undefined') {
-    return false;
-  }
-
-  return isMapToString.working
-    ? isMapToString(value)
-    : value instanceof Map;
-}
-exports.isMap = isMap;
-
-function isSetToString(value) {
-  return ObjectToString(value) === '[object Set]';
-}
-isSetToString.working = (
-  typeof Set !== 'undefined' &&
-  isSetToString(new Set())
-);
-function isSet(value) {
-  if (typeof Set === 'undefined') {
-    return false;
-  }
-
-  return isSetToString.working
-    ? isSetToString(value)
-    : value instanceof Set;
-}
-exports.isSet = isSet;
-
-function isWeakMapToString(value) {
-  return ObjectToString(value) === '[object WeakMap]';
-}
-isWeakMapToString.working = (
-  typeof WeakMap !== 'undefined' &&
-  isWeakMapToString(new WeakMap())
-);
-function isWeakMap(value) {
-  if (typeof WeakMap === 'undefined') {
-    return false;
-  }
-
-  return isWeakMapToString.working
-    ? isWeakMapToString(value)
-    : value instanceof WeakMap;
-}
-exports.isWeakMap = isWeakMap;
-
-function isWeakSetToString(value) {
-  return ObjectToString(value) === '[object WeakSet]';
-}
-isWeakSetToString.working = (
-  typeof WeakSet !== 'undefined' &&
-  isWeakSetToString(new WeakSet())
-);
-function isWeakSet(value) {
-  return isWeakSetToString(value);
-}
-exports.isWeakSet = isWeakSet;
-
-function isArrayBufferToString(value) {
-  return ObjectToString(value) === '[object ArrayBuffer]';
-}
-isArrayBufferToString.working = (
-  typeof ArrayBuffer !== 'undefined' &&
-  isArrayBufferToString(new ArrayBuffer())
-);
-function isArrayBuffer(value) {
-  if (typeof ArrayBuffer === 'undefined') {
-    return false;
-  }
-
-  return isArrayBufferToString.working
-    ? isArrayBufferToString(value)
-    : value instanceof ArrayBuffer;
-}
-exports.isArrayBuffer = isArrayBuffer;
-
-function isDataViewToString(value) {
-  return ObjectToString(value) === '[object DataView]';
-}
-isDataViewToString.working = (
-  typeof ArrayBuffer !== 'undefined' &&
-  typeof DataView !== 'undefined' &&
-  isDataViewToString(new DataView(new ArrayBuffer(1), 0, 1))
-);
-function isDataView(value) {
-  if (typeof DataView === 'undefined') {
-    return false;
-  }
-
-  return isDataViewToString.working
-    ? isDataViewToString(value)
-    : value instanceof DataView;
-}
-exports.isDataView = isDataView;
-
-// Store a copy of SharedArrayBuffer in case it's deleted elsewhere
-var SharedArrayBufferCopy = typeof SharedArrayBuffer !== 'undefined' ? SharedArrayBuffer : undefined;
-function isSharedArrayBufferToString(value) {
-  return ObjectToString(value) === '[object SharedArrayBuffer]';
-}
-function isSharedArrayBuffer(value) {
-  if (typeof SharedArrayBufferCopy === 'undefined') {
-    return false;
-  }
-
-  if (typeof isSharedArrayBufferToString.working === 'undefined') {
-    isSharedArrayBufferToString.working = isSharedArrayBufferToString(new SharedArrayBufferCopy());
-  }
-
-  return isSharedArrayBufferToString.working
-    ? isSharedArrayBufferToString(value)
-    : value instanceof SharedArrayBufferCopy;
-}
-exports.isSharedArrayBuffer = isSharedArrayBuffer;
-
-function isAsyncFunction(value) {
-  return ObjectToString(value) === '[object AsyncFunction]';
-}
-exports.isAsyncFunction = isAsyncFunction;
-
-function isMapIterator(value) {
-  return ObjectToString(value) === '[object Map Iterator]';
-}
-exports.isMapIterator = isMapIterator;
-
-function isSetIterator(value) {
-  return ObjectToString(value) === '[object Set Iterator]';
-}
-exports.isSetIterator = isSetIterator;
-
-function isGeneratorObject(value) {
-  return ObjectToString(value) === '[object Generator]';
-}
-exports.isGeneratorObject = isGeneratorObject;
-
-function isWebAssemblyCompiledModule(value) {
-  return ObjectToString(value) === '[object WebAssembly.Module]';
-}
-exports.isWebAssemblyCompiledModule = isWebAssemblyCompiledModule;
-
-function isNumberObject(value) {
-  return checkBoxedPrimitive(value, numberValue);
-}
-exports.isNumberObject = isNumberObject;
-
-function isStringObject(value) {
-  return checkBoxedPrimitive(value, stringValue);
-}
-exports.isStringObject = isStringObject;
-
-function isBooleanObject(value) {
-  return checkBoxedPrimitive(value, booleanValue);
-}
-exports.isBooleanObject = isBooleanObject;
-
-function isBigIntObject(value) {
-  return BigIntSupported && checkBoxedPrimitive(value, bigIntValue);
-}
-exports.isBigIntObject = isBigIntObject;
-
-function isSymbolObject(value) {
-  return SymbolSupported && checkBoxedPrimitive(value, symbolValue);
-}
-exports.isSymbolObject = isSymbolObject;
-
-function isBoxedPrimitive(value) {
-  return (
-    isNumberObject(value) ||
-    isStringObject(value) ||
-    isBooleanObject(value) ||
-    isBigIntObject(value) ||
-    isSymbolObject(value)
-  );
-}
-exports.isBoxedPrimitive = isBoxedPrimitive;
-
-function isAnyArrayBuffer(value) {
-  return typeof Uint8Array !== 'undefined' && (
-    isArrayBuffer(value) ||
-    isSharedArrayBuffer(value)
-  );
-}
-exports.isAnyArrayBuffer = isAnyArrayBuffer;
-
-['isProxy', 'isExternal', 'isModuleNamespaceObject'].forEach(function(method) {
-  Object.defineProperty(exports, method, {
-    enumerable: false,
-    value: function() {
-      throw new Error(method + ' is not supported in userland');
-    }
-  });
-});
-
-},{"is-arguments":65,"is-generator-function":67,"is-typed-array":68,"which-typed-array":77}],76:[function(require,module,exports){
-(function (process){(function (){
-// Copyright Joyent, Inc. and other Node contributors.
-//
-// Permission is hereby granted, free of charge, to any person obtaining a
-// copy of this software and associated documentation files (the
-// "Software"), to deal in the Software without restriction, including
-// without limitation the rights to use, copy, modify, merge, publish,
-// distribute, sublicense, and/or sell copies of the Software, and to permit
-// persons to whom the Software is furnished to do so, subject to the
-// following conditions:
-//
-// The above copyright notice and this permission notice shall be included
-// in all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
-// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
-// USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-var getOwnPropertyDescriptors = Object.getOwnPropertyDescriptors ||
-  function getOwnPropertyDescriptors(obj) {
-    var keys = Object.keys(obj);
-    var descriptors = {};
-    for (var i = 0; i < keys.length; i++) {
-      descriptors[keys[i]] = Object.getOwnPropertyDescriptor(obj, keys[i]);
-    }
-    return descriptors;
-  };
-
-var formatRegExp = /%[sdj%]/g;
-exports.format = function(f) {
-  if (!isString(f)) {
-    var objects = [];
-    for (var i = 0; i < arguments.length; i++) {
-      objects.push(inspect(arguments[i]));
-    }
-    return objects.join(' ');
-  }
-
-  var i = 1;
-  var args = arguments;
-  var len = args.length;
-  var str = String(f).replace(formatRegExp, function(x) {
-    if (x === '%%') return '%';
-    if (i >= len) return x;
-    switch (x) {
-      case '%s': return String(args[i++]);
-      case '%d': return Number(args[i++]);
-      case '%j':
-        try {
-          return JSON.stringify(args[i++]);
-        } catch (_) {
-          return '[Circular]';
-        }
-      default:
-        return x;
-    }
-  });
-  for (var x = args[i]; i < len; x = args[++i]) {
-    if (isNull(x) || !isObject(x)) {
-      str += ' ' + x;
-    } else {
-      str += ' ' + inspect(x);
-    }
-  }
-  return str;
-};
-
-
-// Mark that a method should not be used.
-// Returns a modified function which warns once by default.
-// If --no-deprecation is set, then it is a no-op.
-exports.deprecate = function(fn, msg) {
-  if (typeof process !== 'undefined' && process.noDeprecation === true) {
-    return fn;
-  }
-
-  // Allow for deprecating things in the process of starting up.
-  if (typeof process === 'undefined') {
-    return function() {
-      return exports.deprecate(fn, msg).apply(this, arguments);
-    };
-  }
-
-  var warned = false;
-  function deprecated() {
-    if (!warned) {
-      if (process.throwDeprecation) {
-        throw new Error(msg);
-      } else if (process.traceDeprecation) {
-        console.trace(msg);
-      } else {
-        console.error(msg);
-      }
-      warned = true;
-    }
-    return fn.apply(this, arguments);
-  }
-
-  return deprecated;
-};
-
-
-var debugs = {};
-var debugEnvRegex = /^$/;
-
-if (process.env.NODE_DEBUG) {
-  var debugEnv = process.env.NODE_DEBUG;
-  debugEnv = debugEnv.replace(/[|\\{}()[\]^$+?.]/g, '\\$&')
-    .replace(/\*/g, '.*')
-    .replace(/,/g, '$|^')
-    .toUpperCase();
-  debugEnvRegex = new RegExp('^' + debugEnv + '$', 'i');
-}
-exports.debuglog = function(set) {
-  set = set.toUpperCase();
-  if (!debugs[set]) {
-    if (debugEnvRegex.test(set)) {
-      var pid = process.pid;
-      debugs[set] = function() {
-        var msg = exports.format.apply(exports, arguments);
-        console.error('%s %d: %s', set, pid, msg);
-      };
-    } else {
-      debugs[set] = function() {};
-    }
-  }
-  return debugs[set];
-};
-
-
-/**
- * Echos the value of a value. Trys to print the value out
- * in the best way possible given the different types.
- *
- * @param {Object} obj The object to print out.
- * @param {Object} opts Optional options object that alters the output.
- */
-/* legacy: obj, showHidden, depth, colors*/
-function inspect(obj, opts) {
-  // default options
-  var ctx = {
-    seen: [],
-    stylize: stylizeNoColor
-  };
-  // legacy...
-  if (arguments.length >= 3) ctx.depth = arguments[2];
-  if (arguments.length >= 4) ctx.colors = arguments[3];
-  if (isBoolean(opts)) {
-    // legacy...
-    ctx.showHidden = opts;
-  } else if (opts) {
-    // got an "options" object
-    exports._extend(ctx, opts);
-  }
-  // set default options
-  if (isUndefined(ctx.showHidden)) ctx.showHidden = false;
-  if (isUndefined(ctx.depth)) ctx.depth = 2;
-  if (isUndefined(ctx.colors)) ctx.colors = false;
-  if (isUndefined(ctx.customInspect)) ctx.customInspect = true;
-  if (ctx.colors) ctx.stylize = stylizeWithColor;
-  return formatValue(ctx, obj, ctx.depth);
-}
-exports.inspect = inspect;
-
-
-// http://en.wikipedia.org/wiki/ANSI_escape_code#graphics
-inspect.colors = {
-  'bold' : [1, 22],
-  'italic' : [3, 23],
-  'underline' : [4, 24],
-  'inverse' : [7, 27],
-  'white' : [37, 39],
-  'grey' : [90, 39],
-  'black' : [30, 39],
-  'blue' : [34, 39],
-  'cyan' : [36, 39],
-  'green' : [32, 39],
-  'magenta' : [35, 39],
-  'red' : [31, 39],
-  'yellow' : [33, 39]
-};
-
-// Don't use 'blue' not visible on cmd.exe
-inspect.styles = {
-  'special': 'cyan',
-  'number': 'yellow',
-  'boolean': 'yellow',
-  'undefined': 'grey',
-  'null': 'bold',
-  'string': 'green',
-  'date': 'magenta',
-  // "name": intentionally not styling
-  'regexp': 'red'
-};
-
-
-function stylizeWithColor(str, styleType) {
-  var style = inspect.styles[styleType];
-
-  if (style) {
-    return '\u001b[' + inspect.colors[style][0] + 'm' + str +
-           '\u001b[' + inspect.colors[style][1] + 'm';
-  } else {
-    return str;
-  }
-}
-
-
-function stylizeNoColor(str, styleType) {
-  return str;
-}
-
-
-function arrayToHash(array) {
-  var hash = {};
-
-  array.forEach(function(val, idx) {
-    hash[val] = true;
-  });
-
-  return hash;
-}
-
-
-function formatValue(ctx, value, recurseTimes) {
-  // Provide a hook for user-specified inspect functions.
-  // Check that value is an object with an inspect function on it
-  if (ctx.customInspect &&
-      value &&
-      isFunction(value.inspect) &&
-      // Filter out the util module, it's inspect function is special
-      value.inspect !== exports.inspect &&
-      // Also filter out any prototype objects using the circular check.
-      !(value.constructor && value.constructor.prototype === value)) {
-    var ret = value.inspect(recurseTimes, ctx);
-    if (!isString(ret)) {
-      ret = formatValue(ctx, ret, recurseTimes);
-    }
-    return ret;
-  }
-
-  // Primitive types cannot have properties
-  var primitive = formatPrimitive(ctx, value);
-  if (primitive) {
-    return primitive;
-  }
-
-  // Look up the keys of the object.
-  var keys = Object.keys(value);
-  var visibleKeys = arrayToHash(keys);
-
-  if (ctx.showHidden) {
-    keys = Object.getOwnPropertyNames(value);
-  }
-
-  // IE doesn't make error fields non-enumerable
-  // http://msdn.microsoft.com/en-us/library/ie/dww52sbt(v=vs.94).aspx
-  if (isError(value)
-      && (keys.indexOf('message') >= 0 || keys.indexOf('description') >= 0)) {
-    return formatError(value);
-  }
-
-  // Some type of object without properties can be shortcutted.
-  if (keys.length === 0) {
-    if (isFunction(value)) {
-      var name = value.name ? ': ' + value.name : '';
-      return ctx.stylize('[Function' + name + ']', 'special');
-    }
-    if (isRegExp(value)) {
-      return ctx.stylize(RegExp.prototype.toString.call(value), 'regexp');
-    }
-    if (isDate(value)) {
-      return ctx.stylize(Date.prototype.toString.call(value), 'date');
-    }
-    if (isError(value)) {
-      return formatError(value);
-    }
-  }
-
-  var base = '', array = false, braces = ['{', '}'];
-
-  // Make Array say that they are Array
-  if (isArray(value)) {
-    array = true;
-    braces = ['[', ']'];
-  }
-
-  // Make functions say that they are functions
-  if (isFunction(value)) {
-    var n = value.name ? ': ' + value.name : '';
-    base = ' [Function' + n + ']';
-  }
-
-  // Make RegExps say that they are RegExps
-  if (isRegExp(value)) {
-    base = ' ' + RegExp.prototype.toString.call(value);
-  }
-
-  // Make dates with properties first say the date
-  if (isDate(value)) {
-    base = ' ' + Date.prototype.toUTCString.call(value);
-  }
-
-  // Make error with message first say the error
-  if (isError(value)) {
-    base = ' ' + formatError(value);
-  }
-
-  if (keys.length === 0 && (!array || value.length == 0)) {
-    return braces[0] + base + braces[1];
-  }
-
-  if (recurseTimes < 0) {
-    if (isRegExp(value)) {
-      return ctx.stylize(RegExp.prototype.toString.call(value), 'regexp');
-    } else {
-      return ctx.stylize('[Object]', 'special');
-    }
-  }
-
-  ctx.seen.push(value);
-
-  var output;
-  if (array) {
-    output = formatArray(ctx, value, recurseTimes, visibleKeys, keys);
-  } else {
-    output = keys.map(function(key) {
-      return formatProperty(ctx, value, recurseTimes, visibleKeys, key, array);
-    });
-  }
-
-  ctx.seen.pop();
-
-  return reduceToSingleString(output, base, braces);
-}
-
-
-function formatPrimitive(ctx, value) {
-  if (isUndefined(value))
-    return ctx.stylize('undefined', 'undefined');
-  if (isString(value)) {
-    var simple = '\'' + JSON.stringify(value).replace(/^"|"$/g, '')
-                                             .replace(/'/g, "\\'")
-                                             .replace(/\\"/g, '"') + '\'';
-    return ctx.stylize(simple, 'string');
-  }
-  if (isNumber(value))
-    return ctx.stylize('' + value, 'number');
-  if (isBoolean(value))
-    return ctx.stylize('' + value, 'boolean');
-  // For some reason typeof null is "object", so special case here.
-  if (isNull(value))
-    return ctx.stylize('null', 'null');
-}
-
-
-function formatError(value) {
-  return '[' + Error.prototype.toString.call(value) + ']';
-}
-
-
-function formatArray(ctx, value, recurseTimes, visibleKeys, keys) {
-  var output = [];
-  for (var i = 0, l = value.length; i < l; ++i) {
-    if (hasOwnProperty(value, String(i))) {
-      output.push(formatProperty(ctx, value, recurseTimes, visibleKeys,
-          String(i), true));
-    } else {
-      output.push('');
-    }
-  }
-  keys.forEach(function(key) {
-    if (!key.match(/^\d+$/)) {
-      output.push(formatProperty(ctx, value, recurseTimes, visibleKeys,
-          key, true));
-    }
-  });
-  return output;
-}
-
-
-function formatProperty(ctx, value, recurseTimes, visibleKeys, key, array) {
-  var name, str, desc;
-  desc = Object.getOwnPropertyDescriptor(value, key) || { value: value[key] };
-  if (desc.get) {
-    if (desc.set) {
-      str = ctx.stylize('[Getter/Setter]', 'special');
-    } else {
-      str = ctx.stylize('[Getter]', 'special');
-    }
-  } else {
-    if (desc.set) {
-      str = ctx.stylize('[Setter]', 'special');
-    }
-  }
-  if (!hasOwnProperty(visibleKeys, key)) {
-    name = '[' + key + ']';
-  }
-  if (!str) {
-    if (ctx.seen.indexOf(desc.value) < 0) {
-      if (isNull(recurseTimes)) {
-        str = formatValue(ctx, desc.value, null);
-      } else {
-        str = formatValue(ctx, desc.value, recurseTimes - 1);
-      }
-      if (str.indexOf('\n') > -1) {
-        if (array) {
-          str = str.split('\n').map(function(line) {
-            return '  ' + line;
-          }).join('\n').slice(2);
-        } else {
-          str = '\n' + str.split('\n').map(function(line) {
-            return '   ' + line;
-          }).join('\n');
-        }
-      }
-    } else {
-      str = ctx.stylize('[Circular]', 'special');
-    }
-  }
-  if (isUndefined(name)) {
-    if (array && key.match(/^\d+$/)) {
-      return str;
-    }
-    name = JSON.stringify('' + key);
-    if (name.match(/^"([a-zA-Z_][a-zA-Z_0-9]*)"$/)) {
-      name = name.slice(1, -1);
-      name = ctx.stylize(name, 'name');
-    } else {
-      name = name.replace(/'/g, "\\'")
-                 .replace(/\\"/g, '"')
-                 .replace(/(^"|"$)/g, "'");
-      name = ctx.stylize(name, 'string');
-    }
-  }
-
-  return name + ': ' + str;
-}
-
-
-function reduceToSingleString(output, base, braces) {
-  var numLinesEst = 0;
-  var length = output.reduce(function(prev, cur) {
-    numLinesEst++;
-    if (cur.indexOf('\n') >= 0) numLinesEst++;
-    return prev + cur.replace(/\u001b\[\d\d?m/g, '').length + 1;
-  }, 0);
-
-  if (length > 60) {
-    return braces[0] +
-           (base === '' ? '' : base + '\n ') +
-           ' ' +
-           output.join(',\n  ') +
-           ' ' +
-           braces[1];
-  }
-
-  return braces[0] + base + ' ' + output.join(', ') + ' ' + braces[1];
-}
-
-
-// NOTE: These type checking functions intentionally don't use `instanceof`
-// because it is fragile and can be easily faked with `Object.create()`.
-exports.types = require('./support/types');
-
-function isArray(ar) {
-  return Array.isArray(ar);
-}
-exports.isArray = isArray;
-
-function isBoolean(arg) {
-  return typeof arg === 'boolean';
-}
-exports.isBoolean = isBoolean;
-
-function isNull(arg) {
-  return arg === null;
-}
-exports.isNull = isNull;
-
-function isNullOrUndefined(arg) {
-  return arg == null;
-}
-exports.isNullOrUndefined = isNullOrUndefined;
-
-function isNumber(arg) {
-  return typeof arg === 'number';
-}
-exports.isNumber = isNumber;
-
-function isString(arg) {
-  return typeof arg === 'string';
-}
-exports.isString = isString;
-
-function isSymbol(arg) {
-  return typeof arg === 'symbol';
-}
-exports.isSymbol = isSymbol;
-
-function isUndefined(arg) {
-  return arg === void 0;
-}
-exports.isUndefined = isUndefined;
-
-function isRegExp(re) {
-  return isObject(re) && objectToString(re) === '[object RegExp]';
-}
-exports.isRegExp = isRegExp;
-exports.types.isRegExp = isRegExp;
-
-function isObject(arg) {
-  return typeof arg === 'object' && arg !== null;
-}
-exports.isObject = isObject;
-
-function isDate(d) {
-  return isObject(d) && objectToString(d) === '[object Date]';
-}
-exports.isDate = isDate;
-exports.types.isDate = isDate;
-
-function isError(e) {
-  return isObject(e) &&
-      (objectToString(e) === '[object Error]' || e instanceof Error);
-}
-exports.isError = isError;
-exports.types.isNativeError = isError;
-
-function isFunction(arg) {
-  return typeof arg === 'function';
-}
-exports.isFunction = isFunction;
-
-function isPrimitive(arg) {
-  return arg === null ||
-         typeof arg === 'boolean' ||
-         typeof arg === 'number' ||
-         typeof arg === 'string' ||
-         typeof arg === 'symbol' ||  // ES6 symbol
-         typeof arg === 'undefined';
-}
-exports.isPrimitive = isPrimitive;
-
-exports.isBuffer = require('./support/isBuffer');
-
-function objectToString(o) {
-  return Object.prototype.toString.call(o);
-}
-
-
-function pad(n) {
-  return n < 10 ? '0' + n.toString(10) : n.toString(10);
-}
-
-
-var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep',
-              'Oct', 'Nov', 'Dec'];
-
-// 26 Feb 16:19:34
-function timestamp() {
-  var d = new Date();
-  var time = [pad(d.getHours()),
-              pad(d.getMinutes()),
-              pad(d.getSeconds())].join(':');
-  return [d.getDate(), months[d.getMonth()], time].join(' ');
-}
-
-
-// log is just a thin wrapper to console.log that prepends a timestamp
-exports.log = function() {
-  console.log('%s - %s', timestamp(), exports.format.apply(exports, arguments));
-};
-
-
-/**
- * Inherit the prototype methods from one constructor into another.
- *
- * The Function.prototype.inherits from lang.js rewritten as a standalone
- * function (not on Function.prototype). NOTE: If this file is to be loaded
- * during bootstrapping this function needs to be rewritten using some native
- * functions as prototype setup using normal JavaScript does not work as
- * expected during bootstrapping (see mirror.js in r114903).
- *
- * @param {function} ctor Constructor function which needs to inherit the
- *     prototype.
- * @param {function} superCtor Constructor function to inherit prototype from.
- */
-exports.inherits = require('inherits');
-
-exports._extend = function(origin, add) {
-  // Don't do anything if add isn't an object
-  if (!add || !isObject(add)) return origin;
-
-  var keys = Object.keys(add);
-  var i = keys.length;
-  while (i--) {
-    origin[keys[i]] = add[keys[i]];
-  }
-  return origin;
-};
-
-function hasOwnProperty(obj, prop) {
-  return Object.prototype.hasOwnProperty.call(obj, prop);
-}
-
-var kCustomPromisifiedSymbol = typeof Symbol !== 'undefined' ? Symbol('util.promisify.custom') : undefined;
-
-exports.promisify = function promisify(original) {
-  if (typeof original !== 'function')
-    throw new TypeError('The "original" argument must be of type Function');
-
-  if (kCustomPromisifiedSymbol && original[kCustomPromisifiedSymbol]) {
-    var fn = original[kCustomPromisifiedSymbol];
-    if (typeof fn !== 'function') {
-      throw new TypeError('The "util.promisify.custom" argument must be of type Function');
-    }
-    Object.defineProperty(fn, kCustomPromisifiedSymbol, {
-      value: fn, enumerable: false, writable: false, configurable: true
-    });
-    return fn;
-  }
-
-  function fn() {
-    var promiseResolve, promiseReject;
-    var promise = new Promise(function (resolve, reject) {
-      promiseResolve = resolve;
-      promiseReject = reject;
-    });
-
-    var args = [];
-    for (var i = 0; i < arguments.length; i++) {
-      args.push(arguments[i]);
-    }
-    args.push(function (err, value) {
-      if (err) {
-        promiseReject(err);
-      } else {
-        promiseResolve(value);
-      }
-    });
-
-    try {
-      original.apply(this, args);
-    } catch (err) {
-      promiseReject(err);
-    }
-
-    return promise;
-  }
-
-  Object.setPrototypeOf(fn, Object.getPrototypeOf(original));
-
-  if (kCustomPromisifiedSymbol) Object.defineProperty(fn, kCustomPromisifiedSymbol, {
-    value: fn, enumerable: false, writable: false, configurable: true
-  });
-  return Object.defineProperties(
-    fn,
-    getOwnPropertyDescriptors(original)
-  );
-}
-
-exports.promisify.custom = kCustomPromisifiedSymbol
-
-function callbackifyOnRejected(reason, cb) {
-  // `!reason` guard inspired by bluebird (Ref: https://goo.gl/t5IS6M).
-  // Because `null` is a special error value in callbacks which means "no error
-  // occurred", we error-wrap so the callback consumer can distinguish between
-  // "the promise rejected with null" or "the promise fulfilled with undefined".
-  if (!reason) {
-    var newReason = new Error('Promise was rejected with a falsy value');
-    newReason.reason = reason;
-    reason = newReason;
-  }
-  return cb(reason);
-}
-
-function callbackify(original) {
-  if (typeof original !== 'function') {
-    throw new TypeError('The "original" argument must be of type Function');
-  }
-
-  // We DO NOT return the promise as it gives the user a false sense that
-  // the promise is actually somehow related to the callback's execution
-  // and that the callback throwing will reject the promise.
-  function callbackified() {
-    var args = [];
-    for (var i = 0; i < arguments.length; i++) {
-      args.push(arguments[i]);
-    }
-
-    var maybeCb = args.pop();
-    if (typeof maybeCb !== 'function') {
-      throw new TypeError('The last argument must be of type Function');
-    }
-    var self = this;
-    var cb = function() {
-      return maybeCb.apply(self, arguments);
-    };
-    // In true node style we process the callback on `nextTick` with all the
-    // implications (stack, `uncaughtException`, `async_hooks`)
-    original.apply(this, args)
-      .then(function(ret) { process.nextTick(cb.bind(null, null, ret)) },
-            function(rej) { process.nextTick(callbackifyOnRejected.bind(null, rej, cb)) });
-  }
-
-  Object.setPrototypeOf(callbackified, Object.getPrototypeOf(original));
-  Object.defineProperties(callbackified,
-                          getOwnPropertyDescriptors(original));
-  return callbackified;
-}
-exports.callbackify = callbackify;
-
-}).call(this)}).call(this,require('_process'))
-},{"./support/isBuffer":74,"./support/types":75,"_process":71,"inherits":64}],77:[function(require,module,exports){
-(function (global){(function (){
-'use strict';
-
-var forEach = require('for-each');
-var availableTypedArrays = require('available-typed-arrays');
-var callBind = require('call-bind');
-var callBound = require('call-bind/callBound');
-var gOPD = require('gopd');
-
-/** @type {(O: object) => string} */
-var $toString = callBound('Object.prototype.toString');
-var hasToStringTag = require('has-tostringtag/shams')();
-
-var g = typeof globalThis === 'undefined' ? global : globalThis;
-var typedArrays = availableTypedArrays();
-
-var $slice = callBound('String.prototype.slice');
-var getPrototypeOf = Object.getPrototypeOf; // require('getprototypeof');
-
-/** @type {<T = unknown>(array: readonly T[], value: unknown) => number} */
-var $indexOf = callBound('Array.prototype.indexOf', true) || function indexOf(array, value) {
-	for (var i = 0; i < array.length; i += 1) {
-		if (array[i] === value) {
-			return i;
-		}
-	}
-	return -1;
-};
-
-/** @typedef {(receiver: import('.').TypedArray) => string | typeof Uint8Array.prototype.slice.call | typeof Uint8Array.prototype.set.call} Getter */
-/** @type {{ [k in `\$${import('.').TypedArrayName}`]?: Getter } & { __proto__: null }} */
-var cache = { __proto__: null };
-if (hasToStringTag && gOPD && getPrototypeOf) {
-	forEach(typedArrays, function (typedArray) {
-		var arr = new g[typedArray]();
-		if (Symbol.toStringTag in arr) {
-			var proto = getPrototypeOf(arr);
-			// @ts-expect-error TS won't narrow inside a closure
-			var descriptor = gOPD(proto, Symbol.toStringTag);
-			if (!descriptor) {
-				var superProto = getPrototypeOf(proto);
-				// @ts-expect-error TS won't narrow inside a closure
-				descriptor = gOPD(superProto, Symbol.toStringTag);
-			}
-			// @ts-expect-error TODO: fix
-			cache['$' + typedArray] = callBind(descriptor.get);
-		}
-	});
-} else {
-	forEach(typedArrays, function (typedArray) {
-		var arr = new g[typedArray]();
-		var fn = arr.slice || arr.set;
-		if (fn) {
-			// @ts-expect-error TODO: fix
-			cache['$' + typedArray] = callBind(fn);
-		}
-	});
-}
-
-/** @type {(value: object) => false | import('.').TypedArrayName} */
-var tryTypedArrays = function tryAllTypedArrays(value) {
-	/** @type {ReturnType<typeof tryAllTypedArrays>} */ var found = false;
-	forEach(
-		// eslint-disable-next-line no-extra-parens
-		/** @type {Record<`\$${TypedArrayName}`, Getter>} */ /** @type {any} */ (cache),
-		/** @type {(getter: Getter, name: `\$${import('.').TypedArrayName}`) => void} */
-		function (getter, typedArray) {
-			if (!found) {
-				try {
-				// @ts-expect-error TODO: fix
-					if ('$' + getter(value) === typedArray) {
-						found = $slice(typedArray, 1);
-					}
-				} catch (e) { /**/ }
-			}
-		}
-	);
-	return found;
-};
-
-/** @type {(value: object) => false | import('.').TypedArrayName} */
-var trySlices = function tryAllSlices(value) {
-	/** @type {ReturnType<typeof tryAllSlices>} */ var found = false;
-	forEach(
-		// eslint-disable-next-line no-extra-parens
-		/** @type {Record<`\$${TypedArrayName}`, Getter>} */ /** @type {any} */ (cache),
-		/** @type {(getter: typeof cache, name: `\$${import('.').TypedArrayName}`) => void} */ function (getter, name) {
-			if (!found) {
-				try {
-					// @ts-expect-error TODO: fix
-					getter(value);
-					found = $slice(name, 1);
-				} catch (e) { /**/ }
-			}
-		}
-	);
-	return found;
-};
-
-/** @type {import('.')} */
-module.exports = function whichTypedArray(value) {
-	if (!value || typeof value !== 'object') { return false; }
-	if (!hasToStringTag) {
-		/** @type {string} */
-		var tag = $slice($toString(value), 8, -1);
-		if ($indexOf(typedArrays, tag) > -1) {
-			return tag;
-		}
-		if (tag !== 'Object') {
-			return false;
-		}
-		// node < 0.6 hits here on real Typed Arrays
-		return trySlices(value);
-	}
-	if (!gOPD) { return null; } // unknown engine
-	return tryTypedArrays(value);
-};
-
-}).call(this)}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"available-typed-arrays":17,"call-bind":19,"call-bind/callBound":18,"for-each":50,"gopd":54,"has-tostringtag/shams":59}]},{},[13]);
+},{}]},{},[13]);

@@ -1,43 +1,33 @@
 // import { loppingSnapExByResponse } from './base-function';
-import * as chai from 'chai';
-import chaiSorted from 'chai-sorted';
-
-const expectChai = chai.expect;
-chai.use(chaiSorted);
-
-export { expectChai };
+import { expect as jestExpect } from '@jest/globals';
 
 
 export const output = (response) => ({
   text: `\n  Request: ${JSON.stringify(response.request, null, 4)}`,
 });
 
-export const expectStatus = (response, expectedStatus) => {
-  expect((response).status, `Reason: Wrong HTTP Status Code ${output(response).text}`).toEqual(expectedStatus);
-};
+export function expectStatus(response, expectedStatus) {
+  jestExpect(response.status).toEqual(expectedStatus);
+}
 
 export const expectEqual = (response, actualData, expectedBody) => {
-  expect(actualData, `Reason: Actual Data is not equal with Expected Data ${output(response).text}`).toEqual(expectedBody);
+  jestExpect(actualData).toEqual(expectedBody);
 };
 
 export const expectContain = (response, actualData, expectedBody) => {
-  expect(actualData, `Reason: Actual Data is not contain with Expected Data ${output(response).text}`).toContain(expectedBody);
+  jestExpect(actualData).toContain(expectedBody);
 };
 
 export const expectSchema = (response, expectedSchema) => {
-  expect((response).body, `Reason: Wrong Response Schema ${output(response).text}`).toMatchSchema(expectedSchema);
+  jestExpect(response.body).toMatchSchema(expectedSchema);
 };
 
 export const expectSnapshot = (response) => {
-  expect((response).body, `Reason: Response Should be the same with Snapshot ${output(response).text}`).toMatchSnapshot();
-};
-
-export const expectSnapshot1 = (response) => {
-  expect((response).body, `Reason: Response Should be the same with Snapshot ${output(response)}`).toMatchSnapshot();
+  jestExpect(response.body).toMatchSnapshot();
 };
 
 export const expectSnapEx = (response, snapshotExcept) => {
-  expect((response).body, `Reason: Response Should be the same with Snapshot ${output(response).text}`).toMatchSnapshot(snapshotExcept);
+  jestExpect(response.body).toMatchSnapshot(snapshotExcept);
 };
 
 // export const expectSnapExArray = async (response, snapshotExcept, pathToArray) => {
@@ -48,53 +38,61 @@ export const expectSnapEx = (response, snapshotExcept) => {
 // };
 
 export const expectSnapshotSpec = (response, actualData) => {
-  expect(actualData, `Reason: Response Should be the same with Snapshot ${output(response).text}`).toMatchSnapshot();
+  jestExpect(actualData).toMatchSnapshot();
 };
 
 export const expectSnapExSpec = (response, actualData, snapshotExcept) => {
-  expect(actualData, `Reason: Response Should be the same with Snapshot ${output(response).text}`).toMatchSnapshot(snapshotExcept);
+  jestExpect(actualData).toMatchSnapshot(snapshotExcept);
 };
 
 export const expectAscending = (response, actualData) => {
-  expectChai(actualData, `Reason: Response must be sorted Ascending ${output(response).text}`).to.be.sorted({ descending: false });
+  jestExpect(actualData).toBeSorted({ descending: false });
 };
 
 export const expectDescending = (response, actualData) => {
-  expectChai(actualData, `Reason: Response mush be sorted Descending ${output(response).text}`).to.be.sorted({ descending: true });
+  jestExpect(actualData).toBeSorted({ descending: true });
 };
 
 export const expectLength = (response, actualData, length) => {
-  expectChai(actualData, `Reason: Actual Length is not Equal with Expected Length ${output(response).text}`).to.have.lengthOf(length);
+  jestExpect(actualData).toHaveLength(length);
 };
 
 export const expectLengthWithin = (response, actualData, minLength, maxLength) => {
-  expectChai(actualData, `Reason: Actual Length is not Equal between Expected Length ${output(response).text}`).to.have.lengthOf.within(minLength, maxLength);
+  jestExpect(actualData).toHaveLengthWithin(minLength, maxLength);
 };
 
 export const expectWithin = (response, actualData, min, max) => {
-  expectChai(actualData, `Reason: Actual Number is not Equal between Expected Number ${output(response).text}`).to.be.within(min, max);
+  jestExpect(actualData).toBeWithin(min, max);
 };
 
 export const expectGreaterThanOrEqual = (response, actualData, number) => {
-  expect(actualData, `Reason: Actual Number is not Greater than or Equal with Expected Number ${output(response).text}`).toBeGreaterThanOrEqual(number);
+  jestExpect(actualData).toBeGreaterThanOrEqual(number);
 };
 
 export const expectLessThanOrEqual = (response, actualData, number) => {
-  expect(actualData, `Reason: Actual Number is not Less than or Equal with Expected Number ${output(response).text}`).toBeLessThanOrEqual(number);
+  jestExpect(actualData).toBeLessThanOrEqual(number);
 };
 
 export const expectGreaterThan = (response, actualData, number) => {
-  expect(actualData, `Reason: Actual Number is not Greater than with Expected Number ${output(response).text}`).toBeGreaterThan(number);
+  jestExpect(actualData).toBeGreaterThan(number);
 };
 
 export const expectLessThan = (response, actualData, number) => {
-  expect(actualData, `Reason: Actual Number is not Less than with Expected Number ${output(response).text}`).toBeLessThan(number);
+  jestExpect(actualData).toBeLessThan(number);
 };
 
 export const expectNotEqual = (response, actualData, expectedBody) => {
-  expect(actualData, `Reason: Actual Data should not equal with Expected Data ${output(response).text}`).not.toEqual(expectedBody);
+  jestExpect(actualData).not.toEqual(expectedBody);
 };
 
 export const expectNotContain = (response, actualData, expectedBody) => {
-  expect(actualData, `Reason: Actual Data is not contain with Expected Data ${output(response).text}`).not.toContain(expectedBody);
+  jestExpect(actualData).not.toContain(expectedBody);
+};
+
+export const expectEmptyObject = (response) => {
+    jestExpect(response).toBeEmpty();
+};
+
+export const expectEmptyArray = (response) => {
+  jestExpect(response).toBeEmpty();
 };

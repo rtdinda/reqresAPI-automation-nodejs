@@ -89,7 +89,7 @@
                 <canvas id="test-suites-canvas" width="100" height="100"></canvas>
                 <h2>Test Suites</h2>
                 <div class="list-group">
-                    <p id="test-suites-results" class="list-group-item list-group-item-action">0 passed, 1 total</p>
+                    <p id="test-suites-results" class="list-group-item list-group-item-action">1 passed, 1 total</p>
                 </div>
             </div>
             <!-- /.col-lg-4 -->
@@ -97,7 +97,7 @@
                 <canvas id="tests-canvas" width="100" height="100"></canvas>
                 <h2>Tests</h2>
                 <div class="list-group">
-                    <p id="tests-results" class="list-group-item list-group-item-action">0 passed, 2 total</p>
+                    <p id="tests-results" class="list-group-item list-group-item-action">4 passed, 4 total</p>
                 </div>
             </div>
             <!-- /.col-lg-4 -->
@@ -105,7 +105,7 @@
                 <canvas id="snapshots-canvas" width="100" height="100"></canvas>
                 <h2>Snapshots</h2>
                 <div class="list-group">
-                    <p id="snapshots-results" class="list-group-item list-group-item-action">0 passed, 0 total</p>
+                    <p id="snapshots-results" class="list-group-item list-group-item-action">4 passed, 4 total</p>
                 </div>
             </div>
             <!-- /.col-lg-4 -->
@@ -125,16 +125,16 @@
 }</div>
         <div id="accordion">
             <div class="d-none" id="test-results">{
-  &quot;numFailedTestSuites&quot;: 1,
-  &quot;numFailedTests&quot;: 1,
-  &quot;numPassedTestSuites&quot;: 0,
-  &quot;numPassedTests&quot;: 0,
+  &quot;numFailedTestSuites&quot;: 0,
+  &quot;numFailedTests&quot;: 0,
+  &quot;numPassedTestSuites&quot;: 1,
+  &quot;numPassedTests&quot;: 4,
   &quot;numPendingTestSuites&quot;: 0,
-  &quot;numPendingTests&quot;: 1,
+  &quot;numPendingTests&quot;: 0,
   &quot;numRuntimeErrorTestSuites&quot;: 0,
   &quot;numTodoTests&quot;: 0,
   &quot;numTotalTestSuites&quot;: 1,
-  &quot;numTotalTests&quot;: 2,
+  &quot;numTotalTests&quot;: 4,
   &quot;openHandles&quot;: [],
   &quot;snapshot&quot;: {
     &quot;added&quot;: 0,
@@ -145,99 +145,117 @@
     &quot;filesRemovedList&quot;: [],
     &quot;filesUnmatched&quot;: 0,
     &quot;filesUpdated&quot;: 0,
-    &quot;matched&quot;: 0,
-    &quot;total&quot;: 0,
+    &quot;matched&quot;: 4,
+    &quot;total&quot;: 4,
     &quot;unchecked&quot;: 0,
     &quot;uncheckedKeysByFile&quot;: [],
     &quot;unmatched&quot;: 0,
     &quot;updated&quot;: 0
   },
-  &quot;startTime&quot;: 1762663177378,
+  &quot;startTime&quot;: 1785662000589,
   &quot;success&quot;: false,
   &quot;testResults&quot;: [
     {
       &quot;leaks&quot;: false,
-      &quot;numFailingTests&quot;: 1,
-      &quot;numPassingTests&quot;: 0,
-      &quot;numPendingTests&quot;: 1,
+      &quot;numFailingTests&quot;: 0,
+      &quot;numPassingTests&quot;: 4,
+      &quot;numPendingTests&quot;: 0,
       &quot;numTodoTests&quot;: 0,
       &quot;openHandles&quot;: [],
       &quot;perfStats&quot;: {
-        &quot;end&quot;: 1762663179358,
-        &quot;loadTestEnvironmentEnd&quot;: 1762663177539,
-        &quot;loadTestEnvironmentStart&quot;: 1762663177447,
-        &quot;runtime&quot;: 1817,
-        &quot;setupAfterEnvEnd&quot;: 1762663177792,
-        &quot;setupAfterEnvStart&quot;: 1762663177792,
-        &quot;setupFilesEnd&quot;: 1762663177541,
-        &quot;setupFilesStart&quot;: 1762663177541,
-        &quot;slow&quot;: false,
-        &quot;start&quot;: 1762663177541
+        &quot;end&quot;: 1785662006044,
+        &quot;loadTestEnvironmentEnd&quot;: 1785662000712,
+        &quot;loadTestEnvironmentStart&quot;: 1785662000647,
+        &quot;runtime&quot;: 5331,
+        &quot;setupAfterEnvEnd&quot;: 1785662001410,
+        &quot;setupAfterEnvStart&quot;: 1785662000947,
+        &quot;setupFilesEnd&quot;: 1785662000713,
+        &quot;setupFilesStart&quot;: 1785662000713,
+        &quot;slow&quot;: true,
+        &quot;start&quot;: 1785662000713
       },
       &quot;skipped&quot;: false,
       &quot;snapshot&quot;: {
         &quot;added&quot;: 0,
         &quot;fileDeleted&quot;: false,
-        &quot;matched&quot;: 0,
+        &quot;matched&quot;: 4,
         &quot;unchecked&quot;: 0,
         &quot;uncheckedKeys&quot;: [],
         &quot;unmatched&quot;: 0,
         &quot;updated&quot;: 0
       },
-      &quot;testFilePath&quot;: &quot;C:\\Users\\Lenovo\\Documents\\api\\__tests__\\getUser.js&quot;,
+      &quot;testFilePath&quot;: &quot;C:\\Users\\user\\OneDrive\\Documents\\training\\api\\__tests__\\getUser.js&quot;,
       &quot;testResults&quot;: [
         {
           &quot;ancestorTitles&quot;: [
             &quot;Get List User -- Positive Case&quot;
           ],
-          &quot;duration&quot;: 329,
+          &quot;duration&quot;: 1039,
           &quot;failing&quot;: false,
-          &quot;failureDetails&quot;: [
-            {
-              &quot;matcherResult&quot;: {
-                &quot;actual&quot;: {
-                  &quot;statusSuccessful&quot;: 200,
-                  &quot;statusUnsuccessful&quot;: 400,
-                  &quot;statusNotFound&quot;: 404
-                },
-                &quot;expected&quot;: 200,
-                &quot;message&quot;: &quot;\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) &#x2F;&#x2F; deep equality\u001b[22m\n\nExpected: \u001b[32m200\u001b[39m\nReceived: \u001b[31m{\&quot;statusNotFound\&quot;: 404, \&quot;statusSuccessful\&quot;: 200, \&quot;statusUnsuccessful\&quot;: 400}\u001b[39m&quot;,
-                &quot;name&quot;: &quot;toEqual&quot;,
-                &quot;pass&quot;: false
-              }
-            }
-          ],
-          &quot;failureMessages&quot;: [
-            &quot;Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) &#x2F;&#x2F; deep equality\u001b[22m\n\nExpected: \u001b[32m200\u001b[39m\nReceived: \u001b[31m{\&quot;statusNotFound\&quot;: 404, \&quot;statusSuccessful\&quot;: 200, \&quot;statusUnsuccessful\&quot;: 400}\u001b[39m\n    at Object.toEqual (C:\\Users\\Lenovo\\Documents\\api\\__tests__\\getUser.js:11:24)\n    at processTicksAndRejections (node:internal&#x2F;process&#x2F;task_queues:95:5)&quot;
-          ],
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
           &quot;fullName&quot;: &quot;Get List User -- Positive Case I can get list user and its detail by page number 2&quot;,
           &quot;invocations&quot;: 1,
           &quot;location&quot;: null,
-          &quot;numPassingAsserts&quot;: 0,
+          &quot;numPassingAsserts&quot;: 3,
           &quot;retryReasons&quot;: [],
-          &quot;startAt&quot;: 1762663178990,
-          &quot;status&quot;: &quot;failed&quot;,
+          &quot;startAt&quot;: 1785662001768,
+          &quot;status&quot;: &quot;passed&quot;,
           &quot;title&quot;: &quot;I can get list user and its detail by page number 2&quot;
         },
         {
           &quot;ancestorTitles&quot;: [
             &quot;Get User -- Positive Case&quot;
           ],
-          &quot;duration&quot;: null,
+          &quot;duration&quot;: 1033,
           &quot;failing&quot;: false,
           &quot;failureDetails&quot;: [],
           &quot;failureMessages&quot;: [],
-          &quot;fullName&quot;: &quot;Get User -- Positive Case I can get detail user by ID 2&quot;,
+          &quot;fullName&quot;: &quot;Get User -- Positive Case I can get detail user by exist ID&quot;,
           &quot;invocations&quot;: 1,
           &quot;location&quot;: null,
-          &quot;numPassingAsserts&quot;: 0,
+          &quot;numPassingAsserts&quot;: 3,
           &quot;retryReasons&quot;: [],
-          &quot;startAt&quot;: 1762663179331,
-          &quot;status&quot;: &quot;pending&quot;,
-          &quot;title&quot;: &quot;I can get detail user by ID 2&quot;
+          &quot;startAt&quot;: 1785662002809,
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;I can get detail user by exist ID&quot;
+        },
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;Get List User -- Negative Case&quot;
+          ],
+          &quot;duration&quot;: 1138,
+          &quot;failing&quot;: false,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;Get List User -- Negative Case I can&#39;t get list user, if data user doesn&#39;t exist&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 4,
+          &quot;retryReasons&quot;: [],
+          &quot;startAt&quot;: 1785662003843,
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;I can&#39;t get list user, if data user doesn&#39;t exist&quot;
+        },
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;Get User -- Negative Case&quot;
+          ],
+          &quot;duration&quot;: 1058,
+          &quot;failing&quot;: false,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;Get User -- Negative Case I can&#39;t get detail user by unexist ID&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 3,
+          &quot;retryReasons&quot;: [],
+          &quot;startAt&quot;: 1785662004983,
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;I can&#39;t get detail user by unexist ID&quot;
         }
       ],
-      &quot;failureMessage&quot;: &quot;\u001b[1m\u001b[31m  \u001b[1m● \u001b[22m\u001b[1mGet List User -- Positive Case › I can get list user and its detail by page number 2\u001b[39m\u001b[22m\n\n    \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) &#x2F;&#x2F; deep equality\u001b[22m\n\n    Expected: \u001b[32m200\u001b[39m\n    Received: \u001b[31m{\&quot;statusNotFound\&quot;: 404, \&quot;statusSuccessful\&quot;: 200, \&quot;statusUnsuccessful\&quot;: 400}\u001b[39m\n\u001b[2m\u001b[22m\n\u001b[2m    \u001b[0m \u001b[90m  9 |\u001b[39m     \u001b[36mconst\u001b[39m response \u001b[33m&#x3D;\u001b[39m \u001b[36mawait\u001b[39m endpoint\u001b[33m.\u001b[39mgetListUsers(\u001b[35m2\u001b[39m)\u001b[33m;\u001b[39m\u001b[22m\n\u001b[2m     \u001b[90m 10 |\u001b[39m     console\u001b[33m.\u001b[39mlog(response\u001b[33m.\u001b[39mstatus\u001b[33m,\u001b[39m response\u001b[33m.\u001b[39mbody\u001b[33m,\u001b[39m respStatus\u001b[33m.\u001b[39mstatusSuccessful)\u001b[22m\n\u001b[2m    \u001b[31m\u001b[1m&gt;\u001b[22m\u001b[2m\u001b[39m\u001b[90m 11 |\u001b[39m     expect(respStatus)\u001b[33m.\u001b[39mtoEqual(respStatus\u001b[33m.\u001b[39mstatusSuccessful)\u001b[33m;\u001b[39m\u001b[22m\n\u001b[2m     \u001b[90m    |\u001b[39m                        \u001b[31m\u001b[1m^\u001b[22m\u001b[2m\u001b[39m\u001b[22m\n\u001b[2m     \u001b[90m 12 |\u001b[39m     er\u001b[33m.\u001b[39mexpectStatus(response\u001b[33m.\u001b[39mstatus\u001b[33m,\u001b[39m respStatus\u001b[33m.\u001b[39mstatusSuccessful)\u001b[33m;\u001b[39m\u001b[22m\n\u001b[2m     \u001b[90m 13 |\u001b[39m     er\u001b[33m.\u001b[39mexpectSchema(response\u001b[33m,\u001b[39m schema\u001b[33m.\u001b[39mlistUsers)\u001b[33m;\u001b[39m\u001b[22m\n\u001b[2m     \u001b[90m 14 |\u001b[39m     er\u001b[33m.\u001b[39mexpectSnapshot(response)\u001b[33m;\u001b[39m\u001b[0m\u001b[22m\n\u001b[2m\u001b[22m\n\u001b[2m      \u001b[2mat Object.toEqual (\u001b[22m\u001b[2m\u001b[0m\u001b[36m__tests__&#x2F;getUser.js\u001b[39m\u001b[0m\u001b[2m:11:24)\u001b[22m\u001b[2m\u001b[22m\n&quot;
+      &quot;failureMessage&quot;: null
     }
   ],
   &quot;wasInterrupted&quot;: false
@@ -249,7 +267,8 @@
   &quot;ci&quot;: false,
   &quot;collectCoverage&quot;: false,
   &quot;collectCoverageFrom&quot;: [],
-  &quot;coverageDirectory&quot;: &quot;C:\\Users\\Lenovo\\Documents\\api\\coverage&quot;,
+  &quot;collectTests&quot;: false,
+  &quot;coverageDirectory&quot;: &quot;C:\\Users\\user\\OneDrive\\Documents\\training\\api\\coverage&quot;,
   &quot;coverageProvider&quot;: &quot;babel&quot;,
   &quot;coverageReporters&quot;: [
     &quot;clover&quot;,
@@ -273,10 +292,10 @@
   &quot;listTests&quot;: false,
   &quot;logHeapUsage&quot;: false,
   &quot;maxConcurrency&quot;: 5,
-  &quot;maxWorkers&quot;: 3,
+  &quot;maxWorkers&quot;: 15,
   &quot;noStackTrace&quot;: false,
   &quot;nonFlagArgs&quot;: [
-    &quot;__tests__\\getUser.js&quot;
+    &quot;__tests__&#x2F;getUser.js&quot;
   ],
   &quot;notify&quot;: false,
   &quot;notifyMode&quot;: &quot;failure-change&quot;,
@@ -291,18 +310,18 @@
       {}
     ],
     [
-      &quot;C:\\Users\\Lenovo\\Documents\\api\\node_modules\\jest-html-reporter\\dist\\index.js&quot;,
+      &quot;C:\\Users\\user\\OneDrive\\Documents\\training\\api\\node_modules\\jest-html-reporter\\dist\\index.js&quot;,
       {}
     ],
     [
-      &quot;C:\\Users\\Lenovo\\Documents\\api\\node_modules\\jest-stare\\lib\\index.js&quot;,
+      &quot;C:\\Users\\user\\OneDrive\\Documents\\training\\api\\node_modules\\jest-stare\\lib\\index.js&quot;,
       {}
     ]
   ],
-  &quot;rootDir&quot;: &quot;C:\\Users\\Lenovo\\Documents\\api&quot;,
+  &quot;rootDir&quot;: &quot;C:\\Users\\user\\OneDrive\\Documents\\training\\api&quot;,
   &quot;runInBand&quot;: false,
   &quot;runTestsByPath&quot;: false,
-  &quot;seed&quot;: 1890398768,
+  &quot;seed&quot;: -884169390,
   &quot;skipFilter&quot;: false,
   &quot;snapshotFormat&quot;: {
     &quot;escapeString&quot;: false,
@@ -311,11 +330,11 @@
   &quot;testFailureExitCode&quot;: 1,
   &quot;testPathPatterns&quot;: {
     &quot;patterns&quot;: [
-      &quot;__tests__\\getUser.js&quot;
+      &quot;__tests__&#x2F;getUser.js&quot;
     ],
     &quot;type&quot;: &quot;TestPathPatterns&quot;
   },
-  &quot;testSequencer&quot;: &quot;C:\\Users\\Lenovo\\Documents\\api\\node_modules\\@jest\\test-sequencer\\build\\index.js&quot;,
+  &quot;testSequencer&quot;: &quot;C:\\Users\\user\\OneDrive\\Documents\\training\\api\\node_modules\\@jest\\test-sequencer\\build\\index.js&quot;,
   &quot;updateSnapshot&quot;: &quot;new&quot;,
   &quot;useStderr&quot;: false,
   &quot;verbose&quot;: true,
@@ -323,6 +342,7 @@
   &quot;watch&quot;: false,
   &quot;watchAll&quot;: false,
   &quot;watchman&quot;: true,
+  &quot;workerGracefulExitTimeout&quot;: 500,
   &quot;workerThreads&quot;: false
 }</div>
 
