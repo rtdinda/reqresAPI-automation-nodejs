@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`User Register -- Negative Case I can't register new user, if the user doesn't defined yet 1`] = `
+{
+  "error": "Note: Only defined users succeed registration",
+}
+`;
+
+exports[`User Register -- Positive Case I can register new user 1`] = `
+{
+  "_meta": {
+    "context": "legacy_success",
+    "cta": {
+      "label": "Get started",
+      "url": "https://app.reqres.in/upgrade",
+    },
+    "docs_url": "https://app.reqres.in/documentation",
+    "example_url": "https://app.reqres.in/examples/notes-app",
+    "message": "This is a read-only demo endpoint. Sign up to create your own collections with full CRUD and auth.",
+    "powered_by": "ReqRes",
+    "upgrade_url": "https://app.reqres.in/upgrade",
+    "variant": "v1_b",
+  },
+  "id": 4,
+  "token": "QpwL5tke4Pnpja7X4",
+}
+`;
