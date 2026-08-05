@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`Update User -- Positive Case I can update existing user 1`] = `
+{
+  "_meta": {
+    "context": "legacy_success",
+    "cta": {
+      "label": "Get started",
+      "url": "https://app.reqres.in/upgrade",
+    },
+    "docs_url": "https://app.reqres.in/documentation",
+    "example_url": "https://app.reqres.in/examples/notes-app",
+    "message": "This is a read-only demo endpoint. Sign up to create your own collections with full CRUD and auth.",
+    "powered_by": "ReqRes",
+    "upgrade_url": "https://app.reqres.in/upgrade",
+    "variant": "v1_b",
+  },
+  "job": "Engineer",
+  "name": "John Doe",
+  "updatedAt": "2026-08-04T09:18:38.719Z",
+}
+`;
+
+exports[`Update User -- Positive Case I can update job of existing user 1`] = `
+{
+  "_meta": {
+    "context": "legacy_success",
+    "cta": {
+      "label": "Get started",
+      "url": "https://app.reqres.in/upgrade",
+    },
+    "docs_url": "https://app.reqres.in/documentation",
+    "example_url": "https://app.reqres.in/examples/notes-app",
+    "message": "This is a read-only demo endpoint. Sign up to create your own collections with full CRUD and auth.",
+    "powered_by": "ReqRes",
+    "upgrade_url": "https://app.reqres.in/upgrade",
+    "variant": "v1_b",
+  },
+  "job": "Manager",
+  "updatedAt": "2026-08-04T09:18:39.486Z",
+}
+`;
+
+exports[`Update User -- Positive Case I can update name of existing user 1`] = `
+{
+  "_meta": {
+    "context": "legacy_success",
+    "cta": {
+      "label": "Get started",
+      "url": "https://app.reqres.in/upgrade",
+    },
+    "docs_url": "https://app.reqres.in/documentation",
+    "example_url": "https://app.reqres.in/examples/notes-app",
+    "message": "This is a read-only demo endpoint. Sign up to create your own collections with full CRUD and auth.",
+    "powered_by": "ReqRes",
+    "upgrade_url": "https://app.reqres.in/upgrade",
+    "variant": "v1_b",
+  },
+  "name": "John Doe",
+  "updatedAt": "2026-08-04T09:18:39.107Z",
+}
+`;

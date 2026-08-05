@@ -1,5 +1,6 @@
 export default {
     statusSuccessful: 200,
-    statusUnsuccessful: 400,
+    statusNoContent: 204,
+    statusBadRequest: 400,
     statusNotFound: 404,
 };

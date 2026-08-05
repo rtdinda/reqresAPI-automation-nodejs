@@ -7,7 +7,6 @@ import {jest} from '@jest/globals';
 describe('Get List User -- Positive Case', () => {
   test('I can get list user and its detail by page number 2', async () => {
     const response = await endpoint.getListUsers(2);
-    console.log(response.body);
     er.expectStatus(response, respStatus.statusSuccessful);
     er.expectSchema(response, schema.listUsers);
     er.expectSnapshot(response);

@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
+
+exports[`User Login -- Negative Case I can't login user, if the email is empty null 1`] = `
+{
+  "error": "Missing email or username",
+}
+`;
+
+exports[`User Login -- Negative Case I can't login user, if the email is empty string 1`] = `
+{
+  "error": "Missing email or username",
+}
+`;
+
+exports[`User Login -- Negative Case I can't login user, if the email is invalid 1`] = `
+{
+  "error": "user not found",
+}
+`;
+
+exports[`User Login -- Negative Case I can't login user, if the password is empty string 1`] = `
+{
+  "error": "Missing password",
+}
+`;
+
+exports[`User Login -- Negative Case I can't login user, if the password is null 1`] = `
+{
+  "error": "Missing password",
+}
+`;
+
+exports[`User Login -- Positive Case I can login existing user 1`] = `
+{
+  "_meta": {
+    "context": "legacy_success",
+    "cta": {
+      "label": "Get started",
+      "url": "https://app.reqres.in/upgrade",
+    },
+    "docs_url": "https://app.reqres.in/documentation",
+    "example_url": "https://app.reqres.in/examples/notes-app",
+    "message": "This is a read-only demo endpoint. Sign up to create your own collections with full CRUD and auth.",
+    "powered_by": "ReqRes",
+    "upgrade_url": "https://app.reqres.in/upgrade",
+    "variant": "v1_b",
+  },
+  "token": "QpwL5tke4Pnpja7X4",
+}
+`;
