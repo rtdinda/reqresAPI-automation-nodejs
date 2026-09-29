@@ -89,7 +89,7 @@
                 <canvas id="test-suites-canvas" width="100" height="100"></canvas>
                 <h2>Test Suites</h2>
                 <div class="list-group">
-                    <p id="test-suites-results" class="list-group-item list-group-item-action">1 passed, 1 total</p>
+                    <p id="test-suites-results" class="list-group-item list-group-item-action">5 passed, 5 total</p>
                 </div>
             </div>
             <!-- /.col-lg-4 -->
@@ -97,7 +97,7 @@
                 <canvas id="tests-canvas" width="100" height="100"></canvas>
                 <h2>Tests</h2>
                 <div class="list-group">
-                    <p id="tests-results" class="list-group-item list-group-item-action">1 passed, 1 total</p>
+                    <p id="tests-results" class="list-group-item list-group-item-action">16 passed, 16 total</p>
                 </div>
             </div>
             <!-- /.col-lg-4 -->
@@ -105,7 +105,7 @@
                 <canvas id="snapshots-canvas" width="100" height="100"></canvas>
                 <h2>Snapshots</h2>
                 <div class="list-group">
-                    <p id="snapshots-results" class="list-group-item list-group-item-action">0 passed, 1 total</p>
+                    <p id="snapshots-results" class="list-group-item list-group-item-action">9 passed, 16 total</p>
                 </div>
             </div>
             <!-- /.col-lg-4 -->
@@ -127,34 +127,425 @@
             <div class="d-none" id="test-results">{
   &quot;numFailedTestSuites&quot;: 0,
   &quot;numFailedTests&quot;: 0,
-  &quot;numPassedTestSuites&quot;: 1,
-  &quot;numPassedTests&quot;: 1,
+  &quot;numPassedTestSuites&quot;: 5,
+  &quot;numPassedTests&quot;: 16,
   &quot;numPendingTestSuites&quot;: 0,
   &quot;numPendingTests&quot;: 0,
   &quot;numRuntimeErrorTestSuites&quot;: 0,
   &quot;numTodoTests&quot;: 0,
-  &quot;numTotalTestSuites&quot;: 1,
-  &quot;numTotalTests&quot;: 1,
+  &quot;numTotalTestSuites&quot;: 5,
+  &quot;numTotalTests&quot;: 16,
   &quot;openHandles&quot;: [],
   &quot;snapshot&quot;: {
-    &quot;added&quot;: 1,
-    &quot;didUpdate&quot;: false,
+    &quot;added&quot;: 0,
+    &quot;didUpdate&quot;: true,
     &quot;failure&quot;: false,
-    &quot;filesAdded&quot;: 1,
+    &quot;filesAdded&quot;: 0,
     &quot;filesRemoved&quot;: 0,
     &quot;filesRemovedList&quot;: [],
     &quot;filesUnmatched&quot;: 0,
-    &quot;filesUpdated&quot;: 0,
-    &quot;matched&quot;: 0,
-    &quot;total&quot;: 1,
+    &quot;filesUpdated&quot;: 4,
+    &quot;matched&quot;: 9,
+    &quot;total&quot;: 16,
     &quot;unchecked&quot;: 0,
     &quot;uncheckedKeysByFile&quot;: [],
     &quot;unmatched&quot;: 0,
-    &quot;updated&quot;: 0
+    &quot;updated&quot;: 7
   },
-  &quot;startTime&quot;: 1785835941954,
+  &quot;startTime&quot;: 1788323518731,
   &quot;success&quot;: false,
   &quot;testResults&quot;: [
+    {
+      &quot;leaks&quot;: false,
+      &quot;numFailingTests&quot;: 0,
+      &quot;numPassingTests&quot;: 6,
+      &quot;numPendingTests&quot;: 0,
+      &quot;numTodoTests&quot;: 0,
+      &quot;openHandles&quot;: [],
+      &quot;perfStats&quot;: {
+        &quot;end&quot;: 1788323523092,
+        &quot;loadTestEnvironmentEnd&quot;: 1788323518855,
+        &quot;loadTestEnvironmentStart&quot;: 1788323518791,
+        &quot;runtime&quot;: 4236,
+        &quot;setupAfterEnvEnd&quot;: 1788323519540,
+        &quot;setupAfterEnvStart&quot;: 1788323519043,
+        &quot;setupFilesEnd&quot;: 1788323518856,
+        &quot;setupFilesStart&quot;: 1788323518856,
+        &quot;slow&quot;: false,
+        &quot;start&quot;: 1788323518856
+      },
+      &quot;skipped&quot;: false,
+      &quot;snapshot&quot;: {
+        &quot;added&quot;: 0,
+        &quot;fileDeleted&quot;: false,
+        &quot;matched&quot;: 5,
+        &quot;unchecked&quot;: 0,
+        &quot;uncheckedKeys&quot;: [],
+        &quot;unmatched&quot;: 0,
+        &quot;updated&quot;: 1
+      },
+      &quot;testFilePath&quot;: &quot;C:\\Users\\user\\OneDrive\\Documents\\training\\api\\__tests__\\loginUser.js&quot;,
+      &quot;testResults&quot;: [
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;User Login -- Positive Case&quot;
+          ],
+          &quot;duration&quot;: 701,
+          &quot;failing&quot;: false,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;User Login -- Positive Case I can login existing user&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 3,
+          &quot;retryReasons&quot;: [],
+          &quot;startAt&quot;: 1788323519783,
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;I can login existing user&quot;
+        },
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;User Login -- Negative Case&quot;
+          ],
+          &quot;duration&quot;: 664,
+          &quot;failing&quot;: false,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;User Login -- Negative Case I can&#39;t login user, if the email is invalid&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 4,
+          &quot;retryReasons&quot;: [],
+          &quot;startAt&quot;: 1788323520486,
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;I can&#39;t login user, if the email is invalid&quot;
+        },
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;User Login -- Negative Case&quot;
+          ],
+          &quot;duration&quot;: 440,
+          &quot;failing&quot;: false,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;User Login -- Negative Case I can&#39;t login user, if the email is empty string&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 4,
+          &quot;retryReasons&quot;: [],
+          &quot;startAt&quot;: 1788323521151,
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;I can&#39;t login user, if the email is empty string&quot;
+        },
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;User Login -- Negative Case&quot;
+          ],
+          &quot;duration&quot;: 417,
+          &quot;failing&quot;: false,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;User Login -- Negative Case I can&#39;t login user, if the email is empty null&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 4,
+          &quot;retryReasons&quot;: [],
+          &quot;startAt&quot;: 1788323521592,
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;I can&#39;t login user, if the email is empty null&quot;
+        },
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;User Login -- Negative Case&quot;
+          ],
+          &quot;duration&quot;: 504,
+          &quot;failing&quot;: false,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;User Login -- Negative Case I can&#39;t login user, if the password is empty string&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 4,
+          &quot;retryReasons&quot;: [],
+          &quot;startAt&quot;: 1788323522011,
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;I can&#39;t login user, if the password is empty string&quot;
+        },
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;User Login -- Negative Case&quot;
+          ],
+          &quot;duration&quot;: 570,
+          &quot;failing&quot;: false,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;User Login -- Negative Case I can&#39;t login user, if the password is null&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 4,
+          &quot;retryReasons&quot;: [],
+          &quot;startAt&quot;: 1788323522517,
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;I can&#39;t login user, if the password is null&quot;
+        }
+      ],
+      &quot;failureMessage&quot;: null
+    },
+    {
+      &quot;leaks&quot;: false,
+      &quot;numFailingTests&quot;: 0,
+      &quot;numPassingTests&quot;: 4,
+      &quot;numPendingTests&quot;: 0,
+      &quot;numTodoTests&quot;: 0,
+      &quot;openHandles&quot;: [],
+      &quot;perfStats&quot;: {
+        &quot;end&quot;: 1788323525339,
+        &quot;loadTestEnvironmentEnd&quot;: 1788323523146,
+        &quot;loadTestEnvironmentStart&quot;: 1788323523134,
+        &quot;runtime&quot;: 2192,
+        &quot;setupAfterEnvEnd&quot;: 1788323523199,
+        &quot;setupAfterEnvStart&quot;: 1788323523198,
+        &quot;setupFilesEnd&quot;: 1788323523147,
+        &quot;setupFilesStart&quot;: 1788323523147,
+        &quot;slow&quot;: false,
+        &quot;start&quot;: 1788323523147
+      },
+      &quot;skipped&quot;: false,
+      &quot;snapshot&quot;: {
+        &quot;added&quot;: 0,
+        &quot;fileDeleted&quot;: false,
+        &quot;matched&quot;: 2,
+        &quot;unchecked&quot;: 0,
+        &quot;uncheckedKeys&quot;: [],
+        &quot;unmatched&quot;: 0,
+        &quot;updated&quot;: 2
+      },
+      &quot;testFilePath&quot;: &quot;C:\\Users\\user\\OneDrive\\Documents\\training\\api\\__tests__\\getUser.js&quot;,
+      &quot;testResults&quot;: [
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;Get List User -- Positive Case&quot;
+          ],
+          &quot;duration&quot;: 480,
+          &quot;failing&quot;: false,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;Get List User -- Positive Case I can get list user and its detail by page number 2&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 3,
+          &quot;retryReasons&quot;: [],
+          &quot;startAt&quot;: 1788323523265,
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;I can get list user and its detail by page number 2&quot;
+        },
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;Get User -- Positive Case&quot;
+          ],
+          &quot;duration&quot;: 407,
+          &quot;failing&quot;: false,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;Get User -- Positive Case I can get detail user by exist ID&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 3,
+          &quot;retryReasons&quot;: [],
+          &quot;startAt&quot;: 1788323523746,
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;I can get detail user by exist ID&quot;
+        },
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;Get List User -- Negative Case&quot;
+          ],
+          &quot;duration&quot;: 614,
+          &quot;failing&quot;: false,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;Get List User -- Negative Case I can&#39;t get list user, if data user doesn&#39;t exist&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 4,
+          &quot;retryReasons&quot;: [],
+          &quot;startAt&quot;: 1788323524154,
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;I can&#39;t get list user, if data user doesn&#39;t exist&quot;
+        },
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;Get User -- Negative Case&quot;
+          ],
+          &quot;duration&quot;: 566,
+          &quot;failing&quot;: false,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;Get User -- Negative Case I can&#39;t get detail user by unexist ID&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 3,
+          &quot;retryReasons&quot;: [],
+          &quot;startAt&quot;: 1788323524769,
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;I can&#39;t get detail user by unexist ID&quot;
+        }
+      ],
+      &quot;failureMessage&quot;: null
+    },
+    {
+      &quot;leaks&quot;: false,
+      &quot;numFailingTests&quot;: 0,
+      &quot;numPassingTests&quot;: 2,
+      &quot;numPendingTests&quot;: 0,
+      &quot;numTodoTests&quot;: 0,
+      &quot;openHandles&quot;: [],
+      &quot;perfStats&quot;: {
+        &quot;end&quot;: 1788323526516,
+        &quot;loadTestEnvironmentEnd&quot;: 1788323525387,
+        &quot;loadTestEnvironmentStart&quot;: 1788323525383,
+        &quot;runtime&quot;: 1129,
+        &quot;setupAfterEnvEnd&quot;: 1788323525439,
+        &quot;setupAfterEnvStart&quot;: 1788323525439,
+        &quot;setupFilesEnd&quot;: 1788323525387,
+        &quot;setupFilesStart&quot;: 1788323525387,
+        &quot;slow&quot;: false,
+        &quot;start&quot;: 1788323525387
+      },
+      &quot;skipped&quot;: false,
+      &quot;snapshot&quot;: {
+        &quot;added&quot;: 0,
+        &quot;fileDeleted&quot;: false,
+        &quot;matched&quot;: 1,
+        &quot;unchecked&quot;: 0,
+        &quot;uncheckedKeys&quot;: [],
+        &quot;unmatched&quot;: 0,
+        &quot;updated&quot;: 1
+      },
+      &quot;testFilePath&quot;: &quot;C:\\Users\\user\\OneDrive\\Documents\\training\\api\\__tests__\\registUser.js&quot;,
+      &quot;testResults&quot;: [
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;User Register -- Positive Case&quot;
+          ],
+          &quot;duration&quot;: 455,
+          &quot;failing&quot;: false,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;User Register -- Positive Case I can register new user&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 3,
+          &quot;retryReasons&quot;: [],
+          &quot;startAt&quot;: 1788323525502,
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;I can register new user&quot;
+        },
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;User Register -- Negative Case&quot;
+          ],
+          &quot;duration&quot;: 553,
+          &quot;failing&quot;: false,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;User Register -- Negative Case I can&#39;t register new user, if the user doesn&#39;t defined yet&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 4,
+          &quot;retryReasons&quot;: [],
+          &quot;startAt&quot;: 1788323525959,
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;I can&#39;t register new user, if the user doesn&#39;t defined yet&quot;
+        }
+      ],
+      &quot;failureMessage&quot;: null
+    },
+    {
+      &quot;leaks&quot;: false,
+      &quot;numFailingTests&quot;: 0,
+      &quot;numPassingTests&quot;: 3,
+      &quot;numPendingTests&quot;: 0,
+      &quot;numTodoTests&quot;: 0,
+      &quot;openHandles&quot;: [],
+      &quot;perfStats&quot;: {
+        &quot;end&quot;: 1788323527954,
+        &quot;loadTestEnvironmentEnd&quot;: 1788323526573,
+        &quot;loadTestEnvironmentStart&quot;: 1788323526569,
+        &quot;runtime&quot;: 1381,
+        &quot;setupAfterEnvEnd&quot;: 1788323526621,
+        &quot;setupAfterEnvStart&quot;: 1788323526620,
+        &quot;setupFilesEnd&quot;: 1788323526573,
+        &quot;setupFilesStart&quot;: 1788323526573,
+        &quot;slow&quot;: false,
+        &quot;start&quot;: 1788323526573
+      },
+      &quot;skipped&quot;: false,
+      &quot;snapshot&quot;: {
+        &quot;added&quot;: 0,
+        &quot;fileDeleted&quot;: false,
+        &quot;matched&quot;: 0,
+        &quot;unchecked&quot;: 0,
+        &quot;uncheckedKeys&quot;: [],
+        &quot;unmatched&quot;: 0,
+        &quot;updated&quot;: 3
+      },
+      &quot;testFilePath&quot;: &quot;C:\\Users\\user\\OneDrive\\Documents\\training\\api\\__tests__\\updateUser.js&quot;,
+      &quot;testResults&quot;: [
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;Update User -- Positive Case&quot;
+          ],
+          &quot;duration&quot;: 426,
+          &quot;failing&quot;: false,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;Update User -- Positive Case I can update existing user&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 3,
+          &quot;retryReasons&quot;: [],
+          &quot;startAt&quot;: 1788323526703,
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;I can update existing user&quot;
+        },
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;Update User -- Positive Case&quot;
+          ],
+          &quot;duration&quot;: 446,
+          &quot;failing&quot;: false,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;Update User -- Positive Case I can update name of existing user&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 3,
+          &quot;retryReasons&quot;: [],
+          &quot;startAt&quot;: 1788323527131,
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;I can update name of existing user&quot;
+        },
+        {
+          &quot;ancestorTitles&quot;: [
+            &quot;Update User -- Positive Case&quot;
+          ],
+          &quot;duration&quot;: 373,
+          &quot;failing&quot;: false,
+          &quot;failureDetails&quot;: [],
+          &quot;failureMessages&quot;: [],
+          &quot;fullName&quot;: &quot;Update User -- Positive Case I can update job of existing user&quot;,
+          &quot;invocations&quot;: 1,
+          &quot;location&quot;: null,
+          &quot;numPassingAsserts&quot;: 3,
+          &quot;retryReasons&quot;: [],
+          &quot;startAt&quot;: 1788323527578,
+          &quot;status&quot;: &quot;passed&quot;,
+          &quot;title&quot;: &quot;I can update job of existing user&quot;
+        }
+      ],
+      &quot;failureMessage&quot;: null
+    },
     {
       &quot;leaks&quot;: false,
       &quot;numFailingTests&quot;: 0,
@@ -163,22 +554,22 @@
       &quot;numTodoTests&quot;: 0,
       &quot;openHandles&quot;: [],
       &quot;perfStats&quot;: {
-        &quot;end&quot;: 1785835943610,
-        &quot;loadTestEnvironmentEnd&quot;: 1785835942066,
-        &quot;loadTestEnvironmentStart&quot;: 1785835942007,
-        &quot;runtime&quot;: 1543,
-        &quot;setupAfterEnvEnd&quot;: 1785835942656,
-        &quot;setupAfterEnvStart&quot;: 1785835942254,
-        &quot;setupFilesEnd&quot;: 1785835942067,
-        &quot;setupFilesStart&quot;: 1785835942067,
+        &quot;end&quot;: 1788323528680,
+        &quot;loadTestEnvironmentEnd&quot;: 1788323527993,
+        &quot;loadTestEnvironmentStart&quot;: 1788323527987,
+        &quot;runtime&quot;: 686,
+        &quot;setupAfterEnvEnd&quot;: 1788323528027,
+        &quot;setupAfterEnvStart&quot;: 1788323528026,
+        &quot;setupFilesEnd&quot;: 1788323527994,
+        &quot;setupFilesStart&quot;: 1788323527994,
         &quot;slow&quot;: false,
-        &quot;start&quot;: 1785835942067
+        &quot;start&quot;: 1788323527994
       },
       &quot;skipped&quot;: false,
       &quot;snapshot&quot;: {
-        &quot;added&quot;: 1,
+        &quot;added&quot;: 0,
         &quot;fileDeleted&quot;: false,
-        &quot;matched&quot;: 0,
+        &quot;matched&quot;: 1,
         &quot;unchecked&quot;: 0,
         &quot;uncheckedKeys&quot;: [],
         &quot;unmatched&quot;: 0,
@@ -190,7 +581,7 @@
           &quot;ancestorTitles&quot;: [
             &quot;Delete User -- Positive Case&quot;
           ],
-          &quot;duration&quot;: 668,
+          &quot;duration&quot;: 596,
           &quot;failing&quot;: false,
           &quot;failureDetails&quot;: [],
           &quot;failureMessages&quot;: [],
@@ -199,7 +590,7 @@
           &quot;location&quot;: null,
           &quot;numPassingAsserts&quot;: 2,
           &quot;retryReasons&quot;: [],
-          &quot;startAt&quot;: 1785835942939,
+          &quot;startAt&quot;: 1788323528082,
           &quot;status&quot;: &quot;passed&quot;,
           &quot;title&quot;: &quot;I can delete existing user&quot;
         }
@@ -241,11 +632,9 @@
   &quot;listTests&quot;: false,
   &quot;logHeapUsage&quot;: false,
   &quot;maxConcurrency&quot;: 5,
-  &quot;maxWorkers&quot;: 15,
+  &quot;maxWorkers&quot;: 1,
   &quot;noStackTrace&quot;: false,
-  &quot;nonFlagArgs&quot;: [
-    &quot;__tests__&#x2F;deleteUser.js&quot;
-  ],
+  &quot;nonFlagArgs&quot;: [],
   &quot;notify&quot;: false,
   &quot;notifyMode&quot;: &quot;failure-change&quot;,
   &quot;onlyChanged&quot;: false,
@@ -268,9 +657,10 @@
     ]
   ],
   &quot;rootDir&quot;: &quot;C:\\Users\\user\\OneDrive\\Documents\\training\\api&quot;,
-  &quot;runInBand&quot;: false,
+  &quot;runInBand&quot;: true,
   &quot;runTestsByPath&quot;: false,
-  &quot;seed&quot;: -2087087362,
+  &quot;seed&quot;: 1925466894,
+  &quot;silent&quot;: true,
   &quot;skipFilter&quot;: false,
   &quot;snapshotFormat&quot;: {
     &quot;escapeString&quot;: false,
@@ -278,15 +668,12 @@
   },
   &quot;testFailureExitCode&quot;: 1,
   &quot;testPathPatterns&quot;: {
-    &quot;patterns&quot;: [
-      &quot;__tests__&#x2F;deleteUser.js&quot;
-    ],
+    &quot;patterns&quot;: [],
     &quot;type&quot;: &quot;TestPathPatterns&quot;
   },
   &quot;testSequencer&quot;: &quot;C:\\Users\\user\\OneDrive\\Documents\\training\\api\\node_modules\\@jest\\test-sequencer\\build\\index.js&quot;,
-  &quot;updateSnapshot&quot;: &quot;new&quot;,
+  &quot;updateSnapshot&quot;: &quot;all&quot;,
   &quot;useStderr&quot;: false,
-  &quot;verbose&quot;: true,
   &quot;waitForUnhandledRejections&quot;: false,
   &quot;watch&quot;: false,
   &quot;watchAll&quot;: false,
